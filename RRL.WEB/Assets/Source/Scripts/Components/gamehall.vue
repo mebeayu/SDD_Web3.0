@@ -1441,7 +1441,7 @@ body,
                     {id:1,word:' 账户余额（红包+金豆）越高，'},{id:2,word:'每日领取的红包金额越大。'}
                 ],
                 resell_loading:false,   //转卖loading
-                resell_con:true,      
+                resell_con:true,
                 result_Card100:0,      //面值为100元的卡数量
                 result_Card10:0,        //面值为10元的卡数量
                 resell_js_result:'A',  //控制显示
@@ -1470,7 +1470,7 @@ body,
                 luckyRedPacket:false,
                 luckyMoney:'',
                 redpacket:'',
-                couponsMoney:'',    
+                couponsMoney:'',
 
                 payMoney:100,
                 enter_zp:false,
@@ -1498,7 +1498,7 @@ body,
           this.GetUserSportInfo();//获取兜兜运动信息
           this.GetUserInfo();   //获取用户信息
           this.Banner();        //获取游戏大厅的轮播图数据
-         
+
           this.method_ajax_getUserHoldMoneyConfig();
           this.xdRecommond();   //小兜推荐
           this.loopPage();
@@ -1512,8 +1512,8 @@ body,
             }
         },
         mounted(){
-          this.GetGameList();   //获取游戏列表 
-          this.GetOtherGameList();   //获取休闲游戏列表 
+          this.GetGameList();   //获取游戏列表
+          this.GetOtherGameList();   //获取休闲游戏列表
           setInterval(this.adScroll,2000); //广告轮播
 					//this.loopPage();
         },
@@ -1548,7 +1548,7 @@ body,
             }
 
         },
-    
+
     methods:{
         //是否可以领取时段充值红包
         IfHasTimeIntervalRedpaket(){
@@ -1610,7 +1610,7 @@ body,
                             var data= res.data[i];
                             that.xdList.push(data);
                         }
-                       
+
                     }
                 }
             })
@@ -1628,7 +1628,7 @@ body,
         resell_commit(){
             this.resell_loading=false;
             this.resell_js_result='A';
-           
+
         },
         //置亮按钮
         initSubmitBtn(){
@@ -1659,7 +1659,7 @@ body,
                         that.resell_js_result='E';
                         that.err_message=res.message;
                 }
-              
+
             })
         },
         //进入协议
@@ -1668,7 +1668,7 @@ body,
         },
         //返回计算结果
         return_result_js(){
-            this.resell_js_result='A';    
+            this.resell_js_result='A';
         },
         //进入详情
         into_result_detail(){
@@ -1698,9 +1698,9 @@ body,
                     that.actualPayGoldBeans=data.actualPayGoldBeans;
                     that.cardCashTotal=data.cardCashTotal;
                     that.platformFeeTotal=data.platformFeeTotal;
-                    
+
                 }
-            })  
+            })
         },
         todetail(id) {
             this.$router.push('/goodsdetail/' + id + '/null')
@@ -1770,7 +1770,7 @@ body,
         */
         call_beans_playing(sta) {
             sta=sta.replace(/[^0-9]/ig,"");
-            this.all_playing(parseInt(sta), 2);  //金豆   
+            this.all_playing(parseInt(sta), 2);  //金豆
         },
         /**
         * 点击大家都在玩跳转不同游戏页面
@@ -1881,10 +1881,10 @@ body,
                 location.href = StringUtils.format("/Game/ThirdPartyGames?iframe={0}&redirect={1}", encodeURIComponent(url), redirect);
             }
         },
-        
+
          /**
          * 获取休闲游戏列表
-         */  
+         */
         GetOtherGameList:function(){
             var that=this;
             $.post("/WebApi/game/GameBaseData", { "type": 2 },(res)=> {
@@ -1908,7 +1908,7 @@ body,
                 }
             })
         },
-      
+
         /**
          * 获取用户信息
          */
@@ -1935,14 +1935,15 @@ body,
         * 点击弹出提示框
         */
         lhbTip:function(){
-           
+
             confirm(`<ul>
-                        <li>1、当红包和金豆总数少于一定数值时，系统会自动发放指定红包进行游戏；</li>
-                        <li>2、机会用完后，可通过完成任务获得更多红包，任务会在机会用完后，自动出现；</li>
-                        <li>3、用红包进行游戏，获胜则直接变为金豆，金豆可以用于商城购物；</li>
-                        <li>4、如果用户存在违规行为（包括但不限于洗钱、虚假交易、赌博、恶意套现、作弊、刷信誉），主办方将取消用户的活动资格、并有权撤销相关违规交易、收回奖励（包括已消费金额）等利益，同时依照相关规则进行处罚；</li>
-                        <li>5、如出现不可抗力或情势变更的情况（包括但不限于重大灾害事件、活动受政府机关指令需要停止举办或调整的、活动遭受严重网络攻击或因系统故障需要暂停举办的），则主办方可依相关法律法规的规定主张免责。</li>
-                      </ul>`
+                        <li>1. 当红包和金豆总数少于一定数值时，系统会自动发放指定红包进行游戏；</li>
+                        <li>2. 平台每日不定时发放V红包，V红包只能用于指定游戏，且不可以在平台直接参与购物以及兑换；</li>
+                        <li>3. 在领取下一个V红包时上一个V红包的金额和所玩的局数自动清零，不累计计算；V红包需要在指定游戏内完成指定局数并满足其他规定条件后才可转化为金豆；</li>
+                        <li>4. 金豆可以直接在平台根据规则购物及兑换；</li>
+                        <li>5. 如果用户存在违规行为（包括但不限于洗钱、虚假交易、赌博、恶意套现、作弊、刷信誉），主办方将取消用户的活动资格、并有权撤销相关违规交易、收回奖励（包括已消费金额）等利益，同时依照相关规则进行处罚。</li>
+                        <li>6. 如出现不可抗力或情势变更的情况（包括但不限于重大灾害事件、活动受政府机关指令需要停止举办或调整的、活动遭受严重网络攻击或因系统故障需要暂停举办的），则主办方可依相关法律法规的规定主张免责。</li>
+                        </ul>`
             , function (){
             })
         },
@@ -2125,14 +2126,14 @@ body,
                                     that.enter_zp=true;
                                     that.gethbnum=data.additional_data;
                                     that.GetUserInfo();
-                                }       
+                                }
                               },'json');
                         } ;
                         if(res.additional_data===true){//针对个人发红包
                             $.post("/WebApi/Game/RefreshPer",
                                   {"token":that.token},
                                   function(res){
-                                        console.log(res)     
+                                        console.log(res)
                                         if(res.status == 0){
                                             var elText = "";
                                             if (res.data.FreeMoney.Money > 0) {
@@ -2149,20 +2150,20 @@ body,
                                             that.GetUserInfo();
                                         } else {
                                              alert(res.data);
-                                        } 
-                                 }, 'json');   
+                                        }
+                                 }, 'json');
                         }
                     },'json');
                     that.data_timeout_id=setTimeout(function(){
                         that.loopPage();
                         that.getTimeStateBsx();
                         that.getTimeStateBdx();
-                    }, 2000);    
+                    }, 2000);
             },
             closeRedFree:function(){
-               $('.maskxx').css('display', 'none');     
+               $('.maskxx').css('display', 'none');
             },
-           
+
          }
       };
     export default  gamehall;
