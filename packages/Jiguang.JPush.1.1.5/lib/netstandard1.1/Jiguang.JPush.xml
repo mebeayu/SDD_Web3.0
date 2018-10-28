@@ -1,0 +1,541 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jiguang.JPush</name>
+    </assembly>
+    <members>
+        <member name="M:Jiguang.JPush.DeviceClient.GetDeviceInfoAsync(System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.GetDeviceInfo(System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetDeviceInfo(System.String)">
+            <summary>
+            查询指定设备信息。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_1"/>
+            </summary>
+            <param name="registrationId">
+                客户端初始化 JPush 成功后，JPush 服务端会分配一个 Registration ID，作为此设备的标识（同一个手机不同 APP 的 Registration ID 是不同的）。
+            </param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.UpdateDeviceInfoAsync(System.String,Jiguang.JPush.Model.DevicePayload)">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.UpdateDeviceInfo(System.String,Jiguang.JPush.Model.DevicePayload)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.UpdateDeviceInfo(System.String,Jiguang.JPush.Model.DevicePayload)">
+            <summary>
+            更新设备信息（目前支持 tag, alias 和 mobile）。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_2"/>
+            </summary>
+            <param name="registrationId">
+                客户端初始化 JPush 成功后，JPush 服务端会分配一个 Registration ID，作为此设备的标识（同一个手机不同 APP 的 Registration ID 是不同的）。
+            </param>
+            <param name="devicePayload">设备信息对象</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetDevicesByAliasAsync(System.String,System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.GetDeviceInfo(System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetDeviceByAlias(System.String,System.String)">
+            <summary>
+            获取指定 alias 下的设备，最多输出 10 个。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_3"/>
+            </summary>
+            <param name="alias">要查询的别名（alias）</param>
+            <param name="platform">"android" 或 "ios", 为 null 则默认为所有平台。</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.DeleteAliasAsync(System.String,System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.DeleteAlias(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.DeleteAlias(System.String,System.String)">
+            <summary>
+            删除一个别名，以及该别名与设备的绑定关系。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_4"/>
+            </summary>
+            <param name="alias">待删除的别名（alias）</param>
+            <param name="platform">"android" 或 "ios"，为 null 则默认为所有平台。</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetTagsAsync">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.GetTags"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetTags">
+            <summary>
+            获取当前应用的所有标签列表，每个平台最多返回 100 个。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_5"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.IsDeviceInTagAsync(System.String,System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.IsDeviceInTag(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.IsDeviceInTag(System.String,System.String)">
+            <summary>
+            查询某个设备是否在某个 tag 下。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_5"/>
+            </summary>
+            <param name="registrationId">设备的 registration id</param>
+            <param name="tag">要查询的 tag</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.AddDevicesToTagAsync(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.AddDevicesToTag(System.String,System.Collections.Generic.List{System.String})"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.AddDevicesToTag(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            为一个标签（tag）添加设备，一次最多支持 1000 个。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_7"/>
+            </summary>
+            <param name="tag">待操作的标签（tag）</param>
+            <param name="registrationIdList">设备的 registration id 列表</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.RemoveDevicesFromTagAsync(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.RemoveDevicesFromTag(System.String,System.Collections.Generic.List{System.String})"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.RemoveDevicesFromTag(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            为一个标签移除设备。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_7"/>
+            </summary>
+            <param name="tag">待操作的标签（tag）</param>
+            <param name="registrationIdList">设备的 registration id 列表</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.DeleteTagAsync(System.String,System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.DeleteTag(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.DeleteTag(System.String,System.String)">
+            <summary>
+            删除标签，以及标签与其下设备的关联关系。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#_8"/>
+            </summary>
+            <param name="tag">待删除标签</param>
+            <param name="platform">"android" 或 "ios"，如果为 null，则默认为所有平台</param>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetUserOnlineStatusAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            <see cref="M:Jiguang.JPush.DeviceClient.GetUserOnlineStatus(System.Collections.Generic.List{System.String})"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.DeviceClient.GetUserOnlineStatus(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取用户在线状态（VIP only）。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/#vip"/>
+            </summary>
+            <param name="registrationIdList">待查询用户设备的 registration id，每次最多支持 1000 个。</param>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.SetBaseURL(System.String)">
+             <summary>
+             设置 push 功能的 API 调用地址。
+             <para>
+             如果极光应用分配在北京机房（极光控制台 “应用设置” -> “应用信息” 中可以看到），并且开发者接口调用的服务器也位于北京，则可以调用如下地址：
+            
+             https://bjapi.push.jiguang.cn/v3/push
+             <para>可以提升 API 的响应速度。</para>
+             </para>
+             </summary>
+             <param name="url"><see cref="!:BASE_URL_DEFAULT"/> or <see cref="!:BASE_URL_BEIJING"/></param>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.SendPushAsync(Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            <see cref="M:Jiguang.JPush.JPushClient.SendPush(Jiguang.JPush.Model.PushPayload)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.SendPush(Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            进行消息推送。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_1"/>
+            </summary>
+            <param name="pushPayload"> 推送对象。<see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7"/> </param>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.IsPushValidAsync(Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            <see cref="M:Jiguang.JPush.JPushClient.IsPushValid(Jiguang.JPush.Model.PushPayload)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.IsPushValid(Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            校验推送能否成功。与推送 API 的区别在于：不会实际向用户发送任何消息。 其他字段说明和推送 API 完全相同。
+            </summary>
+            <param name="pushPayload"> 推送对象。<see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7"/> </param>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.GetCIdListAsync(System.Nullable{System.Int32},System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.JPushClient.GetCIdList(System.Nullable{System.Int32},System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.JPushClient.GetCIdList(System.Nullable{System.Int32},System.String)">
+            <summary>
+            获取 CId（推送的唯一标识符） 列表。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#cid"/>
+            </summary>
+            <param name="count">不传默认为 1。范围为[1, 1000]</param>
+            <param name="type">CId 的类型。取值："push" (默认) 或 "schedule"</param>
+        </member>
+        <member name="T:Jiguang.JPush.Model.Audience">
+            <summary>
+            推送目标。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#audience"/>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.Tag">
+            <summary>
+            多个标签之间取并集（OR）。
+            每次最多推送 20 个。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.TagAnd">
+            <summary>
+            多个标签之间取交集（AND）。
+            每次最多推送 20 个。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.TagNot">
+            <summary>
+            多个标签之间，先取并集，再对结果取补集。
+            每次最多推送 20 个。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.Alias">
+            <summary>
+            多个别名之间取并集（OR）。
+            每次最多同时推送 1000 个。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.RegistrationId">
+            <summary>
+            多个 registration id 之间取并集（OR）。
+            每次最多同时推送 1000 个。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.Segment">
+            <summary>
+            在页面创建的用户分群 ID。
+            目前一次只能推送一个。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Audience.Abtest">
+            <summary>
+            在页面创建的 A/B 测试 ID。
+            目前一次只能推送一个。
+            </summary>
+        </member>
+        <member name="T:Jiguang.JPush.Model.Message">
+            <summary>
+            自定义消息。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#message"/>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Message.Content">
+            <summary>
+            消息内容本身（必填）。
+            </summary>
+        </member>
+        <member name="T:Jiguang.JPush.Model.Notification">
+            <summary>
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#notification"/>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Android.Alert">
+            <summary>
+            必填。
+            </summary>
+        </member>
+        <!-- 对于成员“P:Jiguang.JPush.Model.Android.URLActivity”忽略有格式错误的 XML 注释 -->
+        <member name="P:Jiguang.JPush.Model.Android.URLFlag">
+            <summary>
+            (VIP only)指定打开 Activity 的方式，值为 Intent.java 中预定义的 "access flags" 的取值范围。
+            </summary>
+        </member>
+        <!-- 对于成员“P:Jiguang.JPush.Model.Android.URIAction”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“P:Jiguang.JPush.Model.IOS.Alert”忽略有格式错误的 XML 注释 -->
+        <member name="P:Jiguang.JPush.Model.IOS.Badge">
+            <summary>
+            默认角标 +1。
+            </summary>
+        </member>
+        <member name="T:Jiguang.JPush.Model.Options">
+            <summary>
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#options"/>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Options.SendNo">
+            <summary>
+            推送序号。
+            <para>用来作为 API 调用标识，API 返回时被原样返回，以方便 API 调用方匹配请求与返回。不能为 0。</para>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Options.TimeToLive">
+            <summary>
+            离线消息保留时长(秒)。
+            <para>推送当前用户不在线时，为该用户保留多长时间的离线消息，以便其上线时再次推送。默认 86400 （1 天），最长 10 天。设置为 0 表示不保留离线消息，只有推送当前在线的用户可以收到。</para>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Options.OverrideMessageId">
+            <summary>
+            要覆盖的消息 ID。
+            <para>如果当前的推送要覆盖之前的一条推送，这里填写前一条推送的 msg_id 就会产生覆盖效果。覆盖功能起作用的时限是：1 天。</para>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Options.IsApnsProduction">
+            <summary>
+            iOS 推送是否为生产环境。默认为 false - 开发环境。
+            <para>true: 生产环境；false: 开发环境。</para>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Options.ApnsCollapseId">
+            <summary>
+            更新 iOS 通知的标识符。
+            <para>APNs 新通知如果匹配到当前通知中心有相同 apns-collapse-id 字段的通知，则会用新通知内容来更新它，并使其置于通知中心首位。collapse id 长度不可超过 64 bytes。</para>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Options.BigPushDuration">
+            <summary>
+            定速推送时长（分钟）。
+            又名缓慢推送。把原本尽可能快的推送速度，降低下来，给定的 n 分钟内，均匀地向这次推送的目标用户推送。最大值为 1400，未设置则不是定速推送。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.PushPayload.Platform">
+            <summary>
+            推送平台。可以为 "android" / "ios" / "all"。
+            </summary>
+        </member>
+        <member name="T:Jiguang.JPush.Model.SmsMessage">
+            <summary>
+            短信补充。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#sms_message"/>
+            </summary>
+        </member>
+        <member name="T:Jiguang.JPush.Model.Trigger">
+            <summary>
+            定期任务触发器。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/#schedule"/>
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Trigger.StartDate">
+            <summary>
+            定期任务开始日期，必须为 24 小时制。
+            类似："2017-08-01 12:00:00"
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Trigger.EndDate">
+            <summary>
+            定期任务终止日期，必须为 24 小时制。
+            类似："2017-12-30 12:00:00"
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Trigger.TriggerTime">
+            <summary>
+            具体的触发时间。
+            类似："12:00:00"
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Trigger.TimeUnit">
+            <summary>
+            定期任务执行的最小时间单位。
+            必须为 "day" / "week" / "month" 中的一种。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Trigger.Frequency">
+            <summary>
+            定期任务的执行周期（目前最大支持 100）。
+            比如，当 TimeUnit 为 "day"，Frequency 为 2 时，表示每两天触发一次推送。
+            </summary>
+        </member>
+        <member name="P:Jiguang.JPush.Model.Trigger.TimeList">
+            <summary>
+            当 TimeUnit 为 "week" 或 "month"时，具体的时间表。
+            - 如果 TimeUnit 为 "week": {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+            - 如果 TimeUnit 为 "month": {"01", "02"...};
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.SetBaseURL(System.String)">
+            <summary>
+            设置 Report API 的调用地址。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/"/>
+            </summary>
+            <param name="url"><see cref="F:Jiguang.JPush.ReportClient.BASE_URL_REPORT_DEFAULT"/> or <see cref="F:Jiguang.JPush.ReportClient.BASE_URL_REPORT_BEIJING"/></param>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetMessageReportAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            <see cref="M:Jiguang.JPush.ReportClient.GetMessageReport(System.Collections.Generic.List{System.String})"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetMessageReport(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取指定 msg_id 的消息送达统计数据。
+            </summary>
+            <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetMessageSendStatusAsync(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ReportClient.GetMessageSendStatus(System.String,System.Collections.Generic.List{System.String},System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetMessageSendStatus(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            查询指定消息的送达状态。
+            <para><see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/#_7"/></para>
+            </summary>
+            <param name="msgId">待查询消息的 Message Id。</param>
+            <param name="registrationIdList">收到消息设备的 Registration Id 列表。</param>
+            <param name="data">待查询日期，格式为 yyyy-MM-dd。如果传 null，则默认为当天。</param>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetMessageDetailReportAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            <see cref="M:Jiguang.JPush.ReportClient.GetMessageDetailReport(System.Collections.Generic.List{System.String})"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetMessageDetailReport(System.Collections.Generic.List{System.String})">
+            <summary>
+            提供包括点击数等更详细的统计数据（VIP only）。
+            </summary>
+            <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetUserReportAsync(System.String,System.String,System.Int32)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ReportClient.GetUserReport(System.String,System.String,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ReportClient.GetUserReport(System.String,System.String,System.Int32)">
+            <summary>
+            提供近2个月内某时间段的用户相关统计数据：新增用户、在线用户、活跃用户（VIP only）。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/#vip_1"/>
+            </summary>
+            <param name="timeUnit">时间单位。支持 "HOUR", "DAY" 或 "MOUNTH"</param>
+            <param name="startTime">
+                起始时间。
+                <para>如果单位是小时，则起始时间是小时（包含天），格式例：2014-06-11 09</para>
+                <para>如果单位是天，则起始时间是日期（天），格式例：2014-06-11</para>
+                <para>如果单位是月，则起始时间是日期（月），格式例：2014-06</para>
+            </param>
+            <param name="duration">
+                持续时长。
+                <para>如果时间单位（timeUnit）是天，则是持续的天数，其他时间单位以此类推。</para>
+                <para>只支持查询 60 天以内的用户信息。如果 timeUnit 为 HOUR，则只会输出当天的统计结果。</para>
+            </param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.SetBaseURL(System.String)">
+            <summary>
+            设置 Schedule API 的调用地址。
+            </summary>
+            <param name="url"><see cref="F:Jiguang.JPush.ScheduleClient.BASE_URL_SCHEDULE_DEFAULT"/> or <see cref="F:Jiguang.JPush.ScheduleClient.BASE_URL_SCHEDULE_BEIJING"/></param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.CreateScheduleTaskAsync(System.String)">
+            <summary>
+            创建定时任务。
+            </summary>
+            <param name="json">
+                自己构造的请求 json 字符串。
+                <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/#schedule"/>
+            </param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.CreateSingleScheduleTaskAsync(System.String,Jiguang.JPush.Model.PushPayload,System.String)">
+            <summary>
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/#_4"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.CreateSingleScheduleTask(System.String,Jiguang.JPush.Model.PushPayload,System.String)">
+            <summary>
+            创建单次定时任务。
+            </summary>
+            <param name="name">表示 schedule 任务的名字，由 schedule-api 在用户成功创建 schedule 任务后返回，不得超过 255 字节，由汉字、字母、数字、下划线组成。</param>
+            <param name="pushPayload">推送对象</param>
+            <param name="trigger">触发器</param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.CreatePeriodicalScheduleTaskAsync(System.String,Jiguang.JPush.Model.PushPayload,Jiguang.JPush.Model.Trigger)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ScheduleClient.CreatePeriodicalScheduleTask(System.String,Jiguang.JPush.Model.PushPayload,Jiguang.JPush.Model.Trigger)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.CreatePeriodicalScheduleTask(System.String,Jiguang.JPush.Model.PushPayload,Jiguang.JPush.Model.Trigger)">
+            <summary>
+            创建会在一段时间内重复执行的定期任务。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/#_4"/>
+            </summary>
+            <param name="name">表示 schedule 任务的名字，由 schedule-api 在用户成功创建 schedule 任务后返回，不得超过 255 字节，由汉字、字母、数字、下划线组成。</param>
+            <param name="pushPayload">推送对象</param>
+            <param name="trigger">触发器</param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.GetValidScheduleTasksAsync(System.Int32)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ScheduleClient.GetValidScheduleTasks(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.GetValidScheduleTasks(System.Int32)">
+            <summary>
+            获取有效的定时任务列表。
+            </summary>
+            <param name="page">
+                <para>返回当前请求页的详细的 schedule-task 列表，如未指定 page 则 page 为 1。</para>
+                <para>排序规则：创建时间，由 schedule-service 完成。</para>
+                <para>如果请求页数大于总页数，则 page 为请求值，schedules 为空。</para>
+                <para>每页最多返回 50 个 task，如请求页实际的 task 的个数小于 50，则返回实际数量的 task。</para>
+            </param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.GetScheduleTaskAsync(System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ScheduleClient.GetScheduleTask(System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.GetScheduleTask(System.String)">
+            <summary>
+            获取指定的定时任务。
+            </summary>
+            <param name="scheduleId">定时任务 ID。在创建定时任务时会返回。</param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.UpdateSingleScheduleTaskAsync(System.String,System.String,System.Nullable{System.Boolean},System.String,Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ScheduleClient.UpdateSingleScheduleTask(System.String,System.String,System.Nullable{System.Boolean},System.String,Jiguang.JPush.Model.PushPayload)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.UpdateSingleScheduleTask(System.String,System.String,System.Nullable{System.Boolean},System.String,Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            更新单次定时任务。
+            </summary>
+            <param name="scheduleId">任务 ID</param>
+            <param name="name">任务名称，为 null 表示不更新。</param>
+            <param name="enabled">是否可用，为 null 表示不更新。</param>
+            <param name="triggeringTime">触发时间，类似 "2017-08-03 12:00:00"，为 null 表示不更新。</param>
+            <param name="pushPayload">推送内容，为 null 表示不更新。</param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.UpdatePeriodicalScheduleTaskAsync(System.String,System.String,System.Nullable{System.Boolean},Jiguang.JPush.Model.Trigger,Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ScheduleClient.UpdatePeriodicalScheduleTask(System.String,System.String,System.Nullable{System.Boolean},Jiguang.JPush.Model.Trigger,Jiguang.JPush.Model.PushPayload)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.UpdatePeriodicalScheduleTask(System.String,System.String,System.Nullable{System.Boolean},Jiguang.JPush.Model.Trigger,Jiguang.JPush.Model.PushPayload)">
+            <summary>
+            更新会重复执行的定时任务。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/#schedule_2"/>
+            </summary>
+            <param name="scheduleId">任务 ID</param>
+            <param name="name">任务名称，为 null 表示不更新。</param>
+            <param name="enabled">是否可用，为 null 表示不更新。</param>
+            <param name="trigger">触发器对象，为 null 表示不更新。</param>
+            <param name="pushPayload">推送内容，为 null 表示不更新。</param>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.DeleteScheduleTaskAsync(System.String)">
+            <summary>
+            <see cref="M:Jiguang.JPush.ScheduleClient.DeleteScheduleTask(System.String)"/>
+            </summary>
+        </member>
+        <member name="M:Jiguang.JPush.ScheduleClient.DeleteScheduleTask(System.String)">
+            <summary>
+            删除指定的定时任务。
+            <see cref="!:https://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/#schedule_3"/>
+            </summary>
+            <param name="scheduleId">已创建的 schedule 任务的 id。如果 scheduleId 不合法，即不是有效的 uuid，则返回 404。</param>
+        </member>
+    </members>
+</doc>

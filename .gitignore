@@ -3,3 +3,16 @@
 ################################################################################
 
 /.vs
+/Common/bin/Debug
+/Common/obj/Debug
+/Common/obj/Release
+/ConsoleTest
+/RRL.WEB/node_modules
+/RRL.Config
+/WinFormReleaseVer
+/Vendor
+/ScheduleTask
+/RRL.WEB
+/RRL.EF
+/RRL.DB
+/RRL.Core

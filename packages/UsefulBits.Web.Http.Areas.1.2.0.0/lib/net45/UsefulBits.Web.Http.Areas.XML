@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UsefulBits.Web.Http.Areas</name>
+    </assembly>
+    <members>
+        <member name="T:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyResolver">
+            <summary>
+            Represent a dependency resolver that support per area dependencies
+            </summary>
+        </member>
+        <member name="T:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyScope">
+            <summary>
+            Represent a dependency scope that support per area dependencies
+            </summary>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyScope.GetService(System.Type)">
+            <summary>
+            Retrieves a service from the scope.
+            </summary>
+            <param name="serviceType">The service to be retrieved.</param>
+            <returns>
+            The retrieved service.
+            </returns>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyScope.GetServices(System.Type)">
+            <summary>
+            Retrieves a collection of services from the scope.
+            </summary>
+            <param name="serviceType">The collection of services to be retrieved.</param>
+            <returns>
+            The retrieved collection of services.
+            </returns>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyScope.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyResolver.#ctor(System.Web.Http.Dependencies.IDependencyResolver,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Web.Http.Dependencies.IDependencyResolver},System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.ICollection{System.String}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyResolver"/> class.
+            </summary>
+            <param name="rootDependencyResolver">The root dependency resolver.</param>
+            <param name="areaDependencyResolvers">The area dependency resolvers.</param>
+            <param name="areaNamespaces">The area namespaces.</param>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Dependencies.AreaDependencyResolver.BeginScope">
+            <summary>
+            Starts a resolution scope.
+            </summary>
+            <returns>
+            The dependency scope.
+            </returns>
+        </member>
+        <member name="T:UsefulBits.Web.Http.Areas.HttpConfigurationExtensions">
+            <summary>
+            Extention methods on HttpConfiguration
+            </summary>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.HttpConfigurationExtensions.EnablePerAreaDependencyResovler(System.Web.Http.HttpConfiguration,System.Web.Http.Dependencies.IDependencyResolver)">
+            <summary>
+            Enables the per area dependency resovler.
+            </summary>
+            <param name="configuration">The http configuration.</param>
+            <param name="rootDependencyResolver">The root dependency resolver used to resolve types outside areas.</param>
+        </member>
+        <member name="T:UsefulBits.Web.Http.Areas.Routing.AreaHttpControllerSelector">
+            <summary>
+            <see cref="T:System.Web.Http.Dispatcher.IHttpControllerSelector"/> instance for choosing a <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor"/> given a <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            This implementation handles controllers in different areas filtering controller namespace depending on incoming message's route.
+            This implementation can be registered via the <see cref="P:System.Web.Http.HttpConfiguration.Services"/>.
+            </summary>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Routing.AreaHttpControllerSelector.#ctor(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Web.Http.Dispatcher.DefaultHttpControllerSelector"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Routing.AreaHttpControllerSelector.SelectController(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Selects a <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor"/> for the given <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            </summary>
+            <param name="request">The HTTP request message.</param>
+            <returns>
+            The <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor"/> instance for the given <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">request</exception>
+            <exception cref="T:System.Web.Http.HttpResponseException">
+            </exception>
+            <exception cref="T:System.Web.Http.HttpError">
+            </exception>
+        </member>
+        <member name="T:UsefulBits.Web.Http.Areas.AreaRegistrationContextExtensions">
+            <summary>
+            Extensions methods allowing mapping of http route in areas
+            </summary>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.AreaRegistrationContextExtensions.MapHttpRoute(System.Web.Mvc.AreaRegistrationContext,System.String,System.String,System.Object,System.Object)">
+            <summary>
+            Maps an HTTP route resolving controllers matching AreaRegistrationContext Namespaces.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="name">The unique route name.</param>
+            <param name="routeTemplate">The route template.</param>
+            <param name="defaults">The defaults.</param>
+            <param name="constraints">The constraints.</param>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.AreaRegistrationContextExtensions.SetHttpDependencyResolver(System.Web.Mvc.AreaRegistrationContext,System.Web.Http.Dependencies.IDependencyResolver)">
+            <summary>
+            Provides a registration point for dependency resolvers, using the specified dependency resolver interface as resolver for serives inside this area.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <exception cref="T:System.ArgumentNullException">context is null</exception>
+        </member>
+        <member name="T:UsefulBits.Web.Http.Areas.Routing.ControllerNamespaceRouteConstraint">
+            <summary>
+            Route Constraint to apply on {controller} argument so it allows only controller in specified namespaces.
+            </summary>
+        </member>
+        <member name="F:UsefulBits.Web.Http.Areas.Routing.ControllerNamespaceRouteConstraint.controllerTypes">
+            <summary>
+            Static cache of all availables controllers
+            </summary>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Routing.ControllerNamespaceRouteConstraint.#ctor(System.Collections.Generic.ICollection{System.String},System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UsefulBits.Web.Http.Areas.Routing.ControllerNamespaceRouteConstraint"/> class.
+            </summary>
+            <param name="namespaces">The namespaces in which allowed controllers reside.</param>
+            <param name="innerConstraint">Another constraint to apply or null.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="namespaces"/> is null</exception>
+        </member>
+        <member name="M:UsefulBits.Web.Http.Areas.Routing.ControllerNamespaceRouteConstraint.Match(System.Web.HttpContextBase,System.Web.Routing.Route,System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteDirection)">
+            <summary>
+            Determines whether the URL parameter contains a valid value for this constraint.
+            </summary>
+            <param name="httpContext">An object that encapsulates information about the HTTP request.</param>
+            <param name="route">The object that this constraint belongs to.</param>
+            <param name="parameterName">The name of the parameter that is being checked.</param>
+            <param name="values">An object that contains the parameters for the URL.</param>
+            <param name="routeDirection">An object that indicates whether the constraint check is being performed when an incoming request is being handled or when a URL is being generated.</param>
+            <returns>
+            true if the URL parameter contains a valid value; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:System.Web.Http.Dispatcher.HttpControllerTypeCache">
+            <summary>
+            Manages a cache of <see cref="T:System.Web.Http.Controllers.IHttpController"/> types detected in the system.
+            </summary>
+        </member>
+    </members>
+</doc>
