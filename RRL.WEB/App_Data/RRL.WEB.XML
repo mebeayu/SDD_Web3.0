@@ -1,0 +1,3538 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RRL.WEB</name>
+    </assembly>
+    <members>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.EventManagerController">
+            <summary>
+            活动API
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.EventManagerController.Eight(System.String,System.String,System.String,System.String)">
+            <summary>
+            记录活动8
+            </summary>
+            <param name="username">用户名</param>
+            <param name="mobile">联系电话</param>
+            <param name="area">区域</param>
+            <param name="address">地址</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.GameController">
+            <summary>
+            游戏API
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.AddFavouriteGoodsByGet(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">qingqiu</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.Lottery(RRL.WEB.Areas.WebApi.Controllers.LotteryRequest)">
+            <summary>
+            开奖
+            </summary>
+            <param name="request">开奖请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SetState(RRL.WEB.Areas.WebApi.Controllers.SetStateRequest)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetLogs(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户往期开奖数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.FirstHongFreeMoneyRequest(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            首次进入游戏红包奖励
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.DailyHongFreeMoneyRequest(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            每日红包奖励
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetAddLogs">
+            <summary>
+            获取最近10条红包记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.BuyQuan(RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest)">
+            <summary>
+            购买卡券(获取卡券待支付订单列表)
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.ApplyCouponPay(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            申请卡券支付（APP）
+            </summary>
+            <param name="coupon_list">预支付卡券列表</param>
+            <param name="token">短效令牌</param>
+            <param name="trans_type">交易类型1：微信，2：支付宝</param>
+            <param name="ip">客户ip</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetKaQuanList">
+            <summary>
+            获取卡券列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshPer(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            针对个人发放红包
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshTimeSpreader(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            刷新分享次数
+            </summary>
+            <param name="request">基础令牌请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshTimeRandom(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            领取时段随机红包
+            </summary>
+            <param name="request">基础令牌请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.FiveSpreaderGroup(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            领取5人一组红包
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.lotty(RRL.Core.Models.UserAuth,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,System.Object@)">
+            <summary>
+            开奖
+            </summary>
+            <param name="user"></param>
+            <param name="free"></param>
+            <param name="zs"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest">
+            <summary>
+            代金券购买请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.id">
+            <summary>
+            购买卡券id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.num">
+            <summary>
+            购买数量
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.token">
+            <summary>
+            短效令牌
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel">
+            <summary>
+            代金券模型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.id">
+            <summary>
+            卡券标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goodsid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.money">
+            <summary>
+            购买代金券金额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.countmoney">
+            <summary>
+            代金券金额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goldbean">
+            <summary>
+            赠送金豆数额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.starttime">
+            <summary>
+            开始使用时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.endtime">
+            <summary>
+            结束使用时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goodsname">
+            <summary>
+            商品名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.addtime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goldcoin">
+            <summary>
+            赠送金币
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest">
+            <summary>
+            红包开奖请求参数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.free">
+            <summary>
+            免费红包
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.zs">
+            <summary>
+            赠送红包
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.token">
+            <summary>
+            用户身份令牌
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.LotteryModel">
+            <summary>
+            红包开奖模型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.da">
+            <summary>
+            大
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.xiao">
+            <summary>
+            小
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.dan">
+            <summary>
+            单
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.shuang">
+            <summary>
+            双
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.hong">
+            <summary>
+            红
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.total">
+            <summary>
+            合计出资
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.AuthManagerController">
+            <summary>
+            认证API
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.AuthManagerController.SendSMS(System.String)">
+            <summary>
+            发送短信验证码（已脱离过程）
+            </summary>
+            <param name="mobile">手机号码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController">
+            <summary>
+            配置管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGoodsCarousel">
+            <summary>
+            获取精选页面轮播图(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetMainCarousel">
+            <summary>
+            获取主页面轮播图(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetEventCarousel">
+            <summary>
+            获取活动轮播图(新增)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetExchangeCarousel">
+            <summary>
+            获取兑换页轮播图(新增)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGameArea">
+            <summary>
+            获取游戏分区
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGoldenCoinArea">
+            <summary>
+            获取金币分区
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAndroidVersionInfo">
+            <summary>
+            获取安卓APP版本升级信息(已更新)
+            </summary>
+            <returns>APP版本信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAppSummary">
+            <summary>
+            获取APP简介(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.PublicController">
+            <summary>
+            开放WebApi
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.picture(System.Int32)">
+            <summary>
+            获取图片数据库中的图片(没想好怎么改)
+            </summary>
+            <param name="id">图片索引</param>
+            <returns>图片响应</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetShareGoodsPic(System.Int32,System.String)">
+            <summary>
+            获取商品分享图片
+            </summary>
+            <param name="id">商品索引(测试id:1)</param>
+            <param name="token">短效token</param>
+            <returns>图片响应</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetMutipleShareGoodsPic(System.Int32)">
+            <summary>
+            获取复数图片分享
+            </summary>
+            <param name="goods_id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetShareGoodsText(System.Int32)">
+            <summary>
+            获取商品分享文字
+            </summary>
+            <param name="id">商品索引(测试id:1)</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetInfoMessage">
+            <summary>
+            获取通知消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.zonecode">
+            <summary>
+            获取区域编码字典(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.bankdic">
+            <summary>
+            获取银行卡编码字典(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.trcakcom">
+            <summary>
+            获取快递公司中字典(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.gettrackinfo(System.String,System.String)">
+            <summary>
+            获取快递信息(不需更新)
+            </summary>
+            <param name="TrackCom">快递公司编码,测试:shunfeng</param>
+            <param name="TrackNum">快递单号,测试:236560068552</param>
+            <returns>物流信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getRecentTrackInfo(System.String,System.String)">
+            <summary>
+            获取最近一条快递信息(不需更新)
+            </summary>
+            <returns>物流信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getWxJsConfig(System.String)">
+            <summary>
+            获取微信JsAPI配置,SPA外部不可使用(不需更新)
+            </summary>
+            <param name="url">生成签名的链接</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getWxJsConfigFroPage(System.String)">
+            <summary>
+            获取微信JsAPI配置(不需更新)
+            </summary>
+            <param name="url">请求令牌的URL</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.SendPublicSms(System.String,System.String)">
+            <summary>
+            发送公共短信（无参数）
+            </summary>
+            <param name="mobile">手机号码</param>
+            <param name="templateCode">短信模板编码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController">
+            <summary>
+            商户管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsTypeList">
+            <summary>
+            获取商品分类列表(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetSimpleGoodsTypeList">
+            <summary>
+            获取第三级分类列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsList(System.Int32,System.Int32)">
+            <summary>
+            获取商品列表(已更新)
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsListByType(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            根据商品类型获取商品列表(已更新)
+            </summary>
+            <param name="GoodsType">商品类型编码</param>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.ExGetGoodsListByType(System.Int32,System.Int32,System.Int32,System.String,System.Boolean)">
+            <summary>
+            根据商品类型获取商品列表(排序扩展)
+            </summary>
+            <param name="GoodsType">商品类型编码</param>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="OrderField">排序字段 默认:order_weight;可用字段:return_money_discount(根据兑所需金币),sell_count(兑换量)</param>
+            <param name="IsAsc">是否顺序 默认:false</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetExchangeAreaGoodsList(System.Int32,System.Int32,System.String,System.Boolean)">
+            <summary>
+            获取兑换专区商品列表
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="OrderField">排序字段 默认:order_weight;可用字段:return_money_discount(根据兑所需金币),sell_count(兑换量)</param>
+            <param name="IsAsc">是否顺序 默认:false</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsListByKeyWord(System.String,System.Int32,System.Int32)">
+            <summary>
+            根据关键字获取商品列表(新发布)
+            </summary>
+            <param name="KeyWord">搜索关键字</param>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetHotRecommendGoods(System.Int32,System.Int32)">
+            <summary>
+            获取热门推荐商品列表(已更新)
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetMainRecommendGoods(System.Int32,System.Int32)">
+            <summary>
+            获取主要推荐商品列表(已更新)
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsDetail(System.Int32,System.String)">
+            <summary>
+            获取商品详情
+            </summary>
+            <param name="id">商品标识</param>
+            <param name="token">用户令牌</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsAttr(System.Int32,System.Collections.Generic.List{RRL.Core.Manager.GoodsAttrInView},System.String)">
+            <summary>
+            根据商品规格获取库存价格等
+            </summary>
+            <param name="id"></param>
+            <param name="token"></param>
+            <param name="attr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsShareInfo(System.Int32)">
+            <summary>
+            获取商品可分享评估信息
+            </summary>
+            <param name="id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsSpecDetail(System.Int32)">
+            <summary>
+            获得商品规格型号数据
+            </summary>
+            <param name="goods_id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.TestController">
+            <summary>
+            测试用接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.Test">
+            <summary>
+            测试接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnString">
+            <summary>
+            我的测试方法名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnParamGet(System.Int32)">
+            <summary>
+            返回参数测试方法
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnData(System.Int32)">
+            <summary>
+            返回参数测试方法
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController">
+            <summary>
+            交易管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetShopCartList(System.String)">
+            <summary>
+            获取购物车列表
+            </summary>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.AddGoodsToCart(System.Int32,System.Int32,System.String)">
+            <summary>
+            向购物车中添加或减少商品(自更新)
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="goods_count">商品数量(可为负数)</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.RemoveGoodsInCart(System.Int32,System.String)">
+            <summary>
+            从购物车中移除条目(自更新)
+            </summary>
+            <param name="cart_id">购物车条目id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.CreateOrderFromGoods(System.Int32,System.Int32,System.String)">
+            <summary>
+            通过商品创建订单
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="goods_count">商品数量</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.CreateOrderFromCart(System.String,System.String)">
+            <summary>
+            通过购物车创建订单
+            </summary>
+            <param name="cartlist">购物车列表，格式为：1，2，3</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetOrderList(System.Int32,System.Int32,System.String)">
+            <summary>
+            获取订单列表
+            </summary>
+            <param name="page">页码</param>
+            <param name="pagesize">页面尺寸</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetOrderStatusCount(System.String)">
+            <summary>
+            获取用户订单分类统计数量
+            </summary>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetOrderListByStatus(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            通过订单状态获取订单列表
+            </summary>
+            <param name="status">
+            -3:订单已关闭(?),
+            -2:标记异常(后端)，
+            -1:已取消(后端)，
+            0:过程码(后端)，
+            1:待付款，
+            2：待收货，
+            3：待评价，
+            4：退货
+            </param>
+            <param name="page">页码</param>
+            <param name="pagesize">页面大小</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetOrderDetail(System.Int32,System.String)">
+            <summary>
+            通过订单标识获取订单详情
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetPreOrderList(System.String,System.String)">
+            <summary>
+            通过订单数组获取预处理订单
+            (预处理订单指尚未支付的订单，也就是说此接口无法获取状态1以外的订单)
+            该接口用来处理订单拼接支付前的预渲染
+            </summary>
+            <param name="orderlist">订单标识数组，格式：1，2，3</param>
+            <param name="token">短效token</param>
+            <returns>结果对象,additional_data:当前用户退款账户金额</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.FillOrderReceiveInfo(System.Int32,System.Int32,System.String)">
+            <summary>
+            补充预处理订单收件地址信息
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="receive_id">收件信息id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.CancelOrder(System.Int32,System.String)">
+            <summary>
+            取消未支付订单
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.OrderRefundApply(System.Int32,System.String)">
+            <summary>
+            申请订单退货
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.OrderSettlement(System.Int32,System.String)">
+            <summary>
+            结算订单(确认收货)
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.ApplyPayForOrderList(System.String,System.Double,System.Int32,System.String,System.String)">
+            <summary>
+            申请支付(已强制过期)
+            </summary>
+            <param name="orderlist">订单数组,例如:1,2,3</param>
+            <param name="discount">申请抵扣金币</param>
+            <param name="trans_type">支付类型:1,微信支付，2,支付宝支付，3,退款账户余额支付</param>
+            <param name="IP">请求ip地址</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.ApplyPayForOrderListVer2(System.String,System.Double,System.Int32,System.String,System.String)">
+            <summary>
+            申请支付
+            </summary>
+            <param name="orderlist">订单数组,例如:1,2,3</param>
+            <param name="discount">申请抵扣金币</param>
+            <param name="trans_type">支付类型:1,微信支付，2,支付宝支付，3,退款账户余额支付</param>
+            <param name="IP">请求ip地址</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.UserManagerController">
+            <summary>
+            用户管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddFavouriteGoodsByGet(System.Int32,System.String)">
+            <summary>
+            添加商品收藏(已脱离过程,即将过期)
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddFavouriteGoods(RRL.WEB.Models.Request.BaseGoodsRequest)">
+            <summary>
+            添加商品收藏(已脱离过程,推荐使用)
+            </summary>
+            <param name="Request">商品基础请求对象</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.RemoveFavouriteGoods(System.Int32,System.String)">
+            <summary>
+            移除商品收藏
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserFavouriteGoodsList(System.Int32,System.Int32,System.String)">
+            <summary>
+            获取用户商品收藏列表
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.FillUserIdentity(RRL.WEB.Models.Request.IdentityRequest)">
+            <summary>
+            身份信息补充
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddFavouriteShopByGet(System.Int32,System.String)">
+            <summary>
+            添加商店收藏(已脱离过程,即将过期)
+            </summary>
+            <param name="shop_id">商店id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddFavouriteShop(RRL.WEB.Models.Request.BaseShopRequest)">
+            <summary>
+            添加商店收藏(已脱离过程,推荐使用)
+            </summary>
+            <param name="Request">商店基础请求对象</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.RemoveFavouriteShop(System.Int32,System.String)">
+            <summary>
+            移除商店收藏
+            </summary>
+            <param name="shop_id">商店id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserFavouriteShopList(System.Int32,System.Int32,System.String)">
+            <summary>
+            获取用户商店收藏列表
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.SetUserInfo(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            设置用户基本信息
+            </summary>
+            <param name="nick_name">昵称</param>
+            <param name="sex">性别:1:男，2:女</param>
+            <param name="area_code">区域编码</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.SetUserHeadPic(RRL.WEB.Models.Request.HeadPicRequest)">
+            <summary>
+            设置用户头像
+            </summary>
+            <param name="obj">用户头像设置对象</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserBaseInfo(System.String)">
+            <summary>
+            获取用户基本信息
+            </summary>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddReceiveInfo(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            添加收件人信息
+            </summary>
+            <param name="name">收件人姓名</param>
+            <param name="address">收件人地址</param>
+            <param name="mobile">收件人联系电话</param>
+            <param name="area_code">收件人区域编码</param>
+            <param name="zip_code">收件人邮政编码</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.SetDefaultReceiveInfo(System.Int32,System.String)">
+            <summary>
+            设置默认收件人信息
+            </summary>
+            <param name="receive_id">收获信息id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddReceiveInfoAsDefault(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            添加收件人信息并设为默认值
+            </summary>
+            <param name="name">收件人姓名</param>
+            <param name="address">收件人地址</param>
+            <param name="mobile">收件人联系电话</param>
+            <param name="area_code">收件人区域编码</param>
+            <param name="zip_code">收件人邮政编码</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.RemoveReceiveInfo(System.Int32,System.String)">
+            <summary>
+            移除收件人信息
+            </summary>
+            <param name="receive_id">收件人信息列表id</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserReceiveInfoList(System.String)">
+            <summary>
+            获取用户收件人信息列表
+            </summary>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+            [HttpGet]
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetDefaultReceiveInfo(System.String)">
+            <summary>
+            获取默认收货信息
+            </summary>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddUserBankCard(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            添加银行卡
+            </summary>
+            <param name="bank_en">银行英文缩写</param>
+            <param name="card_no">卡号</param>
+            <param name="card_holder">持卡人姓名</param>
+            <param name="sms_code">短信验证码</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.RemoveUserBankCard(System.Int32,System.String,System.String)">
+            <summary>
+            移除银行卡
+            </summary>
+            <param name="card_id">银行卡id</param>
+            <param name="sms_code">短信验证码</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserBankCardList(System.String)">
+            <summary>
+            获取用户银行卡列表
+            </summary>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserAccountInfo(System.String)">
+            <summary>
+            获取用户账户基本信息
+            </summary>
+            <param name="token">短效token</param>
+            <returns>
+            结果对象<br/>
+            uid:用户id<br/>
+            r_money:奖励金账户<br/>
+            x_money:退款账户<br/>
+            y_money:推广奖励金账户<br/>
+            h_money：金豆账户<br/>
+            plate_to_return_money:待反金额<br/>
+            plate_to_return_today:今日购物奖励<br/>
+            total_plate_to_return_money:累计购物奖励<br/>
+            recommend_today:今日推荐奖励<br/>
+            total_recomend_money:累计推荐奖励<br/>
+            </returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetGetUserAccountInfo2(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户账户信息
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.MarkInfoRead(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            修改信息阅读状态
+            </summary>
+            <param name="Request">基础令牌请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserMoneyRecordList(System.Int32,System.Int32,System.String)">
+            <summary>
+            获取用户帐单列表
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="token">短效token</param>
+            <returns>结果对象:1:普通消费,2:每日分配,3:推荐奖励,4:消费抵扣,5:提现,6:消费退款,7:历史积分转换</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserIncomeRecordList(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户收益列表
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>
+            结果对象 record_type(1:现金记录):1:普通消费,2:每日分配,3:推荐奖励,4:消费抵扣,5:提现,6:消费退款,7:历史积分转换
+            record_type(1:应反记录):1:普通消费,2:历史积累,3:系统赠送
+            </returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserApplyCash(System.Double,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            申请用户提现
+            </summary>
+            <param name="apply_money">申请金额</param>
+            <param name="type">提现类型:1:r_money(奖励金账户);2:x_money(退款账户);3:y_money(佣金账户)</param>
+            <param name="card_id">银行卡id</param>
+            <param name="sms_code">短信验证码</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserCashApplyList(System.Int32,System.Int32,System.String)">
+            <summary>
+            获取用户提现申请列表
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面尺寸</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserPlatToReturnRecord(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户平台应反记录(那啥金币)
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserXMoneyRecord(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户现金账户记录(x_money)
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserRMoneyRecord(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户消费账户记录(r_money)
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserYMoneyRecord(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户推荐账户记录(y_money)
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserSpreadorList(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户上线列表
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserReferralsList(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取用户下线列表
+            </summary>
+            <param name="Request">基础分页请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserRecommandCount(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户推荐统计信息
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMonthRecommandUserData(RRL.WEB.Models.Request.MonthPaginateRequest)">
+            <summary>
+            获取用户月度推荐用户统计数据
+            </summary>
+            <param name="Request">基础月份请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMonthRecommandOrderData(RRL.WEB.Models.Request.MonthPaginateRequest)">
+            <summary>
+            获取用户月度推荐订单统计数据
+            </summary>
+            <param name="Request">基础月份请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMonthRecommandMoneyData(RRL.WEB.Models.Request.MonthPaginateRequest)">
+            <summary>
+            获取用户月度推荐收益统计数据
+            </summary>
+            <param name="Request">基础月份请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserRegistWithSMSCode(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            使用短信验证码注册用户(已更新)
+            </summary>
+            <param name="smscode">验证码</param>
+            <param name="username">用户名</param>
+            <param name="spreader">推荐码</param>
+            <param name="devicecode"></param>
+            <param name="channel"></param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserRegistFromPush(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            代理商推广用户注册接口(已更新)
+            </summary>
+            <param name="smscode">验证码</param>
+            <param name="username">用户名</param>
+            <param name="spreader_code">代理商码</param>
+            <param name="spreader">推荐码</param>
+            <param name="devicecode"></param>
+            <param name="channel"></param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLoginWithSMSCode(System.String,System.String,System.String,System.String)">
+            <summary>
+            使用短信验证码登录
+            </summary>
+            <param name="UserName">用户名</param>
+            <param name="SMSCode">短信码</param>
+            <param name="devicecode"></param>
+            <param name="channel"></param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLoginOrRegistWithSMSCode(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            使用短信码登录或注册
+            </summary>
+            <param name="username">用户名</param>
+            <param name="smscode">短信验证码</param>
+            <param name="spreader">推荐人手机号(注册用)</param>
+            <param name="devicecode"></param>
+            <param name="channel"></param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ReceiveFreeHongMoney(RRL.WEB.Models.Request.HongRequest)">
+            <summary>
+            领取分享红包（注册登录一体化）
+            </summary>
+            <param name="request">红包分享注册请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserBindOpenIdWithUserName(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            绑定用户Openid
+            </summary>
+            <param name="username">用户名</param>
+            <param name="smscode">验证码</param>
+            <param name="openid">openid</param>
+            <param name="type">openid类型:WxOpen(开放平台),WxMP(公众平台)</param>
+            <param name="spreader">推荐人用户名</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ApplyTokenViaOpenId(System.String,System.String,System.String,System.String)">
+            <summary>
+            使用Openid申请token
+            </summary>
+            <param name="openid">openid</param>
+            <param name="type">openid类型:WxOpen(开放平台),WxMP(公众平台)</param>
+            <param name="devicecode"></param>
+            <param name="channel"></param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ReApplyShortTimeToken(System.String,System.String,System.String)">
+            <summary>
+            请求短效Token
+            </summary>
+            <param name="token">长效Token</param>
+            <param name="devicecode"></param>
+            <param name="channel"></param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLogout(System.String)">
+            <summary>
+            用户登出
+            </summary>
+            <param name="token">任意有效token</param>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.WebApiAreaRegistration">
+            <summary>
+            默认的WebApi区域注册
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.WebApiAreaRegistration.AreaName">
+            <summary>
+            区域名
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.WebApiAreaRegistration.RegisterArea(System.Web.Mvc.AreaRegistrationContext)">
+            <summary>
+            注册主体
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:RRL.WEB.Controllers.EventController">
+            <summary>
+            活动控制器
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.One">
+            <summary>
+            活动1：一元抢购纸巾
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Two">
+            <summary>
+            活动2：秋日特饮
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Three">
+            <summary>
+            活动3：火锅活动
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Four">
+            <summary>
+            活动4：七夕玫瑰
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Five">
+            <summary>
+            活动5：一元抢购牛肉酱
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Six">
+            <summary>
+            活动6：中秋大礼包
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Seven">
+            <summary>
+            活动7：一元抢购
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Eight">
+            <summary>
+            活动8：豆浆
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Nine">
+            <summary>
+            活动9：啤酒节
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Ten">
+            <summary>
+            活动10：爱牙日
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Eleven">
+            <summary>
+            活动11：国庆
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Twelve">
+            <summary>
+            活动十二:使用说明
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Thirteen">
+            <summary>
+            活动十三:分销说明
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Fourteen">
+            <summary>
+            活动十四:一元专区
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Fifteen">
+            <summary>
+            活动十五:申请成为掌柜
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Xxxshare">
+            <summary>
+            分享获取红包
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Controllers.PayCallBackController">
+            <summary>
+            支付回调
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Controllers.PayCallBackController.alipay_notify">
+            <summary>
+            支付宝回调
+            </summary>
+            <returns>回调结果</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.PayCallBackController.wxpay_notify">
+            <summary>
+            微信APP回调
+            </summary>
+            <returns>回调结果</returns>
+        </member>
+        <member name="T:RRL.WEB.Controllers.ViewRouteController">
+            <summary>
+            基础视图控制器
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.GetCodeUrl(System.String)">
+            <summary>
+            重新获取Code,以后面实现带着Code重新跳回目标页面(没有用户授权的，只能获取基本信息（openid））
+            </summary>
+            <param name="url">目标页面</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.GetOauthAccessOpenId(System.String)">
+            <summary>
+            根据Code获取用户的openid、access_token
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.GetHostAddress">
+            <summary>
+            获取客户端ip
+            </summary>
+            <returns>ip</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.IsIP(System.String)">
+            <summary>
+            校验ip合法性
+            </summary>
+            <param name="ip">ip地址</param>
+            <returns>校验结果</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.Index">
+            <summary>
+            根节点视图(/)
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.WxJsPay">
+            <summary>
+            微信JS支付节点
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.CouponsPay">
+            <summary>
+            卡券支付节点
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.Product">
+            <summary>
+            产品节点视图(/Product)
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.HongRequest">
+            <summary>
+            红包登录请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.username">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.smscode">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.devicecode">
+            <summary>
+            设备码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.token">
+            <summary>
+            推荐人token
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.IdentityRequest">
+            <summary>
+            真实信息填写请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.IdentityRequest.realname">
+            <summary>
+            真实姓名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.IdentityRequest.identity">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.IdentityRequest.token">
+            <summary>
+            token
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.HeadPicRequest">
+            <summary>
+            设置用户头像请求对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HeadPicRequest.token">
+            <summary>
+            短效token
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HeadPicRequest.base64">
+            <summary>
+            头像base64编码字符串
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.BaseGoodsRequest">
+            <summary>
+            商品基础请求对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BaseGoodsRequest.token">
+            <summary>
+            短效token
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BaseGoodsRequest.goods_id">
+            <summary>
+            商品标识
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.BaseShopRequest">
+            <summary>
+            商店基础请求对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BaseShopRequest.token">
+            <summary>
+            短效token
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BaseShopRequest.shop_id">
+            <summary>
+            商店标识
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.BasePaginateRequest">
+            <summary>
+            基础分页请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BasePaginateRequest.Page">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BasePaginateRequest.PageSize">
+            <summary>
+            页面大小
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.PaginateTokenRequest">
+            <summary>
+            带tonen的分页请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.PaginateTokenRequest.token">
+            <summary>
+            短效token
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.BaseTokenRequest">
+            <summary>
+            基础令牌请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BaseTokenRequest.token">
+            <summary>
+            短效token
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.MonthPaginateRequest">
+            <summary>
+            带月份数据的令牌请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.MonthPaginateRequest.month">
+            <summary>
+            请求月份
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Response.TrackResult">
+            <summary>
+            快递查询结果
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.message">
+            <summary>
+            消息体
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.state">
+            <summary>
+            签收状态
+            0在途中、1已揽收、2疑难、3已签收、4退签、5同城派送中、6退回、7转单
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.status">
+            <summary>
+            通讯状态
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.condition">
+            <summary>
+            明细状态标记
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.ischeck">
+            <summary>
+            是否签收，已弃用
+            这个快递100怕是石乐智
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.com">
+            <summary>
+            快递公司编码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.nu">
+            <summary>
+            快递单号
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackResult.data">
+            <summary>
+            查询结果
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.TrackResult.GetRecent">
+            <summary>
+            获取第一条结果
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Response.TrackNode">
+            <summary>
+            快递节点
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackNode.context">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackNode.time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.TrackNode.ftime">
+            <summary>
+            格式化时间
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Response.DataResult">
+            <summary>
+            结果对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.DataResult.status">
+            <summary>
+            消息码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.DataResult.message">
+            <summary>
+            消息信息
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.DataResult.data">
+            <summary>
+            结果数据集
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.DataResult.additional_data">
+            <summary>
+            附加数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.DataResult.add_data">
+            <summary>
+            其他附加数据
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.DataResult.InitFromDataSet(System.Data.DataSet)">
+            <summary>
+            使用DataSet初始化结果对象
+            </summary>
+            <param name="data">数据集</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.DataResult.InitFromMessageCode(System.Int32)">
+            <summary>
+            使用消息码初始化结果对象
+            </summary>
+            <param name="code">消息码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.DataResult.SingleColumnDataSetToList(System.Data.DataSet)">
+            <summary>
+            转换单一列数据集为列表
+            </summary>
+            <param name="data">数据集</param>
+            <returns>列表</returns>
+        </member>
+        <member name="T:RRL.WEB.Models.Response.AppVersionObject">
+            <summary>
+            APP版本信息对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.AppVersionObject.url">
+            <summary>
+            下载地址
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.AppVersionObject.version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.AppVersionObject.info">
+            <summary>
+            更新信息
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Response.ResultView`1">
+            <summary>
+            结果视图
+            </summary>
+            <typeparam name="T">类型占位符</typeparam>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.ResultView`1.status">
+            <summary>
+            消息码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.ResultView`1.message">
+            <summary>
+            消息信息
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.ResultView`1.data">
+            <summary>
+            结果数据集
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.ResultView`1.InitFromDataSet(System.Data.DataSet)">
+            <summary>
+            使用DataSet初始化结果对象
+            </summary>
+            <param name="data">数据集</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.ResultView`1.InitFromList(System.Collections.Generic.List{`0})">
+            <summary>
+            使用列表初始化结果对象
+            </summary>
+            <param name="List">列表</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Models.Response.ResultView`1.InitFromMessageCode(System.Int32)">
+            <summary>
+            使用消息码初始化结果对象
+            </summary>
+            <param name="code">消息码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.ShopSummary">
+            <summary>
+            商店概览（用于商户列表渲染）
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.ShopSummary.id">
+            <summary>
+            商店标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.ShopSummary.shop_name">
+            <summary>
+            商店名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.ShopSummary.area_code">
+            <summary>
+            商店区域编码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.ShopSummary.lng">
+            <summary>
+            商店坐标经度
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.ShopSummary.lat">
+            <summary>
+            商店坐标纬度
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.ShopSummary.pic_id">
+            <summary>
+            商店封面图
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.SimpleGoodsType">
+            <summary>
+            基础商品分类对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.SimpleGoodsType.id">
+            <summary>
+            类别标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.SimpleGoodsType.name">
+            <summary>
+            类别名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.SimpleGoodsType.icon">
+            <summary>
+            类别图标
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.SimpleGoodsType.InitList(System.Data.DataTable)">
+            <summary>
+            生成基础商品分类列表
+            </summary>
+            <param name="simpleTable"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.GoodsType">
+            <summary>
+            商品类别对象
+            </summary>
+            对应shop_cate
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsType.id">
+            <summary>
+            类别标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsType.name">
+            <summary>
+            类别名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsType.icon">
+            <summary>
+            类别图标
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsType.carousl">
+            <summary>
+            轮播图列表
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsType.nodes">
+            <summary>
+            子分类节点
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.GoodsType.BuildTree(System.Data.DataTable,RRL.WEB.Models.ViewModel.GoodsType,System.Data.DataTable,System.Int32)">
+            <summary>
+            创建树
+            </summary>
+            <returns>结果树</returns>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.GoodsSummary">
+            <summary>
+            商品概览（用于商品列表渲染）
+            </summary>
+            对应GOODS_LIST_VIEW
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.id">
+            <summary>
+            商品标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.shop_type">
+            <summary>
+            店铺类别:0.自营店，1:入驻店
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.price">
+            <summary>
+            平台价格
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.local_price">
+            <summary>
+            商品价格
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.name">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.goods_type">
+            <summary>
+            商品类型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.propaganda">
+            <summary>
+            商品简介
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.pic_id">
+            <summary>
+            商品图
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.return_money_rate">
+            <summary>
+            商品返还率
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.discount">
+            <summary>
+            兑换所需金币数
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.GoodsRecommend">
+            <summary>
+            推荐商品对象
+            </summary>
+            对应RECOMMEND_HOT_VIEW
+            RECOMMEND_MAIN_VIEW
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.id">
+            <summary>
+            商品标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.price">
+            <summary>
+            平台价格
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.local_price">
+            <summary>
+            商品价格
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.name">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.propaganda">
+            <summary>
+            推广语
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.pic_id">
+            <summary>
+            商品图片id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsRecommend.return_money_rate">
+            <summary>
+            商品返还率
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.CarouslFigure">
+            <summary>
+            轮播图对象
+            </summary>
+            对应CAROUSEL_CHOSEN_LIST_VIEW
+            CAROUSEL_MAIN_LIST_VIEW
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.CarouslFigure.id">
+            <summary>
+            轮播图标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.CarouslFigure.pic_id">
+            <summary>
+            图片标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.CarouslFigure.url">
+            <summary>
+            跳转URL:1.goods_id;2.shop_id;3.url
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.CarouslFigure.direct_type">
+            <summary>
+            跳转类型:1.跳转到商品,2.跳转到商店,3.跳转到一个url
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.AreaCode">
+            <summary>
+            地理编码对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.AreaCode.Code">
+            <summary>
+            区域编码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.AreaCode.Name">
+            <summary>
+            区域名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.AreaCode.Class">
+            <summary>
+            区域等级:1.省,2.市,3.区
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.AreaCode.Parent">
+            <summary>
+            父编码
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.BankMain">
+            <summary>
+            银行卡编码对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.BankMain.bank_en">
+            <summary>
+            银行英文编码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.BankMain.bank_name">
+            <summary>
+            银行名称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.BankMain.bank_icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.TrackCom">
+            <summary>
+            快递公司编码对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.TrackCom.id">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.TrackCom.name">
+            <summary>
+            快递公司名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.TrackCom.code">
+            <summary>
+            快递公司编码
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.UserIncomeRecord">
+            <summary>
+            用户收益记录
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.id">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.addtime">
+            <summary>
+            记录添加时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.uid">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.order_id">
+            <summary>
+            订单id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.money">
+            <summary>
+            收益数额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.type">
+            <summary>
+            收益类型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.record_type">
+            <summary>
+            记录类型
+            1:现金收益记录，2:金币收益记录
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserIncomeRecord.rec_class">
+            <summary>
+            推荐等级
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.UserAccount">
+            <summary>
+            用户账户对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.id">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.plate_to_return_money">
+            <summary>
+            用户金币
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.ex_plate_to_return_money">
+            <summary>
+            不参与分配的金币
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.point">
+            <summary>
+            用户历史积分
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.r_money">
+            <summary>
+            用户消费账户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.x_money">
+            <summary>
+            用户现金账户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.y_money">
+            <summary>
+            用户推荐账户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.y_money_frz">
+            <summary>
+            用户推荐账户冻结
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.h_money">
+            <summary>
+            金豆账户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.plate_to_return_weight">
+            <summary>
+            用户分配权重
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.total_trans">
+            <summary>
+            交易总额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.total_return">
+            <summary>
+            总返还额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.total_weight">
+            <summary>
+            总权重
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.return_ave_weight">
+            <summary>
+            每权平均返还
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserAccount.if_info_has_read">
+            <summary>
+            信息是否已阅读
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.UserAccount.#ctor(System.Data.DataRow)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.UserReferral">
+            <summary>
+            用户下线对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserReferral.id">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserReferral.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserReferral.addtime">
+            <summary>
+            绑定时间
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.UserRecommandCount">
+            <summary>
+            用户推荐统计对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.id">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.is_shop_keeper">
+            <summary>
+            是否是掌柜
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.total_recommand_user_count">
+            <summary>
+            推荐用户数合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.recommand_user_first_class">
+            <summary>
+            第一级推荐用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.recommand_user_second_class">
+            <summary>
+            第二级推荐用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.recommand_user_third_class">
+            <summary>
+            第三级推荐用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.recommand_user_consumed">
+            <summary>
+            已购物用户数合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.recommand_user_not_consumed">
+            <summary>
+            未购物用户数合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.total_recommand_award">
+            <summary>
+            推荐收益合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_recommand_award">
+            <summary>
+            本月推荐收益合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.total_recommand_order_count">
+            <summary>
+            推荐订单数合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_recommand_order_count">
+            <summary>
+            本月推荐订单数量合计
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.UserRecommandCount.#ctor(System.Data.DataRow)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="countRow"></param>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.MonthUserRecommandData">
+            <summary>
+            用户月度推荐数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.id">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.is_shop_keeper">
+            <summary>
+            是否是掌柜
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.month_total_recommand_user">
+            <summary>
+            月度推荐用户总数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.month_first_class_recommand_user">
+            <summary>
+            月度推荐第一层级用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.month_second_class_recommand_user">
+            <summary>
+            月度推荐第二层级用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.month_third_class_recommand_user">
+            <summary>
+            月度第三层级用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.month_consumed_recommand_user">
+            <summary>
+            月度推荐已购买用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.month_consumed_not_consumed_user">
+            <summary>
+            月度推荐未购买用户
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandData.list">
+            <summary>
+            月度推荐用户列表
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.MonthUserRecommandObj">
+            <summary>
+            推荐用户对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.id">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.real_name">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.addtime">
+            <summary>
+            注册时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.total_cash">
+            <summary>
+            累计消费
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.recommand_class">
+            <summary>
+            用户推荐层级
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.recommand_count">
+            <summary>
+            用户子用户数
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.MonthUserRecommandObj.#ctor(System.Data.DataRow)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="row">数据行</param>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.MonthOrderRecommandData">
+            <summary>
+            订单月度推荐数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.id">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.is_shop_keeper">
+            <summary>
+            是否是掌柜
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.year_total_order">
+            <summary>
+            年度推荐总订单数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.year_settled_order">
+            <summary>
+            年度已确认订单数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.month_total_order">
+            <summary>
+            月度推荐总订单数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.month_settled_order">
+            <summary>
+            月度已确认订单数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.list">
+            <summary>
+            月度推荐用户列表
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.MonthOrderRecommandData.#ctor(System.Data.DataRow,System.Data.DataTable)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="mainRow"></param>
+            <param name="recommandTable"></param>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj">
+            <summary>
+            推荐订单对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.ordercode">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.addtime">
+            <summary>
+            订单创建时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.checktime">
+            <summary>
+            订单确认时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.money">
+            <summary>
+            订单额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.status">
+            <summary>
+            订单状态2:未确认，3:已确认
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.recommand_class">
+            <summary>
+            推荐层级
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.MonthOrderRecommandObj.#ctor(System.Data.DataRow)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="row">数据行</param>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData">
+            <summary>
+            月度推荐收益数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.id">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.is_shop_keeper">
+            <summary>
+            是否是掌柜
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.year_total_money">
+            <summary>
+            年度推荐收益总额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.year_frz_money">
+            <summary>
+            年度推荐收益冻结
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.month_total_money">
+            <summary>
+            月度推荐收益总额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.month_frz_money">
+            <summary>
+            月度推荐收益冻结
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.list">
+            <summary>
+            月度推荐用户列表
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.MonthRecommandMoneyData.#ctor(System.Data.DataRow,System.Data.DataTable)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="mainRow"></param>
+            <param name="recommandTable"></param>
+        </member>
+        <member name="T:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj">
+            <summary>
+            推荐收益对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.addtime">
+            <summary>
+            入账时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.recommand_money">
+            <summary>
+            推荐入账金额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.buyer_name">
+            <summary>
+            购买人用户名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.is_frz">
+            <summary>
+            是否冻结状态
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.order_money">
+            <summary>
+            订单额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.recommand_class">
+            <summary>
+            推荐层级
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Models.ViewModel.MonthRecommandMoneyObj.#ctor(System.Data.DataRow)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="row">数据行</param>
+        </member>
+        <member name="T:RRL.WEB.Models.Wx.WxOauthAccessToken">
+            <summary>
+            微信认证通行令牌对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Wx.WxOauthAccessToken.access_token">
+            <summary>
+            通行令牌
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Wx.WxOauthAccessToken.expires_in">
+            <summary>
+            超时时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Wx.WxOauthAccessToken.refresh_token">
+            <summary>
+            刷新令牌
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Wx.WxOauthAccessToken.openid">
+            <summary>
+            open_id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Wx.WxOauthAccessToken.scope">
+            <summary>
+            授权作用域
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Ulity.DataSetHelper">
+            <summary>
+            DataSet辅助处理类
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Ulity.DataSetHelper.ConvertDataTableToList``1(System.Data.DataTable)">
+            <summary>
+            DataTable转实体列表
+            </summary>
+            <param name="Table">DataTable</param>
+            <returns>实体列表</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.DataSetHelper.ConvertDataRowToObj``1(System.Data.DataRow)">
+            <summary>
+            DataRow转实体对象
+            </summary>
+            <param name="Row">DataRow</param>
+            <returns>实体对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.DataSetHelper.ConvertRowsToTable(System.Data.DataRow[])">
+            <summary>
+            DataRows转Datatable
+            </summary>
+            <param name="Rows">Datarow数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.DataSetHelper.ConvertDataColumnToList(System.Data.DataTable,System.String)">
+            <summary>
+            提取DataTable中一列为数组
+            </summary>
+            <param name="Table">表</param>
+            <param name="ColumnName">列名</param>
+            一般用来转换数字和字符串
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Ulity.RdSession">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Ulity.RdSession.#ctor(System.Web.HttpContext,System.Boolean,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="context"></param>
+            <param name="isReadOnly"></param>
+            <param name="timeOut"></param>
+        </member>
+        <member name="P:RRL.WEB.Ulity.RdSession.SessionId">
+            <summary>
+            计算SessionID
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.RdSession.Item(System.String)">
+            <summary>
+            获取或设置session
+            </summary>
+            <param name="sessionKey"></param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.RdSession.Exist(System.String)">
+            <summary>
+            判断是否存在
+            </summary>
+            <param name="sessionKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.RdSession.Add(System.String,System.String)">
+            <summary>
+            设置session
+            </summary>
+            <param name="sessionKey"></param>
+            <param name="sessionValue"></param>
+        </member>
+        <member name="T:RRL.WEB.Ulity.SessionHelper">
+            <summary>
+            session处理类
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Add(System.String,System.String)">
+            <summary>
+            添加Session，调动有效期为60分钟
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+            <param name="strValue">Session值</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Adds(System.String,System.String[])">
+            <summary>
+            添加Session，调动有效期为60分钟
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+            <param name="strValues">Session值数组</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Add(System.String,System.String,System.Int32)">
+            <summary>
+            添加Session
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+            <param name="strValue">Session值</param>
+            <param name="iExpires">调动有效期（分钟）</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Adds(System.String,System.String[],System.Int32)">
+            <summary>
+            添加Session
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+            <param name="strValues">Session值数组</param>
+            <param name="iExpires">调动有效期（分钟）</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Get(System.String)">
+            <summary>
+            读取某个Session对象值
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+            <returns>Session对象值</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Gets(System.String)">
+            <summary>
+            读取某个Session对象值数组
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+            <returns>Session对象值数组</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.SessionHelper.Del(System.String)">
+            <summary>
+            删除某个Session对象
+            </summary>
+            <param name="strSessionName">Session对象名称</param>
+        </member>
+        <member name="T:RRL.WEB.Ulity.HttpHelper">
+            <summary>
+            Http连接操作帮助类
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.GetHtml(RRL.WEB.Ulity.HttpItem)">
+            <summary>
+            根据相传入的数据，得到相应页面数据
+            </summary>
+            <param name="item">参数类对象</param>
+            <returns>返回HttpResult类型</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.SetRequest(RRL.WEB.Ulity.HttpItem)">
+             <summary>
+             为请求准备参数
+             </summary>
+            <param name="item">参数列表</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.SetCer(RRL.WEB.Ulity.HttpItem)">
+            <summary>
+            设置证书
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.SetCerList(RRL.WEB.Ulity.HttpItem)">
+            <summary>
+            设置多个证书
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.SetCookie(RRL.WEB.Ulity.HttpItem)">
+            <summary>
+            设置Cookie
+            </summary>
+            <param name="item">Http参数</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.SetPostData(RRL.WEB.Ulity.HttpItem)">
+            <summary>
+            设置Post数据
+            </summary>
+            <param name="item">Http参数</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.SetProxy(RRL.WEB.Ulity.HttpItem)">
+            <summary>
+            设置代理
+            </summary>
+            <param name="item">参数对象</param>
+        </member>
+        <member name="M:RRL.WEB.Ulity.HttpHelper.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            回调验证证书问题
+            </summary>
+            <param name="sender">流对象</param>
+            <param name="certificate">证书</param>
+            <param name="chain">X509Chain</param>
+            <param name="errors">SslPolicyErrors</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:RRL.WEB.Ulity.HttpItem">
+            <summary>
+            Http请求参考类
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.URL">
+            <summary>
+            请求URL必须填写
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Method">
+            <summary>
+            请求方式默认为GET方式,当为POST方式时必须设置Postdata的值
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Timeout">
+            <summary>
+            默认请求超时时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ReadWriteTimeout">
+            <summary>
+            默认写入Post数据超时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Host">
+            <summary>
+            设置Host的标头信息
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.KeepAlive">
+            <summary>
+             获取或设置一个值，该值指示是否与 Internet 资源建立持久性连接默认为true。
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Accept">
+            <summary>
+            请求标头值 默认为text/html, application/xhtml+xml, */*
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ContentType">
+            <summary>
+            请求返回类型默认 text/html
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.UserAgent">
+            <summary>
+            客户端访问信息默认Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Encoding">
+            <summary>
+            返回数据编码默认为NUll,可以自动识别,一般为utf-8,gbk,gb2312
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.PostDataType">
+            <summary>
+            Post的数据类型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Postdata">
+            <summary>
+            Post请求时要发送的字符串Post数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.PostdataByte">
+            <summary>
+            Post请求时要发送的Byte类型的Post数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.CookieCollection">
+            <summary>
+            Cookie对象集合
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Cookie">
+            <summary>
+            请求时的Cookie
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Referer">
+            <summary>
+            来源地址，上次访问地址
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.CerPath">
+            <summary>
+            证书绝对路径
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.WebProxy">
+            <summary>
+            设置代理对象，不想使用IE默认配置就设置为Null，而且不要设置ProxyIp
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.IsToLower">
+            <summary>
+            是否设置为全文小写，默认为不转化
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Allowautoredirect">
+            <summary>
+            支持跳转页面，查询结果将是跳转后的页面，默认是不跳转
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Connectionlimit">
+            <summary>
+            最大连接数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ProxyUserName">
+            <summary>
+            代理Proxy 服务器用户名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ProxyPwd">
+            <summary>
+            代理 服务器密码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ProxyIp">
+            <summary>
+            代理 服务IP,如果要使用IE代理就设置为ieproxy
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ResultType">
+            <summary>
+            设置返回类型String和Byte
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.Header">
+            <summary>
+            header对象
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:RRL.WEB.Ulity.HttpItem.ProtocolVersion" -->
+        <member name="P:RRL.WEB.Ulity.HttpItem.Expect100Continue">
+            <summary>
+             获取或设置一个 System.Boolean 值，该值确定是否使用 100-Continue 行为。如果 POST 请求需要 100-Continue 响应，则为 true；否则为 false。默认值为 true。
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ClentCertificates">
+            <summary>
+            设置509证书集合
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.PostEncoding">
+            <summary>
+            设置或获取Post参数编码,默认的为Default编码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ResultCookieType">
+            <summary>
+            Cookie返回类型,默认的是只返回字符串类型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpItem.ICredentials">
+            <summary>
+            获取或设置请求的身份验证信息。
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Ulity.HttpResult">
+            <summary>
+            Http返回参数类
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.Cookie">
+            <summary>
+            Http请求返回的Cookie
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.CookieCollection">
+            <summary>
+            Cookie对象集合
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.Html">
+            <summary>
+            返回的String类型数据 只有ResultType.String时才返回数据，其它情况为空
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.ResultByte">
+            <summary>
+            返回的Byte数组 只有ResultType.Byte时才返回数据，其它情况为空
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.Header">
+            <summary>
+            header对象
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.StatusDescription">
+            <summary>
+            返回状态说明
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Ulity.HttpResult.StatusCode">
+            <summary>
+            返回状态码,默认为OK
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Ulity.ResultType">
+            <summary>
+            返回类型
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.ResultType.String">
+            <summary>
+            表示只返回字符串 只有Html有数据
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.ResultType.Byte">
+            <summary>
+            表示返回字符串和字节流 ResultByte和Html都有数据返回
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Ulity.PostDataType">
+            <summary>
+            Post的数据格式默认为string
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.PostDataType.String">
+            <summary>
+            字符串类型，这时编码Encoding可不设置
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.PostDataType.Byte">
+            <summary>
+            Byte类型，需要设置PostdataByte参数的值编码Encoding可设置为空
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.PostDataType.FilePath">
+            <summary>
+            传文件，Postdata必须设置为文件的绝对路径，必须设置Encoding的值
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Ulity.ResultCookieType">
+            <summary>
+            Cookie返回类型
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.ResultCookieType.String">
+            <summary>
+            只返回字符串类型的Cookie
+            </summary>
+        </member>
+        <member name="F:RRL.WEB.Ulity.ResultCookieType.CookieCollection">
+            <summary>
+            CookieCollection格式的Cookie集合同时也返回String类型的cookie
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Ulity.MyHttpHelper">
+            <summary>
+            HttpHelper的2次封装函数
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Ulity.MyHttpHelper.HtmlEncode(System.String)">
+            <summary>返回 HTML 字符串的编码结果</summary>
+            <param name="str">字符串</param>
+            <returns>编码结果</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.MyHttpHelper.HtmlDecode(System.String)">
+            <summary>返回 HTML 字符串的解码结果</summary>
+            <param name="str">字符串</param>
+            <returns>解码结果</returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.MyHttpHelper.UrlDecode(System.String,System.Text.Encoding)">
+            <summary>
+            根据指定的编码对RUl进行解码
+            </summary>
+            <param name="str">要解码的字符串</param>
+            <param name="encoding">要进行解码的编码方式</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.MyHttpHelper.UrlEncode(System.String,System.Text.Encoding)">
+            <summary>根据指定的编码对URL进行编码</summary>
+            <param name="str">要编码的URL</param>
+            <param name="encoding">要进行编码的编码方式</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Ulity.MyHttpHelper.GetEncoding(System.String)">
+            <summary>
+            根据 charSet 返回 Encoding
+            </summary>
+            <param name="charSet">"gb2312" or "utf-8",默认: "" ==  "utf-8"</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RRL.WEB.Ulity.MyHttpHelper.HttpPost(System.String,System.String,System.String)" -->
+        <member name="M:RRL.WEB.Ulity.MyHttpHelper.HttpGet(System.String,System.String)">
+            <summary>HTTP Get方式请求数据</summary>
+            <param name="url">URL</param>
+            <param name="charSet">"gb2312" or "utf-8",默认: "" ==  "utf-8"</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RRL.WEB.Ulity.MyHttpHelper.GetPage(System.String,System.String)" -->
+        <member name="T:RedisHelp.RedisConnectionHelp">
+            <summary>
+            ConnectionMultiplexer对象管理帮助类
+            </summary>
+        </member>
+        <member name="F:RedisHelp.RedisConnectionHelp.SysCustomKey">
+            <summary>
+            系统自定义Key前缀
+            </summary>
+        </member>
+        <member name="P:RedisHelp.RedisConnectionHelp.Instance">
+            <summary>
+            单例获取
+            </summary>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.GetConnectionMultiplexer(System.String)">
+            <summary>
+            缓存获取
+            </summary>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.MuxerConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            配置更改时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.MuxerErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
+            <summary>
+            发生错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.MuxerConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            重新建立连接之前的错误
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.MuxerConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            连接失败 ， 如果重新连接成功你将不会收到这个通知
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.MuxerHashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
+            <summary>
+            更改集群
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:RedisHelp.RedisConnectionHelp.MuxerInternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
+            <summary>
+            redis类库错误
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:RedisHelp.RedisHelper">
+            <summary>
+            Redis操作
+            </summary>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="dbNum"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.#ctor(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbNum"></param>
+            <param name="connectionString"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringSet(System.String,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存单个key value
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="value">保存的值</param>
+            <param name="expiry">过期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringSet(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue}})">
+            <summary>
+            保存多个key value
+            </summary>
+            <param name="keyValues">键值对</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringSet``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存一个对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringGet(System.String)">
+            <summary>
+            获取单个key的值
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringGet(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取多个Key
+            </summary>
+            <param name="listKey">Redis Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringGet``1(System.String)">
+            <summary>
+            获取一个key的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringIncrement(System.String,System.Double)">
+            <summary>
+            为数字增长val
+            </summary>
+            <param name="key"></param>
+            <param name="val">可以为负</param>
+            <returns>增长后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringDecrement(System.String,System.Double)">
+            <summary>
+            为数字减少val
+            </summary>
+            <param name="key"></param>
+            <param name="val">可以为负</param>
+            <returns>减少后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringSetAsync(System.String,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存单个key value
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="value">保存的值</param>
+            <param name="expiry">过期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringSetAsync(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue}})">
+            <summary>
+            保存多个key value
+            </summary>
+            <param name="keyValues">键值对</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringSetAsync``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存一个对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringGetAsync(System.String)">
+            <summary>
+            获取单个key的值
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringGetAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取多个Key
+            </summary>
+            <param name="listKey">Redis Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringGetAsync``1(System.String)">
+            <summary>
+            获取一个key的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringIncrementAsync(System.String,System.Double)">
+            <summary>
+            为数字增长val
+            </summary>
+            <param name="key"></param>
+            <param name="val">可以为负</param>
+            <returns>增长后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.StringDecrementAsync(System.String,System.Double)">
+            <summary>
+            为数字减少val
+            </summary>
+            <param name="key"></param>
+            <param name="val">可以为负</param>
+            <returns>减少后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashExists(System.String,System.String)">
+            <summary>
+            判断某个数据是否已经被缓存
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashSet``1(System.String,System.String,``0)">
+            <summary>
+            存储数据到hash表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashSetStr(System.String,System.String,System.String)">
+            <summary>
+            存储string到hash
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashDelete(System.String,System.String)">
+            <summary>
+            移除hash中的某值
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashDelete(System.String,System.Collections.Generic.List{StackExchange.Redis.RedisValue})">
+            <summary>
+            移除hash中的多个值
+            </summary>
+            <param name="key"></param>
+            <param name="dataKeys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashGet``1(System.String,System.String)">
+            <summary>
+            从hash表获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashGetStr(System.String,System.String)">
+            <summary>
+            从hash表获取string
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashIncrement(System.String,System.String,System.Double)">
+            <summary>
+            为数字增长val
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="val">可以为负</param>
+            <returns>增长后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashDecrement(System.String,System.String,System.Double)">
+            <summary>
+            为数字减少val
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="val">可以为负</param>
+            <returns>减少后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashKeys``1(System.String)">
+            <summary>
+            获取hashkey所有Redis key
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashExistsAsync(System.String,System.String)">
+            <summary>
+            判断某个数据是否已经被缓存
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashSetAsync``1(System.String,System.String,``0)">
+            <summary>
+            存储数据到hash表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashDeleteAsync(System.String,System.String)">
+            <summary>
+            移除hash中的某值
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashDeleteAsync(System.String,System.Collections.Generic.List{StackExchange.Redis.RedisValue})">
+            <summary>
+            移除hash中的多个值
+            </summary>
+            <param name="key"></param>
+            <param name="dataKeys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashGeAsync``1(System.String,System.String)">
+            <summary>
+            从hash表获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashIncrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            为数字增长val
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="val">可以为负</param>
+            <returns>增长后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashDecrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            为数字减少val
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="val">可以为负</param>
+            <returns>减少后的值</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.HashKeysAsync``1(System.String)">
+            <summary>
+            获取hashkey所有Redis key
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRemove``1(System.String,``0)">
+            <summary>
+            移除指定ListId的内部List的值
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRange``1(System.String)">
+            <summary>
+            获取指定key的List
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRightPush``1(System.String,``0)">
+            <summary>
+            入队
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRightPop``1(System.String)">
+            <summary>
+            出队
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListLeftPush``1(System.String,``0)">
+            <summary>
+            入栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListLeftPop``1(System.String)">
+            <summary>
+            出栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListLength(System.String)">
+            <summary>
+            获取集合中的数量
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRemoveAsync``1(System.String,``0)">
+            <summary>
+            移除指定ListId的内部List的值
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRangeAsync``1(System.String)">
+            <summary>
+            获取指定key的List
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRightPushAsync``1(System.String,``0)">
+            <summary>
+            入队
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListRightPopAsync``1(System.String)">
+            <summary>
+            出队
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListLeftPushAsync``1(System.String,``0)">
+            <summary>
+            入栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListLeftPopAsync``1(System.String)">
+            <summary>
+            出栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.ListLengthAsync(System.String)">
+            <summary>
+            获取集合中的数量
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetAdd``1(System.String,``0,System.Double)">
+            <summary>
+            添加
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="score"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetRemove``1(System.String,``0)">
+            <summary>
+            删除
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetRangeByRank``1(System.String)">
+            <summary>
+            获取全部
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetLength(System.String)">
+            <summary>
+            获取集合中的数量
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetAddAsync``1(System.String,``0,System.Double)">
+            <summary>
+            添加
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="score"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetRemoveAsync``1(System.String,``0)">
+            <summary>
+            删除
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetRangeByRankAsync``1(System.String)">
+            <summary>
+            获取全部
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SortedSetLengthAsync(System.String)">
+            <summary>
+            获取集合中的数量
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.KeyDelete(System.String)">
+            <summary>
+            删除单个key
+            </summary>
+            <param name="key">redis key</param>
+            <returns>是否删除成功</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.KeyDelete(System.Collections.Generic.List{System.String})">
+            <summary>
+            删除多个key
+            </summary>
+            <param name="keys">rediskey</param>
+            <returns>成功删除的个数</returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.KeyExists(System.String)">
+            <summary>
+            判断key是否存储
+            </summary>
+            <param name="key">redis key</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.KeyRename(System.String,System.String)">
+            <summary>
+            重新命名key
+            </summary>
+            <param name="key">就的redis key</param>
+            <param name="newKey">新的redis key</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.KeyExpire(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            设置Key的时间
+            </summary>
+            <param name="key">redis key</param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.Subscribe(System.String,System.Action{StackExchange.Redis.RedisChannel,StackExchange.Redis.RedisValue})">
+            <summary>
+            Redis发布订阅  订阅
+            </summary>
+            <param name="subChannel"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.Publish``1(System.String,``0)">
+            <summary>
+            Redis发布订阅  发布
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="channel"></param>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.Unsubscribe(System.String)">
+            <summary>
+            Redis发布订阅  取消订阅
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.UnsubscribeAll">
+            <summary>
+            Redis发布订阅  取消全部订阅
+            </summary>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.SetSysCustomKey(System.String)">
+            <summary>
+            设置前缀
+            </summary>
+            <param name="customKey"></param>
+        </member>
+    </members>
+</doc>

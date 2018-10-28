@@ -1,0 +1,346 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>返回      分享领取红包</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Game/css/style.css">
+    <script>
+        @{
+            string[] m_playMoney = new string[] { "1", "5", "10", "50","100"};//可压数量大小
+            if (Request.QueryString["paytype"]=="1")
+            {
+                m_playMoney =new string[]{"1", "5", "10", "50","100"};//可压数量大小
+            }
+            string m_playMoney_str="["+string.Join(",", m_playMoney)+"]";
+            //是否可领取红包标记
+            var canRequest = false;
+            //判断是否已过8点
+            var now = DateTime.Now;
+            var today = new DateTime(now.Year,now.Month,now.Day,0,0,30);
+            var ts = now - today;
+            //获取token,用户当前红包冻结,今日计划分配红包,是否已领取过默认红包
+            var token = Convert.ToString(ViewBag.token);
+            //var hMoneyFreeFrz = Convert.ToDouble(ViewBag.h_money_free_frz);
+            var hMoneyFree = Convert.ToDouble(ViewBag.h_money_free);
+            var dailyHMoneyFree = Convert.ToDouble(ViewBag.daily_h_money_free);
+            var hasReceivedFreeMoneyDefault = Convert.ToBoolean(ViewBag.has_received_free_money_default);
+            var hasReceivedDailyFreeHmoney = Convert.ToBoolean(ViewBag.has_received_daily_free_h_money);
+            //今日分配红包大于0,红包冻结小于等于0,时间超过8点以后
+            if (dailyHMoneyFree > 0 && hMoneyFree <= 0 && ts.TotalSeconds >= 0 && !hasReceivedDailyFreeHmoney)
+            {
+                canRequest = false;
+            }
+            }
+            var token = '@token';
+            var daily = '@dailyHMoneyFree';
+            var freeRedPackage_to_beans_rate = '@ViewBag.freeRedPackage_to_beans_rate';
+            var spreader_redpackage = '@ViewBag.spreader_redpackage';
+            var first = '@ViewBag.first_h_money_free.ToString()';
+            var has_requestd_first_free_h_money = '@hasReceivedFreeMoneyDefault.ToString()';
+            var is_can_request_free_h_money = '@canRequest.ToString()';
+            var payRedpacket = '@ViewBag.payRedpacket';
+
+            var m_playMoney =@m_playMoney_str;
+            var m_maxYahong = 30;//压红最大数 
+            var m_maxYaAll = 200;//一共能压最大数
+            var m_freeRedPackagePlayRed_Money = 30;//免费红包押红的数量
+
+             var m_pay_act = 2;//支付类型 1=免费红包,2=豆,3=小红包
+             var m_paytype='@Request.QueryString["paytype"]';
+             if ("1" == m_paytype) {
+                 m_pay_act = 1;
+             }
+    </script>
+
+    <style>
+     #goback-btn{
+         background-image: none;
+         left: .05rem;
+         background: #ff433d;
+         color: #fff;
+         font-size: .21rem;
+         border-radius: 25px;
+         text-align: center;
+         line-height: .48rem;
+     }
+     .gz-btn{
+         left: 1.2rem;
+     }
+    </style>
+    
+</head>
+<body>
+    <div class="main">
+        <div class="head">
+            <div class="left" style="display:none;">
+                <img src="">
+                <div></div>
+            </div>
+            <!--div class="right">
+                <a href="###" class="sc-btn"></a>
+            </div-->
+        </div>
+        <div id="goback-btn" class="gz-btn">返回</div>
+        <div id="wj-rule" class="gz-btn"></div>
+        <!--div class="gz-btn1"></div-->
+        <div id="time">
+            30秒
+        </div>
+        <div class="float-tip">
+            <div class="float-tip-inner">恭喜用户小飞飞飞飞侠中了80000红包</div>
+        </div>
+        <div class="zp-temp">
+            <div class="zp-bg"></div>
+            <div class="zp-zz"></div>
+            <div class="zp-up"></div>
+            <div class="yz-temp">
+                <div class="yz-bg"></div>
+                <div class="yazhuda "></div>
+                <div class="yazhuxiao "></div>
+                <div class="yazhuhong "></div>
+                <div class="yazhushuang "></div>
+                <div class="yazhudan "></div>
+                <div>
+                    <div class="yazhudantemp yztemp" data-xiazhu-type="dan">
+                        <div class="yz-tip"> </div>
+                    </div>
+                    <div class="yazhushuangtemp yztemp" data-xiazhu-type="shuang">
+                        <div class="yz-tip"> </div>
+                    </div>
+                    <div class="yazhuhongtemp yztemp" data-xiazhu-type="hong">
+                        <div class="yz-tip"></div>
+                    </div>
+                    <div class="yazhuxiaotemp yztemp" data-xiazhu-type="xiao">
+                        <div class="yz-tip"></div>
+                    </div>
+                    <div class="yazhudatemp yztemp" data-xiazhu-type="da">
+                        <div class="yz-tip"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qk-btn"></div>
+        <img class='download-tips' src="~/Assets/Game/img/dtg.png"/>
+         
+        <div class="footer-info">
+            <div class="btn-temp clearfix">
+                @if (Request.QueryString["paytype"] == "2")
+                {
+                <div class="mfhb cur" data-act="2">
+                    <div class="hb-title">金豆</div>
+                    <div class="hb-number">0</div>
+                </div>
+                <div class="zshb " data-act="1">
+                    <div class="hb-title">红包</div>
+                    <div class="hb-number">0</div>
+                </div>
+                }
+                else if (Request.QueryString["paytype"] == "100")
+                {
+                <div class="zshb cur"  data-act="1">
+                    <div class="hb-title">免费红包</div>
+                    <div class="hb-number">0</div>
+                </div>
+                }
+                else
+                {
+                    <div class="mfhb cur" data-act="2">
+                        <div class="hb-title">金豆</div>
+                        <div class="hb-number">0</div>
+                    </div>
+                    <div class="zshb" data-act="3">
+                        <div class="hb-title">小红包</div>
+                        <div class="hb-number">0</div>
+                    </div>
+                    <div class="zshb " data-act="1">
+                        <div class="hb-title">免费红包</div>
+                        <div class="hb-number">0</div>
+                    </div>
+                }
+
+                @if (Request.QueryString["paytype"] == "1")
+                {
+                
+                    <div class="sc-btn" style="float: right;"></div>
+                }
+                else
+                {
+                    <a class="gouwuka" id='gouwuka'></a>
+                    <div class="sc-btn"  ></div>
+                }
+            </div>
+            <div class="size-temp">
+                @for (int i = 0; i < m_playMoney.Length; i++)
+                {
+
+                      <div class="size@(m_playMoney[i]) size @(i==0?"cur":"")" style="left:@((i-0)*0.8)rem;" data-money="@(m_playMoney[i])"></div>
+                }
+                
+                <div class="repair-btn"></div>
+            </div>
+            <div class="history-temp">
+                <div class="bg"></div>
+                <div class="left">期奖往开</div>
+                <div class="right">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='maskoo'>
+        <p class='gethbnum'>30.00</p>
+        <p class='cangettimes'>2</p>
+        <img class='closebtnoo' src='~/Assets/Event/img/images/clearwords.png'/>
+    </div>
+    <div class='maskxx'>
+        <p class='gethbnum y-color'>30.00</p>
+        <img class='closebtnxx' src='~/Assets/Event/img/images/oolin.jpg'/>
+    </div>
+    <!--div class='downloadtool'>
+        <div>
+            <img class='closetool' src='/Assets/Game/img/closeblack.png'
+            onclick="closetool()"/>
+            <img class='sddlogo' src='/Assets/Game/img/sharelogo.png'/>
+            <p>下载省兜兜APP<br/>百万红包任你领</p>
+            <div class='downloadbtn' onclick="toproduct()">立即下载</div>
+        </div>
+
+    </div-->
+    <div class="mask"></div>
+    <div class="gz-dialog">
+        <div class="innermask"></div>
+        <div class="gz-bg">
+            <pre class="gz-content">
+详细规则
+1、红包类型：免费红包、金豆。
+①免费红包：不可直接用于购物，只可参与游戏，游戏获胜后可转化为金豆；
+②金豆：金豆既可参与游戏，也可用于平台购物。
+免费红包获取方式：活动赠送。
+2、玩法和规则
+投入类型：免费红包、金豆
+投入红包、金豆：@m_playMoney_str；
+轮盘共26个格子，分别为1-24个数字和两个红格子，每次下注可在单、双、大、小、红格子中下注。单、双、大、小倍率1:2，红格倍率1:12；
+倒计时结束前，用户可选择离开活动页面放弃参与活动，用户投入的免费红包或金豆将不予消耗；
+系统对每一位用户参与同一轮活动设定了投入免费红包或金豆的单次最低值及最高值，每轮竞猜活动的时间以系统提示为准，倒计时为0时竞猜活动结束，活动结束后，用户不能取消或修改投入数。
+3、注意事项：
+平台有权根据活动参与情况，结束或提前结束用户参与活动的竞猜；
+平台赠送的免费红包在当日内没有参与游戏将于次日自动作废；
+如遇不可抗力或其它客观原因导致当前游戏无法继续进行，则用户投入的免费红包或金豆将全额返还至用户平台相应账户中，平台无需承担任何赔偿或补偿责任；
+活动期间，如用户存在违规行为（包括但不限于机器作弊），平台将取消用户的竞猜获奖资格，并有权依照平台相关规则进行处理；
+平台可根据活动举办的实际情况，在法律允许的范围内，对本活动规则进行变动或调整，相关变动或调整将及时公布在活动页面。
+
+                </pre>
+            <div class="gz-qd-btn"></div>
+        </div>
+    </div>
+    <div class='buy-card'>
+        <div class='bc-tips'>
+            代金券仅限抵扣券面产品，请按需酌情购买，理性消费
+        </div>
+        <ul class='card-list'>
+            <!--li>
+                <div class='cl-left'>
+                    <p class='cl-left-money'>$123</p>
+                    <div class='cl-left-bottom'>
+                        <p>使用时间</p>
+                        <p>2018.1.1-2018.1.31</p>
+                    </div>
+                </div>
+                <div class='cl-right'>
+                    <p>
+                        tixudao
+                    </p>
+                    <p>
+                        daijinquan
+                    </p>
+                    <p>
+                        送金豆100
+                    </p>
+                </div>
+            </li-->
+        </ul>
+        <div class='buytool'>
+            <div class='closebtn'>
+
+            </div>
+            <div class='bt-left'>
+                <div>
+                    <p class='trulypay'>
+                        实付：￥123
+                    </p>
+                    <div>
+
+                    </div>
+                </div>
+                <p>获得：<span class='getjindou'>300</span><img src='~/Assets/Game/img/glodbean.png'/></p>
+            </div>
+            <div class='bt-middle'>
+                <div class='reduce'>
+                    
+                </div>
+                
+                <input id="valueofnum" disabled/>
+                <div class='plus'>
+                    
+                </div>
+                
+            </div>
+            <div class='paybtn'>
+                立即付款
+            </div>
+        </div>
+    </div>
+    <div class = 'hongbao xinren'>
+        <p class='hbjine xirenjine'>
+            30.00元
+        </p>
+        <div class='getbtn xirenbtn'>
+            确认领取
+        </div>
+    </div>
+    <div class = 'hongbao meiri'>
+        <p class='hbjine meirijine'>
+            30.00元
+        </p>
+        <div class='getbtn meiribtn'>
+            确认领取
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+    <script src="~/Assets/Game/js/jquery.js"></script>
+    <script src="~/Assets/global/plugins/layer_mobile_2.0/layer.js?ver=2.0"></script>
+    <script src="~/Assets/Game/js/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver"></script>
+    <script src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js'></script>
+    <script src="~/Assets/Game/js/public.js?ver=@RRL.WEB.App_Start.AppUtils.Ver"></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+
+   <script>
+     
+     // 点击返回游戏大厅
+     $(function(){
+       $("#goback-btn").on("click",function(e){
+          //window.location.search= "?token=" + window.UI.Page.getAllparam().token;
+          // e.stopPropagation();
+           //window.history.back();
+           //window.location.href= window.location.href + "?token=" + window.UI.Page.getAllparam().token;
+           var host = "https://e-shop.rrlsz.com.cn";
+           window.location.href = host + "/#/gamehall?token=" + token;
+       });
+     });
+
+   </script>
+    
+
+</body>
+</html>

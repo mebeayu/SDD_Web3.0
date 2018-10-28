@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Assets/Dist/Styles/app.css" rel="stylesheet" />
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js" type="text/javascript"></script>
+    <script src="~/Assets/Game/js/gameAlert.js"></script>
+    
+    <script>
+        var is_iphone_browser = '0';
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.indexOf('iphone') > -1 || ua.indexOf('ipad')>-1) {
+            is_iphone_browser = '1';
+        }
+        var GLOBLE_OPEN_ID = "@ViewBag.OpenID";
+        var GLOBE_SHORT_TOKEN = "@ViewBag.token";
+        if (GLOBE_SHORT_TOKEN)
+        {
+            localStorage.setItem('shorttoken', GLOBE_SHORT_TOKEN);
+        }
+         var GLOBE_LONG_TOKEN = "@ViewBag.longtoken";
+         if (GLOBE_LONG_TOKEN) {
+             localStorage.setItem('longtoken', GLOBE_LONG_TOKEN);
+         }
+
+        @{
+            //是否可领取红包标记
+            var canRequest = false;
+            //判断是否已过8点
+            var now = DateTime.Now;
+            var today = new DateTime(now.Year,now.Month,now.Day,0,0,30);
+            var ts = now - today;
+            //获取token,用户当前红包冻结,今日计划分配红包,是否已领取过默认红包
+            var token = Convert.ToString(ViewBag.token);
+            //var hMoneyFreeFrz = Convert.ToDouble(ViewBag.h_money_free_frz);
+            var hMoneyFree = Convert.ToDouble(ViewBag.h_money_free);
+            var dailyHMoneyFree = Convert.ToDouble(ViewBag.daily_h_money_free);
+            var hasReceivedFreeMoneyDefault = Convert.ToBoolean(ViewBag.has_received_free_money_default);
+	        var hasReceivedDailyFreeHmoney = Convert.ToBoolean(ViewBag.has_received_daily_free_h_money);
+            //今日分配红包大于0,红包冻结小于等于0,时间超过8点以后
+            if (dailyHMoneyFree > 0 && hMoneyFree <= 0 && ts.TotalSeconds >= 0 && !hasReceivedDailyFreeHmoney)
+            {
+                canRequest = true;
+            }
+        }
+        var global_is_news_user = '@ViewBag.is_new_user';
+        var h_money_pay = '@ViewBag.h_money_pay';
+        var h_money_free = '@ViewBag.h_money_free';
+        var freeRedPackage_to_beans_rate = '@ViewBag.freeRedPackage_to_beans_rate';
+        var spreader_redpackage = '@ViewBag.spreader_redpackage';
+        var daily = '@dailyHMoneyFree';
+        var first = '@ViewBag.first_h_money_free.ToString()';
+        var has_requestd_first_free_h_money = '@hasReceivedFreeMoneyDefault.ToString()';
+        var is_can_request_free_h_money = '@canRequest.ToString()';
+        var payRedpacket = ('@ViewBag.payRedpacket'===''?'1000':'@ViewBag.payRedpacket');
+        var is_show_game = (is_iphone_browser == "1" ? "@ViewBag.is_show_game" : "1");//1显示,0=不显示
+        var platform_hold_money = '@ViewBag.platform_hold_money';
+        var m_play_total_times = '@ViewBag.m_play_total_times';
+        var global_dictionary = eval(@ViewBag.key_value_config);
+        var Order_Shared_discount_money_rate = '@ViewBag.Order_Shared_discount_money_rate';
+        var Order_Shared_discount_beans_rate = '@ViewBag.Order_Shared_discount_beans_rate';
+        var Order_Shared_people_num = '@ViewBag.Order_Shared_people_num';
+
+    </script>
+
+    <script>
+        var ua = navigator.userAgent.toLowerCase();
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        if (isWeixin && !GLOBLE_OPEN_ID) {
+            //return;
+             /*
+            $.get('/SetOpenIdForWx', function (result) {
+                if (result && result.status == 0) {
+                    GLOBLE_OPEN_ID = result.data;
+                }
+            });*/
+        }
+    </script>
+</head>
+<body>
+    @*<div id="application" v-cloak>*@
+        <div id="application">
+        </div>
+    <!--a href='javascript:;' onclick='easemobim.bind({configId: "8d149d8f-bc70-45f8-9c44-96c6ef6098c9"})'>快联系我</a-->
+    <!--script>
+    window.easemobim = window.easemobim || {};
+    easemobim.config = {
+        hide: true,
+        autoConnect: true
+    };
+    </script-->
+    @*<script src="~/Assets/global/plugins/layer_mobile_2.0/layer.js"></script>*@
+    <script src='~/Assets/Dist/Scripts/fit.js'></script>
+    <script src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js'></script>
+    <script src='~/Assets/Dist/Scripts/alert.js'></script>
+    <script src="~/Assets/Dist/Scripts/app.js"></script>
+    <script src="~/Assets/Dist/Scripts/vue-router.js"></script>
+
+</body>
+</html>

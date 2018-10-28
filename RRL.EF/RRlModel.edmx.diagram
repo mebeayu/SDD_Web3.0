@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="575e446e04d546aaad24d78fedfb1cc5" Name="Diagram1" ZoomLevel="21" >
+        <EntityTypeShape EntityType="RRlModel.admin_module" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="RRlModel.admin_role" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="RRlModel.admin_role_power" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="RRlModel.admin_user" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.error_helper" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.event" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_lose_0001_2018" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_lose_0002_2018" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_lose_0003_2018" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_lose_0004_2018" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_lose_0005_2018" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_win_0001_2018" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_win_0002_2018" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_win_0003_2018" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_win_0004_2018" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RRlModel.game_record_win_0005_2018" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="RRlModel.goods_temp" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_carousel_figure" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_cash_apply" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_config" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_favourite" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_fee_config" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_give_personal_money_config" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods" Width="1.5" PointX="8.75" PointY="12.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_attr" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_attr_value" Width="1.5" PointX="10.75" PointY="13.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_attr_value_v2" Width="1.5" PointX="12.75" PointY="13.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_copy" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_coupons_config" Width="1.5" PointX="14.75" PointY="9.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_pic" Width="1.5" PointX="14.75" PointY="13.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_price_record" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_recommend" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_supplier" Width="1.5" PointX="2.75" PointY="16.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_supplier_temp" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_order" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_order_info_goods" Width="1.5" PointX="16.75" PointY="14.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_page_view_log" Width="1.5" PointX="4.75" PointY="17.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_platform_data_record" Width="1.5" PointX="10.75" PointY="17.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_shop" Width="1.5" PointX="12.75" PointY="17.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_shop_cart" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_shop_cate" Width="1.5" PointX="18.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_shop_money_record" Width="1.5" PointX="18.75" PointY="7.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_shop_pic" Width="1.5" PointX="18.75" PointY="11.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_sms" Width="1.5" PointX="18.75" PointY="14.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_supplier" Width="1.5" PointX="18.75" PointY="18.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_trans_body_record" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_trans_record" Width="1.5" PointX="14.75" PointY="19.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_type_translate" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user" Width="1.5" PointX="2.75" PointY="20.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_2018_3_11_18_46" Width="1.5" PointX="20.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_2018_3_11_22_19" Width="1.5" PointX="4.75" PointY="20.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_bank_card" Width="1.5" PointX="20.75" PointY="15.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_money_record" Width="1.5" PointX="20.75" PointY="19.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_money_record_copy" Width="1.5" PointX="6.75" PointY="21.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_plate_to_return_record" Width="1.5" PointX="8.75" PointY="21.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_plate_to_return_record_test" Width="1.5" PointX="22.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_receive_info" Width="1.5" PointX="22.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_template" Width="1.5" PointX="22.75" PointY="8.75" />
+        <EntityTypeShape EntityType="RRlModel.sperader_relation" Width="1.5" PointX="22.75" PointY="14.75" />
+        <EntityTypeShape EntityType="RRlModel.spreader_queue" Width="1.5" PointX="16.75" PointY="22.75" />
+        <EntityTypeShape EntityType="RRlModel.temp" Width="1.5" PointX="22.75" PointY="17.75" />
+        <EntityTypeShape EntityType="RRlModel.track_com" Width="1.5" PointX="22.75" PointY="20.75" />
+        <EntityTypeShape EntityType="RRlModel.wx_cache" Width="1.5" PointX="18.75" PointY="23.75" />
+        <EntityTypeShape EntityType="RRlModel.area_code" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.bank_main" Width="1.5" PointX="24.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RRlModel.cash_pool" Width="1.5" PointX="24.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RRlModel.roulette_logs" Width="1.5" PointX="24.75" PointY="8.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_coupons" Width="1.5" PointX="10.75" PointY="24.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_coupons" Width="1.5" PointX="24.75" PointY="11.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_goods_spec" Width="1.5" PointX="12.75" PointY="24.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_spreader" Width="1.5" PointX="24.75" PointY="16.75" />
+        <EntityTypeShape EntityType="RRlModel.rrl_user_play_state" Width="1.5" PointX="24.75" PointY="19.75" />
+        <EntityTypeShape EntityType="RRlModel.CAROUSEL_CHOSEN_LIST_VIEW" Width="1.5" PointX="20.75" PointY="24.75" />
+        <EntityTypeShape EntityType="RRlModel.CAROUSEL_MAIN_LIST_VIEW" Width="1.5" PointX="24.75" PointY="22.75" />
+        <EntityTypeShape EntityType="RRlModel.CASH_APPLY_LIST_VIEW" Width="1.5" PointX="6.75" PointY="25.75" />
+        <EntityTypeShape EntityType="RRlModel.FAVOURITE_GOODS" Width="1.5" PointX="14.75" PointY="25.75" />
+        <EntityTypeShape EntityType="RRlModel.FAVOURITE_SHOP" Width="1.5" PointX="22.75" PointY="25.75" />
+        <EntityTypeShape EntityType="RRlModel.GOODS_DETAIL_VIEW" Width="1.5" PointX="24.75" PointY="25.75" />
+        <EntityTypeShape EntityType="RRlModel.GOODS_LIST_VIEW" Width="1.5" PointX="26.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.kaquanjilu" Width="1.5" PointX="26.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RRlModel.ord" Width="1.5" PointX="26.75" PointY="7.75" />
+        <EntityTypeShape EntityType="RRlModel.ORDER_COUNT_INFO" Width="1.5" PointX="26.75" PointY="12.75" />
+        <EntityTypeShape EntityType="RRlModel.ORDER_GOODS_OUT_VIEW" Width="1.5" PointX="26.75" PointY="17.75" />
+        <EntityTypeShape EntityType="RRlModel.ORDER_GOODS_VIEW" Width="1.5" PointX="26.75" PointY="22.75" />
+        <EntityTypeShape EntityType="RRlModel.ORDER_LIST_GOODS" Width="1.5" PointX="26.75" PointY="25.75" />
+        <EntityTypeShape EntityType="RRlModel.ORDER_LIST_VIEW" Width="1.5" PointX="16.75" PointY="27.75" />
+        <EntityTypeShape EntityType="RRlModel.ORDER_STATUS_COUNT" Width="1.5" PointX="18.75" PointY="27.75" />
+        <EntityTypeShape EntityType="RRlModel.orderListView" Width="1.5" PointX="28.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.RECOMMEND_HOT_VIEW" Width="1.5" PointX="28.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RRlModel.RECOMMEND_MAIN_VIEW" Width="1.5" PointX="6.75" PointY="28.75" />
+        <EntityTypeShape EntityType="RRlModel.SHOP_CART_LIST_VIEW" Width="1.5" PointX="28.75" PointY="10.75" />
+        <EntityTypeShape EntityType="RRlModel.USER_ACCOUNT_VIEW" Width="1.5" PointX="28.75" PointY="15.75" />
+        <EntityTypeShape EntityType="RRlModel.USER_BANK_CARD_VIEW" Width="1.5" PointX="28.75" PointY="19.75" />
+        <EntityTypeShape EntityType="RRlModel.USER_BASE_INFO_VIEW" Width="1.5" PointX="20.75" PointY="28.75" />
+        <EntityTypeShape EntityType="RRlModel.USER_DAY_PLAT_TO_RETURN_VIEW" Width="1.5" PointX="28.75" PointY="22.75" />
+        <EntityTypeShape EntityType="RRlModel.USER_RECEIVE_LIST_VIEW" Width="1.5" PointX="28.75" PointY="25.75" />
+        <EntityTypeShape EntityType="RRlModel.USER_SMS_VALI_VIEW" Width="1.5" PointX="12.75" PointY="29.75" />
+        <EntityTypeShape EntityType="RRlModel.v_gamge_stat_info" Width="1.5" PointX="26.75" PointY="29.75" />
+        <EntityTypeShape EntityType="RRlModel.v_gamge_stat_info_2018_3_12" Width="1.5" PointX="28.75" PointY="29.75" />
+        <EntityTypeShape EntityType="RRlModel.v_stat_platform_total_info" Width="1.5" PointX="30.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RRlModel.v_stat_platform_total_info_2018_3_12" Width="1.5" PointX="30.75" PointY="7.75" />
+        <EntityTypeShape EntityType="RRlModel.zhuanpanshuju" Width="1.5" PointX="8.75" PointY="30.75" />
+        <AssociationConnector Association="RRlModel.FK__admin_role___MId__5D60DB10" />
+        <AssociationConnector Association="RRlModel.FK__admin_rol__RoleI__5C6CB6D7" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

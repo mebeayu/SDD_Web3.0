@@ -1,0 +1,681 @@
+.flex {
+  display: flex;
+  display: -webkit-flex;
+}
+blockquote,
+body,
+dd,
+dl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre {
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+  font-family: Helvetica, sans-serif;
+}
+ol,
+ul,
+fieldset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img {
+  border: none;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+button,
+input,
+textarea {
+  padding: 0;
+  border: none;
+  outline: 0;
+}
+i,
+strong {
+  font-style: normal;
+  font-weight: normal;
+}
+body {
+  -webkit-overflow-scrolling: touch;
+}
+a {
+  text-decoration: none;
+}
+a,
+button,
+input {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  outline: 0;
+}
+.h2 {
+  font-size: 0.42666667rem;
+  color: #2d2d34;
+}
+.s-title {
+  font-size: 0.37333333rem;
+  color: #2d2d34;
+}
+.s-explain {
+  font-size: 0.32rem;
+  color: #7a7b87;
+}
+.sport-main {
+  width: 100%;
+  height: 100%;
+  font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+.sport-top-header {
+  position: relative;
+  height: 1.17333333rem;
+  line-height: 1.17333333rem;
+  font-size: 0.4rem;
+  border-bottom: 0.01333333rem solid #e0e7eb;
+  background: #fff;
+}
+.sport-top-header h4 {
+  font-weight: normal;
+  text-align: center;
+  color: #2d2d34;
+}
+.sport-top-header a {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.26rem;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 0.53333333rem;
+  height: 0.53333333rem;
+}
+.sport-top-header #shareSport {
+  right: 0.4rem;
+}
+.sport-bottom-header {
+  height: 1.52rem;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  border-bottom: 0.22666667rem solid #f3f4f5;
+}
+.header-record,
+.header-rule {
+  width: 50%;
+}
+.record-icon,
+.rule-icon {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.header-record {
+  border-right: 1px solid #7a7b87;
+  margin: 0.26666667rem 0;
+}
+.header-record .header-record-a {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-record .record-explain {
+  margin-left: 3%;
+}
+.header-record .record-explain .s-title {
+  display: block;
+}
+.header-rule {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.26666667rem 0;
+}
+.header-rule span {
+  margin-left: 3%;
+}
+.sport-centerbar {
+  border-bottom: 0.22666667rem solid #f3f4f5;
+}
+.yjjc-content {
+  text-align: center;
+}
+.yjjc-content .yjjc-title {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  padding: 0.4rem 0;
+}
+.yjjc-content .yjjc-title .yjjc-icon {
+  width: 0.58666667rem;
+  height: 0.56rem;
+  margin-right: 2%;
+}
+.yjjc-content .yjjc-title .up-icon {
+  width: 0.26666667rem;
+  height: 0.16rem;
+  margin-left: 2%;
+  margin-top: 0.2rem;
+}
+.yjjc-content .s-title {
+  line-height: 0.6rem;
+}
+.yjjc-content .s-explain {
+  line-height: 0.6rem;
+}
+.sport-stake {
+  display: flex;
+  display: -webkit-flex;
+  margin-top: 0.66666667rem;
+}
+.sport-stake input {
+  height: 0.77333333rem;
+  border: 1px solid;
+  text-align: center;
+  border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  font-size: 0.32rem;
+  background: none;
+}
+.sport-stake img {
+  width: 0.32rem;
+  height: 0.17333333rem;
+  margin: 0.29333333rem 0.10666667rem 0;
+}
+#ets {
+  width: 2.4rem;
+  margin-left: 0.4rem;
+}
+.unbets {
+  border-color: #fb8394;
+  color: #fb8394;
+}
+input::-webkit-input-placeholder {
+  color: #fb8394;
+}
+input:-moz-placeholder {
+  color: #fb8394;
+}
+input::-moz-placeholder {
+  color: #fb8394;
+}
+input:-ms-input-placeholder {
+  color: #fb8394;
+}
+#even-num {
+  margin-left: 0.13333333rem;
+}
+.ets-unselect {
+  width: 1.33333333rem;
+  border-color: #d3d8df;
+  color: #d3d8df;
+}
+#btn-confirm {
+  width: 1.6rem;
+  border: none;
+  margin-left: 1.76rem;
+}
+.sport-stake .btn-unconfirmed {
+  height: 0.77333333rem;
+  background: #d3d8df;
+  color: #fff;
+}
+.sport-stake .btn-confirmed {
+  background: #65c4aa;
+}
+.sport-stake .bets {
+  background: #fb8394;
+  color: #fff;
+}
+.sport-stake .ets-select {
+  width: 1.33333333rem;
+  border-color: #82c95f;
+  color: #82c95f;
+}
+.sport-stake .ets-selected {
+  background: #82c95f ;
+  color: #fff;
+}
+.current-li span {
+  color: #65c4aa;
+}
+.current-li .ty-icon {
+  background: url("../imgs/green.png") no-repeat center center;
+  background-size: 0.29333333rem 0.33333333rem;
+}
+.jd-num {
+  margin: 0.4rem 0;
+}
+.jd-num .current-num {
+  margin-left: 0.4rem;
+}
+.jd-num .current-num i {
+  color: #fd762d;
+}
+.jd-num a {
+  display: inline-block;
+  width: 1.86666667rem;
+  color: #65c4aa;
+  margin-left: 0.53333333rem;
+}
+.jd-num a img {
+  width: 0.26666667rem;
+  height: 0.26666667rem;
+  margin-left: 0.13333333rem;
+}
+.databar {
+  height: 1.33333333rem;
+  background: #fcfcfc;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e3e4e8;
+}
+.databar li {
+  width: 33.33%;
+  text-align: center;
+  font-size: 0.32rem;
+}
+.databar li i {
+  display: block;
+  background: url("../imgs/greay.png") no-repeat center center;
+  background-size: 0.29333333rem 0.33333333rem;
+  width: 0.29333333rem;
+  height: 0.33333333rem;
+  float: left;
+  margin-top: 0.06666667rem;
+}
+.step-content .step-null {
+  text-align: center;
+  line-height: 3rem;
+  color: #2d2d34;
+  font-size: 0.37333333rem;
+}
+.step-list {
+  height: 1.86666667rem;
+  font-family: "方正黑体", sans-serif;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.step-list .step-left {
+  display: flex;
+  display: -webkit-flex;
+}
+.step-list .step-left .step-head {
+  width: 1.06666667rem;
+  height: 1.06666667rem;
+  margin-left: 0.26666667rem;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.step-list .step-left .ranking {
+  width: 0.45333333rem;
+  height: 0.45333333rem;
+  margin-top: 0.33333333rem;
+}
+.step-list .step-left .step-one-head {
+  border: .05rem solid #fbba02;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  box-sizing: border-box;
+}
+.step-list .step-left .step-title {
+  width: 2.5rem;
+  overflow: hidden;
+  line-height: 1.06666667rem;
+  margin-left: .2rem;
+}
+.step-list .step-right {
+  display: flex;
+  display: -webkit-flex;
+}
+.step-list .step-right .step-num {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: #24c789;
+  width: 2.5rem;
+  text-align: right;
+}
+.step-list .step-right .give-zan {
+  width: .6rem;
+  margin-left: 0.93333333rem;
+  text-align: center;
+}
+.step-list .step-right .give-zan .zan-num {
+  margin-bottom: .05rem;
+}
+.step-list .step-right .give-zan .icon-zan {
+  display: inline-block;
+  width: 0.44rem;
+  height: 0.36rem;
+}
+.step-list .step-right .give-zan .zan-gray {
+  background: url("../imgs/zan-gray.png") no-repeat;
+  background-size: 100% 100%;
+}
+.step-list .step-right .give-zan .zan-red {
+  background: url("../imgs/zan-red.png") no-repeat;
+  background-size: 100% 100%;
+}
+.self-step {
+  border-bottom: 0.22666667rem solid #f3f4f5;
+}
+.shadow2 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 8;
+}
+.likepage {
+  margin: 30% auto;
+  width: 8.13333333rem;
+  background: #fff;
+  border-radius: 0.6rem;
+  -moz-border-radius: 0.6rem;
+  -webkit-border-radius: 0.6rem;
+  height: 8.4rem;
+  padding: 0 0.26666667rem;
+  position: relative;
+}
+.likepage #pullDown {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  text-align: center;
+  width: 100%;
+  color: #555;
+}
+.likepage #noData {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  text-align: center;
+  width: 100%;
+  color: #555;
+}
+.likepage .likepage-title-box {
+  width: 100%;
+  background: #fff;
+  height: 1.33333333rem;
+  line-height: 1.33333333rem;
+  border-radius: 0.6rem;
+  -moz-border-radius: 0.6rem;
+  -webkit-border-radius: 0.6rem;
+}
+.likepage .likepage-title-box .likepage-title {
+  padding-top: 0;
+  font-size: 0.42666667rem;
+  font-weight: 600;
+  text-align: center;
+}
+.likepage .likepage-title-box .likepage-title .lick-list {
+  width: 0.58666667rem;
+  height: 0.56rem;
+  margin-right: 0.26666667rem;
+  vertical-align: middle;
+}
+.likepage .likepage-title-box .likepage-title #close {
+  width: 0.4rem;
+  height: 0.4rem;
+  position: absolute;
+  right: 0.53333333rem;
+  top: 0.53333333rem;
+}
+.likepage .likepage-content {
+  position: relative;
+  height: 6.2rem;
+  overflow: auto;
+}
+.likepage .likepage-content li {
+  height: 1.5rem;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.likepage .likepage-content li img {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.26666667rem;
+  vertical-align: middle;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.likepage .likepage-content li p {
+  font-size: 0.37333333rem;
+  color: #2d2d34;
+  width: 4.26666667rem;
+}
+.likepage .likepage-content li input {
+  width: 2rem;
+  height: 0.86666667rem;
+  text-align: center;
+  line-height: 0.86666667rem;
+  border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  -webkit-border-radius: 0.4rem;
+  font-size: 0.4rem;
+  color: #fff;
+  background: #65c4aa ;
+}
+.yrecord-head {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  height: 1.86666667rem;
+  background: #fff;
+}
+.yrecord-head img {
+  width: 1.33333333rem;
+  height: 1.33333333rem;
+  margin-left: 0.4rem;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.yrecord-head span {
+  margin-left: 0.26666667rem;
+}
+.yrecord-content {
+  position: relative;
+}
+#no-sport-data {
+  width: 100%;
+  background: #f3f4f5;
+}
+.no-data {
+  width: 2.93333333rem;
+  margin: 0 auto;
+  padding: 2.93333333rem 0 9.33333333rem;
+  text-align: center;
+}
+.no-data img {
+  width: 1.46666667rem;
+  height: 1.46666667rem;
+  margin: 0 auto;
+}
+.no-data p {
+  font-size: 0.4rem;
+  line-height: .7rem;
+  color: #7b7a87;
+}
+.yrecord-item dt {
+  font-size: 0.42666667rem;
+  color: #2d2d34;
+  font-weight: 800;
+  margin: 0.53333333rem 0 0.4rem 0.4rem;
+}
+.yrecord-item dd {
+  width: 90%;
+  background: #41cfb1;
+  border-radius: 0.13333333rem;
+  -moz-border-radius: 0.13333333rem;
+  -webkit-border-radius: 0.13333333rem;
+  margin: 0.21333333rem auto 0;
+  padding: 0.4rem 0.26666667rem;
+}
+.yrecord-item dd .yrecord-list {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  font-size: 0.42666667rem;
+  color: #fff;
+  font-family: "方正黑体", sans-serif;
+  line-height: .85rem;
+}
+.yrecord-item dd .yrecord-list .yrecord-list-step {
+  font-size: .7rem;
+}
+.yrecord-tip {
+  font-size: 0.42666667rem;
+  color: #2d2d34;
+  margin-top: 0.8rem;
+  text-align: center;
+}
+.yrecord-tip strong {
+  font-size: .8rem ;
+  color: #fd5773;
+  font-weight: 800;
+  margin: 0 0.26666667rem;
+}
+.yrecord-share {
+  text-align: center;
+  margin-top: 1.33333333rem;
+}
+.yrecord-share img {
+  width: 3.73333333rem;
+  height: 1.2rem;
+}
+.yrecord-share p {
+  font-size: 0.32rem;
+  color: #fd5773;
+  line-height: .7rem;
+}
+.share-main {
+  width: 10rem;
+  height: 17.8rem;
+  background: url("../imgs/share-bg.png") no-repeat center top;
+  background-size: 10rem 17.8rem ;
+  position: relative;
+  color: #fff;
+}
+.wj-back {
+  position: absolute;
+  top: 5%;
+  margin-left: .4rem;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 0.53333333rem;
+  height: 0.53333333rem;
+}
+.share-content {
+  width: 6.93333333rem;
+  height: 5.86666667rem;
+  margin: 0 auto;
+  padding-top: 6.13333333rem;
+  text-align: center;
+  position: relative;
+}
+.share-content .share-title {
+  width: 3.09333333rem;
+  margin: 0 auto;
+}
+.share-content .share-title h3 {
+  font-size: 0.48rem;
+  border-bottom: 1px solid #fff;
+  margin-top: 0.42666667rem;
+  font-weight: normal;
+  padding: 0.13333333rem 0;
+}
+.share-content .share-title .share-date {
+  font-size: 0.42666667rem;
+  margin-top: 0.13333333rem;
+}
+.share-content .share-score {
+  margin-top: 0.53333333rem;
+}
+.share-content .share-score p {
+  font-size: 0.4rem;
+  line-height: 0.66666667rem;
+}
+.share-content .share-score p strong {
+  font-size: 0.64rem;
+  margin: 0 0.16rem;
+}
+.share-content .QR-code {
+  width: 1.86666667rem;
+  height: 1.86666667rem;
+  margin: 0.4rem auto;
+  border-radius: 0.1rem;
+  -moz-border-radius: 0.1rem;
+  -webkit-border-radius: 0.1rem;
+  padding: 0.13333333rem;
+}
+.share-content .qr-explain p {
+  font-size: 0.37333333rem;
+}
+.share-exit {
+  width: 3.8rem;
+  margin: 0.93333333rem auto 0;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+}
+.share-exit a {
+  display: block;
+  width: 1.53333333rem;
+  height: 1.53333333rem;
+}
+#shadow1 .tiplogout {
+  width: 86% !important;
+  top: 3rem !important;
+  margin-left: -43% !important;
+}
+#shadow1 .tiplogout ul {
+  padding: 0 0.3rem;
+}
+#shadow1 .tiplogout li {
+  text-align: left;
+  line-height: .48rem;
+  padding-top: 0.2rem;
+}
+#shadow1 .tiplogout li img {
+  width: 0.58666667rem;
+  height: 0.56rem;
+  margin-right: 0.26666667rem;
+  vertical-align: middle;
+}
+#shadow1 .tiplogout li:first-child {
+  padding-top: 0;
+  font-size: .38rem;
+  font-weight: 600;
+  text-align: center;
+}

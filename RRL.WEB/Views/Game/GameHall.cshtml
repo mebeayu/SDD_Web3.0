@@ -1,0 +1,993 @@
+﻿@using System.Linq;
+@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Assets/Game/css/gamehall.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <link rel="stylesheet" href="~/Assets/Dist/Styles/app.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+    <script src="~/Assets/global/plugins/layer-v3.1.1/layer/mobile/layer.js"></script>
+    <script src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js'></script>
+    <script src='~/Assets/Dist/Scripts/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+    <title>签到</title>
+    <script type="text/javascript">
+        var token = localStorage.getItem('shorttoken');
+
+        function dlg_msg(msg) {
+            /*layer.open({
+                content: msg
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });*/
+            alert(msg);
+        }
+
+        function dlg_confirm(msg, fun_yes, fun_no, title) {
+            title = title || "省兜兜系统提示";
+            /*layer.open({
+                title: [
+                    title,
+                    'background-color:#01AAED; color:#fff;'
+                ],
+                skin: 'footer'
+
+                , anim: 'scale'
+                , content: msg
+                , btn: ['确认', '取消']
+                , yes: fun_yes
+            });*/
+            confirm(msg, fun_yes);
+        }
+
+        // 页面适配解决
+        ;(function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+
+
+    </script>
+</head>
+<body>
+<div class="wj-gamehall-mainbar">
+    <!--头部开始 -->
+    <div class="wj-gamehall-topbar">
+        <h4>签到</h4>
+        <a id="shareRedCollar" href="javascript:;"><img src="~/Assets/Game/img/gamehall-share.jpg"/></a>
+    </div>
+    <!--头部结束 -->
+
+    <!--中间主要区域开始-->
+    <div class="wj-gamehall-centerbar">
+        <!--广告位开始-->
+        @if (ViewBag.is_show_game == "1")
+        {
+        <div id="wj-gamehall-ad" class="wj-gamehall-adbar" >
+            <figure id="wj-gamehall-ad-children" class="swipslider">
+                <ul class="sw-slides" id="gamehallAdCont">
+                    <!--<li class="sw-slide">
+                        <a href="javascript:;">
+                            <img src="/Assets/Game/img/gameHall-DouLandlord2.png"/>
+                        </a>
+                    </li>
+                    <li class="sw-slide">
+                        <a href="/Event/Ten">
+                            <img src="https://e-shop.rrlsz.com.cn/SWebApi/Public/picture/76266.jpg"/>
+                        </a>
+                    </li>
+                    <li class="sw-slide">
+                        <a href="/Game/LeisureGameArea">
+                            <img src="/Assets/Game/img/wj-gamehall-to.png"/>
+                        </a>
+                    </li>-->
+                </ul>
+            </figure>
+        </div>
+        }
+        <!--广告位结束-->
+
+        <!--签到区域开始-->
+        <div class="wj-gamehall-signbar border-b">
+            <!--点击签到开始-->
+            <div id="clickSignFn" class="wj-gamehall-click-sign">
+                <p>坚持签到，领取大额免费红包</p>
+                <img src="~/Assets/Game/img/gamehall-click-sign.jpg" alt="">
+            </div>
+            <!--点击签到结束-->
+
+            <!--今日已签开始-->
+            @if (ViewBag.isCanGetRedpackage == true)
+            {
+            <div id="btnSignIn" class="wj-gamehall-today-sign cur">签到领红包</div><!-- .cur 点击签到-->
+            }
+            else
+            {
+            <div class="wj-gamehall-today-sign cur">今日已签，明日再来</div><!-- .cur 点击签到-->
+            }
+            <div class="wj-gamehall-checked-list-bg">
+                <p id="lblContinuousSignDays" class="wj-gamehall-continue">连续@(ViewBag.continuousSignDays)天</p>
+                <ul class="wj-gamehall-checked-list">
+                    @{ int intIndex = 0; }
+                    @foreach (var redpackageItem in ViewBag.redpackageDayConfig)
+                    {
+                    if (intIndex > 0)
+                    {
+                    <li class="line cur"></li>
+                    }
+
+                    if (redpackageItem.is_signin == "0")
+                    {
+
+                    <li>
+                        <i class="no-checked"></i>
+                        <span>@(redpackageItem.money)万</span>
+                    </li>
+                    }
+                    else
+                    {
+
+                    <li class="cur">
+                        <i></i>
+                        <span>@(redpackageItem.money)万</span>
+                    </li>
+                    }
+
+                    intIndex++;
+                    }
+                </ul>
+            </div>
+
+            <!--总免费红包区域开始-->
+            <div class="wj-total-free-red-envelopes-bar">
+                <div class="wj-total-free-red-envelopes-l">
+                    <div class="wj-total-free-red-envelopes-pic">
+                        <img src="~/Assets/Game/img/gamehall-red-envelopes.png" alt=""/>
+                        <span>总免费红包</span>
+                        <span id="el_h_money_free">-</span>
+                        <span>个</span>
+                    </div>
+                    <div class="wj-total-free-red-envelopes-time">
+                        清零倒计时：<span id="lblCountdown">-</span>
+                    </div>
+                </div>
+
+                <div class="wj-total-free-red-envelopes-r">
+                    <ul>
+                        <li id="el_change_card"><a href="javascript:;"><span>免费红包兑卡券</span><span>（10w起兑）</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--总免费红包区域结束-->
+
+            <!--今日已签开始-->
+        </div>
+        <!--签到区域结束-->
+
+        <!--兜兜运动区域开始-->
+        <div class="border-b" style="display:none">
+            <h6 class="wj-gamehall-headtop">一步一红包 好货随你挑</h6>
+            <div class="wj-dd-motion-list">
+                <ul>
+                    <li>
+                        <img src="~/Assets/Game/img/img@3x-min.png" alt=""/>
+                    </li>
+                    <li>
+                        <div>今日行走步数<span id="lblSportStep">0</span>步</div>
+                        <div>今日免费红包<span id="lblSportMoney">0</span>个</div>
+                        <div>(今日22:00结算后将自动计入总免费红包)</div>
+                    </li>
+                    <li>
+                        <img id="imgBtnToSport" src="~/Assets/Game/img/go@3x-min.png" alt=""/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--兜兜运动区域结束-->
+
+        <!--赠品休闲区开始-->
+        <div>
+            
+            <div class="wj-gamehall-headtop-new" id="continuousSignTips">
+                <h6>赠品休闲区</h6>
+                <img src="~/Assets/Game/img/wjgamehall_rules@3x-min.png" alt="">
+            </div>
+          
+            @if (ViewBag.is_show_game == "1")
+            {
+            <div class="wj-gamehall-game-ad" id="gameAdLeisure">
+                <img src="~/Assets/Game/img/game@3x-min.png" alt=""/>
+            </div>
+            }
+            <div class="wj-gamehall-gift-leisure-bar wj-gamehall-gift-leisure-bar-new">
+                <!--广告大图区域开始-->
+                <div class="wj-gamehall-tip-img-top">
+                    <a href="javascript:;">
+                        <img src="~/Assets/Game/img/wjgamehall_tip_img@3x-min.png" alt=""/>
+                    </a>
+                </div>
+                <!--广告大图区域结束-->
+
+                <!--签到领小红包区域开始-->
+                <div class="wj-gamehall-sign-in-small-red-bag wj-gamehall-sign-in-small-red-bag-new">
+                    <ul>
+                        <li>
+                            <div><img class="wj-gamehall-leisure-bean-icon"
+                                      src="~/Assets/Game/img/wjgamehall_gold_bean@3x-min.png" alt=""/>金豆
+                            </div>
+                            <div id="el_h_money">-</div>
+                            <div>
+                                <input id="buyGoldBean" type="button" value="购券送豆"/>
+                                <input id="goShoppingGameHall" class="goshop" type="button" value="去购物"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div><img class="wj-gamehall-leisure-payoff-icon"
+                                      src="~/Assets/Game/img/wjgamehall_red_payoff@3x-min.png" alt=""/>小红包
+                            </div>
+                            <div id="el_h_money_pay">-</div>
+                            @if (ViewBag.is_show_game == "1")
+                            {
+                            <div id="playGoldBean">
+                                <img class="play-gold-bean-pic" src="~/Assets/Game/img/play_change@3x-min.png" alt=""/>
+                                <!--<input type="button" value="玩一玩变金豆"/>-->
+                            </div>
+                            }
+                        </li>
+                    </ul>
+                </div>
+                <!--签到领小红包区域结束-->
+
+                <!--签到得300小红包区域开始-->
+                <div class="first-share-red-collar">
+                    <input id="firstShareRedCollar" class="goshop" type="button"
+                           value="推荐得@(ViewBag.shareRedpackage)小红包 + @(ViewBag.shareGoldCoins)金币"/>
+                </div>
+                <!--签到得300小红包区域结束-->
+
+                <!--小红包清零倒计时区域开始-->
+                <div class="wj-gamehall-small-red-envelopes wj-gamehall-small-red-envelopes-new">
+                    <div class="wj-gamehall-small-red-envelopes-l">
+                        小红包清零倒计时：<span id="smallRedEnvelopesClear">-</span>
+                    </div>
+                </div>
+                <!--小红包清零倒计时区域结束-->
+            </div>
+
+        </div>
+        <!--赠品休闲区结束-->
+
+    </div>
+    <!--中间主要区域结束-->
+
+    <!--底部导航区域开始-->
+    <div class="wj-bottom-navbar wj-gamehall-botnav wj-bottom-nav">
+        <ul>
+            <li>
+                <a href="/#/index" target="_self">
+                    <img src="/Assets/Source/img/首页灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/首页选中@3x.png" alt="">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/#/sortofgoods" target="_self">
+                    <img src="/Assets/Source/img/分类灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/分类选中@3x.png" alt="">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li class="cur">
+                <a href="javascript:;" target="_self">
+                    <img src="/Assets/Source/img/sign_in_off@3x-min.png" alt="">
+                    <img src="/Assets/Source/img/sign_in_on@3x-min.png" alt="">
+                    <!--<img src="/Assets/Source/img/赠品休闲区@3x_52.png" alt="">-->
+                    <!--<img src="/Assets/Source/img/赠品休闲区@3x_46.png" alt="">-->
+                    <span>签到</span>
+                </a>
+            </li>
+            <li>
+                <a href="/#/shopcart" target="_self">
+                    <img src="/Assets/Source/img/购物车灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/购物车选中@3x.png" alt="">
+                    <span>购物车</span>
+                </a>
+            </li>
+            <li>
+                <a href="/#/my" target="_self">
+                    <img src="/Assets/Source/img/我的灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/我的选中@3x.png" alt="">
+                    <span>我的</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--底部导航区域结束-->
+
+    <!--分享红包图片区域开始-->
+    <div class="hboxfixed" id="hboxfixed">
+        <div class="shaw"></div>
+        <div class="img" id="shareRedCollarImg"><img src="/Assets/Source/img/hbox.png"/></div>
+    </div>
+    <!--分享红包图片区域结束-->
+
+    <!--省兜兜大红包页面开始-->
+    <div class='maskxx wj-maskxx'>
+        <p class='gethbnum y-color'>30.00</p>
+        <img class='closebtnxx' src='~/Assets/Event/img/images/oolin.jpg'/>
+    </div>
+    <!--省兜兜大红包页面结束-->
+
+</div>
+
+<script type="text/javascript" src="/Assets/Game/js/swipeslider.js"></script>
+<script src='/Assets/Dist/Scripts/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+<script>
+
+    $(function () {
+        // 设置倒计时
+        SetCountdown($("#lblCountdown"), '@ViewBag.countdown', null);
+
+        // 设置赠品休闲区的数据
+        getMoneyPaySignInDataAPI();
+
+    });
+
+    /**
+     * 获取赠品休闲区的数据
+     */
+    function getMoneyPaySignInDataAPI() {
+        var $SevenDays = $("#giftLeisureSignSevenDays");
+        UI.Ajax.post("/WebApi/game/MoneyPaySignInData",
+            {"token": token},
+            function (res) {
+                if (res.status === 0) {
+                    var data = res.data,
+                        moneyPayDayConfig = data.moneyPayDayConfig,
+                        liHtml = "";
+                    for (var i = 0; i < moneyPayDayConfig.length; i++) {
+                        var item = moneyPayDayConfig[i];
+                        // 是否已经签到
+                        if (item.is_signin == 0) {
+                            liHtml += StringUtils.format("<li><span class='wj-money'>-</span><span>{0}</span></li>", item.day_index);
+                        } else {
+                            liHtml += "<li class='cur'><span class='wj-money'>+" + item.money + "</span><span>" + item.day_index + "</span></li>";
+                        }
+                    }
+
+                    $SevenDays.html(liHtml);
+
+                    // 小红包清零倒计时
+                    SetCountdown($("#smallRedEnvelopesClear"), data.countdown, null);
+
+                    // 连续签到多少天
+                    $("#continuousSignDays").text(data.continuousSignDays);
+
+                    // 判断是否可以点击签到领小红包
+                    $("#signSmallRedBagSevenDays").attr("data-isCanGetMoneyPay", data.isCanGetMoneyPay);
+
+                } else {
+                    alert(res.message);
+                }
+            }, 'json');
+    }
+
+    /**
+     * 点击签到领小红包
+     */
+    function sign_small_red_bag_seven_days() {
+        var $this = $(this);
+        $this.attr("disabled", true);
+
+        // 判断是否登陆
+        if (!isLogin()) {
+            unloginDlg();
+            $this.attr("disabled", false);
+            return;
+        }
+
+        // 判断是否可以签到
+        var isCanGetMoneyPay = $(this).attr("data-isCanGetMoneyPay");
+        if (isCanGetMoneyPay === "false") {
+            alert("今日已签到，请明天再签~");
+            $this.attr("disabled", false);
+            return;
+        }
+
+        // 没有签到的情况下发送签到的请求
+        if (isCanGetMoneyPay === "true") {
+            UI.Ajax.post("/WebApi/game/SignInMoneyPay", {"token": token}, function (res) {
+                if (res.status === 0) {
+                    // 重新设置赠品休闲区的数据
+                    getMoneyPaySignInDataAPI();
+                } else {
+                    alert(res.message);
+                }
+                $this.attr("disabled", false);
+            });
+        }
+
+    }
+
+
+    function SetCountdown(elment, intCountdownVal, timer) {
+        var jqlblCountdown = elment; // 显示倒计时的span的jQuery对象
+        var intCountdown = intCountdownVal;
+
+        if (intCountdown <= 0) {
+            return;
+        }
+
+        var times = intCountdown;
+
+        timer = setInterval(function () {
+            var day = 0,
+                hour = 0,
+                minute = 0,
+                second = 0;//时间默认值
+            if (times > 0) {
+                day = Math.floor(times / (60 * 60 * 24));
+                hour = Math.floor(times / (60 * 60)) - (day * 24);
+                minute = Math.floor(times / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(times) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+
+            var countdownString = "";
+            if (jqlblCountdown.attr("id") == "smallRedEnvelopesClear") {
+                countdownString = FormatDatePart(hour) + "时" + FormatDatePart(minute) + "分" + FormatDatePart(second) + "秒";
+            }
+            else {
+                countdownString = FormatDatePart(day) + "天" + FormatDatePart(hour) + "时" + FormatDatePart(minute) + "分" + FormatDatePart(second) + "秒";
+            }
+
+            jqlblCountdown.text(countdownString);
+
+            times--;
+            if (times < 0) {
+                if (timer != null) {
+                    clearInterval(timer);
+                }
+            }
+        }, 1000);
+    }
+
+    // 以两位数显示时间的各部分
+    function FormatDatePart(value) {
+        if (value <= 9) {
+            return '0' + value;
+        }
+
+        return value;
+    }
+</script>
+<script type="text/javascript">
+
+    $(function () {
+        // 获取游戏大厅的轮播图数据
+        gamaHallBannerList();
+
+        GetUserInfo();
+        loopPage();
+        // 加载用户运动数据
+        GetUserSportInfo();
+
+        $("#el_change_beans").click(change_beans);
+        $("#el_change_card").click(change_card);
+        $("#btnSignIn").one("click", sign_in);
+        $("#shareRedCollar").on("click", share_red_collar);
+        $("#shareRedCollarImg").on("click", share_red_collar);
+        $("#firstShareRedCollar").on("click", share_red_collar);
+        $("#buyGoldBean").on("click", buy_gold_bean);
+        $("#clickSignFn").on("click", click_sign_fn);
+        $('.closebtnxx').on("click", closeRedFree);
+        $("#imgBtnToSport").on("click", imgBtnToSport_click);
+
+        // 点击玩一玩换金豆 / 点击底部的大按钮Go广告图 ===== 跳转至休闲游戏页面
+        $("#playGoldBean").on("click", goLeisureGamesPage);
+        $("#gameAdLeisure").on("click", goLeisureGamesPage);
+
+        // 签到领小红包
+        $("#signSmallRedBagSevenDays").on("click", sign_small_red_bag_seven_days);
+
+        // 点击去购物 ===== 跳转至分类页面
+        $("#goShoppingGameHall").on("click", go_shopping_game_hall);
+
+        // 点击连续签到弹出提示框
+        $("#continuousSignTips").on("click", continuous_sign_tips);
+
+
+    });
+
+    /**
+     * 获取游戏大厅的轮播图数据
+     */
+    function gamaHallBannerList() {
+        var htmlLi = "",isDataFlag = false;
+        $.ajax({
+            url: "/Webapi/ConfigManager/MainCarousel",
+            type: "get",
+            complete: function (xhr, textStatus) {
+                var res = xhr.responseJSON;
+                // 失败
+                if ((xhr.readyState !== 4) && (xhr.status !== 200)) {
+                    alert(res.message);
+                    return;
+                }
+                // 成功
+                if (res.status === 0) {
+                    var dataList = res.data;
+                    for (var i = 0; i < dataList.length; i++) {
+                        var item = dataList[i];
+                        // 判断是游戏的轮播图数据  type: 8
+                        if (item.type == 8) {
+                            isDataFlag = true;
+                            var url = item.url;
+                            if (!url) {
+                                url = "javascript:;";
+                            } else {
+                                url = item.url.replace("#token", token);
+                            }
+                            htmlLi += "<li class='sw-slide'><a href='" + url + "'><img src='/SWebApi/Public/picture/" + item.pic_id + ".jpg'/></a></li>";
+                        }
+                    }
+
+                    // 没有数据就隐藏所有轮播图展示区域
+                    if(!isDataFlag){
+                        $("#wj-gamehall-ad").css("display", "none");
+                    }
+
+                    // 插入节点
+                    $("#gamehallAdCont").html(htmlLi);
+
+                    // 顶部主轮播图调用
+                    $("#wj-gamehall-ad-children").swipeslider({
+                        autoPlay: true,                               // 是否自动播放
+                        prevNextButtons: false,                        // 是否显示左右箭头
+                        bullets: false,                                // 底部中间是否显示小圆点
+                        sliderHeight: $("#wj-gamehall-ad").height(),    // 设置轮播图的高度
+                    });
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 弹出连续签到提示框
+     */
+    function continuous_sign_tips() {
+        confirm("<ul><li>小红包使用规则</li><li>1、赠品休闲区可以获得小红包，每日陆续发放3次；</li><li>2、当日领取小红包将在24:00准时清零，请尽快使用；</li><li>3、小红包可在赠品休闲区内使用转换为金豆，金豆可在购物时抵扣使用；</li><li>4、所有用户红包均为省兜兜平台免费发放给用户的福利，不能通过充值获取也不可用于交易，本活动最终解释权归省兜兜所有。</li></ul>", function () {
+        });
+    }
+
+    /**
+     * 跳转至分类页面
+     */
+    function go_shopping_game_hall() {
+        window.location.href = "/#/sortofgoods";
+    }
+
+    /**
+     * 跳转至休闲游戏区
+     */
+    function goLeisureGamesPage() {
+        window.location.href = "/Game/LeisureGameArea?token=" + encodeURIComponent(token);
+    }
+
+    /**
+     * 获取小红包的轮询
+     */
+    /**
+     * 获取小红包的轮询
+     */
+    function loopPage() {
+        var endtime = new Date().getTime();//用户退出时间
+        var duration = Math.floor((endtime - starttime) / 1000);
+        var rdcode = String(Math.random()).split(".")[1];
+        var starttime = new Date().getTime();
+
+        $.post("/WebApi/Game/SetState",
+            {starttime: starttime, endtime: endtime, duration: duration, rdcode: rdcode, token: token},
+            function (ret) {
+                if (ret.data == true) {//分时段小红包
+                    $.post("/WebApi/Game/RefreshRandom", {token: token},
+                        function (data) {
+                            if (data.data !== 0) {
+                                $('.maskxx').css('display', 'block');
+                                $('.gethbnum').text(data.additional_data);
+                                GetUserInfo();
+                                // getuser()
+                            }
+                            /* else if (data.add_data !== 0) {
+                                                             alert(data.data);
+                                                         } else {
+                                                             alert('领取失败，请明天再试');
+                                                         }*/
+                        }, 'json');
+                }
+                ;
+                if (ret.additional_data == true) {//针对个人发红包
+                    $.post("/WebApi/Game/RefreshPer",
+                        {"token": token},
+                        function (res) {
+                            console.log(res)
+                            if (res.status == 0) {
+                                var elText = "";
+                                if (res.data.FreeMoney.Money > 0) {
+                                    elText += res.data.FreeMoney.Msg + "</br>";
+                                }
+                                if (res.data.PayMoney.Money > 0) {
+                                    elText += res.data.PayMoney.Msg;
+                                }
+                                $('.maskxx').css('display', 'block');
+                                $('.gethbnum').html(elText);
+                                GetUserInfo();
+                            } else {
+                                alert(res.data);
+                            }
+
+                        }, 'json');
+                }
+            }, 'json');
+        setTimeout(function () {
+            loopPage();
+        }, 2000);
+    }
+
+
+    /**
+     * 关闭小红包
+     */
+    function closeRedFree() {
+        $('.maskxx').css('display', 'none');
+    }
+
+    /**
+     * 点击签到是否显示弹出框文字
+     */
+    function click_sign_fn() {
+        confirm("<ul><li>免费红包使用规则</li><li>1、省兜兜幸运签到7日一个循环，每日可领取免费红包金额为1万、3万、6万、8万、12万、15万、25万，如出现断签，再次续签后将与断签前保持连续性；</li><li>2、签到期间，每日首次登陆省兜兜均可进行签到领取免费红包，免费红包可以手动兑换卡券，10万免费红包起兑；</li><li>3、幸运签到日截止时，没有兑换的免费红包将在签到日最后一天24：00由系统自动兑换为购物卡券，请及时兑换；</li><li>4、免费红包将不可用于平台小游戏也不可转换为金豆；</li><li>5、所有用户红包均为省兜兜平台免费发放给用户的福利，不能通过充值获取也不可用于交易，本活动最终解释权归省兜兜所有。</li></ul>", function () {
+        });
+    }
+
+    /**
+     * 点击购买金豆
+     */
+    function buy_gold_bean() {
+        window.location.href = "/Game/PeasPay?token=" + encodeURIComponent(token) + "&redirect=" + encodeURIComponent(location.href);
+    }
+
+    /**
+     * 点击分享领取红包
+     */
+    function share_red_collar() {
+        var ua = navigator.userAgent.toLowerCase();
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        if (isWeixin) {
+            var $hboxfixed = $("#hboxfixed");
+            if ($hboxfixed.css("display") == "none") {
+                $hboxfixed.css("display", "block");
+            } else {
+                $hboxfixed.css("display", "none");
+            }
+
+            // 微信分享
+            wx.ready(function () {
+                wx.onMenuShareTimeline({
+                    title: '重磅福利！省兜兜红包天天送', // 分享标题
+                    desc: '', // 分享描述
+                    link: window.location.href, // 分享链接
+                    imgUrl: 'https://e-shop.rrlsz.com.cn/Assets/Event/img/lve.jpg', // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    success: function () {
+                        alert('分享成功')
+                    },
+                    cancel: function () {
+                        alert('分享取消')
+                    }
+                });
+            });
+
+        } else {
+            var title = encodeURIComponent("呼朋唤友，奖励无限！");
+            var recommend = encodeURIComponent("友谊小船不翻，红包拿到手软。");
+            var pic_id = "35642";
+            var redirect = "https://e-shop.rrlsz.com.cn/Event/Xxxshare?token=" + encodeURIComponent(token);
+            if (ua.indexOf('iphone') > -1) {
+                redirect = encodeURIComponent(redirect);
+            }
+
+            window.location.href = "https://e-shop.rrlsz.com.cn/Event/SharingGuide?title=" + title + "&recommend=" + recommend + "&pic_id=" + pic_id + "&redirect=" + redirect;
+        }
+    }
+    /**
+     * 签到领取红包
+     */
+    function sign_in() {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        /*var blnIsLogin = 'ViewBag.isLogin';
+        if (blnIsLogin == 'false') {
+            // 弹出是否登录提示框
+            alert('未登录');
+        }
+        else*/
+        {
+            UI.Ajax.post("/Game/SignInRedpackage", {token: token}, function (data) {
+                var jqSignInButton = $("#btnSignIn");
+
+                if (data.status == 0) {
+                    // 更新签到状态
+                    jqSignInButton.after('<div class="wj-gamehall-today-sign cur">今日已签，明日再来</div>');
+                    jqSignInButton.remove();
+                    // 更新连续签到天数数值
+                    var jqContinuousSignDays = $("#lblContinuousSignDays");
+                    var signDays = parseInt('@(ViewBag.continuousSignDays)');
+                    if (!isNaN(signDays)) {
+                        signDays++;
+                        jqContinuousSignDays.text("连续" + signDays + "天");
+                        // 更新连续签到打钩状态
+                        $(".wj-gamehall-checked-list i.no-checked:first").removeClass("no-checked");
+                    }
+
+                    // 重新渲染用户信息
+                    GetUserInfo();
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    }
+
+    /**
+     * 换金豆
+     */
+    function change_beans() {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        window.confirm("是否确定把所有免费红包转换成金豆?", function () {
+            UI.Ajax.post("/WebApi/Game/RedPackageBeans", {token: token}, function (data) {
+                if (data.status == 0) {
+                    alert("免费红包转金豆成功");
+                    GetUserInfo();
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+
+    }
+
+    /**
+     * 换购物卡
+     */
+    function change_card() {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        window.confirm("是否确定把所有免费红包转换成购物券?", function () {
+            UI.Ajax.post("/WebApi/Game/RedPackageToCoupons", {token: token}, function (data) {
+                if (data.status == 0) {
+                    alert("免费红包转购物券成功");
+                    GetUserInfo();
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+
+    }
+
+    /**
+     * 获取用户信息
+     */
+    function GetUserInfo() {
+        if (!isLogin()) {
+            //unloginDlg();
+            return;
+        }
+
+        UI.Ajax.post("/WebApi/Game/GetUserInfo", {token: token}, function (data) {
+            //debugger;
+            renderUserInfo(data.data);
+        });
+    }
+
+    /**
+     *渲染用户信息
+     * user
+     */
+    function renderUserInfo(user) {
+        $("#el_h_money_free").html(user.h_money_free);
+        $("#el_h_money").html(user.h_money);
+        $("#el_h_money_pay").html(user.h_money_pay);
+    }
+
+    /**
+     * 获取用户运动信息
+     */
+    function GetUserSportInfo() {
+        if (!isLogin()) {
+            return;
+        }
+
+        $.get('/WebApi/Sports/UserSportData', { token: token }, function (res) {
+            if (res.status == 0) {
+                $("#lblSportStep").text(res.data.step);
+                $("#lblSportMoney").text(res.data.step);
+            }
+        })
+    }
+
+    /**
+     * 导航到兜兜运动首页
+     */
+    function imgBtnToSport_click() {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+
+        var isAndroid = window.navigator.appVersion.match(/android/gi);
+        if (isAndroid) {
+            alert('Android暂不支持运动数据！');
+            return;
+        }
+
+        location.href = "/Sport/Index2?rundata=enabled&token=" + token;
+    }
+
+    /**
+     * 没登录对话框
+     */
+    function unloginDlg() {
+        dlg_confirm("尚未登录,请登录后才能使用!", function () {
+            location.href = "/#/login?redirect=" + encodeURIComponent("/#/GameHall?token=#token");
+        }, function () {
+        }, "系统提示");
+    }
+
+    /**
+     * 是否登录
+     */
+    function isLogin() {
+        if (token) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+</script>
+</body>

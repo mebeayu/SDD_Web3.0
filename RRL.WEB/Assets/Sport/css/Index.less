@@ -1,0 +1,674 @@
+.flex{
+  display: flex;
+  display: -webkit-flex;
+}
+.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+
+
+blockquote,body,dd,dl,h1,h2,h3,h4,h5,h6,p,pre{margin:0;-webkit-text-size-adjust:100%;font-family:Helvetica,sans-serif;}
+ol,ul,fieldset{margin:0;padding:0;list-style:none}
+img {
+  border: none;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+ul, ol, li {
+  list-style: none;
+}
+button,input,textarea{
+  padding:0;border:none;outline:0
+}
+i,strong{
+  font-style: normal;
+  font-weight: normal;
+}
+body{-webkit-overflow-scrolling: touch;}
+a{text-decoration:none}
+a,button,input{
+  -webkit-tap-highlight-color:transparent;
+  -webkit-appearance:none;
+  outline:0
+}
+
+
+
+
+.h2{
+  font-size: 32/75rem;
+  color: rgb(45,45,52);
+}
+.s-title{
+  font-size: 28/75rem;
+  color: rgb(45,45,52);
+}
+.s-explain{
+  font-size: 24/75rem;
+  color: rgb(122,123,135);
+}
+
+.sport-main {
+  width: 100%;
+  height: 100%;
+  font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  //background: #ffffff;
+
+}
+.sport-top-header{
+  position: relative;
+  height: 1.17333333rem;
+  line-height: 1.17333333rem;
+  font-size: 0.4rem;
+  border-bottom: 0.01333333rem solid #e0e7eb;
+  background: #fff;
+  h4{
+    font-weight: normal;
+    text-align: center;
+    color: #2d2d34;
+  }
+  a{
+    position: absolute;
+    top: 50%;
+    margin-top: -.26rem;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 0.53333333rem;
+    height: 0.53333333rem;
+  }
+  #shareSport{
+    right: 0.4rem;
+  }
+}
+
+.sport-bottom-header{
+  height: 114/75rem;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  border-bottom: 0.22666667rem solid #f3f4f5;
+
+}
+.header-record,.header-rule{
+  width: 50%;
+}
+.record-icon,.rule-icon{
+  width: 60/75rem;height: 60/75rem;
+}
+.header-record{
+  border-right: 1px solid #7a7b87;
+  margin: 20/75rem 0;
+}
+.header-record{
+  .header-record-a{
+    display: flex;
+    display: -webkit-flex;
+    justify-content:center;
+    align-items: center;
+
+  }
+  .record-explain{
+      margin-left:3%;
+      .s-title{
+        display: block;
+      }
+  }
+}
+.header-rule{
+  display: flex;
+  display: -webkit-flex;
+  justify-content:center;
+  align-items: center;
+  margin: 20/75rem 0;
+  span{
+    margin-left:3%;
+  }
+}
+
+//center begin
+.sport-centerbar{
+  border-bottom: 0.22666667rem solid #f3f4f5;
+}
+.yjjc-content{
+  text-align: center;
+  .yjjc-title{
+    .flex;
+    justify-content:center;
+    padding: 30/75rem 0;
+    .yjjc-icon{
+      width: 44/75rem;
+      height: 42/75rem;
+      margin-right: 2%;
+    }
+    .up-icon{
+      width: 20/75rem;
+      height: 12/75rem;
+      margin-left: 2%;
+      margin-top: 15/75rem;
+    }
+  }
+  .s-title{
+    line-height: 0.6rem;
+  }
+  .s-explain{
+    line-height: 0.6rem;
+  }
+}
+
+
+.sport-stake{
+  .flex;
+  margin-top:50/75rem;
+  input{
+      height: 58/75rem;
+      border: 1px solid;
+      text-align: center;
+      .border-radius(10px)!important;
+      font-size: 24/75rem;
+      background: none;
+  }
+  img{
+    width: 24/75rem;
+    height: 13/75rem;
+    margin: 22/75rem  8/75rem 0;
+
+  }
+}
+
+
+  #ets{
+      width: 180/75rem;
+      margin-left: 30/75rem;
+  }
+  .unbets{
+    border-color: #fb8394;
+    color: #fb8394;
+  }
+input::-webkit-input-placeholder {
+  color: #fb8394;
+}
+input:-moz-placeholder{
+  color: #fb8394;
+}
+input::-moz-placeholder{
+  color: #fb8394;
+}
+input:-ms-input-placeholder {
+  color: #fb8394;
+}
+
+
+
+
+#even-num{
+    margin-left: 10/75rem;
+  }
+  .ets-unselect{
+    width: 100/75rem;
+    border-color: #d3d8df;
+    color: #d3d8df;
+  }
+
+  #btn-confirm{
+    width: 120/75rem;
+    border: none;
+    margin-left: 132/75rem;
+  }
+ .sport-stake  .btn-unconfirmed{
+    height: 58/75rem;
+    background:#d3d8df;
+   color: #fff;
+  }
+  .sport-stake .btn-confirmed{
+    background:#65c4aa;
+  }
+//---------------toggeleClass--------------------
+.sport-stake .bets{
+  background: #fb8394;
+  color: #fff;
+}
+.sport-stake  .ets-select{
+  width: 100/75rem;
+  border-color: #82c95f;
+  color: #82c95f;
+}
+.sport-stake .ets-selected{
+  background:#82c95f ;
+  color: #fff;
+}
+
+.current-li span{
+  color: #65c4aa;
+}
+.current-li .ty-icon{
+  background: url("../imgs/green.png") no-repeat center center;
+  background-size:22/75rem  25/75rem;
+}
+
+//---------------toggeleClass--------------------
+
+
+.jd-num{
+  margin: 30/75rem 0;
+  .current-num{
+    margin-left: 30/75rem;
+    i{
+      color: rgb(253,118,45);
+    }
+  }
+  a{
+    display: inline-block;
+    width: 140/75rem;
+    color: rgb(101,196,170);
+    margin-left:40/75rem ;
+    img{
+      width: 20/75rem;height: 20/75rem;margin-left: 10/75rem;
+    }
+  }
+}
+.databar{
+  height: 100/75rem;
+  background: #fcfcfc;
+  .flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e3e4e8;
+
+   li{
+     width: 33.33%;
+     text-align: center;
+     font-size: 24/75rem;
+    i{
+      display: block;
+      background: url("../imgs/greay.png") no-repeat center center;
+      background-size:22/75rem  25/75rem;
+      width: 22/75rem;
+      height: 25/75rem;
+      float: left;
+      margin-top: 5/75rem;
+    }
+
+
+  }
+}
+
+
+.step-content{
+  .step-null{
+    text-align: center;
+    line-height: 3rem;
+    color: rgb(45,45,52);
+    font-size: 28/75rem;
+  }
+}
+.step-list{
+  height: 140/75rem;
+  font-family: "方正黑体",sans-serif;
+  .flex;
+  justify-content:space-around;
+  align-items: center;
+  .step-left{
+    .flex;
+    .step-head{
+      width: 80/75rem;
+      height: 80/75rem;
+      margin-left: 20/75rem;
+      .border-radius(50%);
+    }
+    .ranking{
+      width: 34/75rem;
+      height: 34/75rem;
+      margin-top:25/75rem;
+    }
+    .step-one-head{
+      border: .05rem solid #fbba02;
+      .border-radius(50%);
+      box-sizing: border-box;
+    }
+    .step-title{
+      width: 2.5rem;
+      overflow: hidden;
+      line-height: 1.06666667rem;
+      margin-left: .2rem;
+    }
+  }
+  .step-right{
+    .flex;
+    .step-num{
+      display: inline-block;
+      font-size: 54/75rem;
+      color: rgb(36,199,137);
+      width: 2.5rem;
+      text-align: right;
+    }
+      .give-zan{
+        width: .6rem;
+        margin-left: 70/75rem;
+        text-align: center;
+      .zan-num{
+        margin-bottom: .05rem;
+      }
+      .icon-zan{
+        display: inline-block;
+        width: 33/75rem;
+        height: 27/75rem;
+      }
+
+      .zan-gray{
+        background: url("../imgs/zan-gray.png") no-repeat;
+        background-size: 100% 100%;
+      }
+        .zan-red{
+          background: url("../imgs/zan-red.png") no-repeat;
+          background-size: 100% 100%;
+        }
+    }
+
+  }
+}
+
+
+.self-step{
+  border-bottom: 0.22666667rem solid #f3f4f5;
+}
+
+.shadow2{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 8;
+}
+  .likepage{
+    margin: 30% auto;
+    width: 610/75rem;
+    background:#fff;
+    .border-radius(.6rem);
+    height:  630/75rem;
+    padding: 0 20/75rem;
+    position: relative;
+    #pullDown{
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      text-align: center;
+      width: 100%;
+      color: #555;
+    }
+    #noData{
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      text-align: center;
+      width: 100%;
+      color: #555;
+    }
+    .likepage-title-box{
+        width: 100%;
+        background: #fff; height: 100/75rem;
+        line-height: 100/75rem;
+        .border-radius(.6rem);
+      .likepage-title{
+        padding-top: 0;
+        font-size: 32/75rem;
+        font-weight: 600;
+        text-align: center;
+        .lick-list{
+          width: 0.58666667rem;
+          height: 0.56rem;
+          margin-right: 0.26666667rem;
+          vertical-align: middle;
+        }
+        #close{
+          width: 0.4rem;
+          height: 0.4rem;
+          position: absolute;
+          right:40/75rem;
+          top:40/75rem;
+        }
+      }
+    }
+    .likepage-content{
+      position: relative;
+      height: 6.2rem;
+      overflow: auto;
+
+      li{
+        height: 1.5rem;
+        .flex;
+        justify-content: space-around;
+        align-items: center;
+        img{
+          width:75/75rem;
+          height: 75/75rem;
+          margin-right: 0.26666667rem;
+          vertical-align: middle;
+          .border-radius(50%);
+        }
+        p{
+          font-size: 28/75rem;
+          color: rgb(45,45,52);
+          width: 320/75rem;
+        }
+        input{
+          width: 150/75rem;
+          height: 65/75rem;
+          text-align: center;
+          line-height:65/75rem;
+          .border-radius(.4rem);
+          font-size: 30/75rem;
+          color: #fff;
+          background:#65c4aa ;
+        }
+      }
+    }
+  }
+
+
+
+//------------------------昨日战绩------------------------------------
+//body{
+//  background: #f3f4f5;
+//}
+.yrecord-head{
+  .flex;
+  align-items: center;
+  height: 140/75rem;
+  background: #fff;
+  img{
+    width: 100/75rem;height: 100/75rem;
+    margin-left: 30/75rem;
+    .border-radius(50%);
+  }
+  span{
+    margin-left: 20/75rem;
+  }
+}
+.yrecord-content{
+  position: relative;
+}
+#no-sport-data{
+  width: 100%;background: #f3f4f5;
+}
+.no-data{
+  width: 220/75rem;
+  margin: 0 auto;
+  padding: 220/75rem 0  700/75rem;
+  text-align: center;
+  img{
+    width: 110/75rem;height: 110/75rem;
+    margin: 0 auto;
+  }
+  p{
+    font-size: 30/75rem;
+    line-height: .7rem;
+    color: rgb(123,122,135);
+  }
+}
+.yrecord-item{
+  dt{
+    font-size: 32/75rem;
+    color: rgb(45,45,52);
+    font-weight: 800;
+    margin: 40/75rem 0 30/75rem 30/75rem;
+  }
+  dd{
+    width: 90%;
+    background: #41cfb1;
+    .border-radius(10/75rem);
+    //margin-top: 16/75rem;
+    margin: 16/75rem auto 0;
+    padding: 30/75rem 20/75rem;
+    .yrecord-list{
+      .flex;
+      justify-content: space-between;
+      font-size: 32/75rem;
+      color: #fff;
+      font-family: "方正黑体",sans-serif;
+      line-height: .85rem;
+      .yrecord-list-step{
+        font-size: .7rem;
+      }
+    }
+  }
+}
+.yrecord-tip{
+  font-size: 32/75rem;
+  color: rgb(45,45,52);
+  margin-top:60/75rem;
+  text-align: center;
+  strong{
+    font-size:.8rem ;
+    color: #fd5773;
+    font-weight: 800;
+    margin: 0 20/75rem;
+  }
+}
+.yrecord-share{
+  text-align: center;
+  margin-top: 100/75rem;
+  img{
+    width: 280/75rem;
+    height: 90/75rem;
+  }
+  p{
+    font-size: 24/75rem;
+    color: #fd5773;
+    line-height: .7rem;
+  };
+}
+//------------------------分享---------------------
+.share-main{
+  width:10rem;
+  height:1335/75rem;
+  background: url("../imgs/share-bg.png") no-repeat center top;
+  background-size:10rem 17.8rem ;
+  position: relative;
+  color: #fff;
+}
+.wj-back{
+  position: absolute;
+  top: 5%;
+  margin-left: .4rem;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 0.53333333rem;
+  height: 0.53333333rem;
+}
+.share-content{
+  width: 520/75rem;
+  height: 440/75rem;
+  margin:0 auto;
+  padding-top: 460/75rem;
+  text-align: center;
+  position: relative;
+  .share-title{
+      width: 232/75rem;
+      margin: 0 auto;
+      h3{
+        font-size: 36/75rem;
+        border-bottom: 1px solid #fff;
+        margin-top: 32/75rem;
+        font-weight: normal;
+        padding: 10/75rem 0;
+      }
+      .share-date{
+        font-size: 32/75rem;
+        margin-top: 10/75rem;
+      }
+  }
+  .share-score{
+      margin-top: 40/75rem;
+      p{
+        font-size: 30/75rem;
+        line-height: 50/75rem;
+        strong{
+          font-size: 48/75rem;
+          margin: 0 12/75rem;
+        }
+      }
+  }
+
+  .QR-code{
+    width: 140/75rem;
+    height: 140/75rem;
+    margin:30/75rem auto;
+    .border-radius(.1rem);
+    padding: 10/75rem;
+  }
+  .qr-explain{
+      p{
+        font-size: 28/75rem;
+      }
+  }
+}
+.share-exit{
+  width: 285/75rem;
+  margin: 70/75rem auto 0;
+  .flex;
+    justify-content:space-between;
+   a{
+     display: block;
+     width: 115/75rem;
+     height: 115/75rem;
+   }
+}
+//------------------------------------------
+#shadow1 .tiplogout {
+  width: 86% !important;
+  top: 3rem !important;
+  margin-left: -43% !important;
+}
+#shadow1 .tiplogout ul {
+  padding: 0 0.3rem;
+}
+#shadow1 .tiplogout li {
+  text-align: left;
+  line-height: .48rem;
+  padding-top: 0.2rem;
+  img{
+    width: 44/75rem;
+    height: 42/75rem;
+    margin-right: 20/75rem;
+    vertical-align:middle;
+  }
+}
+#shadow1 .tiplogout li:first-child {
+  padding-top: 0;
+  font-size: .38rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+

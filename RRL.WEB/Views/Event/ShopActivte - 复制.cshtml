@@ -1,0 +1,878 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>520为爱跳一跳</title>
+    <link href="../../Assets/Event/threeLevelLinkage/css/layout.min.css" rel="stylesheet" />
+    <link href="../../Assets/Event/threeLevelLinkage/css/scs.min.css" rel="stylesheet" />
+    <script>
+        // 页面适配解决
+        ; (function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            border: none;
+            outline: none;
+        }
+
+        html, body {
+            width: 100%;
+            /*height: 100%;*/
+        }
+
+        body {
+            background: #f7dce1; /* 控制520当前活动页面的背景颜色 */
+        }
+
+        .wj-520-cont, .wj-520-main {
+            height: 100%;
+        }
+
+            .wj-520-main div.wj-520-cashing-code {
+                padding: 0 20%;
+            }
+
+            img, .wj-520-main input {
+                display: block;
+                width: 100%;
+            }
+
+        .wj-520-cashing-code-txt {
+            height: 1.0666666666666667rem;
+            line-height: 1.0666666666666667rem;
+            background: #fff;
+            color: #555;
+            border: 1px solid #f2617e;
+            text-indent: .37333333333333335rem;
+            font-size: .3466666666666667rem;
+        }
+
+        .wj-520-main .wj-520-cashing-code-btn {
+            width: 60%;
+            height: 1.0666666666666667rem;
+            line-height: 1.0666666666666667rem;
+            background: #f6617f;
+            color: #fff;
+            font-size: .4rem;
+            margin: .4rem auto 0;
+        }
+
+        /* 返回上一页 */
+        .goback-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1rem;
+            height: 1rem;
+        }
+
+            .goback-page img {
+                display: block;
+                width: .65rem;
+                height: .65rem;
+                margin: .2rem auto;
+            }
+
+        .wj-520-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .3);
+            z-index: 2;
+            display: none;
+        }
+
+        .wj-receipt-info, .wj-submit-succes, .wj-gold-bean-succes {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8.666666666666666rem;
+            height: 9.04rem;
+            background: #fff;
+            padding: .4rem;
+            margin: -4.52rem -4.333333333333333rem;
+            display: none;
+        }
+
+        h5.head {
+            color: #313131;
+            font-size: .4rem;
+            font-weight: 600;
+            padding-bottom: 0.29333333333333333rem;
+        }
+
+        div.close {
+            position: absolute;
+            right: -.2rem;
+            top: -.2rem;
+            font-size: .36rem;
+            background: #fff;
+            width: .5333333333333333rem;
+            height: .5333333333333333rem;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 .1rem .1rem rgba(0, 0, 0, .2);
+        }
+
+        input.input, div.input-box textarea {
+            display: block;
+            width: 100%;
+            height: 1.04rem;
+            line-height: 1.04rem;
+            text-indent: .32rem;
+            border: 1px solid #e1e1e1;
+        }
+
+        div.input-box {
+            padding-bottom: .21333333333333335rem;
+        }
+
+            div.input-box textarea {
+                outline: none;
+                height: 1.3066666666666666rem;
+                padding: .3rem 0;
+                line-height: .4rem;
+                font-family: "Microsoft YaHei";
+            }
+
+        div.button-box {
+            text-align: center;
+            padding-top: .2rem;
+        }
+
+            div.button-box button {
+                background: #f6617f;
+                color: #fff;
+                font-size: .36rem;
+                border: none;
+                padding: .3333333333333333rem 1rem;
+            }
+
+        .wj-submit-succes {
+            height: 8.16rem;
+            margin: -4.08rem -4.333333333333333rem;
+        }
+
+        .wj-head-top {
+            text-align: center;
+            padding: .4rem 0 .6rem;
+            border-bottom: 1px dotted #9a9a9a;
+        }
+
+            .wj-head-top img {
+                display: inline-block;
+                width: .8533333333333334rem;
+                height: .8533333333333334rem;
+                font-size: 0;
+            }
+
+            .wj-head-top span {
+                display: inline-block;
+                font-size: .8rem;
+                vertical-align: middle;
+                color: #eb515d;
+                padding-left: .2rem;
+            }
+
+        .wj-til-cont p:nth-of-type(1) {
+            padding: .6rem 0 .56rem;
+        }
+
+        .wj-til-cont p {
+            color: #666;
+            font-size: .3466666666666667rem;
+            text-align: center;
+            line-height: .4533333333333333rem;
+        }
+
+        div.button-box-new {
+            position: absolute;
+            left: 50%;
+            bottom: .4rem;
+            transform: translateX(-50%);
+        }
+
+        .wj-gold-bean-succes {
+            height: 8.133333333333333rem;
+            margin: -4.066666666666666rem -4.333333333333333rem;
+        }
+
+        .wj-head-top i {
+            font-style: normal;
+        }
+
+        .wj-head-top p {
+            font-size: .48rem;
+        }
+
+        .wj-head-top .wj-gold-bean-span {
+            font-size: 0.6133333333333333rem;
+            padding-top: .16rem;
+        }
+
+        div.button-box button.wj-new-btn-bean {
+            padding: .3333333333333333rem .7rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wj-520-cont">
+
+        <!--返回上一页开始-->
+        <div class="goback-page">
+            <img src="/Assets/Source/img/goback.png" id="goBackPage" />
+        </div>
+        <!--返回上一页结束-->
+        <!--主要内容区域开始-->
+
+        <div class="wj-520-main">
+
+            <img src="/Assets/Event/img/wj-520-cashing-code_01.jpg" alt="" />
+            <div class="wj-520-cashing-code">
+                <input id="JS-cashing-code-Txt" class="wj-520-cashing-code-txt" type="text" placeholder="请输入兑奖码" />
+                <input id="JS-cashing-code-Btn" class="wj-520-cashing-code-btn" type="button" value="确认兑换" />
+            </div>
+            <img src="/Assets/Event/img/wj-520-cashing-code_02.jpg" alt="" />
+
+        </div>
+        <!--主要内容区域结束-->
+        <!--弹框区域开始-->
+        <div id="JS-520-Alert" class="wj-520-alert">
+            <!--收货信息区域开始-->
+            <div id="JS-Receipt-Info" class="wj-receipt-info">
+                <div class="close" id="JS-Receipt-Info-Close">×</div>
+                <h5 class="head">收货信息</h5>
+                <div class="input-box">
+                    <input id="receive_name" class="input" type="text" placeholder="收货人姓名" />
+                </div>
+                <div class="input-box">
+                    <input id="receive_mobile" class="input" type="text" placeholder="收货人手机号码" />
+                </div>
+                <div class="input-box">
+                    <input class="input" type="text" readonly placeholder="选择省、市、区县" id="myAddrs" name="addr"
+                           data-key="25-415-4479" /> <!--value="云南省 昆明市 五华区"-->
+                </div>
+                <div class="input-box">
+                    <textarea name="message" id="message" placeholder="详细地址，如街道、楼牌号等"></textarea>
+                </div>
+                <div class="button-box">
+                    <button id="JS-Receipt-Info-Btn">确认提交</button>
+                </div>
+
+            </div>
+            <!--收货信息区域结束-->
+            <!--提交成功区域开始-->
+            <div id="JS-Submit-Succes" class="wj-submit-succes">
+                <div class="close" id="JS-Submit-Succes-Close">×</div>
+                <div class="wj-head-top">
+                    <img src="/Assets/Event/img/wj-submit-succes.jpg" alt="" />
+                    <span>提交成功</span>
+                </div>
+                <div class="wj-til-cont">
+                    <p>小兜将在5个工作日内发出奖品</p>
+                    <p>您可以3个工作日后在【我的-待收货】中查看奖品及物流信息</p>
+                </div>
+                <div class="button-box button-box-new">
+                    <button id="JS-Submit-Succes-Btn" class="wj-new-btn">我知道啦</button>
+                </div>
+
+            </div>
+            <!--提交成功区域结束-->
+            <!--金豆奖励区域开始-->
+            <div id="JS-Gold-Bean" class="wj-gold-bean-succes">
+                <div class="close" id="JS-Gold-Bean-Close">×</div>
+                <div class="wj-head-top">
+                    <p>哇哦，恭喜您获得</p>
+                    <span class="wj-gold-bean-span"><i id="JS-Gold-Bean-Num">200</i>金豆奖励</span>
+                </div>
+                <div class="wj-til-cont">
+                    <p>金豆可在购物时直接抵扣使用哦~</p>
+                    <p>可以在商城首页-我的-我的钱包查看并使用</p>
+                </div>
+                <div class="button-box button-box-new">
+                    <button id="JS-Shopping-Mall" class="wj-new-btn">去商城逛逛</button>
+                </div>
+
+            </div>
+            <!--金豆奖励区域结束-->
+            <!--游戏小红包区域开始-->
+            <div id="JS-GameHall" class="wj-gold-bean-succes">
+                <div class="close" id="JS-GameHall-Close">×</div>
+                <div class="wj-head-top">
+                    <p>哇哦，恭喜您获得</p>
+                    <span class="wj-gold-bean-span"><i id="JS-GameHall-Num">200</i>游戏小红包</span>
+                </div>
+                <div class="wj-til-cont">
+                    <p>小红包可以在休闲区参与小游戏很容易获得金豆，金豆可以在购物时直接抵扣使用哦~ (小红包当天清零，请尽快使用！)</p>
+                </div>
+                <div class="button-box button-box-new">
+                    <button id="JS-GameHall-LeisureGameArea" class="wj-new-btn wj-new-btn-bean">去玩游戏换金豆啦</button>
+                </div>
+
+            </div>
+            <!--游戏小红包区域结束-->
+        </div>
+        <!--弹框区域结束-->
+    </div>
+
+
+    <script src='../../Assets/Event/jquery-3.2.1.min.js'></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+    <script src='../../Assets/Event/threeLevelLinkage/js/jquery.scs.min.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+    <script src='../../Assets/Event/threeLevelLinkage/js/CNAddrArr.min.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+    <script>
+        var token = localStorage.getItem('shorttoken'),
+            orderId = "",
+            $codeEle = $("#JS-cashing-code-Txt"), // 兑奖码
+            code = $codeEle.val();
+        $JSReceiptInfo = $("#JS-Receipt-Info"), // 收货信息
+            $alert = $("#JS-520-Alert"), // 灰色蒙版
+            $JSSubmitSucces = $("#JS-Submit-Succes"), // 提交成功
+            $receive_name = $("#receive_name"),  // 收货人姓名
+            $receive_address = $("#myAddrs"),  //省市区
+            $receive_mobile = $("#receive_mobile"), // 电话号码
+            $message = $("#message"),   //详细地址
+            $myAddrs = $("#myAddrs");  // 省市区弹框
+
+        /* 返回上一页代码实现 */
+        ; (function () {
+            var goBackPage = document.getElementById("goBackPage");
+            goBackPage.addEventListener("click", function () {
+                location.href = "/#/index";
+            }, false);
+        })();
+
+        // 省市区三联动开始
+        $(function () {
+            function getAddrsArrayById(id) {
+                var results = [];
+                if (addr_arr[id] != undefined)
+                    addr_arr[id].forEach(function (subArr) {
+                        results.push({
+                            key: subArr[0],
+                            val: subArr[1]
+                        });
+                    });
+                else {
+                    return;
+                }
+                return results;
+            }
+
+            function getStartIndexByKeyFromStartArr(startArr, key) {
+                var result = 0;
+                if (startArr != undefined)
+                    startArr.forEach(function (obj, index) {
+                        if (obj.key == key) {
+                            result = index;
+                            return false;
+                        }
+                    });
+                return result;
+            }
+
+            //bind the click event for 'input' element
+            $receive_address.click(function () {
+                var PROVINCES = [],
+                    startCities = [],
+                    startDists = [];
+                //Province data，shall never change.
+                addr_arr[0].forEach(function (prov) {
+                    PROVINCES.push({
+                        key: prov[0],
+                        val: prov[1]
+                    });
+                });
+                //init other data.
+                var $input = $(this),
+                    dataKey = $input.attr("data-key"),
+                    provKey = 1, //default province 北京
+                    cityKey = 36, //default city 北京
+                    distKey = 37, //default district 北京东城区
+                    distStartIndex = 0, //default 0
+                    cityStartIndex = 0, //default 0
+                    provStartIndex = 0; //default 0
+
+                if (dataKey != "" && dataKey != undefined) {
+                    var sArr = dataKey.split("-");
+                    if (sArr.length == 3) {
+                        provKey = sArr[0];
+                        cityKey = sArr[1];
+                        distKey = sArr[2];
+
+                    } else if (sArr.length == 2) { //such as 台湾，香港 and the like.
+                        provKey = sArr[0];
+                        cityKey = sArr[1];
+                    }
+                    startCities = getAddrsArrayById(provKey);
+                    startDists = getAddrsArrayById(cityKey);
+                    provStartIndex = getStartIndexByKeyFromStartArr(PROVINCES, provKey);
+                    cityStartIndex = getStartIndexByKeyFromStartArr(startCities, cityKey);
+                    distStartIndex = getStartIndexByKeyFromStartArr(startDists, distKey);
+                }
+                var navArr = [{//3 scrollers, and the title and id will be as follows:
+                    title: "省",
+                    id: "scs_items_prov"
+                }, {
+                    title: "市",
+                    id: "scs_items_city"
+                }, {
+                    title: "区",
+                    id: "scs_items_dist"
+                }];
+                SCS.init({
+                    navArr: navArr,
+                    onOk: function (selectedKey, selectedValue) {
+                        $input.val(selectedValue).attr("data-key", selectedKey);
+                    }
+                });
+                var distScroller = new SCS.scrollCascadeSelect({
+                    el: "#" + navArr[2].id,
+                    dataArr: startDists,
+                    startIndex: distStartIndex
+                });
+                var cityScroller = new SCS.scrollCascadeSelect({
+                    el: "#" + navArr[1].id,
+                    dataArr: startCities,
+                    startIndex: cityStartIndex,
+                    onChange: function (selectedItem, selectedIndex) {
+                        distScroller.render(getAddrsArrayById(selectedItem.key), 0); //re-render distScroller when cityScroller change
+                    }
+                });
+                var provScroller = new SCS.scrollCascadeSelect({
+                    el: "#" + navArr[0].id,
+                    dataArr: PROVINCES,
+                    startIndex: provStartIndex,
+                    onChange: function (selectedItem, selectedIndex) { //re-render both cityScroller and distScroller when provScroller change
+                        cityScroller.render(getAddrsArrayById(selectedItem.key), 0);
+                        distScroller.render(getAddrsArrayById(cityScroller.getSelectedItem().key), 0);
+                    }
+                });
+            });
+        });
+        // 省市区三联动结束
+
+        $(function () {
+            getCashCodeURLFn();
+
+            $("#JS-cashing-code-Btn").on("click", getVerifActivityCodeAPI);
+            $("#JS-Shopping-Mall").on("click", goShoppingMallFn);
+            $("#JS-Receipt-Info-Btn").on("click", getUpdateAddressInfoAPI);
+            $("#JS-Receipt-Info-Close").on("click", hideJSReceiptInfoCloseFn);
+            $("#JS-Submit-Succes-Btn").on("click", hideJSSubmitSuccesFn);
+            $("#JS-Submit-Succes-Close").on("click", hideJSSubmitSuccesFn);
+            $("#JS-GameHall-Close").on("click", hideJSGameHallFn);
+            $("#JS-Gold-Bean-Close").on("click", hideGoldBeanCloseFn);
+            $("#JS-GameHall-LeisureGameArea").on("click", goJSGameHallLeisureGameAreaFn);
+        });
+
+        /*
+        *  获取url地址栏兑换码的值
+        */
+        function getCashCodeURLFn() {
+            var cashCodeURL = UI.Page.getAllparam().cashCodeURL || "";  // 获取url地址栏兑换码的值
+            if (!cashCodeURL) return;
+            $codeEle.val(cashCodeURL);
+        }
+
+        /*
+        *  关闭金豆奖励的弹框
+        */
+        function hideGoldBeanCloseFn() {
+            var $JSGoldBean = $("#JS-Gold-Bean"), // 金豆
+                $alert = $("#JS-520-Alert"); // 灰色蒙版
+            $codeEle.val("");  // 清空兑奖码
+            $JSGoldBean.css("display", "none");
+            $alert.css("display", "none");
+        }
+
+        /*
+        *  关闭收货信息的弹框
+        */
+        function hideJSReceiptInfoCloseFn() {
+            //$codeEle.val("");  // 清空兑奖码
+            $receive_name.val("");
+            $receive_address.val("");
+            $receive_mobile.val("");
+            $message.val("");
+
+            $JSReceiptInfo.css("display", "none");
+            $alert.css("display", "none");
+        }
+
+        /*
+        *  跳转到去游戏列表的页面
+        */
+        function goJSGameHallLeisureGameAreaFn() {
+            window.location.href = "/Game/LeisureGameArea?token=" + token;
+        }
+
+        /*
+        *  关闭游戏小红包的弹框
+        */
+        function hideJSGameHallFn() {
+            var $JSGameHall = $("#JS-GameHall"), // 游戏小红包
+                $alert = $("#JS-520-Alert"); // 灰色蒙版
+            $codeEle.val("");  // 清空兑奖码
+            $JSGameHall.css("display", "none");
+            $alert.css("display", "none");
+        }
+
+        /*
+        *  关闭提交成功的弹框
+        */
+        function hideJSSubmitSuccesFn() {
+            $codeEle.val("");  // 清空兑奖码
+            $JSSubmitSucces.css("display", "none");
+            $alert.css("display", "none");
+            window.location.href = "/";
+        }
+
+        /*
+        *  跳转到去商城逛逛的页面
+        */
+        function goShoppingMallFn() {
+            window.location.href = "/#/sortofgoods";
+        }
+
+        /*
+        *  获取更新地址信息
+        */
+        function getUpdateAddressInfoAPI() {
+
+            var receive_name = $receive_name.val(),
+                receive_address = $receive_address.val(),
+                receive_mobile = $receive_mobile.val(),
+                message = $message.val(),
+                $JSSubmitSucces = $("#JS-Submit-Succes"), // 提交成功
+                $alert = $("#JS-520-Alert"), // 灰色蒙版
+                reg = /^1[0-9]{10}$/;  // 手机号码合法性
+
+            if (!token) {
+                var href = window.location.href;
+                window.location.href = "/#/login?redirect=" + encodeURIComponent(href);
+                return;
+            }
+            code = $codeEle.val();
+            if (code.length <= 0) {
+                alert("兑奖码不存在！");
+                return;
+            }
+            if (receive_name.length <= 0) {
+                alert("收货人姓名不能为空！");
+                return;
+            }
+            if (receive_address.length <= 0) {
+                alert("省市区县不能为空！");
+                return;
+            }
+            if (receive_mobile.length <= 0) {
+                alert("收货人手机号码不能为空！");
+                return;
+            }
+            if (!reg.test(receive_mobile)) {
+                alert("手机号码格式错误！");
+                return;
+            }
+
+            if (message.length <= 0) {
+                alert("详细地址不能为空！");
+                return;
+            }
+            $.ajax({
+                url: '/Webapi/Notice/UpdateAddressInfo?code=' + encodeURIComponent(code) + '&receive_name=' + encodeURIComponent(receive_name) + '&receive_address=' + encodeURIComponent(receive_address) + '&receive_mobile=' + encodeURIComponent(receive_mobile) + '&message=' + encodeURIComponent(message) + '&token=' + encodeURIComponent(token),
+                type: "get",
+                complete: function (xhr, textStatus) {
+
+                    // $codeEle.val("");  // 清空兑奖码
+                    $receive_name.val("");
+                    $receive_address.val("");
+                    $receive_mobile.val("");
+                    $message.val("");
+                    $JSReceiptInfo.css("display", "none");
+
+                    var res = xhr.responseJSON;
+                    // 失败
+                    if ((xhr.readyState !== 4) && (xhr.status !== 200)) {
+                        alert(res.message);
+                        return;
+                    }
+                    // if (res.status === 99) {
+                    //     $alert.css("display", "none");
+                    //     $JSSubmitSucces.css("display", "none");
+                    //     return;
+                    //
+                    // }
+                    // 成功
+                    if (res.status === 0) {
+                        var data = res.data;
+                        $alert.css("display", "block");
+                        $JSSubmitSucces.css("display", "block");
+
+                    }
+                }
+            })
+        }
+
+        /*
+        *  获取默认的省市区三级联动信息
+        */
+        function getDefalutAddressAPI() {
+            $.ajax({
+                url: '/Webapi/Notice/GetDefalutAddress?token=' + encodeURIComponent(token),
+                type: "get",
+                complete: function (xhr, textStatus) {
+                    var res = xhr.responseJSON;
+                    // 失败
+                    if ((xhr.readyState !== 4) && (xhr.status !== 200)) {
+                        alert(res.message);
+                        return;
+                    }
+                    if (res.status === 99) {
+                        // alert(res.message);
+                        return;
+                    }
+
+                    // 成功
+                    if (res.status === 0) {
+                        var data = res.data,
+                            addDefalutInfo = data.addDefalutInfo[0],  // 默认输入框信息
+                            provinceCity = data.provinceCity;      // 默认省市区点击弹开之后的keyCode值
+
+                        $receive_name.val(addDefalutInfo.receive_name);
+                        $receive_mobile.val(addDefalutInfo.receive_mobile);
+                        $message.val(addDefalutInfo.receive_address);
+
+                        // 省市区及弹框打开的值设置
+                        var dataKey = provinceCity.key1 + "-" + provinceCity.key2 + "-" + provinceCity.key3,
+                            dataVal = provinceCity.province + " " + provinceCity.city + " " + provinceCity.county;
+                        $myAddrs.val(dataVal).attr("data-key", dataKey);  // data-key="25-415-4479"
+
+                    }
+                }
+            })
+        }
+
+        /*
+        *  获取兑奖信息
+        */
+        function getVerifActivityCodeAPI() {
+            var $codeEle = $("#JS-cashing-code-Txt"),
+                code = $codeEle.val(),
+                $alert = $("#JS-520-Alert"), // 灰色蒙版
+                $JSGoldBean = $("#JS-Gold-Bean"), // 金豆
+                $JSGoldBeanNum = $("#JS-Gold-Bean-Num"), // 金豆的奖励金额
+                $JSReceiptInfo = $("#JS-Receipt-Info"), // 收货信息
+                $JSGameHall = $("#JS-GameHall"), // 游戏小红包
+                $JSGameHallNum = $("#JS-GameHall-Num"); // 游戏小红包的奖励金额
+
+            if (!token) {
+                var href = window.location.href + "?cashCodeURL=" + code;
+                window.location.href = "/#/login?redirect=" + encodeURIComponent(href) + "&fromcode=tg001_520";
+                return;
+            }
+            if (code.length <= 0) {
+                alert("输入不能为空！");
+                return;
+            }
+            $.ajax({
+                url: '/Webapi/Notice/verif_Activity_Code?code=' + encodeURIComponent(code) + '&token=' + encodeURIComponent(token),
+                type: "get",
+                complete: function (xhr, textStatus) {
+                    var res = xhr.responseJSON;
+                    // 失败
+                    if ((xhr.readyState !== 4) && (xhr.status !== 200)) {
+                        alert(res.message);
+                        return;
+                    }
+                    if (res.status === 99) {
+                        alert(res.message);
+                        $codeEle.val("");
+                        return;
+                    }
+                    // 成功
+                    if (res.status === 0) {
+                        var data = res.data;
+                        orderId = data.order_id;
+                        // 给兑换码赋值
+                        code = $codeEle.val();
+
+                        // 1小红包
+                        if (data.award_type == 1) {
+                            $JSGameHallNum.text(data.cash_money);
+
+                            $JSReceiptInfo.css("display", "none");
+                            $JSGoldBean.css("display", "none");
+                            $JSSubmitSucces.css("display", "none");
+
+                            $alert.css("display", "block");
+                            $JSGameHall.css("display", "block");
+                            return;
+                        }
+
+                        // 2商品
+                        if (data.award_type == 2) {
+                            getDefalutAddressAPI(); // 获取省市区三级联动默认地址信息
+
+                            $JSGameHall.css("display", "none");
+                            $JSGoldBean.css("display", "none");
+                            $JSSubmitSucces.css("display", "none");
+
+
+                            $alert.css("display", "block");
+                            $JSReceiptInfo.css("display", "block");
+                            return;
+                        }
+
+                        // 3金豆
+                        if (data.award_type == 3) {
+                            $JSGoldBeanNum.text(data.cash_money);
+
+                            $JSGameHall.css("display", "none");
+                            $JSReceiptInfo.css("display", "none");
+                            $JSSubmitSucces.css("display", "none");
+
+                            $alert.css("display", "block");
+                            $JSGoldBean.css("display", "block");
+                        }
+
+                    }
+                }
+            })
+        }
+
+
+    </script>
+</body>
+</html>

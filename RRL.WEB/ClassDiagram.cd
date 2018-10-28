@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RRL.WEB.RouteConfig" Collapsed="true">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.SwaggerConfig" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAEAAAAAA=</HashCode>
+      <FileName>App_Start\SwaggerConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.WebApiConfig" Collapsed="true">
+    <Position X="4" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Global" Collapsed="true">
+    <Position X="9.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.AuthManagerController" Collapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\AuthManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAQBAAAAAAABAAAEAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\ConfigManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.EventManagerController" Collapsed="true">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\EventManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.PublicController" Collapsed="true">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAIABAAQQQIAAAIAAAAAAAAAIAAAAAAAQA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\PublicController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.ShopManagerController" Collapsed="true">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgAAQEAAAAAIAAAAIAAAIAgAAAAAAAAAAAACA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\ShopManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.TestController" Collapsed="true">
+    <Position X="2.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\TestController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.TradeManagerController" Collapsed="true">
+    <Position X="9.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAAAAAQBCAAEABIAAAABEAEABAEAAAAAAwCAEAAAA=</HashCode>
+      <FileName>Areas\WebApi\Controllers\TradeManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.Controllers.UserManagerController" Collapsed="true">
+    <Position X="11" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gSAQAiEAAg0AAQAGEACRABCQBAAAAQABAAAgAEAAEQE=</HashCode>
+      <FileName>Areas\WebApi\Controllers\UserManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Areas.WebApi.WebApiAreaRegistration" Collapsed="true">
+    <Position X="2.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\WebApi\WebApiAreaRegistration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Controllers.EventController" Collapsed="true">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAgAAAEAAEAIAAAAAFBAAAAAgAAAgAAIA=</HashCode>
+      <FileName>Controllers\EventController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Controllers.PayCallBackController" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAA=</HashCode>
+      <FileName>Controllers\PayCallBackController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Controllers.ViewRouteController" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAAAAAAAEBAAAAAAAABAAAAAAAAABEAAAAARAA=</HashCode>
+      <FileName>Controllers\ViewRouteController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Request.HeadPicRequest" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RequestObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Request.BaseGoodsRequest" Collapsed="true">
+    <Position X="7.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\RequestObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Request.BaseShopRequest" Collapsed="true">
+    <Position X="9.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RequestObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Response.TrackResult" Collapsed="true">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAKAAAAAAAAQAAAAAAQAAAAAAAAAEAAAQAAAAACA=</HashCode>
+      <FileName>Models\ResponseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Response.TrackNode" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ResponseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Response.DataResult" Collapsed="true">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAQAAAAAAIAAAAAAAAEAAASAAAAACA=</HashCode>
+      <FileName>Models\ResponseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Response.AppVersionObject" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\ResponseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Response.ResultView&lt;T&gt;" Collapsed="true">
+    <Position X="4" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAkAAAQAAAAACA=</HashCode>
+      <FileName>Models\ResponseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.ShopSummary" Collapsed="true">
+    <Position X="11" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAJAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAkA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.GoodsType" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQABAAAEAAAAAAAAAAAAAABAAEAAAEAQAAAAAAIgA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.GoodsSummary" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAAAAAAAAAAAAAAAAAAQAEAgACCAAAAAAAAgA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.GoodsRecommend" Collapsed="true">
+    <Position X="11" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAAAAAAAAAAAAAAAAAAQAEAAACCAAAAAAAAgA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.CarouslFigure" Collapsed="true">
+    <Position X="11" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACgAAAAAAAgA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.AreaCode" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIgQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.BankMain" Collapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIACAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.ViewModel.TrackCom" Collapsed="true">
+    <Position X="4" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\ViewObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Models.Wx.WxOauthAccessToken" Collapsed="true">
+    <Position X="5.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAhAAAAAAAAAAAAAgCAAAAAAAA=</HashCode>
+      <FileName>Models\WxObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Ulity.DataSetHelper" Collapsed="true">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAEA=</HashCode>
+      <FileName>Ulity\DataSetHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Ulity.HttpHelper" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAACEAAQAAQiAAAAAEAAACAAAAAgIAAAAAAAAACAAA=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Ulity.HttpItem" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIFAARQAAEGYgggAAYAuBAAAgDAAKJYEAESWEgAAIhA=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Ulity.HttpResult" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAxAAAAAAQAAAAAAAAAAAAAAABAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Ulity.MyHttpHelper" Collapsed="true">
+    <Position X="11" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAIAAAAAIQAAAAAAAAAAAAQAIAAAAAAAAAAAAI=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.WEB.Ulity.SessionHelper" Collapsed="true">
+    <Position X="7.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAABAAAADAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Ulity\SessionHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="RRL.WEB.Ulity.ResultType" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RRL.WEB.Ulity.PostDataType" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RRL.WEB.Ulity.ResultCookieType" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ulity\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

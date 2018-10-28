@@ -1,0 +1,88 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wj-customer-service {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 41px;
+            line-height: 41px;
+            color: #fff;
+            background: #42b8f4;
+            padding-left: 15px;
+        }
+
+        .wj-iframe {
+            position: absolute;
+            left: 0;
+            top: 41px;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .wj-iframe iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body id="wj-body">
+<div id="wj-goback" class="wj-customer-service">
+    <span>返回</span>
+</div>
+<div class="wj-iframe">
+    <iframe id="wjIframe" src="" frameborder="0"></iframe>
+</div>
+
+<script src="~/Assets/Game/js/jquery.js"></script>
+<script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+<script>
+
+    $(function () {
+        setIframeVal(); // iframe赋值
+
+        $("#wj-goback").on("click", goBack);
+    });
+
+    /**
+     * 获取 游戏大厅页面传过来的url各个参数，并给iframe赋值
+     * */
+    function setIframeVal() {
+        var params = UI.Page.getAllparam(),
+            iframeVal = params.iframe,
+            token = params.token,
+            ver = params.ver,
+            paytype = params.paytype || "";
+        $("#wjIframe").attr("src", iframeVal );
+    }
+
+    /**
+     * 返回 my页面
+     * */
+    function goBack() {
+        var params = UI.Page.getAllparam();
+        var host = "https://" + location.host;
+        window.location.href = host + "/#/GameHall?token=" + params.token;
+    }
+
+</script>
+</body>

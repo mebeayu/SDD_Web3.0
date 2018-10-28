@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css" />
+    <style>
+        .main{
+            background-color: #fff;
+        }
+        .goback-page{
+            position: absolute;
+            top: .5rem;
+            left: .5rem;
+            width: 3rem;
+            height: 3rem;
+        }
+        .goback-page img{
+            display: block;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="goback-page">
+            <img src="/Assets/Source/img/goback.png" id="goBackPage" />
+        </div>
+        <div class="img">
+            <img src="~/Assets/Event/images/wechat_sp.jpg?1"/>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        /* ������һҳ����ʵ�� */
+        ;(function(){
+            var goBackPage = document.getElementById("goBackPage");
+            goBackPage.addEventListener("click",function(){
+                // window.history.go(-1);
+                window.location.href = "/#/index";
+                location.href="/";
+            },false);
+        })();
+
+    </script>
+</body>
+</html>

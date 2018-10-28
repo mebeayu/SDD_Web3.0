@@ -1,0 +1,408 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>0门槛金豆换购区</title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css"/>
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <style>
+        .clearfix:after{
+            display: block;
+            clear: both;
+            content: "";
+            visibility: hidden;
+            height: 0;
+        }
+        .clearfix{
+            zoom:1;
+        }
+        .main{
+            background: #f4b34f;
+            padding-bottom: .15rem;
+             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        .jd_content{
+            width: 96%;
+            margin:1rem auto 0;
+            padding: .5rem 0;
+            background: #ffeede;
+            border-radius: .2rem;
+            position: relative;
+        }
+        .jd_content li {
+            width:46%;
+            float: left;
+            margin-left:2.7%;
+            overflow: hidden;   
+            border-radius: .2rem;
+        }
+        .jd_content a{
+            text-decoration: none;
+        }
+        /* 返回上一页 */
+        .goback-page {
+            position: fixed; top: .5rem; left: .5rem;     z-index: 10;
+        }
+        .goback-page img {
+            display: block; width: .6rem; height: .6rem;
+        }
+        .img .title{
+            width: 4.68rem;
+            height: .95rem;
+            background-size: 100% 100%;  
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            line-height:.8528784648187633rem;
+            font-size: .36rem;
+            letter-spacing: .03rem;
+            position: absolute;
+            top: -.6rem;
+            left: 50%;
+            margin-left: -2.34rem;
+        }
+        .img .title span{
+            display: block;
+            transform: rotate(-3deg);
+        }
+       
+        .jd_goods_title{
+            width: 94%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: .27rem;
+            color: #fff;
+            background: rgba(3,3,3,.3);
+            padding: 3%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        .jd_goods_box{
+            padding : 0 .1rem  0.2rem;
+        }
+        .jd_goods_price{
+            display:flex;
+            justify-content: space-between;
+            color: #333;
+            font-size: .25rem;
+            letter-spacing: -.02rem;
+            line-height: .5rem;
+        }
+        .jd_goods_price_right em{
+            color: #ff5a5e;
+            font-style: normal;
+            font-size: .3rem;
+        }
+        .jd_goods_price_right{
+                white-space: nowrap;
+                  overflow: hidden;
+        }
+        .good_imgs{
+            width: 100%;
+            height: 3.1316631130063963rem;
+            position: relative;
+        }
+        .good_imgs img{
+            width: 100%;
+            height: 100%;
+        }
+        .see_more{
+            display: none;
+            text-align: center;
+            color: #666;
+            font-size: .25rem;
+            margin-top: .5rem;
+        }
+        .title_1{
+            background: url('../../Assets/Event/images/jd_02.png') no-repeat center top;
+        }
+        .title_2{
+            background: url('../../Assets/Event/images/jd_04.png') no-repeat center top;
+        }
+        .title_3{
+            background: url('../../Assets/Event/images/jd_06.png') no-repeat center top;
+        }
+        .title_4{
+            background: url('../../Assets/Event/images/jd_08.png') no-repeat center top;
+        }
+        .title_5{
+            background: url('../../Assets/Event/images/jd_10.png') no-repeat center top;
+        }
+        .banner{
+          position: relative;  
+        }
+        .win_jd{
+           line-height: .56rem;
+            display: block;
+            width: 1.41rem;
+            height: .56rem;
+            background: url(../../Assets/Event/images/jd_btn_03.png);
+            background-size: 100% 100%;
+            position: absolute;
+            top: 4.4rem;
+            right: .3rem;
+            font-size: .26rem;
+            color: #530a04;
+            text-decoration: none;
+            text-align: center;
+             font-weight: bold;
+        }
+        .jd_no_login {
+            width: 50%;
+            margin-left:-25%; 
+            line-height: .56rem;
+            background: #f7e3a6;
+            border-radius: .5rem;
+            position: absolute;
+            top: 4.4rem;
+            left:50%;
+            text-align: center;
+            font-size: .25rem;
+            border: 1px solid #f4b34f;
+            color:#530a04;
+            box-shadow:.05rem .05rem .05rem #b45a1e inset;
+        }
+        .jd_logined{
+            width: 50%;
+            margin-left:-25%;
+              line-height: .56rem;
+            background: #f7e3a6;
+            border-radius: .5rem;
+            position: absolute;
+            top: 4.4rem;
+            left:50%;
+            text-align: center;
+            font-size: .25rem;
+            border: 1px solid #f4b34f;
+            color:#530a04;
+            box-shadow:.05rem .05rem .05rem #b45a1e inset;
+        }
+        .jd_box1{
+            display: none
+        }
+        #jd_count{
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <!--返回上一页开始-->
+        <div class="goback-page">
+            <img src="/Assets/Source/img/goback.png" id="goBackPage"/>
+        </div>
+        <!--返回上一页结束-->
+
+        <!--活动头部开始-->
+        <div class="img" class="banner">
+            <img src="~/Assets/Event/images/jd_banner_01.jpg"/>
+            <div class="jd_box">
+                <p  class="jd_show jd_no_login">登录后显示您当前的金豆数 </p>
+                <a id="login_jd"  class="win_jd" href="javascript:;">去登录</a>   
+            </div>
+            <div class="jd_box1">
+                <p  class="jd_show jd_logined">您当前拥有金豆:<span id='jd_count'></span></p>
+                <a id="win_jd"  class="win_jd" href="javascript:;">奖励金豆</a>   
+            </div>
+        </div>
+        <!--活动头部结束-->
+
+        <!--1~1000-->
+       
+        <div class="jd_content" id="list1">
+             <div class="img" style="overflow: hidden" >
+                <div class="title title_1" id="list1_title" dada-count='1-1000'>
+                    <span> 1-1000金豆</span>
+                </div>
+            </div>
+            <ul class="clearfix">
+                <!-- <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/15159/null">
+                        <div class="good_imgs">
+                            <img src="https://e-shop.rrlsz.com.cn/SWebApi/Public/picture/88459.jpg" onerror='nofind(this);'/>
+                            <p class="jd_goods_title">精品小台芒一级果5斤精品小台芒一级果5斤</p>
+                        </div> 
+                        <div class="jd_goods_price">
+                            <div class="jd_goods_price_left">￥35</div>
+                            <div class="jd_goods_price_right">￥<em>7+3150.22</em>金豆</div>
+                        </div> 
+                    </a>
+                </li> -->
+
+                
+            </ul>
+            <p class="see_more">查看更多></p>
+        </div>
+        <!--1~1000-->
+
+        <!--1000~2000-->
+        <div class="jd_content" id="list2">
+            <div class="img" style="overflow: hidden">
+                <div class="title title_2" id="list2_title" dada-count='1000-2000' >
+                    <span>1000-2000金豆</span>   
+                </div>
+            </div>
+            <ul class="clearfix">
+                <!-- <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/15159/null">
+                        <div class="good_imgs">
+                            <img src="https://e-shop.rrlsz.com.cn/SWebApi/Public/picture/88459.jpg"/>
+                        </div>
+                        <dl class="jd_goods_box">
+                            <dt class="jd_goods_title">精品小台芒一级果5斤精品小台芒一级果5斤</dt>
+                            <dt class="jd_goods_price">
+                                <div class="jd_goods_price_left">￥35</div>
+                                <div class="jd_goods_price_right"><em>￥7+3150</em>金豆</div>
+                            </dt>
+                        </dl>
+                    </a>
+                </li> -->
+
+            </ul>
+        </div>
+        <!--1000~2000-->
+
+        <!--2000~5000-->
+        <div class="jd_content" id="list3">
+            <div class="img" style="overflow: hidden">
+                <div class="title title_3"  id="list3_title" dada-count='2000-5000' >
+                    <span>2000-5000金豆</span>  
+                </div>
+            </div>
+             <ul class="clearfix"></ul>
+        </div>
+        <!--2000~5000-->
+
+        <!--5000~1w-->
+        <div class="jd_content" id="list4">
+            <div class="img" style="overflow: hidden">
+                <div class="title title_4"  id="list4_title" dada-count='5000-10000' >
+                    <span>5000-10000金豆</span>  
+                </div>
+            </div>
+           <ul class="clearfix ul" ></ul>
+        </div>
+        <!--5000~1w-->
+
+         <!--1w以上-->
+        <div class="jd_content" id="list5">
+            <div class="img" style="overflow: hidden">
+                <div class="title title_5"  id="list5_title" dada-count='10000'>
+                    <span>10000金豆以上</span>  
+                </div>
+            </div>
+            <ul class="clearfix ul"></ul>
+        </div>
+        <!--1w以上-->
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    var token=localStorage.getItem('shorttoken');
+    $(function(){
+       ShopOneSectionInfo();
+       isLogin();
+       GetUserInfo();
+       $('#win_jd').on('click',winJd)
+       $('#login_jd').on('click',loginJd)
+    })
+    function loginJd(){
+        location.href = "/#/login?redirect=" + encodeURIComponent("/Event/DetonatingWeek?token=#token");
+    }
+    function isLogin() {
+        if (token) {
+           $('.jd_box').hide();$('.jd_box1').show();
+        } else {
+           $('.jd_box1').hide(); $('.jd_box').show();
+        }
+    }
+    function winJd(){
+        window.location.href = "/Game/LeisureGameArea?token=" + encodeURIComponent(token);      
+    }
+    function GetUserInfo(){
+        $.post('/WebApi/Game/GetUserInfo',{token:token},(res)=>{
+             if(res.status==0){
+                let data=res.data;
+                let jdCount=data.h_money;
+                $('#jd_count').text(jdCount);
+            }
+        })
+    }
+    function ShopOneSectionInfo(){
+        var list1_title=$('#list1_title').attr('dada-count'),
+            list2_title=$('#list2_title').attr('dada-count'),
+            list3_title=$('#list3_title').attr('dada-count'),
+            list4_title=$('#list4_title').attr('dada-count'),
+            list5_title=$('#list5_title').attr('dada-count');
+        var data={
+           list:list1_title+','+list2_title+','+list3_title+','+list4_title+','+list5_title
+        }
+        $.getJSON('/Webapi/ShopManager/ShopOneSectionInfo',{SectionStr:JSON.stringify(data)},function (res) {
+            if(res.status==0){
+                  for(var i in res.data){
+                        var dad=res.data[i];
+                        if(dad.Section=='1-1000'){
+                            fn_list_(dad,$('#list1 ul'))           
+                        }
+                        if(dad.Section=='1000-2000'){
+                            fn_list_(dad,$('#list2 ul'))           
+                        }
+                        if(dad.Section=='2000-5000'){
+                            fn_list_(dad,$('#list3 ul'))           
+                        }
+                        if(dad.Section=='5000-10000'){
+                            fn_list_(dad,$('#list4 ul'))           
+                        }
+                        if(dad.Section=='10000'){
+                            fn_list_(dad,$('#list5 ul'))           
+                        }
+                  }
+            }
+        })
+    }  
+    
+    function fn_list_(objects,el){
+        var str="";
+        objects=objects.model;
+        for(var j in objects){
+            var data=objects[j];
+            var beansPrice=Math.round(data.beans_price);
+            str+=`<li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/`+data.id+`/null">
+                        <div class="good_imgs">
+                            <img src="https://e-shop.rrlsz.com.cn/SWebApi/Public/picture/`+data.pic_id+`.jpg"/>  
+                             <p class="jd_goods_title">`+data.propaganda+`</p>
+                        </div>
+                        <div class="jd_goods_price">
+                            <div class="jd_goods_price_left">￥`+data.price+`</div>
+                            <div class="jd_goods_price_right">
+                                ￥<em>`+data.cash_price+`+`+ beansPrice+`</em> 金豆
+                            </div>  
+                        </div>  
+                    </a> 
+                </li>
+                       
+                        `
+        }
+        el.append(str); 
+    }
+    /* 返回上一页代码实现 */
+    ;(function () {
+        var goBackPage = document.getElementById("goBackPage");
+        goBackPage.addEventListener("click", function () {
+            location.href = "/#/index";
+        }, false);
+    })();
+</script>
+
+</html>

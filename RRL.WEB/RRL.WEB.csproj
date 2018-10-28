@@ -1,0 +1,1144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{45D37251-2297-48C2-8B07-DD9ED0F4C293}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RRL.WEB</RootNamespace>
+    <AssemblyName>RRL.WEB</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyHttp, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyHttp.1.7.0\lib\net40\EasyHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LitJson.0.9.0\lib\LitJson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.4.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.4.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.4.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.4.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.4.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.4.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.V2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.V2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\RRL.WEB.XML">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Assets\Dist\Scripts\alert.js" />
+    <Content Include="Assets\Dist\Scripts\app.js" />
+    <Content Include="Assets\Dist\Scripts\fit.js" />
+    <Content Include="Assets\Dist\Scripts\index.js" />
+    <Content Include="Assets\Dist\Scripts\salloy_finger.vue.js" />
+    <Content Include="Assets\Dist\Scripts\Scriptsalloy_finger.vue.js" />
+    <Content Include="Assets\Dist\Scripts\vue-router.js" />
+    <Content Include="Assets\Dist\Styles\app.css" />
+    <Content Include="Assets\Event\images\20180519105226.jpg" />
+    <Content Include="Assets\Event\images\20180608163219.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_01.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02241.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02242.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02251.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02252.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02261.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02262.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02271.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02272.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02281.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_02282.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_03011.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_03012.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_03021.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_03022.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_04.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_05.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_08.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_10.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_11.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_14.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_15.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_17.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_19.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_20.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_23.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_24.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_26.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_29.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_32.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_34.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_35.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_38.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_40.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_41.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_44.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_45.jpg" />
+    <Content Include="Assets\Event\images\cart-shop_46.jpg" />
+    <Content Include="Assets\Event\img\02定稿-02.jpg" />
+    <Content Include="Assets\Event\img\02定稿-04.jpg" />
+    <Content Include="Assets\Event\img\02定稿-05.jpg" />
+    <Content Include="Assets\Event\img\02定稿-06.jpg" />
+    <Content Include="Assets\Event\img\02定稿-07.jpg" />
+    <Content Include="Assets\Event\img\02定稿-08.jpg" />
+    <Content Include="Assets\Event\img\02定稿-09.png" />
+    <Content Include="Assets\Event\img\02定稿-10.jpg" />
+    <Content Include="Assets\Event\img\02定稿-11.jpg" />
+    <Content Include="Assets\Event\img\02定稿-12.jpg" />
+    <Content Include="Assets\Event\img\02定稿-13.jpg" />
+    <Content Include="Assets\Event\img\02定稿-14.png" />
+    <Content Include="Assets\Event\img\02定稿-15.jpg" />
+    <Content Include="Assets\Event\img\02定稿-16.jpg" />
+    <Content Include="Assets\Event\img\02定稿-17.jpg" />
+    <Content Include="Assets\Event\img\02定稿-24.jpg" />
+    <Content Include="Assets\Event\img\02定稿-25.jpg" />
+    <Content Include="Assets\Event\img\02定稿-26.jpg" />
+    <Content Include="Assets\Event\img\02定稿-28.jpg" />
+    <Content Include="Assets\Event\img\02定稿-29.jpg" />
+    <Content Include="Assets\Event\img\02定稿-30.png" />
+    <Content Include="Assets\Event\img\1元抢购专区定稿转曲-03.png" />
+    <Content Include="Assets\Event\img\1元抢购专区定稿转曲-05.png" />
+    <Content Include="Assets\Event\img\1元抢购专区定稿转曲-06.png" />
+    <Content Include="Assets\Event\img\1元抢购专区定稿转曲-07.png" />
+    <Content Include="Assets\Event\img\1元抢购专区定稿转曲-08.png" />
+    <Content Include="Assets\Event\img\1元抢购专区定稿转曲-09.png" />
+    <Content Include="Assets\Event\img\aaa.jpg" />
+    <Content Include="Assets\Event\img\beer.jpg" />
+    <Content Include="Assets\Event\img\beer.png" />
+    <Content Include="Assets\Event\img\beer1.jpg" />
+    <Content Include="Assets\Event\img\beer2.jpg" />
+    <Content Include="Assets\Event\img\beer3.png" />
+    <Content Include="Assets\Event\img\beer4.png" />
+    <Content Include="Assets\Event\img\beer5.png" />
+    <Content Include="Assets\Event\img\bg1.png" />
+    <Content Include="Assets\Event\img\bg2.png" />
+    <Content Include="Assets\Event\img\bg3.png" />
+    <Content Include="Assets\Event\img\bk.jpg" />
+    <Content Include="Assets\Event\img\bottom.jpg" />
+    <Content Include="Assets\Event\img\bottom_03.jpg" />
+    <Content Include="Assets\Event\img\cha.png" />
+    <Content Include="Assets\Event\img\cz_01.jpg" />
+    <Content Include="Assets\Event\img\cz_02.jpg" />
+    <Content Include="Assets\Event\img\cz_03.jpg" />
+    <Content Include="Assets\Event\img\cz_04.jpg" />
+    <Content Include="Assets\Event\img\cz_05.jpg" />
+    <Content Include="Assets\Event\img\cz_06.jpg" />
+    <Content Include="Assets\Event\img\cz_07.jpg" />
+    <Content Include="Assets\Event\img\cz_08.jpg" />
+    <Content Include="Assets\Event\img\cz_09.jpg" />
+    <Content Include="Assets\Event\img\cz_10.jpg" />
+    <Content Include="Assets\Event\img\cz_11.jpg" />
+    <Content Include="Assets\Event\img\cz_12.jpg" />
+    <Content Include="Assets\Event\img\cz_13.jpg" />
+    <Content Include="Assets\Event\img\cz_14.jpg" />
+    <Content Include="Assets\Event\img\cz_15.jpg" />
+    <Content Include="Assets\Event\img\cz_16.jpg" />
+    <Content Include="Assets\Event\img\cz_17.jpg" />
+    <Content Include="Assets\Event\img\cz_18.jpg" />
+    <Content Include="Assets\Event\img\eee.jpg" />
+    <Content Include="Assets\Event\img\huoguo.png" />
+    <Content Include="Assets\Event\img\huotui.png" />
+    <Content Include="Assets\Event\img\images\0.png" />
+    <Content Include="Assets\Event\img\images\1.png" />
+    <Content Include="Assets\Event\img\images\2.png" />
+    <Content Include="Assets\Event\img\images\3.png" />
+    <Content Include="Assets\Event\img\images\4.png" />
+    <Content Include="Assets\Event\img\images\5.png" />
+    <Content Include="Assets\Event\img\images\6.png" />
+    <Content Include="Assets\Event\img\images\7.png" />
+    <Content Include="Assets\Event\img\images\8.png" />
+    <Content Include="Assets\Event\img\images\9.png" />
+    <Content Include="Assets\Event\img\images\bgdownload.jpg" />
+    <Content Include="Assets\Event\img\images\bghb%403x-min.png" />
+    <Content Include="Assets\Event\img\images\bghb.jpg" />
+    <Content Include="Assets\Event\img\images\clearwords.png" />
+    <Content Include="Assets\Event\img\images\clnn.png" />
+    <Content Include="Assets\Event\img\images\ndsl.png" />
+    <Content Include="Assets\Event\img\images\ndysl.png" />
+    <Content Include="Assets\Event\img\images\newhb.png" />
+    <Content Include="Assets\Event\img\images\nmsl.png" />
+    <Content Include="Assets\Event\img\images\nmysl.png" />
+    <Content Include="Assets\Event\img\images\notimes.png" />
+    <Content Include="Assets\Event\img\images\oolin.jpg" />
+    <Content Include="Assets\Event\img\images\Registrable%403x-min.png" />
+    <Content Include="Assets\Event\img\images\small_payoff%403x-min.png" />
+    <Content Include="Assets\Event\img\images\小红包.png" />
+    <Content Include="Assets\Event\img\images\注册即送.png" />
+    <Content Include="Assets\Event\img\images\红包50.png" />
+    <Content Include="Assets\Event\img\images\领2_01.jpg" />
+    <Content Include="Assets\Event\img\images\领你们_09.jpg" />
+    <Content Include="Assets\Event\img\images\领红包2_01.jpg" />
+    <Content Include="Assets\Event\img\images\领红包2_02.png" />
+    <Content Include="Assets\Event\img\images\领红包2_04.png" />
+    <Content Include="Assets\Event\img\jd_01.jpg" />
+    <Content Include="Assets\Event\img\jd_02.jpg" />
+    <Content Include="Assets\Event\img\jd_03.jpg" />
+    <Content Include="Assets\Event\img\jd_04.jpg" />
+    <Content Include="Assets\Event\img\jd_05.jpg" />
+    <Content Include="Assets\Event\img\jd_06.jpg" />
+    <Content Include="Assets\Event\img\jd_07.jpg" />
+    <Content Include="Assets\Event\img\jd_08.jpg" />
+    <Content Include="Assets\Event\img\jd_09.jpg" />
+    <Content Include="Assets\Event\img\libao1.png" />
+    <Content Include="Assets\Event\img\libao2.png" />
+    <Content Include="Assets\Event\img\libao3.png" />
+    <Content Include="Assets\Event\img\libao3xixi.png" />
+    <Content Include="Assets\Event\img\line-1.png" />
+    <Content Include="Assets\Event\img\line-2.png" />
+    <Content Include="Assets\Event\img\line-3.png" />
+    <Content Include="Assets\Event\img\line.png" />
+    <Content Include="Assets\Event\img\mmmmmm.png" />
+    <Content Include="Assets\Event\img\newhuotui.jpg" />
+    <Content Include="Assets\Event\img\newhuotui.png" />
+    <Content Include="Assets\Event\img\ppp.jpg" />
+    <Content Include="Assets\Event\img\qqq.jpg" />
+    <Content Include="Assets\Event\img\rrr.jpg" />
+    <Content Include="Assets\Event\img\second-kill_arowLeftv2.jpg" />
+    <Content Include="Assets\Event\img\second-kill_bd_v2.jpg" />
+    <Content Include="Assets\Event\img\share_bg.jpg" />
+    <Content Include="Assets\Event\img\title-b.png" />
+    <Content Include="Assets\Event\img\title-t.png" />
+    <Content Include="Assets\Event\img\title.png" />
+    <Content Include="Assets\Event\img\top.jpg" />
+    <Content Include="Assets\Event\img\top1.jpg" />
+    <Content Include="Assets\Event\img\top_01.jpg" />
+    <Content Include="Assets\Event\img\tuijian.png" />
+    <Content Include="Assets\Event\img\v123.png" />
+    <Content Include="Assets\Event\img\www.jpg" />
+    <Content Include="Assets\Event\img\不原谅按钮.png" />
+    <Content Include="Assets\Event\img\免1.png" />
+    <Content Include="Assets\Event\img\免2.png" />
+    <Content Include="Assets\Event\img\免费.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶1.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲-01.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲-02.jpg" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲-02.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲-03.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲-04.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲-05.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定02稿转曲.png" />
+    <Content Include="Assets\Event\img\免费领磨浆豆奶定稿转曲-02-01.jpg" />
+    <Content Include="Assets\Event\img\原味普洱茶膏（晶体熟）.jpg" />
+    <Content Include="Assets\Event\img\原味普洱茶膏（晶体生）.jpg" />
+    <Content Include="Assets\Event\img\原谅按钮.png" />
+    <Content Include="Assets\Event\img\啤酒节落地页教士黑4.png" />
+    <Content Include="Assets\Event\img\啤酒节落地页艾丁格白5.png" />
+    <Content Include="Assets\Event\img\啤酒节落地页艾丁格黑6.png" />
+    <Content Include="Assets\Event\img\对对对.jpg" />
+    <Content Include="Assets\Event\img\微信图片.png" />
+    <Content Include="Assets\Event\img\情人节离地页面2.png" />
+    <Content Include="Assets\Event\img\按钮2.png" />
+    <Content Include="Assets\Event\img\挚爱系列.png" />
+    <Content Include="Assets\Event\img\月饼bk_02.jpg" />
+    <Content Include="Assets\Event\img\枣香普洱茶膏（晶体熟）.jpg" />
+    <Content Include="Assets\Event\img\标题11.png" />
+    <Content Include="Assets\Event\img\标题21.png" />
+    <Content Include="Assets\Event\img\活动.png" />
+    <Content Include="Assets\Event\img\清新系列.png" />
+    <Content Include="Assets\Event\img\火腿.png" />
+    <Content Include="Assets\Event\img\牛肉.jpg" />
+    <Content Include="Assets\Event\img\玫瑰普洱茶膏（晶体生）.jpg" />
+    <Content Include="Assets\Event\img\町花雨礼盒六味.jpg" />
+    <Content Include="Assets\Event\img\町花雨缤纷装.jpg" />
+    <Content Include="Assets\Event\img\白色玫瑰花1.png" />
+    <Content Include="Assets\Event\img\粉色玫瑰花1.png" />
+    <Content Include="Assets\Event\img\红色玫瑰花1.png" />
+    <Content Include="Assets\Event\img\胎菊普洱茶膏（晶体生）.jpg" />
+    <Content Include="Assets\Event\img\舌戏自助火锅——素火锅.jpg" />
+    <Content Include="Assets\Event\img\舌戏自助火锅——素火锅（1盒装）.jpg" />
+    <Content Include="Assets\Event\img\舌戏自助火锅——素火锅（四盒装）.jpg" />
+    <Content Include="Assets\Event\img\舌戏自助火锅——肥牛火锅.jpg" />
+    <Content Include="Assets\Event\img\舌戏自助火锅——肥牛火锅（1盒装）.jpg" />
+    <Content Include="Assets\Event\img\舌戏自助火锅——肥牛火锅（四盒装）.jpg" />
+    <Content Include="Assets\Event\img\花的底图.jpg" />
+    <Content Include="Assets\Event\img\荷叶普洱茶膏（晶体生）.jpg" />
+    <Content Include="Assets\Event\img\萌粉系列.png" />
+    <Content Include="Assets\Event\img\落地页示意.jpg" />
+    <Content Include="Assets\Event\img\蓝孔雀礼盒（晶体熟）.jpg" />
+    <Content Include="Assets\Event\img\豆浆1.jpg" />
+    <Content Include="Assets\Event\img\豆浆2.png" />
+    <Content Include="Assets\Event\img\豆浆3.png" />
+    <Content Include="Assets\Event\img\透明剥离盒.png" />
+    <Content Include="Assets\Event\img\阳光系列.png" />
+    <Content Include="Assets\Event\img\雅银大抽盒（晶体熟）.jpg" />
+    <Content Include="Assets\Event\img\雅银小抽盒（晶体熟）.jpg" />
+    <Content Include="Assets\Event\jquery-3.2.1.min.js" />
+    <Content Include="Assets\Game\css\style.css" />
+    <Content Include="Assets\Game\img\bg.jpg" />
+    <Content Include="Assets\Game\img\buy-btn.png" />
+    <Content Include="Assets\Game\img\clearwords.png" />
+    <Content Include="Assets\Game\img\conis10.png" />
+    <Content Include="Assets\Game\img\conis100.png" />
+    <Content Include="Assets\Game\img\conis1000.png" />
+    <Content Include="Assets\Game\img\conis50.png" />
+    <Content Include="Assets\Game\img\conis500.png" />
+    <Content Include="Assets\Game\img\conis5000.png" />
+    <Content Include="Assets\Game\img\gameHall-DouLandlord.jpg" />
+    <Content Include="Assets\Game\img\gameHall-DouLandlord2.png" />
+    <Content Include="Assets\Game\img\gamehall-share.png" />
+    <Content Include="Assets\Game\img\glodbean.png" />
+    <Content Include="Assets\Game\img\gxbg.png" />
+    <Content Include="Assets\Game\img\gz-btn.png" />
+    <Content Include="Assets\Game\img\gzbg.png" />
+    <Content Include="Assets\Game\img\gzqd-btn.png" />
+    <Content Include="Assets\Game\img\mfhbbg.png" />
+    <Content Include="Assets\Game\img\new.png" />
+    <Content Include="Assets\Game\img\qk-btn.png" />
+    <Content Include="Assets\Game\img\repiar-btn.png" />
+    <Content Include="Assets\Game\img\sc-btn.png" />
+    <Content Include="Assets\Game\img\sizebg.png" />
+    <Content Include="Assets\Game\img\start-btn.png" />
+    <Content Include="Assets\Game\img\timebg.png" />
+    <Content Include="Assets\Game\img\yazhubg.png" />
+    <Content Include="Assets\Game\img\yazhuda.png" />
+    <Content Include="Assets\Game\img\yazhudan.png" />
+    <Content Include="Assets\Game\img\yazhuhong.png" />
+    <Content Include="Assets\Game\img\yazhushuang.png" />
+    <Content Include="Assets\Game\img\yazhuxiao.png" />
+    <Content Include="Assets\Game\img\zp.png" />
+    <Content Include="Assets\Game\img\zpup.png" />
+    <Content Include="Assets\Game\img\zpzz.png" />
+    <Content Include="Assets\Game\img\zshbbg.png" />
+    <Content Include="Assets\Game\img\减少%403x.png" />
+    <Content Include="Assets\Game\img\券.jpg" />
+    <Content Include="Assets\Game\img\增加%403x.png" />
+    <Content Include="Assets\Game\js\alert.js" />
+    <Content Include="Assets\Game\js\buycard.js" />
+    <Content Include="Assets\Game\js\game.js" />
+    <Content Include="Assets\Game\js\gameAlert.js" />
+    <Content Include="Assets\Game\js\jquery.js" />
+    <Content Include="Assets\Game\js\luckyRedPacket.js" />
+    <Content Include="Assets\Game\js\public.js" />
+    <Content Include="Assets\Game\js\swipeslider.js" />
+    <Content Include="Assets\global\common\utils.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\global\plugins\jquery.min.js" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\layer.js" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\mobile\layer.js" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\mobile\need\layer.css" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\theme\default\icon-ext.png" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\theme\default\icon.png" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\theme\default\layer.css" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\theme\default\loading-0.gif" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\theme\default\loading-1.gif" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\layer\theme\default\loading-2.gif" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\test.html" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\更新日志.txt" />
+    <Content Include="Assets\global\plugins\layer_mobile_2.0\layer.js" />
+    <Content Include="Assets\global\plugins\layer_mobile_2.0\need\layer.css" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\1.jpg" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\2.jpg" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\3.jpg" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\4.jpg" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\5.JPG" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\6.JPG" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\7.jpg" />
+    <Content Include="Assets\GoodsShare\Img\Mutiple\1\8.jpg" />
+    <Content Include="Assets\GoodsShare\Img\Single\1.png" />
+    <Content Include="Assets\GoodsShare\Text\1.txt" />
+    <Content Include="Assets\images\index\sign_red_bag_fixed.png" />
+    <Content Include="Assets\images\news.png" />
+    <Content Include="Assets\images\photo.png" />
+    <Content Include="Assets\images\qrcode.png" />
+    <Content Include="Assets\images\set.png" />
+    <Content Include="Assets\images\二维码%403x.png" />
+    <Content Include="Assets\images\加入购物车%403x.png" />
+    <Content Include="Assets\images\商家LOGO%403x .png" />
+    <Content Include="Assets\images\客户服务%403x.png" />
+    <Content Include="Assets\images\待付款%403x.png" />
+    <Content Include="Assets\images\待消费收货%403x.png" />
+    <Content Include="Assets\images\待评价%403x.png" />
+    <Content Include="Assets\images\我的1%403x.png" />
+    <Content Include="Assets\images\推荐有礼%403x.png" />
+    <Content Include="Assets\images\收藏商品%403x.png" />
+    <Content Include="Assets\images\收藏商家%403x.png" />
+    <Content Include="Assets\images\新人有礼%403x.png" />
+    <Content Include="Assets\images\未选择%403x.png" />
+    <Content Include="Assets\images\浏览记录%403x.png" />
+    <Content Include="Assets\images\消息%403x.png" />
+    <Content Include="Assets\images\热门%403x.png" />
+    <Content Include="Assets\images\特价%403x.png" />
+    <Content Include="Assets\images\精选1%403x.png" />
+    <Content Include="Assets\images\设置%403x.png" />
+    <Content Include="Assets\images\购物车1%403x.png" />
+    <Content Include="Assets\images\购物车2%403x.png" />
+    <Content Include="Assets\images\退换售后%403x.png" />
+    <Content Include="Assets\images\钱包1%403x.png" />
+    <Content Include="Assets\images\首页2%403x.png" />
+    <Content Include="Assets\Product\img\arr.png" />
+    <Content Include="Assets\Product\img\screen.png" />
+    <Content Include="Assets\Source\game-banner-big.jpg" />
+    <Content Include="Assets\Source\goods-cart-clear.jpg" />
+    <Content Include="Assets\Source\goods-cart-no.png" />
+    <Content Include="Assets\Source\img\back.png" />
+    <Content Include="Assets\Source\img\banner%403x.png" />
+    <Content Include="Assets\Source\img\bkwithbd.png" />
+    <Content Include="Assets\Source\img\clearwords.png" />
+    <Content Include="Assets\Source\img\collection.png" />
+    <Content Include="Assets\Source\img\download.png" />
+    <Content Include="Assets\Source\img\error.png" />
+    <Content Include="Assets\Source\img\game-banner-big.jpg" />
+    <Content Include="Assets\Source\img\get.png" />
+    <Content Include="Assets\Source\img\gift-leisure.png" />
+    <Content Include="Assets\Source\img\glodbean.png" />
+    <Content Include="Assets\Source\img\goback.png" />
+    <Content Include="Assets\Source\img\goods-cart-clear.jpg" />
+    <Content Include="Assets\Source\img\goods-cart-no.png" />
+    <Content Include="Assets\Source\img\gzcode.jpg" />
+    <Content Include="Assets\Source\img\hbox.png" />
+    <Content Include="Assets\Source\img\icon-1.png" />
+    <Content Include="Assets\Source\img\icon-bottom.png" />
+    <Content Include="Assets\Source\img\icon-right.png" />
+    <Content Include="Assets\Source\img\jin.png" />
+    <Content Include="Assets\Source\img\jinbipay.png" />
+    <Content Include="Assets\Source\img\lanzi.png" />
+    <Content Include="Assets\Source\img\left.png" />
+    <Content Include="Assets\Source\img\logo%403x.png" />
+    <Content Include="Assets\Source\img\mutizhuanpan.png" />
+    <Content Include="Assets\Source\img\my_qrcod.png" />
+    <Content Include="Assets\Source\img\news.png" />
+    <Content Include="Assets\Source\img\order-creation-arrow-right.png" />
+    <Content Include="Assets\Source\img\order-creation-bug-msg.png" />
+    <Content Include="Assets\Source\img\order-creation-goback.gif" />
+    <Content Include="Assets\Source\img\order-creation-gold-bean.png" />
+    <Content Include="Assets\Source\img\photo.png" />
+    <Content Include="Assets\Source\img\put.png" />
+    <Content Include="Assets\Source\img\qrcode.png" />
+    <Content Include="Assets\Source\img\redyg.png" />
+    <Content Include="Assets\Source\img\ruletips.png" />
+    <Content Include="Assets\Source\img\Search Icon%403x.png" />
+    <Content Include="Assets\Source\img\second-hand-area-left.png" />
+    <Content Include="Assets\Source\img\set.png" />
+    <Content Include="Assets\Source\img\sharelogo.png" />
+    <Content Include="Assets\Source\img\sign-check-icon.png" />
+    <Content Include="Assets\Source\img\sign-error-icon.png" />
+    <Content Include="Assets\Source\img\status_loading.gif" />
+    <Content Include="Assets\Source\img\ti.png" />
+    <Content Include="Assets\Source\img\totop.png" />
+    <Content Include="Assets\Source\img\user.png" />
+    <Content Include="Assets\Source\img\whiteb5.png" />
+    <Content Include="Assets\Source\img\witerback.png" />
+    <Content Include="Assets\Source\img\wxpay.png" />
+    <Content Include="Assets\Source\img\¥%403x.png" />
+    <Content Include="Assets\Source\img\一元抢购.png" />
+    <Content Include="Assets\Source\img\下一页%402x.png" />
+    <Content Include="Assets\Source\img\下一页%403x.png" />
+    <Content Include="Assets\Source\img\下一页.png" />
+    <Content Include="Assets\Source\img\不支持icon%403x .png" />
+    <Content Include="Assets\Source\img\中国风十二生肖拷贝3%403x.png" />
+    <Content Include="Assets\Source\img\今日奖励金%403x.png" />
+    <Content Include="Assets\Source\img\代金券底%403x.png" />
+    <Content Include="Assets\Source\img\优.png" />
+    <Content Include="Assets\Source\img\优惠卷.png" />
+    <Content Include="Assets\Source\img\公告%402x.png" />
+    <Content Include="Assets\Source\img\公告%403x.png" />
+    <Content Include="Assets\Source\img\公告.png" />
+    <Content Include="Assets\Source\img\六六大%403x.png" />
+    <Content Include="Assets\Source\img\减%403x.png" />
+    <Content Include="Assets\Source\img\减少%403x.png" />
+    <Content Include="Assets\Source\img\分享%403x.png" />
+    <Content Include="Assets\Source\img\分享-2的副本%403x.png" />
+    <Content Include="Assets\Source\img\分类灰色%402x.png" />
+    <Content Include="Assets\Source\img\分类灰色%403x.png" />
+    <Content Include="Assets\Source\img\分类灰色.png" />
+    <Content Include="Assets\Source\img\分类选中%402x.png" />
+    <Content Include="Assets\Source\img\分类选中%403x.png" />
+    <Content Include="Assets\Source\img\分类选中.png" />
+    <Content Include="Assets\Source\img\加入购物车%403x.png" />
+    <Content Include="Assets\Source\img\动物向前冲%403x.png" />
+    <Content Include="Assets\Source\img\商%403x.png" />
+    <Content Include="Assets\Source\img\商城.png" />
+    <Content Include="Assets\Source\img\商家%403x.png" />
+    <Content Include="Assets\Source\img\商家LOGO%403x .png" />
+    <Content Include="Assets\Source\img\图层21拷贝%402x.png" />
+    <Content Include="Assets\Source\img\图层21拷贝%403x.png" />
+    <Content Include="Assets\Source\img\图层21拷贝.png" />
+    <Content Include="Assets\Source\img\增加%403x.png" />
+    <Content Include="Assets\Source\img\大转盘.png" />
+    <Content Include="Assets\Source\img\头像.png" />
+    <Content Include="Assets\Source\img\奖%403x.png" />
+    <Content Include="Assets\Source\img\奖励金账户%403x.png" />
+    <Content Include="Assets\Source\img\定位%403x.png" />
+    <Content Include="Assets\Source\img\客户服务%403x.png" />
+    <Content Include="Assets\Source\img\小红包%403x.png" />
+    <Content Include="Assets\Source\img\小红包1%403x.png" />
+    <Content Include="Assets\Source\img\小红包bj.png" />
+    <Content Include="Assets\Source\img\小转盘.png" />
+    <Content Include="Assets\Source\img\展开%403x.png" />
+    <Content Include="Assets\Source\img\已收藏%403x.png" />
+    <Content Include="Assets\Source\img\形状4%403x.png" />
+    <Content Include="Assets\Source\img\待付款%403x.png" />
+    <Content Include="Assets\Source\img\待消费收货%403x.png" />
+    <Content Include="Assets\Source\img\待评价%403x.png" />
+    <Content Include="Assets\Source\img\待返奖励%403x.png" />
+    <Content Include="Assets\Source\img\微信图片_20171031171209.png" />
+    <Content Include="Assets\Source\img\微信图片_20171031171217.png" />
+    <Content Include="Assets\Source\img\微信图片_20171031171221.jpg" />
+    <Content Include="Assets\Source\img\微信图片_20171031171228.png" />
+    <Content Include="Assets\Source\img\微信支付%403x.png" />
+    <Content Include="Assets\Source\img\微笑.png" />
+    <Content Include="Assets\Source\img\我的1%403x.png" />
+    <Content Include="Assets\Source\img\我的2%403x.png" />
+    <Content Include="Assets\Source\img\我的灰色%402x.png" />
+    <Content Include="Assets\Source\img\我的灰色%403x.png" />
+    <Content Include="Assets\Source\img\我的灰色.png" />
+    <Content Include="Assets\Source\img\我的选中%402x.png" />
+    <Content Include="Assets\Source\img\我的选中%403x.png" />
+    <Content Include="Assets\Source\img\我的选中.png" />
+    <Content Include="Assets\Source\img\折%403x.png" />
+    <Content Include="Assets\Source\img\推荐有礼%403x.png" />
+    <Content Include="Assets\Source\img\提现%403x.png" />
+    <Content Include="Assets\Source\img\提示%403x.png" />
+    <Content Include="Assets\Source\img\搜索%402x.png" />
+    <Content Include="Assets\Source\img\搜索%403x.png" />
+    <Content Include="Assets\Source\img\搜索.png" />
+    <Content Include="Assets\Source\img\支持icon%403x.png" />
+    <Content Include="Assets\Source\img\收藏%403x.png" />
+    <Content Include="Assets\Source\img\收藏商品%403x.png" />
+    <Content Include="Assets\Source\img\收藏商家%403x.png" />
+    <Content Include="Assets\Source\img\新人有礼%403x.png" />
+    <Content Include="Assets\Source\img\新人有礼.jpg" />
+    <Content Include="Assets\Source\img\新人有礼.png" />
+    <Content Include="Assets\Source\img\新品%403x.png" />
+    <Content Include="Assets\Source\img\时间%403x.png" />
+    <Content Include="Assets\Source\img\未选择  %282%29.png" />
+    <Content Include="Assets\Source\img\未选择%403x.png" />
+    <Content Include="Assets\Source\img\未选择.png" />
+    <Content Include="Assets\Source\img\标志定稿-01.jpg" />
+    <Content Include="Assets\Source\img\椭圆6拷贝%402x.png" />
+    <Content Include="Assets\Source\img\椭圆6拷贝%403x.png" />
+    <Content Include="Assets\Source\img\椭圆6拷贝.png" />
+    <Content Include="Assets\Source\img\椭圆6拷贝2%403x.png" />
+    <Content Include="Assets\Source\img\浏览记录%403x.png" />
+    <Content Include="Assets\Source\img\游戏.png" />
+    <Content Include="Assets\Source\img\游戏1.png" />
+    <Content Include="Assets\Source\img\火热%403x.png" />
+    <Content Include="Assets\Source\img\炸地主%403x.png" />
+    <Content Include="Assets\Source\img\热门%403x.png" />
+    <Content Include="Assets\Source\img\物流%403x.png" />
+    <Content Include="Assets\Source\img\特价%403x.png" />
+    <Content Include="Assets\Source\img\猜大小%403x.png" />
+    <Content Include="Assets\Source\img\猜大牌%403x.png" />
+    <Content Include="Assets\Source\img\生肖%403x.png" />
+    <Content Include="Assets\Source\img\省兜兜微信服务号.jpg" />
+    <Content Include="Assets\Source\img\矩形19%402x.png" />
+    <Content Include="Assets\Source\img\矩形19%403x.png" />
+    <Content Include="Assets\Source\img\矩形19.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝%402x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝%403x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝2%402x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝2%403x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝2.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝3%402x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝3%403x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝3.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝4%402x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝4%403x.png" />
+    <Content Include="Assets\Source\img\矩形19拷贝4.png" />
+    <Content Include="Assets\Source\img\矩形1拷贝%403x.png" />
+    <Content Include="Assets\Source\img\矩形20%402x.png" />
+    <Content Include="Assets\Source\img\矩形33%402x.png" />
+    <Content Include="Assets\Source\img\矩形33拷贝%402x.png" />
+    <Content Include="Assets\Source\img\精选.png" />
+    <Content Include="Assets\Source\img\精选1%403x.png" />
+    <Content Include="Assets\Source\img\精选2%403x.png" />
+    <Content Include="Assets\Source\img\累计已返%403x.png" />
+    <Content Include="Assets\Source\img\红包-3%403x.png" />
+    <Content Include="Assets\Source\img\红包-3-1%403x.png" />
+    <Content Include="Assets\Source\img\红包-3.png" />
+    <Content Include="Assets\Source\img\编辑%403x.png" />
+    <Content Include="Assets\Source\img\翻扑克%403x.png" />
+    <Content Include="Assets\Source\img\自营.png" />
+    <Content Include="Assets\Source\img\规则.png" />
+    <Content Include="Assets\Source\img\购物车%403x.png" />
+    <Content Include="Assets\Source\img\购物车1%403x.png" />
+    <Content Include="Assets\Source\img\购物车2%403x.png" />
+    <Content Include="Assets\Source\img\购物车灰色%402x.png" />
+    <Content Include="Assets\Source\img\购物车灰色%403x.png" />
+    <Content Include="Assets\Source\img\购物车灰色.png" />
+    <Content Include="Assets\Source\img\购物车选中%402x.png" />
+    <Content Include="Assets\Source\img\购物车选中%403x.png" />
+    <Content Include="Assets\Source\img\购物车选中.png" />
+    <Content Include="Assets\Source\img\赠品休闲区%403x_46.png" />
+    <Content Include="Assets\Source\img\赠品休闲区%403x_52.png" />
+    <Content Include="Assets\Source\img\转盘%403x.png" />
+    <Content Include="Assets\Source\img\转盘设置%403x.png" />
+    <Content Include="Assets\Source\img\返回%403x.png" />
+    <Content Include="Assets\Source\img\返回.png" />
+    <Content Include="Assets\Source\img\退换售后%403x.png" />
+    <Content Include="Assets\Source\img\选择%403x.png" />
+    <Content Include="Assets\Source\img\金豆%403x.png" />
+    <Content Include="Assets\Source\img\金豆-3%403x.png" />
+    <Content Include="Assets\Source\img\金豆.png" />
+    <Content Include="Assets\Source\img\钱包1%403x.png" />
+    <Content Include="Assets\Source\img\钱包2%403x.png" />
+    <Content Include="Assets\Source\img\顶部分享%403x.png" />
+    <Content Include="Assets\Source\img\领红包%402x.png" />
+    <Content Include="Assets\Source\img\领红包%403x.png" />
+    <Content Include="Assets\Source\img\领红包.png" />
+    <Content Include="Assets\Source\img\领红包灰色%402x.png" />
+    <Content Include="Assets\Source\img\领红包灰色%403x.png" />
+    <Content Include="Assets\Source\img\领红包灰色.png" />
+    <Content Include="Assets\Source\img\首页1%403x.png" />
+    <Content Include="Assets\Source\img\首页2%403x.png" />
+    <Content Include="Assets\Source\img\首页灰色%402x.png" />
+    <Content Include="Assets\Source\img\首页灰色%403x.png" />
+    <Content Include="Assets\Source\img\首页灰色.png" />
+    <Content Include="Assets\Source\img\首页选中%402x.png" />
+    <Content Include="Assets\Source\img\首页选中%403x.png" />
+    <Content Include="Assets\Source\img\首页选中.png" />
+    <Content Include="Assets\Source\img\默认%403x.png" />
+    <Content Include="Assets\Source\img\默认banner.png" />
+    <Content Include="Assets\Source\img\默认图像.png" />
+    <Content Include="Assets\Source\img\￥%403x.png" />
+    <Content Include="Assets\Source\qq%402x.png" />
+    <Content Include="Assets\Source\qq%403x.png" />
+    <Content Include="Assets\Source\qq.png" />
+    <Content Include="Assets\Source\Scripts\alert.js" />
+    <Content Include="Assets\Source\Scripts\alloy_finger.vue.js" />
+    <Content Include="Assets\Source\Scripts\app.js" />
+    <Content Include="Assets\Source\Scripts\Components\PublicModules\MicroMessengerHelper.js" />
+    <Content Include="Assets\Source\Scripts\Components\PublicModules\PageVisit.js" />
+    <Content Include="Assets\Source\Scripts\Router\vue-router.js" />
+    <Content Include="Assets\Source\Scripts\Store\index.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\gamearea.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\goodsdetail.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\login.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\makeorder.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\my.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\mycard.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\orderdetail.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\orderlist.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\promise.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\recommand.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\shopcart.js" />
+    <Content Include="Assets\Source\Scripts\Store\Modules\wallet.js" />
+    <Content Include="Assets\Source\Scripts\Store\store.js" />
+    <Content Include="Assets\Source\Scripts\ZoneCode.js" />
+    <Content Include="Assets\Source\Styles\2-22.css" />
+    <Content Include="Assets\Source\下一页%402x.png" />
+    <Content Include="Assets\Source\下一页%403x.png" />
+    <Content Include="Assets\Source\下一页.png" />
+    <Content Include="Assets\Source\关闭%402x.png" />
+    <Content Include="Assets\Source\关闭%403x.png" />
+    <Content Include="Assets\Source\关闭.png" />
+    <Content Include="Assets\Source\微信%402x.png" />
+    <Content Include="Assets\Source\微信%403x.png" />
+    <Content Include="Assets\Source\微信.png" />
+    <Content Include="Assets\Source\微博%402x.png" />
+    <Content Include="Assets\Source\微博%403x.png" />
+    <Content Include="Assets\Source\微博.png" />
+    <Content Include="Assets\Source\省兜兜logo%402x.png" />
+    <Content Include="Assets\Source\省兜兜logo%403x.png" />
+    <Content Include="Assets\Source\省兜兜logo.png" />
+    <Content Include="Assets\Source\输入框关闭%402x.png" />
+    <Content Include="Assets\Source\输入框关闭%403x.png" />
+    <Content Include="Assets\Source\输入框关闭.png" />
+    <Content Include="Assets\Sport\css\Index.css" />
+    <Content Include="Assets\Sport\imgs\3-head.png" />
+    <Content Include="Assets\Sport\imgs\98.png" />
+    <Content Include="Assets\Sport\imgs\like.png" />
+    <Content Include="Assets\Sport\imgs\second-head.png" />
+    <Content Include="Assets\Sport\imgs\fist-step.png" />
+    <Content Include="Assets\Sport\imgs\share_img_bg.png" />
+    <Content Include="Assets\Sport\imgs\share_img_text_area.png" />
+    <Content Include="Assets\Sport\imgs\yrecord.png" />
+    <Content Include="Assets\Sport\imgs\rules.png" />
+    <Content Include="Assets\Sport\imgs\yjjc.png" />
+    <Content Include="Assets\Sport\imgs\up.png" />
+    <Content Include="Assets\Sport\imgs\step.png" />
+    <Content Include="Assets\Sport\imgs\jd-step.png" />
+    <Content Include="Assets\Sport\imgs\greay.png" />
+    <Content Include="Assets\Sport\imgs\green.png" />
+    <Content Include="Assets\Sport\imgs\s-head.png" />
+    <Content Include="Assets\Sport\imgs\fist-head.png" />
+    <Content Include="Assets\Sport\imgs\zan-gray.png" />
+    <Content Include="Assets\Sport\imgs\zan-red.png" />
+    <Content Include="Assets\Sport\imgs\k-face.png" />
+    <Content Include="Assets\Sport\imgs\share-btn.png" />
+    <Content Include="Assets\Sport\imgs\share-bg.png" />
+    <Content Include="Assets\Sport\imgs\close.png" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\Source\.project" />
+    <Content Include="Assets\Source\Scripts\app.vue" />
+    <Content Include="Assets\Source\Scripts\Components\aboutus%28old%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\alertbox\alertbox.vue" />
+    <Content Include="Assets\Source\Scripts\Components\alertbox\kefubox.vue" />
+    <Content Include="Assets\Source\Scripts\Components\article-detail.vue" />
+    <Content Include="Assets\Source\Scripts\Components\back-page-btn%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\bottom.vue">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Assets\Source\Scripts\Components\chose-address.vue" />
+    <Content Include="Assets\Source\Scripts\Components\coingoods.vue" />
+    <Content Include="Assets\Source\Scripts\Components\coininfo.vue" />
+    <Content Include="Assets\Source\Scripts\Components\coinsdetail.vue" />
+    <Content Include="Assets\Source\Scripts\Components\coinslist.vue" />
+    <Content Include="Assets\Source\Scripts\Components\coinspage.vue" />
+    <Content Include="Assets\Source\Scripts\Components\downloadapp.vue" />
+    <Content Include="Assets\Source\Scripts\Components\editadd.vue" />
+    <Content Include="Assets\Source\Scripts\Components\ffff%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\gamearea.vue" />
+    <Content Include="Assets\Source\Scripts\Components\gamerule%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goods-detail.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goods-list-3rd.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goods-sort.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodscollection.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodsdetail\goods-detail-buy.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodsdetail\goods-detail-guige.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodsdetail\goods-detail-header.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodsdetail\goods-detail-rule.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodsdetail\goods-dtail-info.vue" />
+    <Content Include="Assets\Source\Scripts\Components\goodsdetail\selfshop.vue" />
+    <Content Include="Assets\Source\Scripts\Components\hhhh%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\hisbind%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\idcard.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\coins.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-banner.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-hotgoods%28old%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-hotgoods.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-newuser.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-sale.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-sort%28zxfz%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-sort%28遵循分支%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-sort.vue" />
+    <Content Include="Assets\Source\Scripts\Components\index\index-yanxuan.vue" />
+    <Content Include="Assets\Source\Scripts\Components\jingxuan\sort-goodscell.vue" />
+    <Content Include="Assets\Source\Scripts\Components\jingxuan\sort-recommend-goods.vue" />
+    <Content Include="Assets\Source\Scripts\Components\jingxuan\sortbanner.vue" />
+    <Content Include="Assets\Source\Scripts\Components\local-registe%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\login.vue" />
+    <Content Include="Assets\Source\Scripts\Components\login_new%28nouse%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\makeorder\address.vue" />
+    <Content Include="Assets\Source\Scripts\Components\makeorder\ordershowgood.vue" />
+    <Content Include="Assets\Source\Scripts\Components\makeshareimg.vue" />
+    <Content Include="Assets\Source\Scripts\Components\makesureorder.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my%28fz%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my-rec-order.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my-rec-people.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my-rec-reward.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my.vue" />
+    <Content Include="Assets\Source\Scripts\Components\mycard.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my\my-apply.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my\my-bill.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my\mycard-list.vue" />
+    <Content Include="Assets\Source\Scripts\Components\my\walletime.vue" />
+    <Content Include="Assets\Source\Scripts\Components\order.vue" />
+    <Content Include="Assets\Source\Scripts\Components\orderdetail.vue" />
+    <Content Include="Assets\Source\Scripts\Components\order\getgoodstime.vue" />
+    <Content Include="Assets\Source\Scripts\Components\order\order-listcell.vue" />
+    <Content Include="Assets\Source\Scripts\Components\order\order-nav.vue" />
+    <Content Include="Assets\Source\Scripts\Components\pay.vue" />
+    <Content Include="Assets\Source\Scripts\Components\payqrcode.vue" />
+    <Content Include="Assets\Source\Scripts\Components\payway.vue" />
+    <Content Include="Assets\Source\Scripts\Components\regist.vue" />
+    <Content Include="Assets\Source\Scripts\Components\searchpage.vue" />
+    <Content Include="Assets\Source\Scripts\Components\second-hand-area.vue" />
+    <Content Include="Assets\Source\Scripts\Components\set.vue" />
+    <Content Include="Assets\Source\Scripts\Components\setuserinfo.vue" />
+    <Content Include="Assets\Source\Scripts\Components\sharepage.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopcart%28fz%29.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopcart.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopcart\buy-tool.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopcart\cart-goodscell.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopcart\empty-cart.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopcart\goods-cell.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopdetail.vue" />
+    <Content Include="Assets\Source\Scripts\Components\shopdetail\shopdetail-header.vue" />
+    <Content Include="Assets\Source\Scripts\Components\sort-of-goods\searchbox.vue" />
+    <Content Include="Assets\Source\Scripts\Components\sort-of-goods\sort-list-cell.vue" />
+    <Content Include="Assets\Source\Scripts\Components\sortOfGoods.vue" />
+    <Content Include="Assets\Source\Scripts\Components\sure-up-account.vue" />
+    <Content Include="Assets\Source\Scripts\Components\title.vue" />
+    <Content Include="Assets\Source\Scripts\Components\transdetail.vue" />
+    <Content Include="Assets\Source\Scripts\Components\up-account.vue" />
+    <Content Include="Assets\Source\Scripts\Components\wallet.vue" />
+    <Content Include="Assets\Source\Scripts\Components\walletdetail.vue" />
+    <Content Include="Assets\Source\Styles\Scss\app.scss" />
+    <Content Include="Assets\mix-manifest.json" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\文档\jquery下载.url" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\文档\layer官网.url" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\文档\layer文档.url" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\文档\layui社区.url" />
+    <Content Include="Assets\global\plugins\layer-v3.1.1\文档\获得layim.url" />
+    <Content Include="Assets\Sport\css\Index.less" />
+    <Content Include="Assets\Source\Scripts\Components\gamehall.vue" />
+    <Content Include="Assets\Source\Scripts\Components\share-redpacket.vue" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\ApplicationStartUtils.cs" />
+    <Compile Include="App_Start\HttpModule .cs" />
+    <Compile Include="Areas\WebApi\Controllers\EventManagerController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\BaseApiController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\TradeManagerController.part2.cs" />
+    <Compile Include="Areas\WebApi\Controllers\ViewRouteController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\VisitStatisticsController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\GameController.part1.cs" />
+    <Compile Include="Areas\WebApi\Controllers\SportsController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\MessageController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\GameController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\NoticeController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\TradeManagerController.part1.cs" />
+    <Compile Include="Areas\WebApi\Controllers\UserManagerController.part1.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\SportController.cs" />
+    <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\VerCodeController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\PayCallBack_backup_Controller.cs" />
+    <Compile Include="Models\PayNotifyModel.cs" />
+    <Compile Include="Models\RequestObject.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\ResponseObject.cs" />
+    <Compile Include="Models\ViewObject.cs" />
+    <Compile Include="Ulity\DataSetHelper.cs" />
+    <Compile Include="Ulity\RdSession.cs" />
+    <Compile Include="Ulity\RedisConnectionHelp.cs" />
+    <Compile Include="Ulity\RedisHelper.cs" />
+    <Compile Include="Ulity\SessionHelper.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\WebApi\Controllers\AuthManagerController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\ConfigManagerController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\PublicController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\ShopManagerController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\TestController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\TradeManagerController.cs" />
+    <Compile Include="Areas\WebApi\Controllers\UserManagerController.cs" />
+    <Compile Include="Areas\WebApi\WebApiAreaRegistration.cs" />
+    <Compile Include="Controllers\PayCallBackController.cs" />
+    <Compile Include="Controllers\ViewRouteController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Ulity\HttpHelper.cs" />
+    <Compile Include="Models\WxObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ViewRoute\Index.cshtml" />
+    <Content Include="Areas\WebApi\Views\web.config" />
+    <Content Include="ClassDiagram.cd" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Properties\PublishProfiles\RRL.WEB.pubxml" />
+    <Content Include="Views\ViewRoute\Product.cshtml" />
+    <Content Include="Views\ViewRoute\WxJsPay.cshtml" />
+    <Content Include="Views\ViewRoute\Mobile.cshtml" />
+    <Content Include="Views\Event\Eight.cshtml" />
+    <Content Include="Views\Event\Eleven.cshtml" />
+    <Content Include="Views\Event\Five.cshtml" />
+    <Content Include="Views\Event\Four.cshtml" />
+    <Content Include="Views\Event\Nine.cshtml" />
+    <Content Include="Views\Event\One.cshtml" />
+    <Content Include="Views\Event\Seven.cshtml" />
+    <Content Include="Views\Event\Six.cshtml" />
+    <Content Include="Views\Event\Ten.cshtml" />
+    <Content Include="Views\Event\Thirteen.cshtml" />
+    <Content Include="Views\Event\Three.cshtml" />
+    <Content Include="Views\Event\Twelve.cshtml" />
+    <Content Include="Views\Event\Two.cshtml" />
+    <Content Include="Views\Event\Fourteen.cshtml" />
+    <Content Include="Views\Game\Roulette_V2.cshtml" />
+    <Content Include="Views\Event\Fifteen.cshtml" />
+    <Content Include="Views\Event\Xxxshare.cshtml" />
+    <Content Include="Views\ViewRoute\CouponsPay.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Game\PeasPay.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\ViewRoute\payway.cshtml" />
+    <Content Include="Views\Event\Stopserver.cshtml" />
+    <Content Include="Views\Event\SharingGuide.cshtml" />
+    <Content Include="Views\Event\ProductDes.cshtml" />
+    <Content Include="Views\ViewRoute\payway2.0.cshtml" />
+    <Content Include="Views\VerCode\Picture.cshtml" />
+    <Content Include="Views\ViewRoute\ProductForGame.cshtml" />
+    <Content Include="Views\Game\ThirdPartyGames.cshtml" />
+    <Content Include="Views\Game\SelfGames.cshtml" />
+    <Content Include="Views\Game\GameHall.cshtml" />
+    <Content Include="Views\Game\CustomerService.cshtml" />
+    <Content Include="Views\Device\LoginInfo.cshtml" />
+    <Content Include="Views\Device\Dialing.cshtml" />
+    <Content Include="Views\Game\GameJump.cshtml" />
+    <Content Include="Views\Device\ThirdPartyLogin.cshtml" />
+    <Content Include="Views\Game\LeisureGameArea.cshtml" />
+    <Content Include="Views\Sport\Index2.cshtml" />
+    <Content Include="Views\Sport\Yrecord.cshtml" />
+    <Content Include="Views\Sport\Share.cshtml" />
+    <Content Include="Views\Event\GoWechatFriend.cshtml" />
+    <Content Include="Views\Event\GoWechatCircle.cshtml" />
+    <Content Include="Views\Event\DetonatingWeek.cshtml" />
+    <Content Include="Views\Event\ShopActivte.cshtml" />
+    <Content Include="Views\Event\SecondKill.cshtml" />
+    <Content Include="Views\ViewRoute\WxMessageReceiver.cshtml" />
+    <Content Include="Views\Event\XxxshareWx.cshtml" />
+    <Content Include="Views\Event\ShareGoodsToWechatCircle.cshtml" />
+    <Content Include="Views\Event\ShareGoodsToWechatFriend.cshtml" />
+    <Content Include="Views\Event\RedpackageFissionShare.cshtml" />
+    <Content Include="Views\Event\Update.cshtml" />
+    <Content Include="Views\Event\OpenFissionRedpackage.cshtml" />
+    <Content Include="Views\Event\Newshare.cshtml" />
+    <Content Include="Views\Device\UserLogin.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\WebApi\Views\Notice\" />
+    <Folder Include="Areas\WebApi\Views\Shared\" />
+    <Folder Include="Assets\Source\img\掌柜界面%283%29\__MACOSX\掌柜界面\" />
+    <Folder Include="Assets\Source\Scripts\img\" />
+    <Folder Include="Assets\Sport\script\" />
+    <Folder Include="CERT\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{FFAB3ED2-C51F-4BBB-9C5C-F1F5B5C3CF35}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RRL.Config\RRL.Config.csproj">
+      <Project>{E85C91AA-3CD3-4046-87DC-4074845A61B0}</Project>
+      <Name>RRL.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RRL.Core\RRL.Core.csproj">
+      <Project>{0ac2a711-08f6-47f9-b1ff-cb562ea22d96}</Project>
+      <Name>RRL.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RRL.DB\RRL.DB.csproj">
+      <Project>{6F66FC0B-60F7-4F7B-8E74-42D91AD419BA}</Project>
+      <Name>RRL.DB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_Data\Swagger.js" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55791</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55791/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:55791/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

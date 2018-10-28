@@ -1,0 +1,235 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>野生松茸</title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <style>
+        .main{background: #2d2d2d;} 
+        .main .img{
+            height: 100%;
+        }
+        .content, .content li {
+            padding: 0;
+        }
+        .content li.flp-li {
+            width: 33.3333333333%;
+        }
+        /* 返回上一页 */
+        .goback-page {
+            position: fixed; top: .5rem; left: .5rem; width: 3rem; height: 3rem;
+        }
+        .goback-page img {
+            display: block; width: .6rem; height: .6rem;
+        }
+        .content1{
+            margin: .2rem 0;
+        }
+        .content1 li{
+           width:50%;float:left;margin-bottom: .4rem;
+            
+        }
+        .guide_box{
+            position: relative;
+        }
+        .pre_sale li{
+            margin-bottom: .5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <!--返回上一页开始-->
+        <div class="goback-page">
+            <img src="/Assets/Source/img/goback.png" id="goBackPage"/>
+        </div>
+        <!--返回上一页结束-->
+
+        <!--活动头部开始-->
+        <div class="img">
+            <img src="~/Assets/Event/images/sr_01.jpg"/>
+            <img src="~/Assets/Event/images/sr_02.jpg"/>
+            <img src="~/Assets/Event/images/sr_03.jpg"/>
+        </div>
+        <!--活动头部结束-->
+
+        <!--预售款-->
+        <div class="pre_sale">
+            <ul>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18854/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/sr_04.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18855/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/sr_06.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18856/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/sr_08.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18857/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/sr_10.jpg"/>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--预售款-->
+
+        <!--现货款-->
+        <div class="img" style="overflow: hidden">
+             <div class="img" style="width:100%;">
+                <img src="~/Assets/Event/images/sr_12.jpg"/>
+            </div>
+        </div>
+        <div class="content1">
+            <ul>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18879/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_03.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18880/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_04.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18881/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_05.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18882/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_06.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18854/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_09.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18855/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_10.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18856/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_13.jpg"/>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/18857/null">
+                        <div class="img">
+                            <img src="~/Assets/Event/images/srxh_14.jpg"/>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--现货款-->
+        <ul class="content">
+            <!--返回首页开始-->
+            <li class="flp-li">
+                <a href="/#/index">
+                    <div class="img">
+                        <img src="~/Assets/Event/images/srf_25.jpg"/>
+                    </div>
+                </a>
+            </li>
+            <!--返回首页结束-->
+
+            <!--二维码开始-->
+            <li class="flp-li">
+                <a href="javascript:;">
+                    <div class="img">
+                        <img src="~/Assets/Event/images/srf_26.jpg"/>
+                    </div>
+                </a>
+            </li>
+            <!--二维码结束-->
+
+            <!--返回顶部开始-->
+            <li id="goBack" class="flp-li">
+                <a href="javascript:;">
+                    <div class="img">
+                        <img src="~/Assets/Event/images/srf_27.jpg"/>
+                    </div>
+                </a>
+            </li>
+            <!--返回顶部结束-->
+        </ul>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    /* 返回上一页代码实现 */
+    ;(function () {
+        var goBackPage = document.getElementById("goBackPage");
+        goBackPage.addEventListener("click", function () {
+            location.href = "/#/index";
+        }, false);
+    })();
+
+    /* 返回顶部代码实现 */
+    ;(function () {
+        var timer = null, goBack = document.getElementById("goBack");
+        goBack.onclick = function () {
+            cancelAnimationFrame(timer);
+            timer = requestAnimationFrame(function fn() {
+                var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+                if (oTop > 0) {
+                    scrollBy(0, -50);
+                    timer = requestAnimationFrame(fn);
+                    return;
+                }
+                cancelAnimationFrame(timer);
+            });
+        }
+    })();
+
+    /*客服系统代码实现*/
+    function custormService(){
+        var iframe = encodeURIComponent("https://kefu.easemob.com/webim/im.html?configId=8d149d8f-bc70-45f8-9c44-96c6ef6098c9");
+        window.location.href = "/Game/CustomerService?iframe=" + iframe + "&redirect=" + encodeURIComponent("https://e-shop.rrlsz.com.cn/Event/ShopActivte");
+    }
+
+</script>
+
+</html>

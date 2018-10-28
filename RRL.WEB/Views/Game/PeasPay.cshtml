@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购买代金券</title>
+    <link rel="stylesheet" type="text/css" href="~/Assets/Game/css/buycard.css?ver=@RRL.WEB.App_Start.AppUtils.Ver">
+</head>
+<body>
+    <div class='buy-card'>
+        <div class="goback-content">
+            <h4>购券送豆</h4>
+            <a id="goback-btn" class="wj-goback-btn"><img src="~/Assets/Game/img/left.png"></a>
+        </div>
+        <div class='bc-tips'>
+            代金券仅限抵扣券面产品，请按需酌情购买，理性消费
+        </div>
+        <ul class='card-list'>
+            <!-- <li  class="list_li lion">
+                <div class='cl-top'>
+                    <div class='cl-left'>
+                        <span class="cl-left-log"></span>
+                        <div class="cardtime_box">
+                           <p class="cl_price">￥<strong>100</strong></p>   
+                           <p class="cardtime">使用时间：2018.01.09-2018.07.31</p>
+                        </div>
+                    </div>
+                    <div class='cl-right'>
+                        <div class="sendjindou">
+                            <p class="sendj_tl">送金豆</p> 
+                            <p class="sendj_zs">2000</p>
+                            <p class="sendj_plus">+</p>
+                            <p class="sendj_ys">40</p>
+                        </div>
+                        <div class="sendjindou1">
+                            <p class="sendj_tl">送金豆</p> 
+                            <p class="sendj_zs">2000</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class ='cl-bottom'>
+                    所有商品，购物满400元能抵扣20元
+                </div>
+            </li>
+ -->
+
+        </ul>
+        <div class='buytool'>
+            <div class='bt-left'>
+                <div>
+                    <p class='trulypay'>
+                        实付：￥123
+                    </p>
+                    <div>
+
+                    </div>
+                </div>
+                <p style="color:#333">获得：<span class='getjindou'>300</span><img src='~/Assets/Game/img/glodbean.png' /></p>
+            </div>
+            <div class='bt-middle'>
+                <div class='reduce'>
+                    －
+                </div>
+
+                <input id="valueofnum" disabled />
+                <div class='plus'>
+                    ＋
+                </div>
+
+            </div>
+            <div class='paybtn'>
+                立即付款
+            </div>
+        </div>
+    </div>
+    <script src="~/Assets/Game/js/jquery.js"></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+    <script src="~/Assets/Game/js/buycard.js?ver=@RRL.WEB.App_Start.AppUtils.Ver"></script>
+    <script>
+      ;(function(){
+        var param=  UI.Page.getAllparam();
+        var goBackBtn = document.getElementById("goback-btn");
+        // 返回上一页
+        goBackBtn.addEventListener("click",function(){
+            window.location.href = param.redirect;
+        },false);
+      })();
+    </script>
+</body>

@@ -1,0 +1,521 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>领取红包</title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css" />   
+    <script>
+        var jindou = '@ViewBag.jindou'; // 获取金豆金额
+        var type = '@ViewBag.type';
+        var orderid = '@ViewBag.orderid';
+        var taskId =  '@ViewBag.taskId';
+    </script>
+</head>
+<style>
+    *{
+        padding: 0 ;margin: 0;
+    }
+    body{
+        margin: 0;
+        border: none;
+        padding: 0;
+        background: #f54e2e
+    }
+    input {
+        outline: none;
+        -webkit-appearance: none;
+        border: none;
+    }
+    .top{
+        position:relative;
+    }
+    .top img {
+        width: 100%;
+    }
+
+    .fucku {
+        height:7.48rem;
+        background: url('../../Assets/Event/img/newsharebg.jpg') no-repeat #f54e2e;
+        background-size: 100% 100%;position: relative;
+    }
+    .get_redpackcount{
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 4.5rem;
+        color: #fcd6d7;
+        font-size: .4rem;
+    }
+    .get_redpackcount span{
+        font-size: .6rem;
+        letter-spacing: -.02rem;
+        font-weight: bold;
+    }
+    .bottom {
+        position: relative;
+        z-index:4;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .inputbox {
+        width: 100%;
+        position: absolute;
+        top: 7.48rem;
+        left: 0; 
+    }
+    .inputbox li{
+        width: 90%;
+        margin: 0 auto;
+        position: relative;
+        margin-bottom: .2rem;
+        height: .9rem;
+    }
+    .phonenum{
+        width: 100%;    
+        text-align: left;
+        text-indent: .2rem;
+        display: block;
+        line-height: .9rem;
+        border-radius: 2rem;
+    }
+    .yzm{
+        width: 61%;
+        text-align: left;
+        text-indent: .2rem;
+        display: block;
+        line-height: .9rem;
+        border-radius: 2rem;
+        float: left;
+    }
+    .getCode{
+        min-width: 2rem;
+        color: #e04039;
+        background: #fbe9ce;
+        border-radius: 2rem;
+        float: right;
+        line-height: 1rem;
+        padding:0 .4rem;
+    }
+    .desync-code-pic{
+        border-radius: 2rem;    
+        float: right;
+        width: 2.3rem;
+    }
+
+
+
+
+
+    #err,#right {
+       color: #fff;
+       font-size: 13px;
+      font-size: .3rem;
+    }
+
+    .maskoo{
+       display: none;
+        width:100%;
+        height:100%;
+        position: fixed;
+        top:0;
+        left:0;
+        background: url('../../Assets/Event/img/images/secondshare.png') no-repeat;
+        background-size: 100% 100%;
+        z-index:1111
+    }
+    .gethbnum{
+        position: absolute;
+        top:45%;
+        color:#fff;
+        font-size:30px;
+        text-align: center;
+        width:100%;
+    }
+    .closebtn{
+        width:30px;
+        height:30px;
+        position: absolute;
+        bottom:10%;
+        left:50%;
+        margin-left:-15px;
+    }
+    .cangettimes{
+        position: absolute;
+        bottom:24.5%;
+        left:39%;
+        font-size:14px;
+        color:#fff;
+    }
+
+    .mask, .gz-dialog, .innermask {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 3;
+    }
+
+    .gz-dialog {
+        display: none;
+        z-index:5;
+    }
+
+    .gz-bg {
+        background: url(../../Assets/Game/img/gzbg.png) no-repeat; background-size: 100%;
+        width: 373px;
+        height: 485px;
+        top: 50%;
+        left: 50%;
+        margin: -4.145rem 0 0 -3.19rem;
+        position: fixed;
+        z-index: 4;
+    }
+    .innermask {
+        background: #000;
+        opacity: .7;
+    }
+
+    .gz-bg {
+        background: url(../../Assets/Game/img/gzbg.png) no-repeat; background-size: 100%;
+        width: 374px;
+        height: 485px;
+        top: 50%;
+        left: 50%;
+        margin: -242px 0 0 -186.9px;
+        position: fixed;
+        z-index: 4
+    }
+
+    .gz-content {
+        width: 280px;
+        margin: 70px auto 0;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        height: 340px;
+        overflow: auto;
+        font-size: 12px;
+        line-height: 21px;
+    }
+
+    .gz-qd-btn {
+        background: url('../../Assets/Game/img/gzqd-btn.png') no-repeat; width: 154px;
+        height: 48px;
+        margin: 12px auto 0;
+        background-size: 100%;
+    }
+
+    .gz-btn {
+        background: url(../../Assets/Game/img/gz-btn.png) no-repeat;
+        display: block;
+        width: 59px;
+        height: 28px;
+        background-size: 58px 27.8px;
+        position: absolute;
+        top: 11.6px;
+        left: 3px;
+        z-index:11111111;
+    }
+
+
+    .desync-code-input{
+        width:70%!important;
+        border-radius: 2rem;    
+        height: 100%;
+        text-align: left;
+        text-indent: 10px;
+        border-top: 1px solid #cbcbcb;
+        }
+    .input-submit-btn{
+        width:100%;
+        text-align: center;
+        color: #e04039;
+        border-radius: 1.5rem;
+        font-size: 14px;
+        line-height: 1rem;
+        background: #fbe9ce;
+     
+    }
+    .desync-code{
+      position: relative;
+    }
+
+    .top-picbar {
+        text-align: center;
+        position: relative;
+        top: 12%;
+    }
+
+    .loginBar,.payBar,.numBar{
+      display: inline-block;
+       font-size: 0;
+    }
+
+    .loginBar{
+      width: 10%;
+    }
+    .payBar{
+      width: 30%;
+    }
+    .numBar{
+       width: 27px;
+    }
+   .numBar img{
+     display:inline-block;
+     font-size: 0;
+      width: 100%;
+    }
+</style>
+<body>
+    <div class='fucku'>
+        <div class="get_redpackcount">
+            ￥<span id="get_redpackcount">1111.00</span>
+        </div>
+        <div class='bottom'>
+            <ul class='inputbox'>
+                <li>
+                    <input onchange="checkbtn()" placeholder="请输入手机号码领取" id='phonenum' class='phonenum' value="" />
+                </li>
+                <li class="input-code clearfix">
+                    <input onchange="checkbtn()" placeholder='请输入验证码' class='yzm' id="sms"/>
+                    <input id="getCode" class='getCode' type="button" value="获取验证码" onclick="getsms()" />
+                </li>
+                <li class="desync-code clearfix">
+                    <input onchange="checkbtn()" id="getDesync-code-input" placeholder='请输入动态验证码' class='yzm' />
+                    <img id="getDesync-code-pic"  onClick="checkDesyncCode()" class="desync-code-pic" src="/VerCode/Picture?t="+new Date().getTime()/>
+                </li>
+                <li>
+                    <p class='err' id="err"></p>
+                    <p class='right' id="right"></p>
+                    <input type="button" class="input-submit-btn" value="立即领取" onclick="registbtn()" />
+                </li>
+            </div>
+        </div>
+        <div class="mask"></div>
+        <div class="gz-dialog">
+            <div class="innermask"></div>
+            <div class="gz-bg">
+                <pre class="gz-content">
+详细规则
+1、红包类型：免费红包、金豆。
+①免费红包：不可直接用于购物，只可参与游戏，游戏获胜后可转化为金豆；
+②金豆：金豆既可参与游戏，也可用于平台购物。
+免费红包获取方式：活动赠送。
+2、玩法和规则
+投入类型：免费红包、金豆
+投入红包、金豆：100、300、500、1000、5000、10000；
+轮盘共26个格子，分别为1-24个数字和两个红格子，每次出资可在单、双、大、小、红格子中出资。单、双、大、小倍率1:2，红格倍率1:12；
+倒计时结束前，用户可选择离开活动页面放弃参与活动，用户投入的免费红包或金豆将不予消耗；
+系统对每一位用户参与同一轮活动设定了投入免费红包或金豆的单次最低值及最高值，每轮竞猜活动的时间以系统提示为准，倒计时为0时竞猜活动结束，活动结束后，用户不能取消或修改投入数。
+3、注意事项：
+平台有权根据活动参与情况，结束或提前结束用户参与活动的竞猜；
+平台赠送的免费红包在当日内没有参与游戏将于次日自动作废；
+如遇不可抗力或其它客观原因导致当前游戏无法继续进行，则用户投入的免费红包或金豆将全额返还至用户平台相应账户中，平台无需承担任何赔偿或补偿责任；
+活动期间，如用户存在违规行为（包括但不限于机器作弊），平台将取消用户的竞猜获奖资格，并有权依照平台相关规则进行处理；
+平台可根据活动举办的实际情况，在法律允许的范围内，对本活动规则进行变动或调整，相关变动或调整将及时公布在活动页面。
+
+                </pre>
+                <div class="gz-qd-btn" onclick="close(true)"></div>
+            </div>
+        </div>
+
+    </div>
+    <!--div class='mask'>
+        <p class='gethbnum'>30.00</p>
+        <p class='cangettimes'>2</p>
+        <img class='closebtn' onClick='closemask()' src='~/Assets/Event/img/images/clearwords.png'/>
+    </div-->
+    <script src='../../Assets/Event/jquery-3.2.1.min.js'></script>
+    <script>
+        $(function(){
+            var redpackcount=localStorage.getItem("hello")
+            $('#get_redpackcount').html(redpackcount+'.00');
+        })
+        var $input = $('#phonenum')
+        var $sms = $('#sms')
+        var num = $input.val();
+        var reg =/^1[0-9]{10}$/;
+        var url = window.location.href;
+        url = url.split('?')
+        var id =''
+        var token=''
+        
+
+        // 获取短信验证码倒计时效果
+        var countdown=60;
+        function settime(obj) { //发送验证码倒计时
+            if (countdown == 0) {
+                obj.attr('disabled',false);
+                //obj.removeattr("disabled");
+                obj.val("获取验证码");
+                countdown = 60;
+                return;
+            } else {
+                obj.attr('disabled',true);
+                obj.val("重新发送(" + countdown + ")");
+                countdown--;
+            }
+        setTimeout(function() {
+            settime(obj) }
+            ,1000)
+        }
+        
+        function GetQueryString(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+        id = GetQueryString('token')
+        function getsms() {
+            num = $input.val();
+            if (reg.test(num)) {
+                //發短信
+                $('#err').css("display","none").text('');
+                $('#right').css("display","none").text('');
+                settime($("#getCode"));
+                sendsms(num);
+            } else {
+                $('#err').css("display","block").text('请输入正确的手机号码');
+                $('#right').css("display","none").text('');
+            }
+        }
+        function checkDesyncCode(){
+          var $code = $("#getDesync-code-pic");
+          $code.attr("src","/VerCode/Picture?t="+new Date().getTime());
+        }
+
+        function checkbtn() {
+            var sms = $sms.val();
+            var num = $input.val();
+            var $desyncCode = $("#getDesync-code-input").val();
+            if(reg.test(num) == false) {
+                $('#err').css("display","block").text('请输入正确的手机号码');
+                $('#right').css("display","none").text('');
+                return false;
+            } else if(sms.length == 0) {
+                $('#err').css("display","block").text('请输入验证码');
+                $('#right').css("display","none").text('');
+                return false;
+            }else if($desyncCode.length==0){
+                $('#err').css("display","block").text('请输入动态验证码');
+                $('#right').css("display","none").text('');
+                return false;
+            }else {
+                $('#err').css("display","none").text('');
+                $('#right').css("display","none").text('');
+                return true;
+            }
+        }
+
+        function registbtn() {
+            if(!checkbtn()) return;
+            var sms = $sms.val();
+            var num = $input.val();
+            var $desyncCode = $("#getDesync-code-input").val();
+            regist(num, sms, $desyncCode);
+        }
+        function sendsms(num) {
+            $.ajax({
+                url: '/WebApi/AuthManager/SendSMS?mobile=' + num,
+                type: "get",
+                success: function(data) {
+                    if (data.status == 0) {
+                        $('#err').css("display","none").text('');
+                        $('#right').css("display","block").text('验证码发送成功');
+                    } else {
+                        $('#right').css("display","none").text('');
+                        $('#err').css("display","block").text('验证码发送失败，请稍后重试');
+                    }
+                }
+            })
+        }
+
+        function regist(num, sms, desync) {
+            $.ajax({
+                url: '/WebApi/UserManager/ReceiveFreeHongMoney',
+                data: {
+                    'username': num,
+                    'smscode': sms,
+                    "picture_code": desync,
+                    'token': id,
+                    type: type,
+                    orderid:orderid,
+                    tid: taskId
+                },
+                type: 'post',
+                success: function(data) {
+                    //console.log(data)
+                    if (data.status == 0) {
+                        token = data.data;
+                        //alert(data.add_data);
+                        window.location.href = 'https://e-shop.rrlsz.com.cn/ProductForGame';
+                        //window.location.href = 'https://e-shop.rrlsz.com.cn/Game/Roulette/?token=' + encodeURIComponent(token)
+                    }
+                    /*else {
+                        $('#err').css("display","block").text(data.message);
+                        $('#right').css("display","none").text('');
+                    }*/
+                }
+            })
+        }
+        var formatjindou = parseInt(jindou);
+        var $login = $("#loginBar"),
+            $numBar = $("#numBar"),
+            $payBar = $("#payBar"),
+            $topPicBar = $(".top-picbar"),
+            arrTotalList = [0,1,2,3,4,5,6,7,8,9];
+        if(jindou.length===1){
+             $payBar.css("width","26%");
+             $login.css("width","49%");
+             $numBar.css("width","4%").html("<img src='/Assets/Event/img/images/"+ arrTotalList[formatjindou] +".png'>");
+        }else if(jindou.length===2){
+             var one = arrTotalList[parseInt(jindou.slice(0,1))],
+                 two = arrTotalList[parseInt(jindou.slice(1,2))];
+             $payBar.css("width","26%");
+             $login.css("width","44%");
+             $numBar.css("width","8%").html("<img src='/Assets/Event/img/images/"+ (one) +".png'><img src='/Assets/Event/img/images/"+ (two) +".png'>");
+             $numBar.find("img").css("width","50%");
+        }else if(jindou.length===3){
+              var one = arrTotalList[parseInt(jindou.slice(0,1))],
+                  two = arrTotalList[parseInt(jindou.slice(1,2))],
+                  three = arrTotalList[parseInt(jindou.slice(2,3))];
+              $payBar.css("width","25%");
+              $login.css("width","43%");
+              $numBar.css("width","12%").html("<img src='/Assets/Event/img/images/"+ (one) +".png'><img src='/Assets/Event/img/images/"+ (two) +".png'><img src='/Assets/Event/img/images/"+ (three) +".png'>");
+              $numBar.find("img").css("width","33.3333333333%");
+         }else if(jindou.length===4){
+               var one = arrTotalList[parseInt(jindou.slice(0,1))],
+               two = arrTotalList[parseInt(jindou.slice(1,2))],
+               three = arrTotalList[parseInt(jindou.slice(2,3))],
+               four = arrTotalList[parseInt(jindou.slice(3,4))];
+               $payBar.css("width","24%");
+               $login.css("width","39%");
+               $numBar.css("width","15%").html("<img src='/Assets/Event/img/images/"+ (one) +".png'><img src='/Assets/Event/img/images/"+ (two) +".png'><img src='/Assets/Event/img/images/"+ (three) +".png'><img src='/Assets/Event/img/images/"+ (four) +".png'>");
+                $numBar.find("img").css("width","25%");
+           }else if(jindou.length===5 || jindou.length===6){
+              var one = arrTotalList[parseInt(jindou.slice(0,1))],
+              two = arrTotalList[parseInt(jindou.slice(1,2))],
+              three = arrTotalList[parseInt(jindou.slice(2,3))],
+              four = arrTotalList[parseInt(jindou.slice(3,4))],
+              five = arrTotalList[parseInt(jindou.slice(4,5))];
+              $payBar.css("width","22%");
+              $login.css("width","38%");
+              $numBar.css("width","18%").html("<img src='/Assets/Event/img/images/"+ (one) +".png'><img src='/Assets/Event/img/images/"+ (two) +".png'><img src='/Assets/Event/img/images/"+ (three) +".png'><img src='/Assets/Event/img/images/"+ (four) +".png'><img src='/Assets/Event/img/images/"+ (five) +".png'>");
+               $numBar.find("img").css("width","20%");
+          }
+
+        $(".gz-btn").click(function () { // 规则按钮点击事件
+            $(".gz-dialog").show();
+        })
+        $(".gz-qd-btn").click(function () { //关闭规则按钮
+            $(".gz-dialog").hide();
+        })
+        
+    </script>
+</body>
+</html>

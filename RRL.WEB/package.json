@@ -1,0 +1,43 @@
+{
+  "name": "rrlwebplatform",
+  "version": "1.0.0",
+  "description": "something change",
+  "author": "rrl",
+  "private": true,
+  "bin": {
+    "cross-env": "./node_modules/.bin/cross-env"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --color --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --color --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --color --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "dependencies": {
+    "@xkeshi/vue-qrcode": "^0.3.0",
+    "alloyfinger": "^0.1.8",
+    "axios": "^0.16.2",
+    "bootstrap-sass": "^3.3.7",
+    "clipboard": "^1.7.1",
+    "css-loader": "^0.28.11",
+    "element-ui": "^2.4.8",
+    "jquery": "^3.1.1",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
+    "vant": "^1.0.3",
+    "vue": "^2.1.10",
+    "vue-router": "^2.1.10",
+    "vue-swiper": "^0.5.0",
+    "vuex": "^2.1.10"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "laravel-mix": "^1.0",
+    "lodash": "^4.17.4",
+    "swiper": "^3.4.1",
+    "vue-lazyload": "^1.2.2"
+  }
+}

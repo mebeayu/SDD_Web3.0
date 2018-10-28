@@ -1,0 +1,136 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css" />
+    <style>
+    .price-instructions-head{
+        font-size: 16px;
+        text-align: center;
+        padding: 10px;
+        color: #555;
+        line-height: 24px;
+        border-bottom: 1px solid #dadada;
+    }
+    .price-instructions-box{
+        padding: 10px;
+    }
+    .price-instructions-til,.price-instructions-text{
+        font-size: 14px;
+        color: #666;
+        line-height: 24px;
+    }
+    .price-instructions-text{
+         text-indent: 16px;
+    }
+    .price-instructions-text img{
+       display: block;
+       width: 85%;
+       height: 85%;
+       margin: 6px auto;
+    }
+    .urgent-noticebar{
+           padding: 10px;
+           background: rgba(0,0,0,.03);
+           border-radius: 2px;
+           border: 1px solid #dadada;
+           margin-bottom: 10px;
+    }
+    .urgent-noticebar p{
+      color: #f00;
+    }
+    h5 {
+        padding-bottom: 10px;
+    }
+    b {
+        background-color: #f2ff03;
+    }
+
+    /* 返回上一页 */
+    .goback-page{
+        position: absolute;
+        top: .5rem;
+        left: .5rem;
+        width: 3rem;
+        height: 3rem;
+    }
+    .goback-page img{
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+     </style>
+</head>
+
+<body>
+    <div class="goback-page">
+        <img src="/Assets/Source/img/goback.png" id="goBackPage" />
+    </div>
+    <h5 class="price-instructions-head">紧急通知</h5>
+    <div class="price-instructions-box">
+       <div class="urgent-noticebar">
+          <p class="price-instructions-til">安装步骤：</p>
+          <p class="price-instructions-text">
+                 尊敬的省兜兜用户，因微信公众号商城系统维护，暂时停止使用，在此期间为了不影响个人账户的使用及相关账户信息、订单信息等个人账户内容的查询，请大家下载App进行登录使用。<br/>&nbsp;&nbsp;&nbsp;&nbsp;如身边的朋友遇到相同问题，请帮忙转告，为之感谢！
+                 <br/>&nbsp;&nbsp;&nbsp;&nbsp;安装过程中遇到问题请拨打客服电话：<b>400-990-7881</b>
+           </p>
+       </div>
+       <h5>安卓系统：</h5>
+       <ul>
+          <li>
+           <p class="price-instructions-text">1、长按链接----<b>复制</b>----缩到后台----打开手机浏览器</p>
+           <p class="price-instructions-text"><span style="color:#1b03ff;font-weight:bold;">https://e-shop.rrlsz.com.cn/Product</span></p>
+          </li>
+          <li>
+           <p class="price-instructions-text">2、打开  <b>“手机浏览器” </b>，粘贴到顶部,打开复制的链接（<b>记住不要用微信直接打开）</b></p>
+           <p class="price-instructions-text">
+                <img src="~/Assets/Event/images/open-brower.jpg" />
+           </p>
+          </li>
+          <li>
+             <p class="price-instructions-text">3、<b>选择Android下载</b>。</p>
+             <p class="price-instructions-text">
+                 <img src="~/Assets/Event/images/android-product.jpg" />
+             </p>
+          </li>
+       </ul>
+
+       <h5>苹果系统：</h5>
+        <ul>
+            <li>
+             <p class="price-instructions-text">1、<b>在App store中直接搜索“省兜兜”</b></p>
+             <p class="price-instructions-text">
+                   <img src="~/Assets/Event/images/ios-search.png" />
+             </p>
+            </li>
+            <li>
+             <p class="price-instructions-text">2、<b>点击下载安装</b></p>
+             <p class="price-instructions-text">
+                  <img src="~/Assets/Event/images/ios-product.png" />
+             </p>
+            </li>
+        </ul>
+
+    </div>
+    <script type="text/javascript">
+
+        /* 返回上一页代码实现 */
+        ;(function(){
+          var goBackPage = document.getElementById("goBackPage");
+          goBackPage.addEventListener("click",function(){
+             window.history.go(-1);
+          },false);
+        })();
+
+    </script>
+</body>
+</html>

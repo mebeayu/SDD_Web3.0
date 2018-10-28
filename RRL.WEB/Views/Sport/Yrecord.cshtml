@@ -1,0 +1,278 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Assets/Sport/css/Index.css" />
+    <link rel="stylesheet" href="~/Assets/Dist/Styles/app.css" />
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js" type="text/javascript"></script>
+    <script src="~/Assets/global/plugins/layer-v3.1.1/layer/mobile/layer.js"></script>
+    <script src='~/Assets/Dist/Scripts/alert.js'></script>
+    <title>分享战绩</title>
+
+    <script>
+        // 页面适配解决
+        ; (function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+    </script>
+</head>
+<body>
+    <div class="sport-main">
+        <!--header begin-->
+        <div class="sport-top-header">
+            <a id="goBackSport" href="javascript:;" class="wj-back"><img src="~/Assets/Game/img/left.png"></a>
+            <h4>昨日战绩</h4>
+        </div>
+
+        <div class="yrecord-head">
+            <img  id="headPic"   alt="用户头像">
+            <span id="username" class="h2"></span>
+        </div>
+        <!--header end-->
+
+
+        <!--当没数据时候-->
+        <div id="no-sport-data" style="display:none;">
+            <div class="no-data">
+                <img src="~/Assets/Sport/imgs/k-face.png" alt="你还没有战绩">
+                <p>你还没有战绩</p>
+                <p>请明日再来</p>
+            </div>
+        </div>
+
+        <!--当有数据的时候-->
+        <div id="yrecord-content" class="yrecord-content" >
+            <!--<h3 class="yrecord-date">4月12日</h3>-->
+            <dl class="yrecord-item">
+                <dt id="yrecord-date">4月12日</dt>
+                <dd>
+                    <div class="yrecord-list">
+                        <span>运动步数</span>
+                        <span  id="yrecord-list-step" class="yrecord-list-step"></span>
+                    </div>
+                    <div class="yrecord-list ">
+                        <span>排名</span>
+                        <span id="yrecord-list-ranking">第一名</span>
+                    </div>
+                </dd>
+                <dd>
+                    <div class="yrecord-list">
+                        <span>获赞次数</span>
+                        <span id="yrecord-list-like" class="yrecord-list-step"></span>
+                    </div>
+                    <div class="yrecord-list ">
+                        <span>回赞次数</span>
+                        <span id="yrecord-list-replyLike"></span>
+                    </div>
+                </dd>
+                <dd>
+                    <div class="yrecord-list">
+                        <span>运动红包</span>
+                        <span id="yrecord-list-Money" class="yrecord-list-step"></span>
+                    </div>
+                    <div class="yrecord-list ">
+                        <span>有奖竞猜</span>
+                        <span id="yrecord-list-guess"></span>
+                    </div>
+                </dd>
+            </dl>
+            <p class="yrecord-tip">您击败了全国
+                <strong id="yrecord-rankingPercent">98%</strong> 的用户
+            </p>
+            <div class="yrecord-share">
+                <a href="~/Sport/Share"><img src="~/Assets/Sport/imgs/share-btn.png"></a>
+                <p>点击分享到朋友圈立即获赞一万免费红包</p>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var token = localStorage.getItem('shorttoken');
+        $(function () {
+            // 点击返回按钮 ===== 跳转至游戏大厅页面
+            $("#goBackSport").on("click", goBackSport);
+            //没有运动数据的返回值
+            userEffortData();
+        });
+        /**
+         * 没有运动数据的返回值
+         */
+        function userEffortData() {
+            $.get('/WebApi/Sports/UserEffortData',{"token":token},function (res) {
+                   if(res.status===0){
+                       var data=res.data;
+                       var str='/SWebApi/Public/picture/'+data.headPic+'.jpg';
+                       var guessResult= $('#yrecord-list-guess');
+                       $('#headPic').attr('src',str);
+                       $('#username').text(data.username);
+                       //当没有竞猜数据
+                       if(data.isHasData==0){
+                           $('#no-sport-data').css('display','block');
+                           $('#yrecord-content').css('display','none');
+                       }
+                       //当有竞猜数据
+                       if(data.isHasData==1){
+                           $('#yrecord-date').text(data.date);
+                           $('#yrecord-list-step').text(data.step);
+                           $('#yrecord-list-ranking').text('第'+data.ranking+'名');
+                           $('#yrecord-list-like').text(data.likeCount+'次');
+                           $('#yrecord-list-replyLike').text(data.replyLikeCount+'次');
+                           $('#yrecord-list-Money').text(data.sportMoney);
+                           //当没有竞猜数据
+                           if(data.isJoinGuess==0){ guessResult.text('您没参与竞猜'); }
+                           //当有竞猜数据
+                           if(data.isJoinGuess==1){
+                               var n=data.guessResult;
+                               switch(n){
+                                   case "1":
+                                       guessResult.text('猜对了，奖励'+data.guessMoeny+'个金豆');
+                                       break;
+                                   case "2":
+                                       guessResult.text('猜错了，扣除'+data.guessMoeny+'个金豆');
+                                       break;
+                                   default:
+                                       guessResult.text('未开奖');
+                               }
+                           }
+                       }
+                       $('#yrecord-rankingPercent').text(data.rankingPercent);
+                   }else{
+                       alert(res.message);
+                   }
+            })
+        }
+        /**
+         * 点击返回按钮 ===== 跳转至游戏大厅页面
+         */
+        function goBackSport() {
+            window.location.href = "/Sport/Index2?token=" + encodeURIComponent(token);
+        }
+    </script>
+</body>
+</html>

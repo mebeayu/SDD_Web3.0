@@ -1,0 +1,96 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css" />
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js"></script>
+    <style>
+        .main {
+            background-color: #fff;
+        }
+
+        .content, .content li {
+            padding: 0;
+        }
+
+            .content li.flp-li {
+                width: 33.3333333333%;
+            }
+
+        /* 返回上一页 */
+        .goback-page {
+            position: fixed;
+            top: .5rem;
+            left: .5rem;
+        }
+
+            .goback-page img {
+                display: block;
+                width: .6rem;
+                height: .6rem;
+            }
+    </style>
+</head>
+
+<body>
+<div class="main">
+
+    <!--返回上一页开始-->
+    <div class="goback-page">
+        <img src="/Assets/Source/img/goback.png" id="goBackPage"/>
+    </div>
+    <!--返回上一页结束-->
+
+    <!--活动头部开始-->
+    <div class="img">
+        <img src="~/Assets/Event/images/a-resale-product_01.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_02.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_03.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_04.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_05.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_06.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_07.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_08.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_09.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_10.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_11.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_12.png"/>
+        <img src="~/Assets/Event/images/a-resale-product_13.png"/>
+    </div>
+    <!--活动头部结束-->
+
+</div>
+</body>
+
+<script type="text/javascript">
+    var token = localStorage.getItem('shorttoken');
+
+    /* 返回上一页代码实现 */
+    ;(function () {
+        var goBackPage = document.getElementById("goBackPage");
+        goBackPage.addEventListener("click", function () {
+            var strRedirect = window.UI.Page.getAllparam().redirect;
+            if (strRedirect) {
+                location.href = strRedirect;
+                return;
+            }
+
+            location.href = "/#/index";
+        }, false);
+
+        if (token) {
+            $.post('/WebApi/Game/DoTaskDaily', { token: token, taskType: 'resell' }, function () {});
+        }
+    })();
+
+</script>
+
+</html>

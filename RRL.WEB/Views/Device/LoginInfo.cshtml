@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>登录成功</title>
+    <style>
+        a {
+            -webkit-tap-highlight-color: rgba(255,0,0,0);
+        }
+    </style>
+    <script>
+        //window.setTimeout(function () {
+            var redirectUrl = '@ViewBag.goBackUrl';
+            if (redirectUrl.length > 0) {
+                window.location.href = redirectUrl;
+            }else
+			{
+			   window.location.href="/";
+			}
+        //}, 3000);
+    </script>
+</head>
+<body style='margin:0;'>
+    <p>
+        <span style="font-size:16px;"><strong>登录成功!正在跳转...</strong></span>
+    </p>
+    <p>
+        <span style="font-size:16px;margin-left:10px;"><span style="line-height:2;"><a href="@ViewBag.goBackUrl">[点击返回商城]</a></span></span><br />
+    </p>
+</body>
+</html>

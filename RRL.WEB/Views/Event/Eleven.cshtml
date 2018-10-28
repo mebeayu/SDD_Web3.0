@@ -1,0 +1,188 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>一元体验智能锁</title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css"/>
+    <style>
+        .main{background: #0f1223;} 
+        .main .img{height: 100%;}
+        .content, .content li {padding: 0; }
+         .content li.flp-li {width: 33.3333333333%;}
+         /* 返回上一页 */
+        .goback-page {  position: fixed; top: .5rem; left: .5rem;}
+        .goback-page img { display: block; width: .6rem; height: .6rem;}
+        .content1{background: #02c4e8;}
+        .content1 li{
+            background-size:100% 100%; position: relative;     
+        }
+        .content1 li a{
+            display: block;width: 2.56rem; height:.78rem;position: absolute;
+        }
+        .list1{
+            width: 100%;height: 9.77rem;position: relative;
+            background: url('/Assets/Event/images/zns_04.png') no-repeat center top;
+        }
+        .list1 .a1{
+            bottom: 43%;  right: 9%;
+        }
+        .list1 .a2{
+             top: 27%;right:9%;
+        }
+        .list2{
+            width: 100%;height: 9.71rem;position: relative;
+            background: url('/Assets/Event/images/zns_06.png') no-repeat center top;
+        }
+        .list2 .a1{
+            bottom: 30%; left: 12%;
+        }
+        .list2 .a2{
+            top: 41%; left: 12%;
+        }
+        .list3{
+            width: 100%;height: 11.08rem;position: relative;
+            background: url('/Assets/Event/images/zns_07.png') no-repeat center top;
+        }
+        .list3 .a1{
+            bottom: 33%;right:9%;
+        }
+        .list3 .a2{
+            top:41%;right:9%;
+        }
+        .list4{
+            width: 100%;height:9.71rem;position: relative;
+            background: url('/Assets/Event/images/zns_08.png') no-repeat center top;
+        }
+        .list4 .a1{
+           bottom:29%;left: 8%;
+        }
+        .list4 .a2{
+            top: 41%;left: 9%;
+        }
+        .list5{
+            width: 100%;height:10.46rem;position: relative;
+            background: url('/Assets/Event/images/zns_09.png') no-repeat center top;
+        }
+        .list5 .a1{
+            bottom: 28%;right:9%;
+        }
+        .list5 .a2{
+            top: 44%;right: 9%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main">
+
+    <!--返回上一页开始-->
+    <div class="goback-page">
+        <img src="/Assets/Source/img/goback.png" id="goBackPage"/>
+    </div>
+    <!--返回上一页结束-->
+
+    <!--活动头部开始-->
+    <div class="img">
+        <img src="~/Assets/Event/images/zns_01.png"/>
+        <img src="~/Assets/Event/images/zns_02.png"/>
+        <img src="~/Assets/Event/images/zns_03.png"/>
+    </div>
+    <!--活动头部结束-->
+    
+    <!--智能锁专区开始-->
+     <div class="content1">
+        <ul>
+            <li class="list1">
+                <a class='a1' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19200/null"></a>  
+                <a class='a2' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19201/null"></a>  
+            </li>
+            <li class="list2">
+                <a class='a1' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19199/null"></a>  
+                <a class='a2' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19202/null"></a>  
+            </li>
+            <li class="list3">
+                <a class='a1' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19198/null"></a>  
+                <a class='a2' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19203/null"></a>  
+            </li>
+            
+            <li class="list4">
+                <a class='a1' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19196/null"></a>  
+                <a class='a2' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19204/null"></a>  
+            </li>
+            <li class="list5">
+                <a class='a1' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19195/null"></a>  
+                <a class='a2' href="https://e-shop.rrlsz.com.cn/#/goodsdetail/19205/null"></a>  
+            </li>
+        </ul>
+    </div> 
+    <!--智能锁专区结束-->
+    <ul class="content">
+            <!--返回首页开始-->
+            <li class="flp-li">
+                <a href="/#/index">
+                    <div class="img">
+                        <img src="~/Assets/Event/images/zns_28.jpg"/>
+                    </div>
+                </a>
+            </li>
+            <!--返回首页结束-->
+
+            <!--二维码开始-->
+            <li class="flp-li">
+                <a href="javascript:;">
+                    <div class="img">
+                        <img src="~/Assets/Event/images/zns_29.jpg"/>
+                    </div>
+                </a>
+            </li>
+            <!--二维码结束-->
+
+            <!--返回顶部开始-->
+            <li id="goBack" class="flp-li">
+                <a href="javascript:;">
+                    <div class="img">
+                        <img src="~/Assets/Event/images/zns_30.jpg"/>
+                    </div>
+                </a>
+            </li>
+            <!--返回顶部结束-->
+    </ul>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    /* 返回上一页代码实现 */
+    ;(function () {
+        var goBackPage = document.getElementById("goBackPage");
+        goBackPage.addEventListener("click", function () {
+            location.href = "/#/index";
+        }, false);
+    })();
+
+    /* 返回顶部代码实现 */
+    ;(function () {
+        var timer = null, goBack = document.getElementById("goBack");
+        goBack.onclick = function () {
+            cancelAnimationFrame(timer);
+            timer = requestAnimationFrame(function fn() {
+                var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+                if (oTop > 0) {
+                    scrollBy(0, -50);
+                    timer = requestAnimationFrame(fn);
+                    return;
+                }
+                cancelAnimationFrame(timer);
+            });
+        }
+    })();
+
+</script>
+
+</html>

@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body id="wj-body">
+    <div id="wj-goback" class="wj-customer-service">
+        <span>< 返回</span>
+    </div>
+
+    <div class="wj-contact-us" onclick='easemobim.bind({configId: "8d149d8f-bc70-45f8-9c44-96c6ef6098c9"})'>+ 联系我们客服</div>
+    <!--<iframe id="wjIframe" width="100%" height="100%" scrolling="no" frameborder="0"></iframe>-->
+
+    <script src="~/Assets/Game/js/jquery.js"></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+    <script>
+
+        $(document).ready(function () {
+            easemobim.bind({ configId: "8d149d8f-bc70-45f8-9c44-96c6ef6098c9" });
+        });
+
+        window.easemobim = window.easemobim || {};
+        easemobim.config = {
+            hide: true,
+            autoConnect: true
+        };
+
+        $(function () {
+            $("#wj-goback").on("click", goBack);
+        });
+
+        /**
+         * 返回 my页面
+         * */
+        function goBack() {
+            window.location.href = UI.Page.getAllparam().redirect;
+            // window.location.href = "/#/my";
+        }
+
+    </script>
+    <script src='//kefu.easemob.com/webim/easemob.js'></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wj-bot-iframe {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+            .wj-bot-iframe iframe {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: #eee;
+            }
+
+        .gametop {
+            position: absolute;
+            height: 50px;
+            z-index: 2;
+        }
+
+            .gametop .gamenav, .gametop .gamenav div {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            .gametop .gamenav {
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                padding: 0 .4rem;
+                background: rgba(255, 255, 255, .8);
+                font-size: 32px;
+                line-height: 1.17333333rem;
+                overflow: hidden;
+                border-bottom-right-radius: 10px;
+                box-shadow: 2px 4px 3px rgb(0, 0, 0, .2);
+            }
+
+                .gametop .gamenav img {
+                    width: .53333333rem;
+                    padding-right: 6px;
+                }
+
+        .gamenav div {
+            line-height: 50px;
+            font-size: 18px;
+            color: #444;
+        }
+
+        /*    body, body.easemobim-mobile-body, body.theme-1, body.em-mobile, iframe.easemobim-chat-panel.easemobim-mobile {
+            height: 90% !important;
+            top: 30px !important;
+        }*/
+
+        .wj-customer-service {
+            display: block !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 41px;
+            line-height: 41px;
+            color: #fff;
+            z-index: 999999999;
+            background: #42b8f4;
+        }
+
+        .wj-customer-service, .wj-contact-us {
+            padding-left: 10px;
+        }
+
+        .wj-contact-us {
+            padding: 10px;
+            float: right;
+            /*border: 1px solid #00a0e7;
+        border-radius: 4px;
+        margin: 10px;*/
+            color: #00a0e7;
+        }
+    </style>
+</body>

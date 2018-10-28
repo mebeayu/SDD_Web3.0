@@ -1,0 +1,236 @@
+﻿@{
+Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>产品中心</title>
+    <link href="//cdn.staticfile.org/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Hiragino Sans GB', 'Microsoft YaHei', 'STXihei', serif, sans-serif;
+            color: #333;
+            background: url('../../Assets/Event/img/images/bgdownload.jpg') no-repeat #f15b42 top center;
+            background-size: cover;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.4s ease 0s;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #555;
+        }
+
+        /*************/
+
+        .header {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+
+        #footer {
+            text-align: center;
+            vertical-align: middle;
+            background: #ffffff;
+        }
+
+        .header .bg-color {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .header .bg-color h1 {
+            color: #fff;
+            font-size: 42px;
+            margin-bottom: 30px;
+        }
+
+        .header .bg-color a.read-more-bg {
+
+            color: #fadbb5;
+            font-size: 18px;
+            border: 1px solid #fadbb5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .header .bg-color a.read-more-bg:hover {
+            background: rgba(8, 78, 90, 0.4);
+            border: 1px solid #37ABD6;
+            -moz-box-shadow: inset 0 0 5px #084E5A;
+            -webkit-box-shadow: inset 0 0 5px #084E5A;
+            box-shadow: inset 0 0 5px #084E5A;
+        }
+
+        .header .bg-color a.read-more-bg i {
+            margin-right: 6px;
+        }
+
+        .bg-top-img {
+            width: 100%;
+            background: url(/Assets/Product/img/screen.png) no-repeat center top;
+            height: 450px;
+            margin-top: 60px;
+        }
+
+        .download-wrap {
+            position: absolute;
+            width: 100%;
+            top: 66%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .download-wrap a {
+            display: block;
+            width: 50%;
+            height: auto !important;
+            padding: 1rem 0;
+            margin: 0 auto;
+        }
+
+        .download-wrap a:nth-of-type(2) {
+            margin-top: .8rem;
+            background-color: #fae9cd !important;
+            color: #ef7b68 !important;
+        }
+
+        .header{
+            overflow: hidden;
+        }
+       .hboxfixed .shaw {
+            background-color: #000;
+            opacity: .7;
+            z-index: 1;
+        }
+        .hboxfixed, .hboxfixed .shaw {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        .hboxfixed{
+            z-index: 8;
+            display: none;
+        }
+        .hboxfixed .img {
+            padding: 0 .53333333rem;
+            position: relative;
+            z-index: 999;
+        }
+        .hboxfixed img{
+            width: 100%;height: 100%;
+        } 
+    </style>
+</head>
+<body>
+<div class="header">
+    
+    <!--微信打开-->
+    <div class="hboxfixed" id="arr">
+        <div class="shaw"></div>
+        <div class="img" id="shareRedCollarImg"><img src="/Assets/Source/img/wechatDowload.png"/></div>
+    </div>
+    <!--微信打开-->
+
+
+    <div class="bg-color">
+        <div class="container-fluid">
+            <div class="row">
+                <h1 style="display:none">@ViewBag.Title</h1>
+                <div class="download-wrap">
+                    <a href="https://itunes.apple.com/cn/app/id1180975910?mt=8" class="read-more-bg" id="el_iphone">
+                        <!--<i class="fa fa-apple fa-2x" aria-hidden="true"></i>-->iphone版下载</a>
+                    <a href="javascript:;" class="read-more-bg"  id="wechatDownload">
+                        <!--<i class="fa fa-android fa-2x" aria-hidden="true"></i>-->Android版下载</a>
+                       
+                </div>
+                <div style="display:none" class="bg-top-img"></div>
+            </div>
+        </div>
+    </div>
+    <nav id="footer" style="display:none" class="navbar-fixed-bottom">
+        <div class="container">
+            <p>人人利网络科技（深圳）有限公司</p>
+            <p>Copyright © 2015.RENRENLI NETWORK TECHNOLOGY LTD. All rights reserved.</p>
+        </div>
+    </nav>
+    
+</div>
+<script>
+    var ua = window.navigator.userAgent.toLowerCase();
+    var arr = document.getElementById("arr");
+    var oWechatDownload=document.getElementById('wechatDownload');
+    oWechatDownload.onclick=function(){
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+             arr.style.display='block';
+        } else {
+           // window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=cn.rrlsz.renrenli";
+            window.location.href = "https://e-shop.rrlsz.com.cn/Assets/Product/sdoudou.apk";
+        }
+    }
+    
+     
+    arr.onclick=function(){
+        arr.style.display='none';
+    }
+
+  
+
+
+    ;(function(){
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            //arr.style.display = '';
+        } else {
+            var isAndroid = /(Android)/i.test(navigator.userAgent); //android终端或者uc浏览器
+            var isiOS = !!ua.match(/(iPhone|iPad|iPod|iOS)/i); //ios终端
+            if (isAndroid) {
+                //window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=cn.rrlsz.renrenli";
+                oWechatDownload.click();
+            }
+            if (isiOS) {
+                //window.location.href = "https://itunes.apple.com/cn/app/id1180975910?mt=8";
+                //document.getElementById('el_iphone').click();
+            }
+        }
+    })();
+
+</script>
+</body>
+</html>

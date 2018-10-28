@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RRL.Core.BaseController" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAEBAQAAAKAAAgAEAAACAACAACAAAAAAAAA=</HashCode>
+      <FileName>BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.DbContextFactory" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DbContextFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.PagedList&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAAEIAAAAA=</HashCode>
+      <FileName>PagedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RRL.Core.Preprocessor" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAAAAAAEAA=</HashCode>
+      <FileName>Preprocessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.ServiceBase&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAYAAAAAACAQAABAAAMABAQAAAEAAAAAAgAAgAAgAAA=</HashCode>
+      <FileName>ServiceBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RRL.Core.ServiceGlobal" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIBAAAAAAACIAAAAAACAAAAIAIAgAAAhAABCAAAAAAA=</HashCode>
+      <FileName>ServiceGlobal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.AliSMS" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAACAACAAAIAEAAAAQAADAAAAAA=</HashCode>
+      <FileName>External\AliSMS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.SMSTemplate" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>External\AliSMSTemplateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.AuthSMS" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>External\AliSMSTemplateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.PublicSMS" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>External\AliSMSTemplateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.OrderPaymentSuccessSMS" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>External\AliSMSTemplateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.CashApplyHandleSMS" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>External\AliSMSTemplateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.External.KuaiDi100" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAIAAAAAAAAAAAgAAAAAAAAAAIAAA=</HashCode>
+      <FileName>External\KuaiDi100.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.AuthManager" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Manager\AuthManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.ConfigManager" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAABAAAAAAADAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Manager\ConfigManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.EventManager" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Manager\EventManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.HelpManager" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAQA=</HashCode>
+      <FileName>Manager\HelpManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.PublicManager" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAIAAQAAAAAAAQAAAAABAAAgAAAAAA=</HashCode>
+      <FileName>Manager\PublicManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.ShopManager" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEggAAQGEAAAAAAAAQIAAAIAgAYAAAAAAAAAACA=</HashCode>
+      <FileName>Manager\ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.SpecData" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Manager\ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.SpecRow" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAIAAAAAAAAAIAAAAAAAAAAAAAAAAACEAAkA=</HashCode>
+      <FileName>Manager\ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.TradeManager" Collapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIEAAAAQBQIAEABIAAAAAEAUABAAAAAAAAgCAEAAAA=</HashCode>
+      <FileName>Manager\TradeManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Manager.UserManager" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQACBAAgAAACACBCSBBBIgBEAAAAABAAAgAAAAEBU=</HashCode>
+      <FileName>Manager\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.Dictionary" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAABAAAAQAAAAAAAAAMAACAEAAABAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.ListOrder" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GGUEwEgAowAAEBUIAAhBECgIJAAAQAAIAIAgwAYKEkA=</HashCode>
+      <FileName>Models\ListOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.PayBody" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAEAIAAAAAACAAAAAAAIgIAAAgAAIAEAQ=</HashCode>
+      <FileName>Models\PayBody.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.TokenObject" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAQAAAAAAAAAAAAAEABEAAAAAQgAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\UserAuth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.UserAuth" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIQAgMACAQhBACAAAABAAgEAAAggAAAgAAZAAAFBIwA=</HashCode>
+      <FileName>Models\UserAuth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.WxJsAPICache" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAACEAAAIAkQAiCAAAAAABAAIACAAIAAAAI=</HashCode>
+      <FileName>Models\WxJsAPICache.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.WxJSAPI.SuccessAccessToken" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Models\WxJSAPIObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.WxJSAPI.ErrorAccessToken" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Models\WxJSAPIObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.WxJSAPI.JsApiTicket" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Models\WxJSAPIObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.WxJSAPI.JsConfigObject" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAIAAAAACAAAAAAgAAAAQABAAAAAAAAAA=</HashCode>
+      <FileName>Models\WxJSAPIObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Models.WxJSAPI.JsPayConfigObject" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAIAAAAAAIBAAAAAAAAAAAAAAAIAABAAAAAAAAAA=</HashCode>
+      <FileName>Models\WxJSAPIObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.AliPay.AliPay" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAgAAAAgAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Pay\AliPay\AliPay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.AliPay.AliPayConfig" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACJASAYAAAAEAAAAEAAAJBAAAAAFAIEAAAACAAAA=</HashCode>
+      <FileName>Pay\AliPay\AliPayConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.AliPay.AliPayCore" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAACAAACAAAAAAABAAAAAAAAAAABAA=</HashCode>
+      <FileName>Pay\AliPay\AliPayCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.AliPay.AlipayMD5" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pay\AliPay\AliPayMD5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.AliPay.RSAFromPkcs8" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABAAAAAAAAAAAQkASAEAACAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Pay\AliPay\RSAFromPkcs8.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.AliPay.Submit" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAMgAAAAACAAgAAAAAAAAAAAACAIAAgAAA=</HashCode>
+      <FileName>Pay\AliPay\Submit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.GeneratorPay" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAACAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Pay\GeneratorPay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.HttpService" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAACAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pay\WxPay\HttpService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.Log" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAEACAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Pay\WxPay\Log.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.Notify" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Pay\WxPay\Notify.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.WxPayApi" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAACEAAAAAEACAAQAAAACAIAACBAAAiAAAABCA=</HashCode>
+      <FileName>Pay\WxPay\WxPayApi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.WxPayConfig" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIRgBAIAAAAAAAIACQAAAQAAgAASBABAA=</HashCode>
+      <FileName>Pay\WxPay\WxPayConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.WxPayData" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAIAAACAAAACCACAEICAAAAAAAAA=</HashCode>
+      <FileName>Pay\WxPay\WxPayData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Pay.WxPay.WxPayException" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pay\WxPay\WxPayException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.DES" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQACAAAAAAAAAAIAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Utility\DES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.MessageCode" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIoSGAmENPAAAAAAKAiAJBYgAgANGAAoGASAiQAAiAA=</HashCode>
+      <FileName>Utility\MessageCode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.PublicAPI" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAQAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\PublicAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.SqlExeUtility" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\SqlExeUtility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.SqlQueryUtility" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAgAAAAAAAAAAAAACACgAAAAAAAQAAAA=</HashCode>
+      <FileName>Utility\SqlQueryUtility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.Rand" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAQAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\ValidatedCode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RRL.Core.Utility.ValidatedCode" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAAAAAAAACAAACAmAEAgBgDgAABAiAACIAgACSAAA=</HashCode>
+      <FileName>Utility\ValidatedCode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="RRL.Core.IServiceBase&lt;T&gt;" Collapsed="true">
+    <Position X="2.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAACAAAABAAAAAAAQAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>IServiceBase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RRL.Core.IPagedList" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>PagedList.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="RRL.Core.DContext" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DbContextFactory.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

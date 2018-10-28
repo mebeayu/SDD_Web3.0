@@ -1,0 +1,656 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Assets/Sport/css/Index.css" />
+    <link rel="stylesheet" href="~/Assets/Dist/Styles/app.css" />
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js" type="text/javascript"></script>
+    <script src="~/Assets/global/plugins/layer-v3.1.1/layer/mobile/layer.js"></script>
+    <script src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js'></script>
+    <script src='~/Assets/Dist/Scripts/alert.js'></script>
+
+    <title>一步一红包</title>
+    <script>
+        // 页面适配解决
+        ; (function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+    </script>
+</head>
+<body>
+    <div class="sport-main">
+        <!--header begin-->
+        <div class="sport-top-header">
+            <a id="goGameHallBack" href="javascript:;" class="wj-back"><img src="~/Assets/Game/img/left.png"></a>
+            <h4>一步一个红包</h4>
+            <a id="shareSport" href="javascript:;"><img src="~/Assets/Game/img/gamehall-share.jpg"></a>
+        </div>
+        <div class="sport-bottom-header">
+            <div class="header-record">
+                <a href="~/Sport/Yrecord" class="header-record-a">
+                    <img class="record-icon" src="~/Assets/Sport/imgs/yrecord.png" alt="昨日战绩">
+                    <div class="record-explain">
+                        <span class="s-title">昨日战绩</span>
+                        <span class="s-explain">分享得一万红包</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-rule" id="jl-rule">
+                <!--弹框出来-->
+                <img class="rule-icon" src="~/Assets/Sport/imgs/rules.png" alt="奖励规则">
+                <span class="rule-explain s-title">奖励规则</span>
+            </div>
+        </div>
+        <!--header end-->
+
+        <!--center begin-->
+        <div class="sport-centerbar">
+            <div class="yjjc-content">
+                <div class="yjjc-title">
+                    <img class="yjjc-icon" src="~/Assets/Sport/imgs/yjjc.png" alt="有奖竞猜">
+                    <span class="h2">有奖竞猜</span>
+                    <!--点击收起-->
+                    <img  id="take-up" class="up-icon"  src="~/Assets/Sport/imgs/up.png" alt="收起">
+                </div>
+                <div id="take-up-conten">
+                    <p class="s-title">猜一猜今日你的步数为单数还是双数？</p>
+                    <p class="s-explain">（押10个金豆猜对+10猜错-10，请先押金豆）</p>
+                </div>
+            </div>
+
+            <div class="sport-stake">
+                <input id="ets" class="unbets" type="button"  >
+                <img  src="~/Assets/Sport/imgs/step.png" alt="下一步">
+                <div>
+                    <input id="odd-num"  class="ets-unselect"  type="button" value="单数"  disabled>
+                    <input id="even-num" class="ets-unselect"  type="button" value="双数"  disabled>
+                </div>
+                <input  id="btn-confirm" class="btn-unconfirmed"  type="submit" value="确认" disabled>
+            </div>
+
+            <div class="jd-num">
+                <span class="current-num s-explain">当前金豆 <i id="currentJd">45700</i></span>
+                <a id="buyGoldBean" href="javascript:void(0);">
+                    购买金豆<img src="~/Assets/Sport/imgs/jd-step.png" alt="购买金豆">
+                </a>
+            </div>
+        </div>
+        <!--center end-->
+        <!--content  begin-->
+        <div class="sport-content" >
+            <ul class="databar s-explain">
+                <li >
+                    <span id="prePreDate"></span>
+                </li>
+                <li>
+                    <i class="ty-icon"></i>
+                    <span id="preDate"></span>
+                </li>
+                <li  class="current-li">
+                    <i class="ty-icon"></i>
+                    <span id="currentDate"></span>
+                </li>
+            </ul>
+
+            <div class="step-content" >
+                <!--自己-->
+                <div class="step-list self-step">
+                    <div class="step-left">
+                        <span id="self-step-ranking" class="ranking s-explain"></span>
+                        <img  id="self-step-head"  class="step-head" onerror="this.src='/Assets/Source/img/默认图像.png'" alt=""/>
+                        <span id="self-step-name"  class="s-title step-title"></span>
+                    </div>
+                    <div class="step-right">
+                        <span class="step-num" id="self-step-num"><i class="icon-dowm"></i></span>
+                        <div class="give-zan">
+                            <p class="zan-num s-explain" id="self-step-zan"></p>
+                            <i class="icon-zan zan-red"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="step-content-list"  style="display:none"></ul>
+                <ul class="step-content-list"  style="display:none"></ul>
+                <ul class="step-content-list" id="cTimeSportRank">
+
+                    <!--<li class="step-list">-->
+                        <!--<div class="step-left">-->
+                            <!--<span class="ranking s-explain">2</span>-->
+                            <!--<img class="step-head" src="/Assets/Source/img/默认图像.png" alt="头像">-->
+                            <!--<span class="s-title step-title">北冥有鱼</span>-->
+                        <!--</div>-->
+                        <!--<div class="step-right">-->
+                        <!--<span class="step-num">-->
+                            <!--100000<i class="icon-dowm"></i>-->
+                        <!--</span>-->
+                            <!--<div class="give-zan lickto" data-user-id="121352">-->
+                                <!--<p class="zan-num s-explain"></p>-->
+                                <!--<i class="icon-zan zan-gray"></i>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+
+                </ul>
+            </div>
+            <!--点赞弹框-->
+            <div  id="lick-shadow" class="shadow2" style="display: none">
+                  <div class="likepage">
+                          <div class="likepage-title-box">
+                              <h3 class="likepage-title"><img  class="lick-list" src="~/Assets/Sport/imgs/like.png" alt="点赞记录">
+                                  点赞记录
+                                  <img  id='close' src="~/Assets/Sport/imgs/close.png" alt="关闭"></h3>
+                          </div>
+                          <ul class="likepage-content">
+                              <!--<li>-->
+                                  <!--<img src="~/Assets/Sport/imgs/s-head.png" alt="头像">-->
+                                  <!--<p>度六六刚刚给我点赞了</p>-->
+                                  <!--<input type="button" value="回赞"/>-->
+                              <!--</li>-->
+                          </ul>
+                      <div id="pullDown" style="display: none">
+                          <span>点击查看更多</span>
+                      </div>
+                      <div id="noData" style="display: none;">
+                          <span>数据已加载完 ......</span>
+                      </div>
+                  </div>
+            </div>
+
+        <!--content end-->
+    </div>
+    <script>
+        //出资的变量
+        var etsNu=10;
+        var token = localStorage.getItem('shorttoken');
+        $(function () {
+            $('#ets').val('押'+etsNu+'个金豆');
+            //分享兜兜运动
+            $("#shareSport").on("click", shareSport);
+            // 点击返回按钮 ===== 跳转至游戏大厅页面
+            $("#goGameHallBack").on("click", goGameHallPage);
+            //点击购买金豆
+            $("#buyGoldBean").on("click", buy_gold_bean);
+            //奖励规则
+            $('#jl-rule').on('click',jlRule);
+            //收起
+            $('#take-up').on('click',takeUP);
+            //出资金豆
+            $('#ets').on('click',Ets);
+            //用户竞猜出资
+            $('#btn-confirm').on('click',etsConfirm);
+            //目前金豆数量
+            currentJdNum();
+            //获取用户的兜兜运动竞猜数据
+            getSportDataAPI();
+            //获取用户的步数数据
+            userStepInfo();
+            //用户数排名
+            intSportDataRanking(curDate,2);
+            //初始化当天的排名数据
+            UserSportDataRanking();
+            //获取用户点赞和回赞分页数据
+            $('#self-step-zan').on('click',likePageDataByUser);
+            getTime();
+        });
+        /**
+         * 获取时间
+         */
+        Date.prototype.format = function (format) {
+            var args = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+
+                "S": this.getMilliseconds()
+            };
+            if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var i in args) {
+                var n = args[i];
+
+                if (new RegExp("(" + i + ")").test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? n : ("00" + n).substr(("" + n).length));
+            }
+            return format;
+        };
+        var curDate = new Date();
+        var prePreDate = new Date(curDate.getTime() - 48*60*60*1000).format("yyyy-MM-dd");
+        var preDate = new Date(curDate.getTime() - 24*60*60*1000).format("yyyy-MM-dd");
+        var currentDate=new Date().format("yyyy-MM-dd");
+        function getTime() {
+            $("#prePreDate").text(prePreDate);
+            $("#preDate").text(preDate);
+            $("#currentDate").text(currentDate);
+        }
+        /**
+         * 初始化当天的排名数据
+         */
+        var time='';
+        var boxNum=0;
+        var userId=[];
+        function intSportDataRanking(time,boxNum) {
+            $.get('/WebApi/Sports/UserSportDataRanking',{token:token,date:time},function (res) {
+                if(res.status==0){
+                    for(var i in  res.data){
+                        var obj=res.data[i];
+                        if(obj.ranking==1){
+                            obj.ranking='<img src="../Assets/Sport/imgs/fist-step.png" alt="第一名">';
+                        }
+                        if(obj.ranking==2){
+                            obj.ranking='<img src="../Assets/Sport/imgs/second-head.png" alt="第二名">';
+                        }
+                        if(obj.ranking==3){
+                            obj.ranking='<img src="../Assets/Sport/imgs/3-head.png" alt="第三名">';
+                        }
+                        if(obj.is_allow_like==1){
+                            var tolickDom='<i class="icon-zan zan-gray"></i>';
+                        }
+                        if(obj.is_allow_like==0){
+                            var tolickDom='<i class="icon-zan zan-gray zan-red"></i>';
+                        }
+                        var clickEvent = '';
+                        if (boxNum == 2) {
+                            clickEvent = 'onclick="userToLike(this, ' + obj.uid + ');"';
+                        }
+                        var str = '<li class="step-list"> ' +
+                                  '  <div class="step-left">' + 
+                                  '    <span class="ranking s-explain">' + obj.ranking + '</span> ' + 
+                                  '    <img class="step-head" src="/SWebApi/Public/picture/' + obj.head_pic + '.jpg" alt="头像"> ' + 
+                                  '    <span class="s-title step-title">' + obj.username + '</span> ' + 
+                                  '  </div>'+
+                                  '  <div class="step-right"> ' + 
+                                  '    <span class="step-num">' + obj.step + ' <i class="icon-dowm"></i></span>' + 
+                                  '    <div class="lickto give-zan" '+ clickEvent +'> ' + 
+                                  '      <p class="zan-num s-explain">' + obj.like_count + '</p> ' + tolickDom + '</div>' + 
+                                  '  </div>' + '</li>';
+                        $('.step-content-list').eq(boxNum).append(str);
+                    }
+                }
+            })
+        }
+        /**
+         * 按日期获取用户运动数据排名
+         */
+         function UserSportDataRanking() {
+            $('.databar li').each(function (index) {
+                var stepConUl=$('.step-content ul');
+                $(this).click(function () {
+                    $(this).addClass('current-li').siblings().removeClass('current-li');
+                    stepConUl.eq(index).show().siblings('.step-content ul').hide();
+                    time=$(this).text();
+                    boxNum=index;
+                    var stenCon=stepConUl.html();
+                    if(index==2){
+                        var cTimeSportRank=$('#cTimeSportRank');
+                        if(cTimeSportRank.length>0){
+                            cTimeSportRank.empty();
+                            intSportDataRanking(time,boxNum);
+                        }
+                    }else{
+                        if(stenCon.length==''){
+                            intSportDataRanking(time,boxNum);
+                        }
+                    }
+                    userStepInfo(time);
+                });
+            });
+         }
+        /**
+         * 用户点赞操作
+       */
+        function userToLike(obj, to_uid) {
+            $.get('/WebApi/Sports/UserToLike', { token: token, to_uid: to_uid, type: '0' }, function (res) {
+                if (res.status == 0) {
+                    var jqLikeNum = $(obj).find('p.zan-num');
+                    var lickCont = parseInt(jqLikeNum.text());
+                    jqLikeNum.text(++lickCont);
+
+                    jqLikeNum.next('.zan-gray').addClass('zan-red');
+                }
+                if (res.status == -1) {
+                    alert('今天已经点过赞了');
+                }
+            });
+        }
+        /**
+         * 用户回赞操作
+       */
+        function userReplayLike(jqBtnReplay) {
+            $.get('/WebApi/Sports/UserToLike', { token: token, to_uid: jqBtnReplay.attr("dataid"), type: '1' }, function (res) {
+                if (res.status == 0) {
+                    jqBtnReplay.css('background-color', '#D3D8DF');
+                    jqBtnReplay.val("已回赞");
+                }
+                if (res.status == -1) {
+                    alert('今天已经回赞了');
+                }
+            });
+        }
+        /**
+         * 获取用户点赞和回赞分页数据
+         */
+        $('#pullDown').on('click',function () {
+            LikePageData();
+        });
+        var pageCount = 1;
+        function likePageDataByUser() {
+            var currentDate = new Date().format("yyyy-MM-dd");
+            var time = $(".current-li span").text();
+            if (currentDate != time) {
+                return;
+            }
+
+            var lickShadow=$('#lick-shadow');
+            lickShadow.css('display','block');
+            $('#close').on('click',function () {lickShadow.css('display','none'); });
+
+            if ($(".likepage-content li").length == 0) {
+                LikePageData();
+            }
+        }
+        
+        function LikePageData() {
+            var time = $(".current-li span").text();
+            $.get('/WebApi/Sports/LikePageDataByUser',
+                { token: token, pageIndex: pageCount, pageSize: 5, date: time }, function (res) {
+                        if(res.status==0){
+                            pageCount++;
+                            var data=res.data;
+                            for(var i in data){
+                                var obj=data[i];
+                               
+                                if (obj.is_allow_replay == 1) {
+                                    var strLikeType = '回赞';
+                                }
+                                else {
+                                    var strLikeType = '已回赞';
+                                }
+
+                                var jqReturnZan = $('<input class="likeType" type="button" value="' + strLikeType + '" dataid="' + obj.from_uid + '" />');
+                                var jqLi = $('<li><img src="/SWebApi/Public/picture/' + obj.head_pic + '.jpg" alt="头像"> <p>' + obj.username + '刚刚点赞我</p></li>');
+                                jqLi.append(jqReturnZan);
+
+                                if(pageCount>1){
+                                    $('#pullDown').css('display','block');
+                                }
+                                if(data.length < 4){
+                                    $('#pullDown').css('display','none');
+                                    $("#noData").css("display","block");
+                                }
+
+                                if (obj.is_allow_replay == 1) {
+                                    jqReturnZan.css('background-color', '#65c4aa');
+                                    jqReturnZan.on('click', function () {
+                                        // 回赞操作
+                                        userReplayLike($(this));
+                                    })
+                                }
+                                else {
+                                    jqReturnZan.css('background-color', '#D3D8DF');
+                                }
+                              
+                                $('.likepage-content').append(jqLi);
+                            }
+                        }else{
+                            alert(res.message);
+                        }
+                    })
+        }
+        /**
+         * 获取用户的步数数据
+         */
+        function userStepInfo(time) {
+            $.get('/WebApi/Sports/UserSportData',{token: token,date:time},function (res) {
+                if(res.status==0){
+                    var data=res.data;
+                    $("#self-step-ranking").html(data.ranking);
+                    var str='/SWebApi/Public/picture/'+data.head_pic+'.jpg';
+                    $("#self-step-head").attr('src',str);
+                    $("#self-step-name").html(data.username);
+                    $("#self-step-num").html(data.step);
+                    $("#self-step-zan").html(data.like_count);
+                }else{
+                    alert(res.message);
+                }
+            })
+        }
+        /**
+         * 获取用户的兜兜运动竞猜数据
+         */
+        function getSportDataAPI() {
+            $.post('/WebApi/Sports/UserGuessData',
+                 {"token": token},function (res) {
+                if(res.status==0){
+                    var data=res.data;
+                    if(data!==null){
+                        var btnConfirm=$('#btn-confirm'),oddNum=$('#odd-num'),evenNum=$('#even-num'),ets=$('#ets');
+                        btnConfirm.val('已出资').attr('disabled','true').removeClass('btn-confirmed');
+                        ets.addClass('bets').attr('disabled','true');
+                        if(data.forecast_result==1){
+                            oddNum.addClass('ets-selected');
+                        }
+                        if(data.forecast_result==2){
+                            evenNum.addClass('ets-selected');
+                        }
+                        if(data.money==10){
+                            ets.val('押10个金豆');
+                        }
+                    }
+                }else{
+                    alert(res.message);
+                }
+            })
+        }
+        var exp;
+        var num=false;
+        function Ets() {
+            var ets=$('#ets'), btnConfirm=$('#btn-confirm'),etsUnselect=$('.ets-unselect');
+            if(num==false){
+                ets.addClass('bets');
+                etsUnselect.addClass('ets-select').removeAttr('disabled');
+                etsUnselect.on('click',function () {
+                    $(this).addClass('ets-selected').siblings().removeClass('ets-selected');
+                    btnConfirm.removeAttr('disabled').addClass('btn-confirmed');
+                });
+                num=true;
+            }else{
+                ets.removeClass('bets');
+                etsUnselect.removeClass('ets-select').attr('disabled','true').removeClass('ets-selected');
+                btnConfirm.removeClass('btn-confirmed').attr('disabled',true);
+                num=false;
+            }
+        }
+        function etsConfirm() {
+            var Ets=etsNu;
+            var exp=$('.ets-selected').val();
+            var Num=(exp=='单数')?1:2;
+            $.post('/WebApi/Sports/UserGuessBetting',
+                    {token:token,money:Ets,forecast:Num},
+                    function (res){
+                    if(res.status==0){
+                        getSportDataAPI();
+                    }
+                    if(res.status==-101){
+                        alert('金豆余额不足');
+                    }
+                    if(res.status==-999){
+                        alert('今天已经参与了竞猜');
+                    }
+            })
+        }
+        /**
+         * 金豆数量
+         */
+         function currentJdNum() {
+            $.post('/WebApi/Game/GetUserInfo',{token:token},function (res) {
+                if(res.status==0){
+                    var data=res.data;
+                    $("#currentJd").text(data.h_money);
+                }else{
+                    alert(res.message);
+                }
+            })
+        }
+        /**
+         * 奖励规则
+         */
+        function jlRule() {
+            confirm("<ul><li><img src='/Assets/Sport/imgs/yjjc.png' alt='有奖竞猜'>奖励规则</li><li>1、用户每走一步奖励1免费红包，每位用户每天最多能领取按步数奖励的1.2万免费红包。</li><li>2、用户每获得1个赞，奖励100免费红包，用户每日赞的奖励最高不超过1万免费红包。</li><li>3、用户每日首次分享战绩到朋友圈或微信好友，奖励1万免费红包。</li><li>4、用户每日可押10金豆猜自己明天步数的单双，猜对了返还押金10金豆，再奖励10金豆，猜错了扣除押金10金豆，不奖励金豆。</li><li>5、所有用户的红包都是省兜兜平台免费发放给玩家的福利，不能通过充值获取，不能用于交易，最终解释权归省兜兜所有。</li></ul>", function () {
+            });
+        }
+        /**
+         * 有奖竞猜折叠
+         */
+        function takeUP() {
+            let takeUpConten=$('#take-up-conten');takeUpConten.toggle();
+        }
+        /**
+         * 跳转至休闲游戏区
+         */
+        function goGameHallPage() {
+            window.location.href = "/#/GameHall?token=" + encodeURIComponent(token);
+        }
+        /**
+         * 分享兜兜运动
+         */
+        function shareSport() {
+            window.location.href = "/Event/SharingGuide?token=" + encodeURIComponent(token) + "&redirect=" + encodeURIComponent(location.href);
+        }
+        /**
+         * 点击购买金豆
+         */
+        function buy_gold_bean() {
+            window.location.href = "/Game/PeasPay?token=" + encodeURIComponent(token) + "&redirect=" + encodeURIComponent(location.href);
+        }
+    </script>
+    </div>
+</body>
+</html>

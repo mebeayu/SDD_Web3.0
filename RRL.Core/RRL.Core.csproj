@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0AC2A711-08F6-47F9-B1FF-CB562EA22D96}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RRL.Core</RootNamespace>
+    <AssemblyName>RRL.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alipay.AopSdk.2.0.0\lib\net35\AopSdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyHttp, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyHttp.1.7.0\lib\net40\EasyHttp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Jiguang.JPush, Version=1.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jiguang.JPush.1.1.5\lib\net45\Jiguang.JPush.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LitJson, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LitJson.0.9.0\lib\LitJson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MarkdownDeep, Version=1.5.4615.26275, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MarkdownDeep.NET.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QRCoder, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.3.2\lib\net40\QRCoder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.3.2\lib\net40\UnityEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseController.cs" />
+    <Compile Include="DbContextFactory.cs" />
+    <Compile Include="External\AliSMS.cs" />
+    <Compile Include="External\AliSMSTemplateObject.cs" />
+    <Compile Include="External\KuaiDi100.cs" />
+    <Compile Include="IServiceBase.cs" />
+    <Compile Include="Manager\MessageManager.cs" />
+    <Compile Include="Manager\PushbindingManager.cs" />
+    <Compile Include="Manager\SddCardManager.cs" />
+    <Compile Include="Manager\SkillRemindManager.cs" />
+    <Compile Include="Manager\TradeManager.part3.cs" />
+    <Compile Include="Manager\TradeManager.part2.cs" />
+    <Compile Include="Manager\ShopManager.part1.cs" />
+    <Compile Include="Manager\UserManager.part_zetee.cs" />
+    <Compile Include="Models\rrl_sddcard_order.cs" />
+    <Compile Include="Models\rrl_sddcard_owner.cs" />
+    <Compile Include="Push\JPush.cs" />
+    <Compile Include="Manager\AuthManager.cs" />
+    <Compile Include="Manager\ConfigManager.cs" />
+    <Compile Include="Manager\EventManager.cs" />
+    <Compile Include="Manager\GameManager.cs" />
+    <Compile Include="Manager\SportsManager.cs" />
+    <Compile Include="Manager\HelpManager.cs" />
+    <Compile Include="Manager\GameManager.part1.cs" />
+    <Compile Include="Push\IAppPush.cs" />
+    <Compile Include="Manager\PublicManager.cs" />
+    <Compile Include="Manager\ShopManager.cs" />
+    <Compile Include="Manager\TestManager.cs" />
+    <Compile Include="Manager\TradeManager.cs" />
+    <Compile Include="Manager\TradeManager.part1.cs" />
+    <Compile Include="Manager\UserManager.part2.cs" />
+    <Compile Include="Manager\UserManager.part1.cs" />
+    <Compile Include="Manager\UserManager.cs" />
+    <Compile Include="Models\ApplyPayV3_SumPay.cs" />
+    <Compile Include="Models\BussResult.cs" />
+    <Compile Include="Models\Dictionary.cs" />
+    <Compile Include="Models\Goods_Coupons_Config.cs" />
+    <Compile Include="Models\ListOrder.cs" />
+    <Compile Include="Models\PayBody.cs" />
+    <Compile Include="Models\PlateStatistic.cs" />
+    <Compile Include="Models\SearchInfo.cs" />
+    <Compile Include="Models\WxJsAPICache.cs" />
+    <Compile Include="Models\WxJSAPIObject.cs" />
+    <Compile Include="Models\WxMpMessage.cs" />
+    <Compile Include="PagedList.cs" />
+    <Compile Include="Pay\AliPay\AliPay.cs" />
+    <Compile Include="Pay\AliPay\AliPayConfig.cs" />
+    <Compile Include="Pay\AliPay\AliPayCore.cs" />
+    <Compile Include="Pay\AliPay\AliPayMD5.cs" />
+    <Compile Include="Pay\AliPay\RSAFromPkcs8.cs" />
+    <Compile Include="Pay\AliPay\Submit.cs" />
+    <Compile Include="Pay\GeneratorPay.cs" />
+    <Compile Include="Pay\WxPay\HttpService.cs" />
+    <Compile Include="Pay\WxPay\Log.cs" />
+    <Compile Include="Pay\WxPay\Notify.cs" />
+    <Compile Include="Pay\WxPay\WxPayApi.cs" />
+    <Compile Include="Pay\WxPay\WxPayConfig.cs" />
+    <Compile Include="Pay\WxPay\WxPayData.cs" />
+    <Compile Include="Pay\WxPay\WxPayException.cs" />
+    <Compile Include="Preprocessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="ServiceGlobal.cs" />
+    <Compile Include="Tables\Shop_Cart.cs" />
+    <Compile Include="Utility\DatetimeHelper.cs" />
+    <Compile Include="Utility\DES.cs" />
+    <Compile Include="Utility\MessageCode.cs" />
+    <Compile Include="Utility\PublicAPI.cs" />
+    <Compile Include="Models\UserAuth.cs" />
+    <Compile Include="Utility\SqlExeUtility.cs" />
+    <Compile Include="Utility\SqlQueryUtility.cs" />
+    <Compile Include="Utility\ValidatedCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{FFAB3ED2-C51F-4BBB-9C5C-F1F5B5C3CF35}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RRL.Config\RRL.Config.csproj">
+      <Project>{E85C91AA-3CD3-4046-87DC-4074845A61B0}</Project>
+      <Name>RRL.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RRL.DB\RRL.DB.csproj">
+      <Project>{6f66fc0b-60f7-4f7b-8e74-42d91ad419ba}</Project>
+      <Name>RRL.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RRL.EF\RRL.EF.csproj">
+      <Project>{D0C1450E-3F5B-4B49-AC05-F1A2FBFD8824}</Project>
+      <Name>RRL.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vendor\aliyun-net-sdk-core\aliyun-net-sdk-core.csproj">
+      <Project>{bb84cecb-295d-4772-a669-3726e511ccfa}</Project>
+      <Name>aliyun-net-sdk-core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vendor\aliyun-net-sdk-dysmsapi\aliyun-net-sdk-dysmsapi.csproj">
+      <Project>{5012802c-da46-44c8-8f40-741022e5bbd7}</Project>
+      <Name>aliyun-net-sdk-dysmsapi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="ClassDiagram.cd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

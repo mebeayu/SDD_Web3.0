@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "payway";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Assets/Dist/Styles/app.css?ver=@RRL.WEB.App_Start.AppUtils.Ver" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div class="back-page-btn" id="carttop">
+            <img src="/Assets/Source/img/返回@3x.png" v-on:click="back" />
+            <p>选择支付方式</p>
+        </div>
+        <div class="totalcash">
+            需支付：<span id="gggcash"></span>元
+        </div>
+        <ul class='chosepayway'>
+            <li>
+                <img src="~/Assets/Source/img/wxpay.png" />
+                <div>
+                    <p>微信支付</p>
+                    推荐安装微信5.0以上版本的用户使用
+                </div>
+                <input type='radio' value='wx' name='picked' />
+            </li>
+            <li>
+                <img src="~/Assets/Source/img/jinbipay.png" />
+                <div>
+                    <p>钱包支付</p>
+                    你的钱包余额为:<span id='walletcash'></span>
+                </div>
+                <input type='radio' name="picked" value="wallet" id='usewallet' />
+            </li>
+            <li>
+                <img src="~/Assets/Source/img/glodbean.png" />
+                <div>
+                    <p>金豆支付(100金豆 = 1元)</p>
+                    你的金豆余额为：<span id='jdcash'></span>
+                </div>
+                <input type='radio' value="goldbean" id='usejd' name='picked' />
+            </li>
+        </ul>
+        <div class="paybtnaa">
+            <input type="button" value="立即支付" onClick="pay()" />
+        </div>
+    </div>
+    <script src="~/Assets/Event/jquery-3.2.1.min.js"></script>
+    <script>
+        var request;
+        function GetRequest() {
+
+            var url = location.search; //获取url中含"?"符后的字串
+
+            var theRequest = new Object();
+
+            if (url.indexOf("?") != -1) {
+
+                var str = url.substr(1);
+
+                strs = str.split("&");
+
+                for (var i = 0; i < strs.length; i++) {
+
+                    theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+
+                }
+
+            }
+
+            return theRequest;
+
+        }
+
+        request = GetRequest()
+        console.log(request);
+        $('#walletcash').text(request.wallet);
+        $('#jdcash').text(request.jd);
+        $('#gggcash').text(request.cash);
+
+        var canusejindou, canusetuikuan;
+
+        if (request.cash >= 88) {
+            console.log(request.jd / 100 < request.cash)
+            parseFloat(request.jd) / 100 < parseFloat(request.cash) ? $('#usejd').attr('disabled', 'disabled') : canusejindou = true;
+            parseFloat(request.wallet) < parseFloat(request.cash) ? $('#usewallet').attr('disabled', 'disabled') : canusetuikuan = true;
+            console.log(canusejindou)
+        } else {
+            console.log(request.cash + 12)
+            parseFloat(request.jd / 100) < parseFloat(request.cash) + 12 ? $('#usejd').attr('disabled', 'disabled') : canusejindou = true;
+            parseFloat(request.wallet) < parseFloat(request.cash) + 12 ? $('#usewallet').attr('disabled', 'disabled') : canusetuikuan = true;
+        }
+
+
+        function pay() {
+            var way = $('input[name = "picked"]:checked').val();
+            const that = this
+            switch (way) {
+                case 'wx':
+                    const rec = sessionStorage.getItem('recommand')
+                    window.location.href = '/WxJsPay/?orderlist=' + request.list + '&discount=0&token=' + encodeURIComponent(request.token) + '&sperador=';
+                    break;
+                case 'wallet':
+                    $.ajax({
+                        url: 'WebApi/TradeManager/ApplyPayVer2?orderlist=' + request.list + '&discount=0&trans_type=3&token=' + encodeURIComponent(request.token),
+                        type: 'get',
+                        success: function (data) {
+                            if (data.status == 0) {
+                                alert('支付成功')
+                                window.location.href = '/#/order/0';
+                            } else {
+                                alert(data.message)
+                            }
+                        }
+                    })
+                    break;
+                case 'goldbean':
+                    $.ajax({
+                        url: 'WebApi/TradeManager/ApplyPayVer2?orderlist=' + request.list + '&discount=0&trans_type=5&token=' + encodeURIComponent(request.token),
+                        type: 'get',
+                        success: function (data) {
+                            if (data.status == 0) {
+                                alert('支付成功')
+                                window.location.href = '/#/order/0';
+                            } else {
+                                alert(data.message)
+                            }
+                        }
+                    })
+                    break;
+            }
+            console.log(way);
+        }
+    </script>
+    <script src='~/Assets/Dist/Scripts/fit.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+</body>
+</html>

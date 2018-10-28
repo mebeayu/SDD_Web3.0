@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+				<title>关于商品价格的说明</title>
+        		<link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css" />
+        		<style>
+        			.price-instructions-head{
+        				font-size: 16px;
+                        text-align: center;
+                        padding: 10px;
+                        color: #555;
+                        line-height: 24px;
+                        border-bottom: 1px solid #dadada;
+        			}
+        			.price-instructions-box{
+        			  padding: 10px;
+        			}
+        			.price-instructions-til,.price-instructions-text{
+                            font-size: 14px;
+                            color: #666;
+                            line-height: 24px;
+        			}
+        			.price-instructions-text{
+        			text-indent: 16px;
+        			}
+        			/* 返回上一页 */
+                    .goback-page{
+                        position: absolute;
+                        top: .5rem;
+                        left: .5rem;
+                        width: 3rem;
+                        height: 3rem;
+                    }
+                    .goback-page img{
+                        display: block;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+        		</style>
+        	</head>
+
+        	<body>
+        	<div class="goback-page">
+                <img src="/Assets/Source/img/goback.png" id="goBackPage" />
+            </div>
+        	<h5 class="price-instructions-head">关于商品价格的说明</h5>
+            <div class="price-instructions-box">
+               <p class="price-instructions-til">各位尊敬的省兜兜用户：</p>
+                           <p class="price-instructions-text">省兜兜平台一直秉承“品质好货，轻松赚钱”的理念，所有平台商品都是来自正规品牌和厂家，经过层层筛选，严格把关，品质保证。故平台商品的价格只与*猫、*东等平台的品牌自营店正品比价，不与*宝代购、贴牌、不明进货渠道商家比价，还望各位会员知悉。感谢大家都省兜兜一直以来的支持，我们会努力做得更好，回馈您的厚爱！</p>
+            </div>
+            </body>
+
+            <script type="text/javascript">
+
+                /* 返回上一页代码实现 */
+                ;(function(){
+                  var goBackPage = document.getElementById("goBackPage");
+                  goBackPage.addEventListener("click",function(){
+                     window.history.go(-1);
+                  },false);
+                })();
+
+            </script>
+
+</html>

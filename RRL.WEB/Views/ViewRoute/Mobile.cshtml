@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html  lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="//kefu.easemob.com/webim/easemob.js?configId=c79d25e0-b2a2-4908-81cb-2c04d26f8e73"></script>
+    <link href="~/Assets/dists/mobile_frontend/styles.bundle.css" rel="stylesheet" />
+</head>
+<body>
+    <app-root></app-root>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+    <script>
+        window.easemobim = window.easemobim || {};
+        easemobim.config = {
+            hide: true,
+            autoConnect: true
+        };
+    </script>
+    <script src="//kefu.easemob.com/webim/easemob.js"></script>
+    <script src="~/Assets/dists/mobile_frontend/inline.bundle.js"></script>
+    <script src="~/Assets/dists/mobile_frontend/polyfills.bundle.js"></script>
+    <script src="~/Assets/dists/mobile_frontend/vendor.bundle.js"></script>
+    <script src="~/Assets/dists/mobile_frontend/main.bundle.js"></script>
+    <script src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js'></script>
+</body>
+</html>
