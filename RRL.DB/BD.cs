@@ -124,7 +124,7 @@ namespace RRL.DB
                 int res = sm.ExecuteNonQuery();
                 return res;
             }
-            catch
+            catch (Exception e)
             {
                 return -1;
             }
