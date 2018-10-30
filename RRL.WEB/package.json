@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@xkeshi/vue-qrcode": "^0.3.0",
+    "ajv": "^6.5.4",
     "alloyfinger": "^0.1.8",
     "axios": "^0.16.2",
     "bootstrap-sass": "^3.3.7",
@@ -39,5 +40,8 @@
     "lodash": "^4.17.4",
     "swiper": "^3.4.1",
     "vue-lazyload": "^1.2.2"
-  }
+  },
+  "main": "webpack.mix.js",
+  "keywords": [],
+  "license": "ISC"
 }

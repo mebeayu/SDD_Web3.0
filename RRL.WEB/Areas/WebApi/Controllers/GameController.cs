@@ -850,11 +850,13 @@ AND end_at > '{timestr}'");
                     DataSet ds = null;
                     int Min_Game_Play_Count = 20;//最小游戏局数
                     int PlayCountToday = 0;//今天玩的游戏局数
-                    //ds = db.ExeQuery($@"select [Value] from rrl_config where Item='Min_Game_Play_Count'");
-                    //if (ds.Tables[0].Rows.Count > 0)
-                    //{
-                    //    Min_Game_Play_Count = int.Parse(ds.Tables[0].Rows[0][0].ToString());
-                    //}
+
+                    double rateof_vmoney_to_needplay = 1.5;
+                    ds = db.ExeQuery($@"select [Value] from rrl_config where Item='rateof_vmoney_to_needplay'");
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        rateof_vmoney_to_needplay = double.Parse(ds.Tables[0].Rows[0][0].ToString());
+                    }
                     string today = DateTime.Now.ToString("yyyy-MM-dd");
                     ds = db.ExeQuery($@"select count from game_user_daily_count where uid={user.id} and date='{today}'  and active=1");
                     if (ds != null && ds.Tables[0].Rows.Count > 0) PlayCountToday = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
@@ -890,7 +892,7 @@ AND end_at > '{timestr}'");
                                 var money = Convert.ToInt32(dr["money"]);
                                 //最少次数限制
                                 Min_Game_Play_Count = Convert.ToInt32(dr["min_play_count"]);
-                                if(PlayCountToday< Min_Game_Play_Count)//今天玩的局数小于了红包要求的局数
+                                if (PlayCountToday < Min_Game_Play_Count)//今天玩的局数小于了红包要求的局数
                                 {
                                     db.Close();
                                     result = DataResult.InitFromMessageCode(MessageCode.ERROR_UNKONWN);
@@ -932,18 +934,21 @@ AND end_at > '{timestr}'");
                                             db.ExeCMD($@"update rrl_user set h_money_free = isnull(h_money_free,0) + {money},has_received_daily_free_h_money = 1, last_random_h_money_time = getdate() where id = {user.id}");
                                         }
                                         else if (intMoneyType == 2)
-                                        {
+                                        {//rateof_vmoney_to_needplay
                                             double h_money_pay = 0;
-                                            ds = db.ExeQuery($@"select h_money_pay from rrl_user where id={user.id}");
+                                            ds = db.ExeQuery($@"select h_money_pay,need_play_conut from rrl_user where id={user.id}");
                                             if (ds != null && ds.Tables[0].Rows.Count > 0) h_money_pay = Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
-                                            int NeedPlayCount = Convert.ToInt32((h_money_pay / 1.5));//所需局数转换条件为V红包金额/1.5
-                                            if (PlayCountToday> NeedPlayCount)
+                                            int NeedPlayCount = Convert.ToInt32(ds.Tables[0].Rows[0][1].ToString());//
+                                            if (PlayCountToday>= NeedPlayCount)
                                             {
                                                 //达到条件，把V红包自动转金豆
+                                                
                                                 db.ExeCMD($@"update rrl_user set h_money=h_money+h_money_pay where id={user.id}");
                                             }
+                                            int new_need_play_conut = Convert.ToInt32(h_money_pay / rateof_vmoney_to_needplay);
+                                            if (new_need_play_conut == 0) new_need_play_conut = 1;
                                             // 更新小红包数额
-                                            db.ExeCMD($@"update rrl_user set h_money_pay = {money},has_received_daily_free_h_money = 1, last_random_h_money_time = getdate() where id = {user.id}");
+                                            db.ExeCMD($@"update rrl_user set h_money_pay = {money},has_received_daily_free_h_money = 1,need_play_conut={new_need_play_conut}, last_random_h_money_time = getdate() where id = {user.id}");
                                             //更新游戏局数
                                             db.ExeCMD($@"update game_user_daily_count set count = 0 where uid = {user.id} and date='{today}'");
                                         }
