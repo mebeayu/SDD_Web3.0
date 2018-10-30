@@ -945,7 +945,7 @@ AND end_at > '{timestr}'");
                                                 
                                                 db.ExeCMD($@"update rrl_user set h_money=h_money+h_money_pay where id={user.id}");
                                             }
-                                            int new_need_play_conut = Convert.ToInt32(h_money_pay / rateof_vmoney_to_needplay);
+                                            int new_need_play_conut = Convert.ToInt32(money / rateof_vmoney_to_needplay);
                                             if (new_need_play_conut == 0) new_need_play_conut = 1;
                                             // 更新小红包数额
                                             db.ExeCMD($@"update rrl_user set h_money_pay = {money},has_received_daily_free_h_money = 1,need_play_conut={new_need_play_conut}, last_random_h_money_time = getdate() where id = {user.id}");
