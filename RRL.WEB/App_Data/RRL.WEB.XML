@@ -546,7 +546,7 @@
         </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IsHaveRandomRedBag">
             <summary>
-            查询是否有分时段红包，返回数据data：true/false
+            查询是否有分时段红包，返回数据data为红包金额如果等于0没有红包；大于0有红包
             </summary>
             <returns></returns>
         </member>

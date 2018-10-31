@@ -815,7 +815,7 @@ AND end_at > '{timestr}'");
             return result;
         }
         /// <summary>
-        /// 查询是否有分时段红包，返回数据data：true/false
+        /// 查询是否有分时段红包，返回数据data为红包金额如果等于0没有红包；大于0有红包
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -825,20 +825,27 @@ AND end_at > '{timestr}'");
             var db = new RRLDB();
             DataResult result = DataResult.InitFromMessageCode(MessageCode.SUCCESS);
             var timestr = DateTime.Now.GetDateTimeFormats('T')[0];
-            DataSet ds = db.ExeQuery($@"select count(*)
+            DataSet ds = db.ExeQuery($@"select money
                                               from spreader_queue
                                              where (start_at < '{timestr}')
                                                and (end_at > '{timestr}') and (money > 0)");
             if (ds == null)
             {
-                result.data = false;
+                result.data = -1;
                 result.message = "查询错误";
                 db.Close();
                 return result;
             }
-            var count = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-            if(count>0) result.data = true;
-            else result.data = false;
+            if(ds.Tables[0].Rows.Count==0)
+            {
+                result.data = 0;
+                result.message = "现在没有可领取的红包";
+                db.Close();
+                return result;
+            }
+            double money = Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+            result.message = "新红包";
+            result.data = money;
             return result;
         }
 
