@@ -4,6 +4,31 @@
         <name>RRL.WEB</name>
     </assembly>
     <members>
+        <member name="M:RRL.WEB.App_Start.HttpModule.Dispose">
+            <summary>  
+            处置由实现 System.Web.IHttpModule 的模块使用的资源（内存除外）  
+            </summary>  
+        </member>
+        <member name="M:RRL.WEB.App_Start.HttpModule.Init(System.Web.HttpApplication)">
+            <summary>  
+            初始化模块，并使其为处理请求做好准备。  
+            </summary>  
+            <param name="context"></param>  
+        </member>
+        <member name="M:RRL.WEB.App_Start.HttpModule.context_EndRequest(System.Object,System.EventArgs)">
+            <summary>  
+            在 ASP.NET 响应请求时作为 HTTP 执行管线链中的最后一个事件发生。  
+            </summary>  
+            <param name="sender"></param>  
+            <param name="e"></param>  
+        </member>
+        <member name="M:RRL.WEB.App_Start.HttpModule.context_BeginRequest(System.Object,System.EventArgs)">
+            <summary>  
+            在 ASP.NET 响应请求时作为 HTTP 执行管线链中的第一个事件发生。  
+            </summary>  
+            <param name="sender"></param>  
+            <param name="e"></param>  
+        </member>
         <member name="T:RRL.WEB.Areas.WebApi.Controllers.EventManagerController">
             <summary>
             活动API
@@ -19,551 +44,116 @@
             <param name="address">地址</param>
             <returns>结果对象</returns>
         </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.GameController">
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.BaseApiController">
             <summary>
-            游戏API
+            Web API基类
             </summary>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.AddFavouriteGoodsByGet(RRL.WEB.Models.Request.BaseTokenRequest)">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.BaseApiController.CheckToken(RRL.WEB.Models.Request.BaseTokenRequest,RRL.Core.Models.UserAuth@)">
             <summary>
-            获取用户信息
+            Token校验
             </summary>
-            <param name="request">qingqiu</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.Lottery(RRL.WEB.Areas.WebApi.Controllers.LotteryRequest)">
-            <summary>
-            开奖
-            </summary>
-            <param name="request">开奖请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SetState(RRL.WEB.Areas.WebApi.Controllers.SetStateRequest)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetLogs(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            获取用户往期开奖数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.FirstHongFreeMoneyRequest(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            首次进入游戏红包奖励
-            </summary>
-            <param name="request">基础token请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.DailyHongFreeMoneyRequest(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            每日红包奖励
-            </summary>
-            <param name="request">基础token请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetAddLogs">
-            <summary>
-            获取最近10条红包记录
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.BuyQuan(RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest)">
-            <summary>
-            购买卡券(获取卡券待支付订单列表)
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.ApplyCouponPay(System.String,System.String,System.Int32,System.String)">
-            <summary>
-            申请卡券支付（APP）
-            </summary>
-            <param name="coupon_list">预支付卡券列表</param>
-            <param name="token">短效令牌</param>
-            <param name="trans_type">交易类型1：微信，2：支付宝</param>
-            <param name="ip">客户ip</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetKaQuanList">
-            <summary>
-            获取卡券列表
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshPer(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            针对个人发放红包
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshTimeSpreader(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            刷新分享次数
-            </summary>
-            <param name="request">基础令牌请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshTimeRandom(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            领取时段随机红包
-            </summary>
-            <param name="request">基础令牌请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.FiveSpreaderGroup(RRL.WEB.Models.Request.BaseTokenRequest)">
-            <summary>
-            领取5人一组红包
-            </summary>
-            <param name="request">基础token请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.lotty(RRL.Core.Models.UserAuth,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,System.Object@)">
-            <summary>
-            开奖
-            </summary>
-            <param name="user"></param>
-            <param name="free"></param>
-            <param name="zs"></param>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest">
-            <summary>
-            代金券购买请求
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.id">
-            <summary>
-            购买卡券id
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.num">
-            <summary>
-            购买数量
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.token">
-            <summary>
-            短效令牌
-            </summary>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel">
-            <summary>
-            代金券模型
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.id">
-            <summary>
-            卡券标识
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goodsid">
-            <summary>
-            商品id
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.money">
-            <summary>
-            购买代金券金额
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.countmoney">
-            <summary>
-            代金券金额
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goldbean">
-            <summary>
-            赠送金豆数额
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.starttime">
-            <summary>
-            开始使用时间
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.endtime">
-            <summary>
-            结束使用时间
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goodsname">
-            <summary>
-            商品名
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.addtime">
-            <summary>
-            添加时间
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goldcoin">
-            <summary>
-            赠送金币
-            </summary>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest">
-            <summary>
-            红包开奖请求参数
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.free">
-            <summary>
-            免费红包
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.zs">
-            <summary>
-            赠送红包
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.token">
-            <summary>
-            用户身份令牌
-            </summary>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.LotteryModel">
-            <summary>
-            红包开奖模型
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.da">
-            <summary>
-            大
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.xiao">
-            <summary>
-            小
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.dan">
-            <summary>
-            单
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.shuang">
-            <summary>
-            双
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.hong">
-            <summary>
-            红
-            </summary>
-        </member>
-        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.total">
-            <summary>
-            合计出资
-            </summary>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.AuthManagerController">
-            <summary>
-            认证API
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.AuthManagerController.SendSMS(System.String)">
-            <summary>
-            发送短信验证码（已脱离过程）
-            </summary>
-            <param name="mobile">手机号码</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController">
-            <summary>
-            配置管理接口
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGoodsCarousel">
-            <summary>
-            获取精选页面轮播图(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetMainCarousel">
-            <summary>
-            获取主页面轮播图(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetEventCarousel">
-            <summary>
-            获取活动轮播图(新增)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetExchangeCarousel">
-            <summary>
-            获取兑换页轮播图(新增)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGameArea">
-            <summary>
-            获取游戏分区
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGoldenCoinArea">
-            <summary>
-            获取金币分区
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAndroidVersionInfo">
-            <summary>
-            获取安卓APP版本升级信息(已更新)
-            </summary>
-            <returns>APP版本信息对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAppSummary">
-            <summary>
-            获取APP简介(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.PublicController">
-            <summary>
-            开放WebApi
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.picture(System.Int32)">
-            <summary>
-            获取图片数据库中的图片(没想好怎么改)
-            </summary>
-            <param name="id">图片索引</param>
-            <returns>图片响应</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetShareGoodsPic(System.Int32,System.String)">
-            <summary>
-            获取商品分享图片
-            </summary>
-            <param name="id">商品索引(测试id:1)</param>
-            <param name="token">短效token</param>
-            <returns>图片响应</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetMutipleShareGoodsPic(System.Int32)">
-            <summary>
-            获取复数图片分享
-            </summary>
-            <param name="goods_id">商品id</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetShareGoodsText(System.Int32)">
-            <summary>
-            获取商品分享文字
-            </summary>
-            <param name="id">商品索引(测试id:1)</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetInfoMessage">
-            <summary>
-            获取通知消息
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.zonecode">
-            <summary>
-            获取区域编码字典(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.bankdic">
-            <summary>
-            获取银行卡编码字典(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.trcakcom">
-            <summary>
-            获取快递公司中字典(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.gettrackinfo(System.String,System.String)">
-            <summary>
-            获取快递信息(不需更新)
-            </summary>
-            <param name="TrackCom">快递公司编码,测试:shunfeng</param>
-            <param name="TrackNum">快递单号,测试:236560068552</param>
-            <returns>物流信息对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getRecentTrackInfo(System.String,System.String)">
-            <summary>
-            获取最近一条快递信息(不需更新)
-            </summary>
-            <returns>物流信息对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getWxJsConfig(System.String)">
-            <summary>
-            获取微信JsAPI配置,SPA外部不可使用(不需更新)
-            </summary>
-            <param name="url">生成签名的链接</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getWxJsConfigFroPage(System.String)">
-            <summary>
-            获取微信JsAPI配置(不需更新)
-            </summary>
-            <param name="url">请求令牌的URL</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.SendPublicSms(System.String,System.String)">
-            <summary>
-            发送公共短信（无参数）
-            </summary>
-            <param name="mobile">手机号码</param>
-            <param name="templateCode">短信模板编码</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController">
-            <summary>
-            商户管理接口
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsTypeList">
-            <summary>
-            获取商品分类列表(已更新)
-            </summary>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetSimpleGoodsTypeList">
-            <summary>
-            获取第三级分类列表
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsList(System.Int32,System.Int32)">
-            <summary>
-            获取商品列表(已更新)
-            </summary>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsListByType(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            根据商品类型获取商品列表(已更新)
-            </summary>
-            <param name="GoodsType">商品类型编码</param>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.ExGetGoodsListByType(System.Int32,System.Int32,System.Int32,System.String,System.Boolean)">
-            <summary>
-            根据商品类型获取商品列表(排序扩展)
-            </summary>
-            <param name="GoodsType">商品类型编码</param>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <param name="OrderField">排序字段 默认:order_weight;可用字段:return_money_discount(根据兑所需金币),sell_count(兑换量)</param>
-            <param name="IsAsc">是否顺序 默认:false</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetExchangeAreaGoodsList(System.Int32,System.Int32,System.String,System.Boolean)">
-            <summary>
-            获取兑换专区商品列表
-            </summary>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <param name="OrderField">排序字段 默认:order_weight;可用字段:return_money_discount(根据兑所需金币),sell_count(兑换量)</param>
-            <param name="IsAsc">是否顺序 默认:false</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsListByKeyWord(System.String,System.Int32,System.Int32)">
-            <summary>
-            根据关键字获取商品列表(新发布)
-            </summary>
-            <param name="KeyWord">搜索关键字</param>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetHotRecommendGoods(System.Int32,System.Int32)">
-            <summary>
-            获取热门推荐商品列表(已更新)
-            </summary>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetMainRecommendGoods(System.Int32,System.Int32)">
-            <summary>
-            获取主要推荐商品列表(已更新)
-            </summary>
-            <param name="Page">页码</param>
-            <param name="PageSize">页面大小</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsDetail(System.Int32,System.String)">
-            <summary>
-            获取商品详情
-            </summary>
-            <param name="id">商品标识</param>
-            <param name="token">用户令牌</param>
-            <returns>结果对象</returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsAttr(System.Int32,System.Collections.Generic.List{RRL.Core.Manager.GoodsAttrInView},System.String)">
-            <summary>
-            根据商品规格获取库存价格等
-            </summary>
-            <param name="id"></param>
-            <param name="token"></param>
-            <param name="attr"></param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsShareInfo(System.Int32)">
-            <summary>
-            获取商品可分享评估信息
-            </summary>
-            <param name="id">商品id</param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsSpecDetail(System.Int32)">
-            <summary>
-            获得商品规格型号数据
-            </summary>
-            <param name="goods_id">商品id</param>
-            <returns></returns>
-        </member>
-        <member name="T:RRL.WEB.Areas.WebApi.Controllers.TestController">
-            <summary>
-            测试用接口
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.Test">
-            <summary>
-            测试接口
-            </summary>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnString">
-            <summary>
-            我的测试方法名
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnParamGet(System.Int32)">
-            <summary>
-            返回参数测试方法
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnData(System.Int32)">
-            <summary>
-            返回参数测试方法
-            </summary>
-            <param name="id"></param>
+            <param name="request">从客户端提交的包含token信息的参数</param>
+            <param name="user">返回用户基础信息对象</param>
             <returns></returns>
         </member>
         <member name="T:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController">
             <summary>
             交易管理接口
             </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetOrderSharedTimes(System.String,System.String)">
+            <summary>
+            获取订单分享得次数
+            </summary>
+            <param name="orderlist"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.CreateOrderFromGoodsV3(System.Int32,System.Int32,System.String)">
+            <summary>
+            通过商品创建订单
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="goods_count">商品数量</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetPreOrderListV3(System.String,System.String)">
+            <summary>
+            通过订单数组获取预处理订单
+            (预处理订单指尚未支付的订单，也就是说此接口无法获取状态1以外的订单)
+            该接口用来处理订单拼接支付前的预渲染
+            </summary>
+            <param name="orderlist">订单标识数组，格式：1，2，3</param>
+            <param name="token">短效token</param>
+            <returns>结果对象,additional_data:当前用户退款账户金额</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.CreateOrderFromCartV3(System.String,System.String)">
+            <summary>
+            通过购物车创建订单
+            </summary>
+            <param name="cartlist">购物车列表，格式为：1，2，3</param>
+            <param name="token">短效token</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.UpdateOrderIsBeansPayV3(System.String,System.String,System.String,System.String)">
+            <summary>
+            通过购物车创建订单
+            </summary>
+            <param name="cartlist">购物车列表，格式为：1，2，3</param>
+            <param name="token">短效token</param>
+            <param name="discount_type">discount_type 0=正常比例,1=优惠比例(30%,70%)</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.UpdateOrderGoodsAttrV3(System.Int32,System.Int32,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.String)">
+            <summary>
+            更新商品数量或者商品备注信息
+            </summary>
+            <param name="order_id"></param>
+            <param name="goods_id"></param>
+            <param name="token"></param>
+            <param name="goods_count"></param>
+            <param name="msg_leave_word"></param>
+            <param name="msg_phone"></param>
+            <param name="msg_realname"></param>
+            <param name="msg_idcardno"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.ApplyPayForOrderListVer3(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            申请支付
+            </summary>
+            <param name="orderlist">订单数组,例如:1,2,3</param>
+            <param name="discount">申请抵扣金币??没用</param>
+            <param name="trans_type">支付类型:1,微信支付，2,支付宝支付，3,退款账户余额支付</param>
+            <param name="IP">请求ip地址</param>
+            <param name="token">短效token</param>
+            <param name="is_beans_pay">"1"=用豆支付,"0"=纯现金支付</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.SecondHandBuyCardData(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            二手一键转卖，计算用户可以兑换的卡面额和卡数量
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.SecondHandAutoCreateOrder(RRL.WEB.Models.Request.SecondHandAutoOrderRequest)">
+            <summary>
+            二手一键转卖自动下单
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.SecondHandAutoCreateOrder(RRL.Core.Models.UserAuth,System.String,System.String)">
+            <summary>
+            二手一键转卖自动生成订单，并转入二手平台
+            </summary>
+            <param name="user">用户信息</param>
+            <param name="payAccount">用户收款账户</param>
+            <param name="name">用户真实姓名</param>
+            <returns></returns>
         </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetShopCartList(System.String)">
             <summary>
@@ -581,7 +171,7 @@
             <param name="token">短效token</param>
             <returns>结果对象</returns>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.RemoveGoodsInCart(System.Int32,System.String)">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.RemoveGoodsInCart(System.String,System.String)">
             <summary>
             从购物车中移除条目(自更新)
             </summary>
@@ -659,7 +249,7 @@
             <param name="token">短效token</param>
             <returns>结果对象,additional_data:当前用户退款账户金额</returns>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.FillOrderReceiveInfo(System.Int32,System.Int32,System.String)">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.FillOrderReceiveInfo(System.String,System.String,System.String)">
             <summary>
             补充预处理订单收件地址信息
             </summary>
@@ -708,16 +298,750 @@
             申请支付
             </summary>
             <param name="orderlist">订单数组,例如:1,2,3</param>
-            <param name="discount">申请抵扣金币</param>
+            <param name="discount">申请抵扣金币??没用</param>
             <param name="trans_type">支付类型:1,微信支付，2,支付宝支付，3,退款账户余额支付</param>
             <param name="IP">请求ip地址</param>
             <param name="token">短效token</param>
             <returns>结果对象</returns>
         </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.OneKeyResell(System.Int32,System.Int32,System.String)">
+            <summary>
+            一键转卖接口 2018年2月6日 13:29:56
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="order_id">订单id</param>
+            <param name="token">短token</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.ReSellCallBack(System.String,System.String,System.String)">
+            <summary>
+            转卖回调接口
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="status">订单状态 0=发布转卖成功,1=商品转卖成功</param>
+            <param name="sell_token">转卖凭据</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.ReSellDetails(System.String)">
+            <summary>
+            转卖详情  2018年2月11日 10:44:57
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="order_id">订单id</param>
+            <param name="token">短token</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetAvailableCoupons(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            获取我可以的来支付的券包
+            </summary>
+            <param name="order_list"></param>
+            <param name="token"></param>
+            <param name="page_index"></param>
+            <param name="page_size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.ApplyCouponsPay(System.String,System.String,System.String)">
+            <summary>
+            应用券支付
+            </summary>
+            <param name="order_list"></param>
+            <param name="coupons_id"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.VisitStatisticsController">
+            <summary>
+            访问统计的WebApi
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.VisitStatisticsController.RecordsVisitLog(RRL.WEB.Models.Request.VisitDataRequest)">
+            <summary>
+            记录访问数据
+            </summary>
+            <param name="request">包含token的请求</param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.GameController">
+            <summary>
+            与签到功能和游戏相关的WebApi
+            </summary>
+            <summary>
+            游戏API
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.InitSignInData(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            初始化签到数据
+            </summary>
+            <param name="request">包含token的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SignInRedpackage(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            签到操作
+            </summary>
+            <param name="request">包含token的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RedpackageFissionShareDaily(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            红包裂变分享到微信，获得每日首次分享红包
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.UserRedpackageFissionTaskData(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            用户红包裂变任务数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.ReceiveRedpackageFissionTask(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            领取新的红包裂变任务
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RedpackageFissionHistory(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户领取红包的历史数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.CheckIfOpenFissionRedpackage(RRL.WEB.Models.Request.RedpackageFissionRequest)">
+            <summary>
+            检查是否可以帮拆红包
+            </summary>
+            <param name="request">基础token请求(该token是任务发起人的)</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GameStatusForBalloon2">
+            <summary>
+            爆双喜游戏状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GameStatusForBalloonMore">
+            <summary>
+            爆多喜游戏状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IfHasTimeIntervalRedpaket(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            是否可以领取时段充值红包
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IfHasRedpaketAtCurrentTime">
+            <summary>
+            当前时间是否有红包
+            </summary>
+            <returns>1：有红包；0：没有红包</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.MoneyAreaAtCurrentTime">
+            <summary>
+            获取当前时间下的余额区间条件
+            </summary>
+            <returns>1：有红包；0：没有红包</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IfReceivedTimeIntervalRedpaket(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            当前用户是否已经领取分时段充值红包
+            </summary>
+            <returns>1：已领取；0：未领取</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.AddFavouriteGoodsByGet(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">qingqiu</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.Lottery(RRL.WEB.Areas.WebApi.Controllers.LotteryRequest)">
+            <summary>
+            开奖
+            </summary>
+            <param name="request">开奖请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SetState(RRL.WEB.Areas.WebApi.Controllers.SetStateRequest)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetLogs(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户往期开奖数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.FirstHongFreeMoneyRequest(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            首次进入游戏红包奖励
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.DailyHongFreeMoneyRequest(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            每日红包奖励
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetAddLogs">
+            <summary>
+            获取最近10条红包记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.BuyQuan(RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest)">
+            <summary>
+            购买卡券(获取卡券待支付订单列表)
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.ApplyCouponPay(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            申请卡券支付（APP）
+            </summary>
+            <param name="coupon_list">预支付卡券列表</param>
+            <param name="token">短效令牌</param>
+            <param name="trans_type">交易类型1：微信，2：支付宝</param>
+            <param name="ip">客户ip</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetKaQuanList">
+            <summary>
+            获取卡券列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetRedpacketCouponsList(System.Nullable{System.Int32})">
+            <summary>
+            获取卡券列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshPer(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            针对个人发放红包
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshTimeSpreader(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            刷新分享次数
+            </summary>
+            <param name="request">基础令牌请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IsHaveRandomRedBag">
+            <summary>
+            查询是否有分时段红包，返回数据data：true/false
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.RefreshTimeRandom(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            领取时段随机红包
+            </summary>
+            <param name="request">基础令牌请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.FiveSpreaderGroup(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            领取5人一组红包
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SpreaderShareHongMoneyPay(RRL.WEB.Areas.WebApi.Controllers.SpreaderShareRedpackageParameter)">
+            <summary>
+            被推荐用户通过省兜兜APP登录后，奖励推荐人小红包(新游戏中心分享得小红包功能)
+            </summary>
+            <param name="param">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GameBaseData(RRL.WEB.Areas.WebApi.Controllers.GameDataRequest)">
+            <summary>
+            获取自营和第三方的游戏基础数据
+            </summary>
+            <param name="request">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.MoneyPaySignInData(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取签到领小红包数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SignInMoneyPay(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            每日小红包签到
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.MoneyPayCountdown">
+            <summary>
+            获取签到领取的小红包的倒计时数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.SpreaderShareRedpackageForWeChat(RRL.WEB.Models.Request.WeChatBaseRequest)">
+            <summary>
+            被推荐人在微信公众号中登录系统，赠送推荐人红包
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GameAutoRedpackageDaily(RRL.WEB.Models.Request.GameAutoRedpackageRequest)">
+            <summary>
+            每日游戏自动红包
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.TaskRedpackageDaily(RRL.WEB.Models.Request.TaskRedpackageRequest)">
+            <summary>
+            每日做任务领取的红包
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.lotty(RRL.Core.Models.UserAuth,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,RRL.WEB.Areas.WebApi.Controllers.LotteryModel,System.Object@)">
+            <summary>
+            开奖
+            </summary>
+            <param name="user"></param>
+            <param name="free"></param>
+            <param name="zs"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetUrlParameter(System.String)">
+            <summary>
+            从一个类似url参数字符串中解析出参数集合
+            </summary>
+            <param name="urlParameterString">表示url参数的字符串</param>
+            <returns>参数键值对集合</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.GetCanChangeToGoldBeanTimes(RRL.Core.Models.UserAuth,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="uid">用户ID</param>
+            <param name="moneyType">资金类型</param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.SportsController">
+            <summary>
+            兜兜运动WebApi
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserGuessData(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取指定用户的运动竞猜数据
+            </summary>
+            <param name="request">包含token的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserGuessBetting(RRL.WEB.Models.Request.GuessBettingRequest)">
+            <summary>
+            用户竞猜投注操作
+            </summary>
+            <param name="request">包含token和投注信息的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserStepData(RRL.WEB.Models.Request.SportStepRequest)">
+            <summary>
+            用户步数数据维护
+            </summary>
+            <param name="request">包含token和用户总步数的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserToLike(RRL.WEB.Models.Request.UserToLikeRequest)">
+            <summary>
+            用户点赞和回赞操作
+            </summary>
+            <param name="request">包含token和用户点赞数据的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.LikePageDataByUser(RRL.WEB.Models.Request.LikeQueryRequest)">
+            <summary>
+            获取指定用户的点赞和回赞的分页数据
+            </summary>
+            <param name="request">包含token、分页信息和查询条件的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserSportDiary(RRL.WEB.Models.Request.SportDataQueryRequest)">
+            <summary>
+            获取指定用户的运动日记数据
+            </summary>
+            <param name="request">包含token和查询条件的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserSportData(RRL.WEB.Models.Request.SportDataQueryRequest)">
+            <summary>
+            获取指定用户某一天的运动数据
+            </summary>
+            <param name="request">包含token和查询条件的请求</param>
+            <returns>包括用户基础信息、总步数、步数名次、被点赞总次数</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserEffortData(RRL.WEB.Models.Request.SportDataQueryRequest)">
+            <summary>
+            获取指定用户某一天的战绩数据
+            </summary>
+            <param name="request">包含token和查询条件的请求</param>
+            <returns>包括用户基础信息、总步数、步数名次、被点赞总次数</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.UserSportDataRanking(RRL.WEB.Models.Request.SportDataQueryRequest)">
+            <summary>
+            获取指定日期的运动数据排名
+            </summary>
+            <param name="request">包含token和查询条件的请求</param>
+            <returns>包括用户基础信息、总步数、步数名次、被点赞总次数</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.SportShareRedpackage(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            用户分享运动信息奖励红包
+            </summary>
+            <param name="request">包含token的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.SportsController.StepToRedpackage(System.Object)">
+            <summary>
+            按步数奖励的红包数
+            </summary>
+            <param name="step">步数</param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.MessageController">
+            <summary>
+            消息API
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.MessageController.MessageByPage(RRL.WEB.Models.Request.PaginateTokenRequest)">
+            <summary>
+            获取指定用户的消息的分页数据
+            </summary>
+            <param name="request">包含分页信息和token的请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.MessageController.UnreadMessageCount(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取指定用户未读消息总数
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.MessageController.SetAsHasBeenRead(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            将指定用户的未读消息设置为“已读”
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest">
+            <summary>
+            代金券购买请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.id">
+            <summary>
+            购买卡券id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.num">
+            <summary>
+            购买数量
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanRequest.token">
+            <summary>
+            短效令牌
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel">
+            <summary>
+            代金券模型rrl_goods_coupons
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.id">
+            <summary>
+            卡券标识
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goodsid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.money">
+            <summary>
+            购买代金券金额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.countmoney">
+            <summary>
+            代金券金额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goldbean">
+            <summary>
+            赠送金豆数额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.starttime">
+            <summary>
+            开始使用时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.endtime">
+            <summary>
+            结束使用时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goodsname">
+            <summary>
+            商品名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.addtime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.goldcoin">
+            <summary>
+            赠送金币
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.leastconsume">
+            <summary>
+            最少消费可抵用
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.KaQuanModel.type">
+            <summary>
+            券类型[1=买券送豆,2=买券送红包]
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest">
+            <summary>
+            红包开奖请求参数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.free">
+            <summary>
+            免费红包
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.zs">
+            <summary>
+            赠送红包
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryRequest.token">
+            <summary>
+            用户身份令牌
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.LotteryModel">
+            <summary>
+            红包开奖模型
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.da">
+            <summary>
+            大
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.xiao">
+            <summary>
+            小
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.dan">
+            <summary>
+            单
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.shuang">
+            <summary>
+            双
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.hong">
+            <summary>
+            红
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.LotteryModel.total">
+            <summary>
+            合计出资
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.SpreaderShareRedpackageParameter">
+            <summary>
+            被推荐用户通过省兜兜APP登录后，奖励推荐人小红包的API参数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.SpreaderShareRedpackageParameter.DeviceInfo">
+            <summary>
+            包含用户信息和设备信息的加密字符串
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.SpreaderShareRedpackageParameter.RegistrationId">
+            <summary>
+            极光推送注册号
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.GameDataRequest">
+            <summary>
+            获取游戏数据的API参数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Areas.WebApi.Controllers.GameDataRequest.Type">
+            <summary>
+            游戏类型(比如:1开头表示自营游戏；2开头表示第三方游戏)
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.NoticeController">
+            <summary>
+            公告接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.NoticeDetail(System.String)">
+             <summary>
+            根据id获取公告内容
+             </summary>
+             <param name="id"></param>
+             <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.GetFloatInfo">
+            <summary>
+            获取浮窗信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.GetNewFloatInfo(System.String)">
+            <summary>
+            新弹框
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.VerifActivityCode(System.String,System.String)">
+            <summary>
+            兑奖码兑换
+            </summary>
+            <param name="code">兑奖码</param>
+            <param name="token">token</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.CreateOrderInfo(System.Int32,System.Decimal,RRL.DB.SqlDataBase,System.Int32)">
+            <summary>
+            创建订单
+            </summary>
+            <param name="uid"></param>
+            <param name="cash_money"></param>
+            <param name="db"></param>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.CreateOrderDetatiInfo(System.Int32,System.Int32,System.Decimal,RRL.DB.SqlDataBase)">
+            <summary>
+            订单详细记录
+            </summary>
+            <param name="order_id"></param>
+            <param name="goods_id"></param>
+            <param name="cash_money"></param>
+            <param name="db"></param>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.UpdateAddressInfo(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            根据订单id更新地址信息
+            </summary>
+            <param name="order_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.UpdateUserH_money(System.Int32,System.Decimal,System.Int32)">
+            <summary>
+            更新金豆账户并记录
+            </summary>
+            <param name="id"></param>
+            <param name="h_money"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.NoticeController.UpdateUserH_money_free(System.Int32,System.Decimal,System.Int32)">
+            <summary>
+            更新红包账户并记录
+            </summary>
+            <param name="id"></param>
+            <param name="h_money"></param>
+            <param name="type"></param>
+        </member>
         <member name="T:RRL.WEB.Areas.WebApi.Controllers.UserManagerController">
             <summary>
             用户管理接口
             </summary>
+            <summary>
+            用户管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.getSperaderListByUid(System.Int32,System.String,System.Int32,System.Int32)">
+            <summary>
+            获取推荐人列表
+            </summary>
+            <param name="uid"></param>
+            <param name="token"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserHoldMoneyConfig(System.String)">
+            <summary>
+            用户门槛配置
+            </summary>
+            <param name="uid"></param>
+            <param name="token"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ResgistWithSMSInApp(System.String,System.String,System.String,System.String)">
+            <summary>
+            APP上使用短信验证码注册用户
+            </summary>
+            <param name="userdata">加密后的用户注册数据。（加密前的格式：手机号码,短信验证码）</param>
+            <param name="spreader">推荐人</param>
+            <param name="channel_open_id">开放式平台上的用户身份唯一ID</param>
+            <param name="fromcode">来源编码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.LogAndroidInfo(RRL.WEB.Models.Request.AndroidInfoRequest)">
+            <summary>
+            记录Android设备信息
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.LogIosInfo(RRL.WEB.Models.Request.IOSInfoRequest)">
+            <summary>
+            记录IOS设备信息
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
         </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.AddFavouriteGoodsByGet(System.Int32,System.String)">
             <summary>
@@ -1017,6 +1341,13 @@
             <param name="Request">基础token请求</param>
             <returns>结果对象</returns>
         </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetUserRecommandCountV2(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取用户推荐统计信息
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMonthRecommandUserData(RRL.WEB.Models.Request.MonthPaginateRequest)">
             <summary>
             获取用户月度推荐用户统计数据
@@ -1038,7 +1369,7 @@
             <param name="Request">基础月份请求</param>
             <returns></returns>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserRegistWithSMSCode(System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserRegistWithSMSCode(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             使用短信验证码注册用户(已更新)
             </summary>
@@ -1047,6 +1378,7 @@
             <param name="spreader">推荐码</param>
             <param name="devicecode"></param>
             <param name="channel"></param>
+            <param name="fromcode">来源编码</param>
             <returns>结果对象</returns>
         </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserRegistFromPush(System.String,System.String,System.String,System.String,System.String,System.String)">
@@ -1061,7 +1393,7 @@
             <param name="channel"></param>
             <returns>结果对象</returns>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLoginWithSMSCode(System.String,System.String,System.String,System.String)">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLoginWithSMSCode(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             使用短信验证码登录
             </summary>
@@ -1071,7 +1403,7 @@
             <param name="channel"></param>
             <returns>结果对象</returns>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLoginOrRegistWithSMSCode(System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UserLoginOrRegistWithSMSCode(System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             使用短信码登录或注册
             </summary>
@@ -1125,6 +1457,443 @@
             </summary>
             <param name="token">任意有效token</param>
         </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMyCoupons(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取我拥有的卡券
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMonthRecommandUserRanking(RRL.WEB.Models.Request.RecommandStatisticsRequest)">
+            <summary>
+            获取用户月度推荐人数排名
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMyRecommandUserStat(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取我的推荐用户的多维度统计数据
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMonthRecommandRewardsRanking(RRL.WEB.Models.Request.RecommandStatisticsRequest)">
+            <summary>
+            获取用户月度推荐奖励排名
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.GetMyRecommandRewardsStat(RRL.WEB.Models.Request.BaseTokenRequest)">
+            <summary>
+            获取我的推荐奖励的多维度统计数据
+            </summary>
+            <param name="Request">基础token请求</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.open_device_info_record(System.String,RRL.DB.SqlDataBase)">
+            <summary>
+            记录打开app 的设备信息
+            </summary>
+            <param name="osifa"></param>
+            <param name="db"></param>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.Callback_url(System.String)">
+            <summary>
+            回调第三方
+            </summary>
+            <param name="callback_url"></param>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.UpdateCallback_url(System.String,System.String,RRL.DB.SqlDataBase)">
+            <summary>
+            更新callback_url
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.getAndroidInfo(System.String,System.String,System.String,System.String)">
+            <summary>
+            获取第三方安卓设备信息
+            </summary>
+            <param name="mac"></param>
+            <param name="device_id">设备id</param>
+            <param name="advertising_id">广告id</param>
+            <param name="callback_url">回调url</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.getRegisterPhone(System.String,System.String)">
+            <summary>
+            获取登录的手机号
+            </summary>
+            <returns name="phone">手机号</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ProxyStatisticsDaily(RRL.WEB.Models.Request.ProxyStatisticsByMonthlyRequest)">
+            <summary>
+            按天统计所有被推荐人在指定月份内的汇总数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ProxyDataByDate(RRL.WEB.Models.Request.ProxyStatisticsByDayRequest)">
+            <summary>
+            根据指定的日期，获取所有被推荐人的数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.UserManagerController.ProxyStatisticsByUserMonthly(RRL.WEB.Models.Request.ProxyStatisticsByMonthlyRequest)">
+            <summary>
+            根据指定的年月，获取所有被推荐人的按月统计数据
+            </summary>
+            <param name="request">基础token请求</param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.AuthManagerController">
+            <summary>
+            认证API
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.AuthManagerController.SendSMS(System.String)">
+            <summary>
+            发送短信验证码（已脱离过程）
+            </summary>
+            <param name="mobile">手机号码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController">
+            <summary>
+            配置管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGoodsCarousel">
+            <summary>
+            获取精选页面轮播图(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetMainCarousel">
+            <summary>
+            获取主页面轮播图(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetEventCarousel">
+            <summary>
+            获取活动轮播图(新增)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetExchangeCarousel">
+            <summary>
+            获取兑换页轮播图(新增)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGameArea">
+            <summary>
+            获取游戏分区
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetGoldenCoinArea">
+            <summary>
+            获取金币分区
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAndroidVersionInfo">
+            <summary>
+            获取安卓APP版本升级信息(已更新)
+            </summary>
+            <returns>APP版本信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAppleVersionInfo">
+            <summary>
+            获取苹果APP版本升级信息(已更新)
+            </summary>
+            <returns>APP版本信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ConfigManagerController.GetAppSummary">
+            <summary>
+            获取APP简介(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.PublicController">
+            <summary>
+            开放WebApi
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.picture(System.Int32)">
+            <summary>
+            获取图片数据库中的图片(没想好怎么改)
+            </summary>
+            <param name="id">图片索引</param>
+            <returns>图片响应</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.picture_jpg(System.Int32)">
+            <summary>
+            静态化-资源
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetShareGoodsPic(System.Int32,System.String)">
+            <summary>
+            获取商品分享图片
+            </summary>
+            <param name="id">商品索引(测试id:1)</param>
+            <param name="token">短效token</param>
+            <returns>图片响应</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetMutipleShareGoodsPic(System.Int32)">
+            <summary>
+            获取复数图片分享
+            </summary>
+            <param name="goods_id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetShareGoodsText(System.Int32)">
+            <summary>
+            获取商品分享文字
+            </summary>
+            <param name="id">商品索引(测试id:1)</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.GetInfoMessage">
+            <summary>
+            获取通知消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.zonecode">
+            <summary>
+            获取区域编码字典(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.bankdic">
+            <summary>
+            获取银行卡编码字典(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.trcakcom">
+            <summary>
+            获取快递公司中字典(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.gettrackinfo(System.String,System.String)">
+            <summary>
+            获取快递信息(不需更新)
+            </summary>
+            <param name="TrackCom">快递公司编码,测试:shunfeng</param>
+            <param name="TrackNum">快递单号,测试:236560068552</param>
+            <returns>物流信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getRecentTrackInfo(System.String,System.String)">
+            <summary>
+            获取最近一条快递信息(不需更新)
+            </summary>
+            <returns>物流信息对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getWxJsConfig(System.String)">
+            <summary>
+            获取微信JsAPI配置,SPA外部不可使用(不需更新)
+            </summary>
+            <param name="url">生成签名的链接</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.getWxJsConfigFroPage(System.String)">
+            <summary>
+            获取微信JsAPI配置(不需更新)
+            </summary>
+            <param name="url">请求令牌的URL</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.PublicController.SendPublicSms(System.String,System.String)">
+            <summary>
+            发送公共短信（无参数）
+            </summary>
+            <param name="mobile">手机号码</param>
+            <param name="templateCode">短信模板编码</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController">
+            <summary>
+            商户管理接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsTypeList">
+            <summary>
+            获取商品分类列表(已更新)
+            </summary>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetSimpleGoodsTypeList">
+            <summary>
+            获取第三级分类列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsList(System.Int32,System.Int32)">
+            <summary>
+            获取商品列表(已更新)
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsListByType(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            根据商品类型获取商品列表(已更新)
+            </summary>
+            <param name="GoodsType">商品类型编码</param>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.ExGetGoodsListByType(System.Int32,System.Int32,System.Int32,System.String,System.Boolean)">
+            <summary>
+            根据商品类型获取商品列表(排序扩展)
+            </summary>
+            <param name="GoodsType">商品类型编码</param>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="OrderField">排序字段 默认:order_weight;可用字段:return_money_discount(根据兑所需金币),sell_count(兑换量)</param>
+            <param name="IsAsc">是否顺序 默认:false</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetExchangeAreaGoodsList(System.Int32,System.Int32,System.String,System.Boolean)">
+            <summary>
+            获取兑换专区商品列表
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <param name="OrderField">排序字段 默认:order_weight;可用字段:return_money_discount(根据兑所需金币),sell_count(兑换量)</param>
+            <param name="IsAsc">是否顺序 默认:false</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsListByKeyWord(System.String,System.Int32,System.Int32)">
+            <summary>
+            根据关键字获取商品列表(新发布)
+            </summary>
+            <param name="KeyWord">搜索关键字</param>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.SetCaChe(System.String,System.Int32,System.Int32)" -->
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetHotRecommendGoods(System.Int32,System.Int32)">
+            <summary>
+            获取热门推荐商品列表(已更新)
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetMainRecommendGoods(System.Int32,System.Int32)">
+            <summary>
+            获取主要推荐商品列表(已更新)
+            </summary>
+            <param name="Page">页码</param>
+            <param name="PageSize">页面大小</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsDetail(System.Int32,System.String)">
+            <summary>
+            获取商品详情
+            </summary>
+            <param name="id">商品标识</param>
+            <param name="token">用户令牌</param>
+            <returns>结果对象</returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsAttr(System.Int32,System.Collections.Generic.List{RRL.Core.Manager.GoodsAttrInView},System.String)">
+            <summary>
+            根据商品规格获取库存价格等
+            </summary>
+            <param name="id"></param>
+            <param name="token"></param>
+            <param name="attr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsShareInfo(System.Int32)">
+            <summary>
+            获取商品可分享评估信息
+            </summary>
+            <param name="id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetGoodsSpecDetail(System.Int32)">
+            <summary>
+            获得商品规格型号数据
+            </summary>
+            <param name="goods_id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetSecKillActivity">
+            <summary>
+            秒杀正在进行时
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetOnepreferentialList(System.String)">
+            <summary>
+            特惠商品区间值
+            </summary>
+            <param name="SectionStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetPreferentialList(System.String)">
+            <summary>
+            特惠商品区间值
+            </summary>
+            <param name="SectionStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.GetNextSecKillActvity(System.String)">
+            <summary>
+            秒杀下期预告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.ShopManagerController.Set_Skill_Remind(System.String,System.Int32)">
+            <summary>
+            秒杀提醒
+            </summary>
+            <returns>token</returns>
+            <returns>商品id</returns>
+        </member>
+        <member name="T:RRL.WEB.Areas.WebApi.Controllers.TestController">
+            <summary>
+            测试用接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.Test">
+            <summary>
+            测试接口
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnString">
+            <summary>
+            我的测试方法名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnParamGet(System.Int32)">
+            <summary>
+            返回参数测试方法
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TestController.ReturnData(System.Int32)">
+            <summary>
+            返回参数测试方法
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:RRL.WEB.Areas.WebApi.WebApiAreaRegistration">
             <summary>
             默认的WebApi区域注册
@@ -1141,16 +1910,65 @@
             </summary>
             <param name="context"></param>
         </member>
+        <member name="M:RRL.WEB.Controllers.ShopController.GoodsShareQRCode(System.String,System.Int32)">
+            <summary>
+            商品分享的二维码
+            </summary>
+            <param name="token">token</param>
+            <param name="goodsId">商品ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ShopController.GoodsShareImage(System.String,System.Int32,System.Int32)">
+            <summary>
+            商品的分享图片
+            </summary>
+            <param name="token"></param>
+            <param name="goodsId">商品ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.SportController.SportShareQRCode(System.String)">
+            <summary>
+            运动分享的二维码
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.SportController.SportShareImage(System.String)">
+            <summary>
+            用户运动数据分享图片
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RRL.WEB.Controllers.DeviceController.LoginInfo" -->
+        <member name="M:RRL.WEB.Controllers.DeviceController.Dialing">
+            <summary>
+            拨打电话 /Device/Dialing?tel=13827470343
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.DeviceController.ThirdPartyLogin">
+            <summary>
+            第三方登录类型,wx   /Device/ThirdPartyLogin?type=wx
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.DeviceController.UserLogin">
+            <summary>
+            通过APP进行用户登录的跳转地址
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:RRL.WEB.Controllers.EventController">
             <summary>
             活动控制器
             </summary>
         </member>
-        <member name="M:RRL.WEB.Controllers.EventController.One">
+        <member name="M:RRL.WEB.Controllers.EventController.SecondKill">
             <summary>
             活动1：一元抢购纸巾
             </summary>
-            <returns>视图</returns>
+            <returns>视图</returns>   
         </member>
         <member name="M:RRL.WEB.Controllers.EventController.Two">
             <summary>
@@ -1242,6 +2060,100 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:RRL.WEB.Controllers.EventController.Newshare">
+            <summary>
+            分享获取红包
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.ShareGoodsToWechatCircle">
+            <summary>
+            分享商品到微信朋友圈
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.EventController.ShareGoodsToWechatFriend">
+            <summary>
+            分享商品给微信好友
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.GetUserRedpackageList(System.Int32,System.Boolean@,System.Boolean@)">
+            <summary>
+            获取指定用户，最近一个周期签到领取的红包数据
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="existDataInValidCycles">返回参数，有效周期(7天为一个周期)内是否存在红包领取数据. true:存在; false:不存在</param>
+            <param name="isCanGetRedpackage">返回参数，当天是否可以领取红包. true:当天可以领取; false:当天不能领取</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.CrazyCircleConfigList(System.Int32,System.Int32)">
+            <summary>
+            获取疯狂转转赚的盘面配置数据列表
+            </summary>
+            <param name="moneyType">资金类型(1：免费红包；2：金豆)</param>
+            <param name="weightType">权重类型(1：用户奖励的权重高；2：用户扣除的权重高)</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.UpdateWeightForCrazyCircle(System.String,System.Int32)">
+            <summary>
+            更新权重
+            </summary>
+            <param name="id">主键</param>
+            <param name="weight">权重值</param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.CrazyCircleWaveConfigList">
+            <summary>
+            获取疯狂转转赚的调控配置数据列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.UpdateWaveConfigForCrazyCircle(System.String,System.Int32,System.Int32,System.Decimal,System.Decimal)">
+            <summary>
+            疯狂转转赚的调控配置数据更新
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.BuyBeansForCrazy(System.String,System.String)">
+            <summary>
+            强买豆逻辑
+            </summary>
+            <param name="token"></param>
+            <param name="goldbean"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.RechargeForGiveRedpackage(System.String)">
+            <summary>
+            充值送免费红包
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.GameController.ReceiveTimeIntervalRedpaket(System.String)">
+            <summary>
+            领取分时段充值红包
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RRL.WEB.Controllers.PayCallBack_backup_Controller">
+            <summary>
+            支付回调
+            </summary>
+        </member>
+        <member name="M:RRL.WEB.Controllers.PayCallBack_backup_Controller.alipay_notify">
+            <summary>
+            支付宝回调
+            </summary>
+            <returns>回调结果</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.PayCallBack_backup_Controller.wxpay_notify">
+            <summary>
+            微信APP回调
+            </summary>
+            <returns>回调结果</returns>
+        </member>
         <member name="T:RRL.WEB.Controllers.PayCallBackController">
             <summary>
             支付回调
@@ -1259,12 +2171,18 @@
             </summary>
             <returns>回调结果</returns>
         </member>
+        <member name="M:RRL.WEB.Controllers.PayCallBackController.CallPayFromCardPlatform(System.Int32,System.String)">
+            <summary>
+            调用卡券平台的支付接口
+            </summary>
+            <param name="orderId">3.0中的订单编号</param>
+        </member>
         <member name="T:RRL.WEB.Controllers.ViewRouteController">
             <summary>
             基础视图控制器
             </summary>
         </member>
-        <member name="M:RRL.WEB.Controllers.ViewRouteController.GetCodeUrl(System.String)">
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.GetCodeUrl(System.String,System.String)">
             <summary>
             重新获取Code,以后面实现带着Code重新跳回目标页面(没有用户授权的，只能获取基本信息（openid））
             </summary>
@@ -1313,6 +2231,73 @@
             </summary>
             <returns>视图</returns>
         </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.ProductForGame">
+            <summary>
+            产品节点视图(/Product)
+            </summary>
+            <returns>视图</returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.WxMessageReceiver">
+            <summary>
+            接收微信消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.SetOpenIdForWx">
+            <summary>
+            获取和保存用户在微信中的OpenId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Controllers.ViewRouteController.CardGoodsPay(System.String,System.String,System.Int32)">
+            <summary>
+            卡券商品支付
+            </summary>
+            <param name="token">用户身份令牌</param>
+            <param name="card_id">卡券商品在卡券商城中的唯一标识。使用该ID来查询3.0中对应的商品信息</param>
+            <param name="goods_count">购买的数量</param>
+            <returns></returns>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.IsPaySuccess">
+            <summary>
+            是否支付成功
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.AttachData">
+            <summary>
+            附加数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.Subject_Title">
+            <summary>
+            支付标题(商品描述)
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.Total_Fee">
+            <summary>
+            总费用,(微信)精确到分,如:1元=100分,这里填100,阿里精确到元=1.00
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.Out_Trade_No">
+            <summary>
+            外部订单号(商户的订单号) 
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.Transaction_id">
+            <summary>
+            交易id,微信或支付宝那边的交易id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.Three_Pay_Type">
+            <summary>
+            第三方支付类型 WX_JSAPI=微信公众号支付、WX_APP=微信app支付,阿里支付=ALIPAY_APP
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.PayNotifyModel.Completed_Trans_Time">
+            <summary>
+            完成交易时间
+            </summary>
+        </member>
         <member name="T:RRL.WEB.Models.Request.HongRequest">
             <summary>
             红包登录请求
@@ -1336,6 +2321,26 @@
         <member name="P:RRL.WEB.Models.Request.HongRequest.token">
             <summary>
             推荐人token
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.picture_code">
+            <summary>
+            图片验证码
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.type">
+            <summary>
+            类型1=分享购物有优惠,2=红包裂变,4=,8=
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.orderid">
+            <summary>
+            d订单id
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.HongRequest.tid">
+            <summary>
+            红包裂变任务ID
             </summary>
         </member>
         <member name="T:RRL.WEB.Models.Request.IdentityRequest">
@@ -1446,6 +2451,117 @@
         <member name="P:RRL.WEB.Models.Request.MonthPaginateRequest.month">
             <summary>
             请求月份
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.RecommandStatisticsRequest">
+            <summary>
+            用于推荐统计的请求
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.RecommandStatisticsRequest.month">
+            <summary>
+            表示年月的日期字符创
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.BasePaginationRequest">
+            <summary>
+            <para>包含基础令牌的分页请求</para>
+            <para>当需要获取与指定用户相关的分页数据时使用</para>
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BasePaginationRequest.PageIndex">
+            <summary>
+            页索引（即，显示第几页）
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.BasePaginationRequest.PageSize">
+            <summary>
+            页大小（即，一页显示多少行）
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.GuessBettingRequest">
+            <summary>
+            竞猜出资操作的请求类
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.GuessBettingRequest.money">
+            <summary>
+            出资金额
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.GuessBettingRequest.forecast">
+            <summary>
+            预测结果("1":单数; "2":双数)
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.SportStepRequest">
+            <summary>
+            运动步数据维护的请求类
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.UserToLikeRequest">
+            <summary>
+            用户点赞或回赞操作的请求类
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.LikeQueryRequest">
+            <summary>
+            点赞和回赞数据查询的请求类
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.SportDataQueryRequest">
+            <summary>
+            用户运动数据查询的请求类
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.VisitDataRequest">
+            <summary>
+            用来记录用户在页面访问行为的请求类
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.visitTime">
+            <summary>
+            访问页面时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.leaveTime">
+            <summary>
+            离开页面时间
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.visitInterval">
+            <summary>
+            访问时长（秒）
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.pageType">
+            <summary>
+            页面类型（index,list,banner,detail）
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.goodsId">
+            <summary>
+            商品ID
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.visitPath">
+            <summary>
+            访问的页面地址
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.VisitDataRequest.deep">
+            <summary>
+            页面深度（即，当前页面在站点中的层级）
+            </summary>
+        </member>
+        <member name="T:RRL.WEB.Models.Request.WeChatBaseRequest">
+            <summary>
+            用于公众号操作的请求基类
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Request.GameAutoRedpackageRequest.source">
+            <summary>
+            来源
             </summary>
         </member>
         <member name="T:RRL.WEB.Models.Response.TrackResult">
@@ -1591,6 +2707,21 @@
             更新信息
             </summary>
         </member>
+        <member name="P:RRL.WEB.Models.Response.AppleVersionObject.url">
+            <summary>
+            下载地址
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.AppleVersionObject.version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.Response.AppleVersionObject.info">
+            <summary>
+            更新信息
+            </summary>
+        </member>
         <member name="T:RRL.WEB.Models.Response.ResultView`1">
             <summary>
             结果视图
@@ -1686,6 +2817,16 @@
         <member name="P:RRL.WEB.Models.ViewModel.SimpleGoodsType.icon">
             <summary>
             类别图标
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.SimpleGoodsType.redirect_type">
+            <summary>
+            重定向类型0=不做url 跳转,1=跳转url ,按redirect_url 值做跳转
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.SimpleGoodsType.redirect_url">
+            <summary>
+            跳转的url
             </summary>
         </member>
         <member name="M:RRL.WEB.Models.ViewModel.SimpleGoodsType.InitList(System.Data.DataTable)">
@@ -1786,6 +2927,16 @@
         <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.discount">
             <summary>
             兑换所需金币数
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.cash_price">
+            <summary>
+            钱支付的
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.GoodsSummary.beans_price">
+            <summary>
+            豆支付的钱
             </summary>
         </member>
         <member name="T:RRL.WEB.Models.ViewModel.GoodsRecommend">
@@ -2141,6 +3292,31 @@
         <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_recommand_order_count">
             <summary>
             本月推荐订单数量合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_recommand_user_count">
+            <summary>
+            本月推荐用户数合计
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.each_level_recommand_user_count">
+            <summary>
+            分级推荐人数统计数据
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_recommand_user_count_ranking">
+            <summary>
+            本月推荐人数排名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_recommand_rewards_ranking">
+            <summary>
+            本月推荐奖励排名
+            </summary>
+        </member>
+        <member name="P:RRL.WEB.Models.ViewModel.UserRecommandCount.month_unconfirm_order_sum_reward">
+            <summary>
+            本月待确认奖励金额
             </summary>
         </member>
         <member name="M:RRL.WEB.Models.ViewModel.UserRecommandCount.#ctor(System.Data.DataRow)">
@@ -3533,6 +4709,10 @@
             设置前缀
             </summary>
             <param name="customKey"></param>
+        </member>
+        <member name="M:RedisHelp.RedisHelper.LockTake(System.String,System.String)">
+            尝试获取分布式锁
+            @return 是否获取成功
         </member>
     </members>
 </doc>

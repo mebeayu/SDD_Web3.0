@@ -814,6 +814,33 @@ AND end_at > '{timestr}'");
             }
             return result;
         }
+        /// <summary>
+        /// 查询是否有分时段红包，返回数据data：true/false
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("IsHaveRandomRedBag")]
+        public DataResult IsHaveRandomRedBag()
+        {
+            var db = new RRLDB();
+            DataResult result = DataResult.InitFromMessageCode(MessageCode.SUCCESS);
+            var timestr = DateTime.Now.GetDateTimeFormats('T')[0];
+            DataSet ds = db.ExeQuery($@"select count(*)
+                                              from spreader_queue
+                                             where (start_at < '{timestr}')
+                                               and (end_at > '{timestr}') and (money > 0)");
+            if (ds == null)
+            {
+                result.data = false;
+                result.message = "查询错误";
+                db.Close();
+                return result;
+            }
+            var count = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+            if(count>0) result.data = true;
+            else result.data = false;
+            return result;
+        }
 
         /// <summary>
         /// 领取时段随机红包
