@@ -8,11 +8,31 @@ using System.Dynamic;
 using RRL.Config;
 using System.Text.RegularExpressions;
 using RRL.Core.Models;
+using System.Data;
 
 namespace RRL.Core.Manager
 {
     public partial class GameManager
     {
+        static public bool IsCompletePlayCountToday(int uid ,out double h_money_pay)
+        {
+            h_money_pay = 0;
+            var db = new RRLDB();
+            DataSet ds = null;
+
+            int PlayCountToday = 0;//今天玩的游戏局数
+
+            string today = DateTime.Now.ToString("yyyy-MM-dd");
+            ds = db.ExeQuery($@"select count from game_user_daily_count where uid={uid} and date='{today}'  and active=1");
+            if (ds != null && ds.Tables[0].Rows.Count > 0) PlayCountToday = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            
+            ds = db.ExeQuery($@"select h_money_pay,need_play_conut from rrl_user where id={uid}");
+            if (ds != null && ds.Tables[0].Rows.Count > 0) h_money_pay = Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+            int NeedPlayCount = Convert.ToInt32(ds.Tables[0].Rows[0][1].ToString());
+            db.Close();
+            if (PlayCountToday >= NeedPlayCount) return true;
+            else return false;
+        }
         /// <summary>
         /// 获取所有有效的游戏数据
         /// </summary>

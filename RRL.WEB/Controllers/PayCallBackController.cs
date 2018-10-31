@@ -247,7 +247,28 @@ namespace RRL.WEB.Controllers
                             // 更新用户账户
                             // lcl 2018-10-19 Modify 将送免费红包修改为赠送小红包，并且数额不累加
                             //db.ExeCMD($@"update rrl_user set h_money = h_money + {hMoney} ,h_money_free = isnull(h_money_free,0) + {mH_Money_Free} ,pay_coupons_total_money = isnull(pay_coupons_total_money,0) + {money} where id = {uid}");
-                            db.ExeCMD($@"update rrl_user set h_money = h_money + {hMoney} ,h_money_pay = {mH_Money_Free} ,pay_coupons_total_money = isnull(pay_coupons_total_money,0) + {money} where id = {uid}");
+                            double h_money_pay_old = 0;
+                            double rateof_vmoney_to_needplay = 1.5;
+                            ds = db.ExeQuery($@"select [Value] from rrl_config where Item='rateof_vmoney_to_needplay'");
+                            if (ds.Tables[0].Rows.Count > 0)
+                            {
+                                rateof_vmoney_to_needplay = double.Parse(ds.Tables[0].Rows[0][0].ToString());
+                            }
+                            int new_need_play_conut = Convert.ToInt32(Convert.ToDouble(mH_Money_Free) / rateof_vmoney_to_needplay);
+                            if (new_need_play_conut == 0) new_need_play_conut = 1;
+
+                            bool bComplete = GameManager.IsCompletePlayCountToday(uid,out h_money_pay_old);
+                            int res = db.ExeCMD($@"update rrl_user set h_money = h_money + {hMoney} ,h_money_pay = {mH_Money_Free},need_play_conut={new_need_play_conut} ,pay_coupons_total_money = isnull(pay_coupons_total_money,0) + {money} where id = {uid}");
+                            if (res>0)//更新局数
+                            {
+                                if(bComplete)//转金豆
+                                {
+                                    db.ExeCMD($@"update rrl_user set h_money=h_money+{h_money_pay_old} where id={uid}");
+                                }
+                                string today = DateTime.Now.ToString("yyyy-MM-dd");
+                                db.ExeCMD($@"update game_user_daily_count set count = 0 where uid = {uid} and date='{today}'");
+
+                            }
                             // 记录资金流水
                             db.ExeCMD($@"insert into rrl_user_money_record ([uid] ,[money] ,[type] ,[remark]) values ({uid} ,-{money} ,304 ,N'分时段充值送红包的充值购券消费')");
                             db.ExeCMD($@"insert into rrl_user_money_record ([uid] ,[money] ,[type] ,[remark]) values ({uid} ,{mH_Money_Free} ,305 ,N'分时段充值购券{money}送红包')");
