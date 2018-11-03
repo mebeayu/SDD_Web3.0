@@ -92,6 +92,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                     if (order_id != null)
                         order_list.Add(order_id.Value);
                     result.data = order_list;
+                    
                     return result;
                 }
             }
@@ -99,7 +100,28 @@ namespace RRL.WEB.Areas.WebApi.Controllers
             Resault.data = order_list;
             return Resault;
         }
-
+        /// <summary>
+        /// 给当前用户添加推荐人
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="spreader_uid">推荐人id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("AddToSpreader")]
+        public DataResult AddToSpreader(string token, int spreader_uid)
+        {
+            int res;
+            TokenObject Token = TokenObject.InitTokenObjFromString(token);
+            if (!string.Equals(TokenObject.ShortTimeToken, Token.Prefix))
+            {
+                return DataResult.InitFromMessageCode( MessageCode.ERROR_TOKEN_VALIDATE);
+            }
+            else
+            {
+                res = tm.AddToSpreader(Token.id, spreader_uid);
+                return DataResult.InitFromMessageCode(res);
+            }
+        }
         /// <summary>
         /// 通过订单数组获取预处理订单
         /// (预处理订单指尚未支付的订单，也就是说此接口无法获取状态1以外的订单)

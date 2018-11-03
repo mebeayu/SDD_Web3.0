@@ -109,6 +109,7 @@
     <Compile Include="Manager\TradeManager.part2.cs" />
     <Compile Include="Manager\ShopManager.part1.cs" />
     <Compile Include="Manager\UserManager.part_zetee.cs" />
+    <Compile Include="Models\FeeConfig.cs" />
     <Compile Include="Models\rrl_sddcard_order.cs" />
     <Compile Include="Models\rrl_sddcard_owner.cs" />
     <Compile Include="Push\JPush.cs" />

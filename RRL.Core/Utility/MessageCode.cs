@@ -56,6 +56,7 @@
 
         public const int ERROR_USER_LOCKED = 141;//用户被所锁定
         public const int ERROR_ORDER_NO_ADDRESS = 200;//订单无收货地址
+        public const int ERROR_HAVE_SPREADER = 201;//已有在安全期内的推荐人
 
         public static string TranslateMessageCode(int Code)
         {
@@ -65,6 +66,9 @@
                 
                 case SUCCESS:
                     result = "成功";
+                    break;
+                case ERROR_HAVE_SPREADER:
+                    result = "已有在安全期内的推荐人";
                     break;
                 case ERROR_ORDER_NO_ADDRESS:
                     result = "订单无收货地址";

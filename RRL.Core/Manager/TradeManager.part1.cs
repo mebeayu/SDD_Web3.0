@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Dynamic;
+using System.Data.SqlClient;
 
 namespace RRL.Core.Manager
 {
@@ -60,9 +61,15 @@ namespace RRL.Core.Manager
                         return new BussResult() { status = 99, message = "商品订单创建失败!" };
                     }
                     if(order_type==970)//带推荐人的订单
-                    {
-                        int res = db.Execute("update rrl_roder set order_type=970,spreader_uid=@spreader_uid where id=@orderId",
-                            new { spreader_uid= spreader_uid, orderId = orderId });
+                    {//recommend_award_rate
+                        List<FeeConfig> list = db.Select<FeeConfig>("select buyer_recommend_award from rrl_goods a left join rrl_fee_config b on a.fee_id=b.id where a.id=@goods_id",new { goods_id= goods_id });
+                        double buyer_recommend_award = 0;
+                        if(list!=null&&list.Count!=0)
+                        {
+                            buyer_recommend_award = list[0].buyer_recommend_award;
+                        }
+                        int res = db.Execute("update rrl_order set order_type=970,spreader_uid=@spreader_uid,recommend_award_rate=@recommend_award_rate where id=@orderId",
+                            new { spreader_uid= spreader_uid, orderId = orderId, recommend_award_rate= buyer_recommend_award });
                     }
                 }
                 else
@@ -71,7 +78,50 @@ namespace RRL.Core.Manager
             }
             return bussResult;
         }
-
+        public int AddToSpreader(int uid,int spreader_uid)
+        {
+            RRLDB db = new RRLDB();
+            DataSet ds = db.ExeQuery("select spreader_uid,spreader_expire from rrl_user where id=@uid", new SqlParameter("uid", uid));
+            if (ds == null)
+            {
+                db.Close();
+                return MessageCode.ERROR_EXECUTE_SQL;
+            }
+            if (ds.Tables[0].Rows.Count==0)
+            {
+                db.Close();
+                return MessageCode.ERROR_NO_UID;
+            }
+            DateTime spreader_expire = DateTime.Parse(ds.Tables[0].Rows[0][1].ToString());
+            int old_spreader_uid = int.Parse(ds.Tables[0].Rows[0][0].ToString());
+            if(spreader_uid!= old_spreader_uid)
+            {
+                if(spreader_expire<DateTime.Now)//当前时间超过到期日
+                {
+                    DateTime new_spreader_expire = DateTime.Now.AddDays(30);
+                    int res = db.ExeCMD("update rrl_user set spreader_uid=@spreader_uid,spreader_expire=@spreader_expire where id=@uid",
+                        new SqlParameter("spreader_uid", spreader_uid),
+                        new SqlParameter("spreader_expire", spreader_expire.ToString("yyyy-MM-dd HH:mm:ss")),
+                        new SqlParameter("uid", uid));
+                    if (res<=0)
+                    {
+                        db.Close();
+                        return MessageCode.ERROR_EXECUTE_SQL;
+                    }
+                    db.Close();
+                    return MessageCode.SUCCESS;
+                }
+                else
+                {
+                    return MessageCode.ERROR_HAVE_SPREADER;
+                }
+            }
+            else
+            {
+                db.Close();
+                return MessageCode.SUCCESS;
+            }
+        }
         /// <summary>
         /// 更新是否豆支付
         /// </summary>

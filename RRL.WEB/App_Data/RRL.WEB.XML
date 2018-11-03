@@ -89,6 +89,14 @@
             <param name="spreader_uid">推荐人id</param>
             <returns></returns>
         </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.AddToSpreader(System.String,System.Int32)">
+            <summary>
+            给当前用户添加推荐人
+            </summary>
+            <param name="token"></param>
+            <param name="spreader_uid">推荐人id</param>
+            <returns></returns>
+        </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetPreOrderListV3(System.String,System.String)">
             <summary>
             通过订单数组获取预处理订单
