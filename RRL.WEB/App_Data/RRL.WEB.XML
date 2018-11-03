@@ -79,6 +79,16 @@
             <param name="token">短效token</param>
             <returns>结果对象</returns>
         </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.CreateSpreaderOrderFromGoodsV3_(System.Int32,System.Int32,System.String,System.Int32)">
+            <summary>
+            创建带推荐人的订单
+            </summary>
+            <param name="goods_id">商品id</param>
+            <param name="goods_count">商品数量</param>
+            <param name="token"></param>
+            <param name="spreader_uid">推荐人id</param>
+            <returns></returns>
+        </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetPreOrderListV3(System.String,System.String)">
             <summary>
             通过订单数组获取预处理订单

@@ -959,6 +959,7 @@
     <Compile Include="Controllers\VerCodeController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PayCallBack_backup_Controller.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PayNotifyModel.cs" />
     <Compile Include="Models\RequestObject.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

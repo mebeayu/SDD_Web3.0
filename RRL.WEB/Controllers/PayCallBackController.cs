@@ -254,7 +254,7 @@ namespace RRL.WEB.Controllers
                             {
                                 rateof_vmoney_to_needplay = double.Parse(ds.Tables[0].Rows[0][0].ToString());
                             }
-                            int new_need_play_conut = Convert.ToInt32(Convert.ToDouble(mH_Money_Free) / rateof_vmoney_to_needplay);
+                            int new_need_play_conut = Convert.ToInt32((Convert.ToDouble(mH_Money_Free)-money) / rateof_vmoney_to_needplay);
                             if (new_need_play_conut == 0) new_need_play_conut = 1;
 
                             bool bComplete = GameManager.IsCompletePlayCountToday(uid,out h_money_pay_old);

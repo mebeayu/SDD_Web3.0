@@ -57,7 +57,48 @@ namespace RRL.WEB.Areas.WebApi.Controllers
             Resault.data = order_list;
             return Resault;
         }
+        /// <summary>
+        /// 创建带推荐人的订单
+        /// </summary>
+        /// <param name="goods_id">商品id</param>
+        /// <param name="goods_count">商品数量</param>
+        /// <param name="token"></param>
+        /// <param name="spreader_uid">推荐人id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("CreateSpreaderOrderFromGoodsV3")]
+        public DataResult CreateSpreaderOrderFromGoodsV3_(int goods_id, int goods_count, string token, int spreader_uid = 0)
+        {
+            List<int> order_list = new List<int>();
+            int res;
+            TokenObject Token = TokenObject.InitTokenObjFromString(token);
+            if (!string.Equals(TokenObject.ShortTimeToken, Token.Prefix))
+            {
+                res = MessageCode.ERROR_TOKEN_VALIDATE;
+            }
+            else
+            {
+                UserAuth User = new UserAuth();
+                res = User.Load(Token.id);
+                if (res == MessageCode.SUCCESS)
+                {
+                    int? order_id = 0;
+                    var s = tm.CreateOrderFromGoodsV3(User.id, goods_id, goods_count, "", "", "", "", out order_id,970, spreader_uid);
+                    if (order_id != null)
+                    {
 
+                    }
+                    var result = new DataResult() { status = s.status, message = s.message };// AutoMapper.Mapper.Map< BussResult, DataResult >(s);
+                    if (order_id != null)
+                        order_list.Add(order_id.Value);
+                    result.data = order_list;
+                    return result;
+                }
+            }
+            DataResult Resault = DataResult.InitFromMessageCode(res);
+            Resault.data = order_list;
+            return Resault;
+        }
 
         /// <summary>
         /// 通过订单数组获取预处理订单

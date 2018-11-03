@@ -37,7 +37,8 @@ namespace RRL.Core.Manager
         /// <param name="goods_count">商品数量</param>
         /// <param name="receive_id">收货信息</param>
         /// <returns>生成结果</returns>
-        public BussResult CreateOrderFromGoodsV3(int uid, int goods_id, int goods_count,string msg_leave_word,   string msg_phone, string msg_realname, string msg_idcardno, out int? order_id)
+        public BussResult CreateOrderFromGoodsV3(int uid, int goods_id, int goods_count,string msg_leave_word,   
+            string msg_phone, string msg_realname, string msg_idcardno, out int? order_id,int order_type = 1,int spreader_uid=0)
         {
             BussResult bussResult = new BussResult() { status = 0, message = "订单创建成功!" };
             //创建单一订单
@@ -57,6 +58,11 @@ namespace RRL.Core.Manager
                     if (cnt==0)
                     {
                         return new BussResult() { status = 99, message = "商品订单创建失败!" };
+                    }
+                    if(order_type==970)//带推荐人的订单
+                    {
+                        int res = db.Execute("update rrl_roder set order_type=970,spreader_uid=@spreader_uid where id=@orderId",
+                            new { spreader_uid= spreader_uid, orderId = orderId });
                     }
                 }
                 else
