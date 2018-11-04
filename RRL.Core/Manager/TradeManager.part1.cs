@@ -67,7 +67,7 @@ namespace RRL.Core.Manager
                         if(list!=null&&list.Count!=0)
                         {
                             buyer_recommend_award = list[0].buyer_recommend_award;
-                        }
+                        }//订单上设置推荐人id，推荐奖励比例
                         int res = db.Execute("update rrl_order set order_type=970,spreader_uid=@spreader_uid,recommend_award_rate=@recommend_award_rate where id=@orderId",
                             new { spreader_uid= spreader_uid, orderId = orderId, recommend_award_rate= buyer_recommend_award });
                     }
@@ -915,6 +915,7 @@ from rrl_goods where id =@goods_id";
             body.uid = user.id;
             body.order_code = applyPayV3_SumPay.max_ordercode + "";
             body.order_list = order_arr_str;
+            body.bean = (double)applyPayV3_SumPay.sum_need_pay_beans;
             body.money = (double)applyPayV3_SumPay.sum_need_pay_money;
             body.postage = (double)applyPayV3_SumPay.sum_postage;
             body.discount = (double)applyPayV3_SumPay.sum_pay_gold_coin;
@@ -1170,7 +1171,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="Transaction_id"></param>
         /// <param name="trans_type"></param>
         /// <returns></returns>
-        public int DealWithPayCompleteTrade(PayBody body ,string Transaction_id,string  notify_id, string trans_type,string three_pay_type,DateTime three_completed_trans_time  )
+        public int DealWithPayCompleteTrade(PayBody body ,string Transaction_id,string  notify_id, string trans_type,string three_pay_type,DateTime three_completed_trans_time,string order_code="")
         {
             List<int> listInt = PublicAPI.StrToIntList(body.order_list);
             SqlDataBase db = new SqlDataBase();
@@ -1187,6 +1188,27 @@ from rrl_goods where id =@goods_id";
 
             UserAuth user = new UserAuth(body.uid);
             ThreadPool.QueueUserWorkItem(new WaitCallback(SendWxMessage), new { user = user, body = body });
+            //更新订单金豆支付和现金支付实际金额，更新推荐人安全期
+            RRLDB rrldb = new RRLDB();
+            int res = rrldb.ExeCMD("update rrl_order set pay_bean=@pay_bean,pay_money=@pay_money where ordercode=@order_code",
+                new SqlParameter("pay_bean", body.bean),
+                new SqlParameter("pay_money", body.money),
+                new SqlParameter("order_code", order_code));
+            DataSet ds = rrldb.ExeQuery("select spreader_uid,order_type,buyer_id from rrl_order where ordercode=@order_code",
+                new SqlParameter("order_code", order_code));
+            if (ds!=null&&ds.Tables[0].Rows.Count>0)
+            {
+                int spreader_uid =int.Parse( ds.Tables[0].Rows[0]["spreader_uid"].ToString());
+                int order_type = int.Parse(ds.Tables[0].Rows[0]["order_type"].ToString());
+                int buyer_id = int.Parse(ds.Tables[0].Rows[0]["buyer_id"].ToString());
+                if(order_type==970&& spreader_uid!=0)
+                {
+                    DateTime spreader_expire = DateTime.Now.AddDays(30);
+                    res = rrldb.ExeCMD("update rrl_user set spreader_expire=@spreader_expire",
+                        new SqlParameter("spreader_expire", spreader_expire.ToString("yyyy-MM-dd HH:mm:ss")));
+                }   
+            }
+            rrldb.Close();
             return MessageCode.SUCCESS;
         }
 

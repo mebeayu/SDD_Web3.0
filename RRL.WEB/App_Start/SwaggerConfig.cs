@@ -260,9 +260,9 @@ namespace RRL.WEB
 
         private static string GetRootUrlFromAppConfig()
         {
-            //return "https://e-shop.rrlsz.com.cn";
+            return "https://e-shop.rrlsz.com.cn";
 
-            return "http://localhost:55791";
+            //return "http://localhost:55791";
 
         }
 

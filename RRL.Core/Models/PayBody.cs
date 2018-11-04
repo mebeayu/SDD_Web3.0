@@ -16,6 +16,7 @@ namespace RRL.Core.Models
         public double money = 0;
         public string order_code = "";
         public double discount = 0;
+        public double bean = 0;
         public double postage = 0;
         public string spreador = "";
         public bool isticket = false;

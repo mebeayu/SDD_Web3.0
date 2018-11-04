@@ -74,7 +74,7 @@ namespace RRL.WEB.Controllers
                     {
                         PayBody body = PayBody.DecryptBody(record_id, order_code);
                         //订单校验完成，进行订单处理
-                        int intResult = tradeBiz.DealWithPayCompleteTrade(body, payNotifyModel.Transaction_id, payNotifyModel.Notify_id, "Alipay",payNotifyModel.Three_Pay_Type, payNotifyModel.Completed_Trans_Time);
+                        int intResult = tradeBiz.DealWithPayCompleteTrade(body, payNotifyModel.Transaction_id, payNotifyModel.Notify_id, "Alipay",payNotifyModel.Three_Pay_Type, payNotifyModel.Completed_Trans_Time, order_code);
                         // lcl 2018-10-21 Insert
                         if (intResult == 0)
                         {
@@ -145,7 +145,7 @@ namespace RRL.WEB.Controllers
                     try
                     {
                         var body = PayBody.DecryptBody(record_id, order_code);
-                        intResult = tradeBiz.DealWithPayCompleteTrade(body, payNotifyModel.Transaction_id, "", "WX_" + trade_type, payNotifyModel.Three_Pay_Type, payNotifyModel.Completed_Trans_Time);
+                        intResult = tradeBiz.DealWithPayCompleteTrade(body, payNotifyModel.Transaction_id, "", "WX_" + trade_type, payNotifyModel.Three_Pay_Type, payNotifyModel.Completed_Trans_Time, order_code);
                         //int res;
                         //{
                         //    //处理订单:改变订单状态，添加现金记录，修改用户账户，添加交易记录
