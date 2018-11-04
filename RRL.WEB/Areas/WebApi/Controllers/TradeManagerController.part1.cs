@@ -118,7 +118,8 @@ namespace RRL.WEB.Areas.WebApi.Controllers
             }
             else
             {
-                res = tm.AddToSpreader(Token.id, spreader_uid);
+                int new_spreader_uid;
+                res = tm.AddToSpreader(Token.id, spreader_uid,out new_spreader_uid);
                 return DataResult.InitFromMessageCode(res);
             }
         }

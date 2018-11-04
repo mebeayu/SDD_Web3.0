@@ -38,39 +38,50 @@ namespace RRL.Core.Manager
         /// <param name="goods_count">商品数量</param>
         /// <param name="receive_id">收货信息</param>
         /// <returns>生成结果</returns>
-        public BussResult CreateOrderFromGoodsV3(int uid, int goods_id, int goods_count,string msg_leave_word,   
-            string msg_phone, string msg_realname, string msg_idcardno, out int? order_id,int order_type = 1,int spreader_uid=0)
+        public BussResult CreateOrderFromGoodsV3(int uid, int goods_id, int goods_count, string msg_leave_word,
+            string msg_phone, string msg_realname, string msg_idcardno, out int? order_id, int order_type = 1, int spreader_uid = 0)
         {
             BussResult bussResult = new BussResult() { status = 0, message = "订单创建成功!" };
             //创建单一订单
             order_id = null;
             SqlDataBase db = new SqlDataBase();
-            int effect=db.Execute(@"UPDATE  rrl_goods SET inv_count =inv_count-@goods_count, sell_count = sell_count + @goods_count WHERE id = @goods_id and inv_count>=@goods_count", new { goods_count= goods_count, goods_id= goods_id });
-            if(effect==0)
+            int effect = db.Execute(@"UPDATE  rrl_goods SET inv_count =inv_count-@goods_count, sell_count = sell_count + @goods_count WHERE id = @goods_id and inv_count>=@goods_count", new { goods_count = goods_count, goods_id = goods_id });
+            if (effect == 0)
             {
-                return new BussResult() { status=99, message="库存不足!" };
+                return new BussResult() { status = 99, message = "库存不足!" };
 
-            }else
+            }
+            else
             {
-                int? orderId= Order_Insert(goods_id, uid);
+                int? orderId = Order_Insert(goods_id, uid);
                 if (orderId != null)
                 {
                     int cnt = OrderInfoGoods_Insert(orderId.Value, goods_id, goods_count, msg_leave_word, msg_phone, msg_realname, msg_idcardno);
-                    if (cnt==0)
+                    if (cnt == 0)
                     {
                         return new BussResult() { status = 99, message = "商品订单创建失败!" };
                     }
-                    if(order_type==970)//带推荐人的订单
-                    {//recommend_award_rate
-                        List<FeeConfig> list = db.Select<FeeConfig>("select buyer_recommend_award from rrl_goods a left join rrl_fee_config b on a.fee_id=b.id where a.id=@goods_id",new { goods_id= goods_id });
-                        double buyer_recommend_award = 0;
-                        if(list!=null&&list.Count!=0)
-                        {
-                            buyer_recommend_award = list[0].buyer_recommend_award;
-                        }//订单上设置推荐人id，推荐奖励比例
-                        int res = db.Execute("update rrl_order set order_type=970,spreader_uid=@spreader_uid,recommend_award_rate=@recommend_award_rate where id=@orderId",
-                            new { spreader_uid= spreader_uid, orderId = orderId, recommend_award_rate= buyer_recommend_award });
+
+
+                    List<FeeConfig> list = db.Select<FeeConfig>("select buyer_recommend_award from rrl_goods a left join rrl_fee_config b on a.fee_id=b.id where a.id=@goods_id",
+                        new { goods_id = goods_id });
+                    double buyer_recommend_award = 0;
+                    if (list != null && list.Count != 0)
+                    {
+                        buyer_recommend_award = list[0].buyer_recommend_award;
                     }
+                    List<Spreader> list_spreader = db.Select<Spreader>("select spreader_uid,spreader_expire from rrl_user where id=@uid",
+                        new { uid = uid });
+                    if (list_spreader != null && list_spreader.Count > 0)
+                    {
+                        spreader_uid = list_spreader[0].spreader_uid;
+                        DateTime spreader_expire = DateTime.Parse(list_spreader[0].spreader_expire);
+                        if (DateTime.Now > spreader_expire) spreader_uid = 0;//过期
+                    }
+                    //订单上设置推荐人id，推荐奖励比例
+                    int res = db.Execute("update rrl_order set order_type=970,spreader_uid=@spreader_uid,recommend_award_rate=@recommend_award_rate where id=@orderId",
+                        new { spreader_uid = spreader_uid, orderId = orderId, recommend_award_rate = buyer_recommend_award });
+
                 }
                 else
                     return new BussResult() { status = 99, message = "主订单创建失败!" };
@@ -78,8 +89,9 @@ namespace RRL.Core.Manager
             }
             return bussResult;
         }
-        public int AddToSpreader(int uid,int spreader_uid)
+        public int AddToSpreader(int uid, int spreader_uid, out int new_spreader_uid)
         {
+            new_spreader_uid = 0;
             RRLDB db = new RRLDB();
             DataSet ds = db.ExeQuery("select spreader_uid,spreader_expire from rrl_user where id=@uid", new SqlParameter("uid", uid));
             if (ds == null)
@@ -87,38 +99,41 @@ namespace RRL.Core.Manager
                 db.Close();
                 return MessageCode.ERROR_EXECUTE_SQL;
             }
-            if (ds.Tables[0].Rows.Count==0)
+            if (ds.Tables[0].Rows.Count == 0)
             {
                 db.Close();
                 return MessageCode.ERROR_NO_UID;
             }
             DateTime spreader_expire = DateTime.Parse(ds.Tables[0].Rows[0][1].ToString());
             int old_spreader_uid = int.Parse(ds.Tables[0].Rows[0][0].ToString());
-            if(spreader_uid!= old_spreader_uid)
+            if (spreader_uid != old_spreader_uid)
             {
-                if(spreader_expire<DateTime.Now)//当前时间超过到期日
+                if (spreader_expire < DateTime.Now)//当前时间超过到期日
                 {
                     DateTime new_spreader_expire = DateTime.Now.AddDays(30);
                     int res = db.ExeCMD("update rrl_user set spreader_uid=@spreader_uid,spreader_expire=@spreader_expire where id=@uid",
                         new SqlParameter("spreader_uid", spreader_uid),
-                        new SqlParameter("spreader_expire", spreader_expire.ToString("yyyy-MM-dd HH:mm:ss")),
+                        new SqlParameter("spreader_expire", new_spreader_expire.ToString("yyyy-MM-dd HH:mm:ss")),
                         new SqlParameter("uid", uid));
-                    if (res<=0)
+                    if (res <= 0)
                     {
                         db.Close();
                         return MessageCode.ERROR_EXECUTE_SQL;
                     }
                     db.Close();
+                    new_spreader_uid = spreader_uid;
                     return MessageCode.SUCCESS;
                 }
                 else
                 {
+                    new_spreader_uid = old_spreader_uid;
                     return MessageCode.ERROR_HAVE_SPREADER;
                 }
             }
             else
             {
                 db.Close();
+                new_spreader_uid = old_spreader_uid;
                 return MessageCode.SUCCESS;
             }
         }
@@ -129,14 +144,14 @@ namespace RRL.Core.Manager
         /// <param name="orderlist"></param>
         /// <param name="is_beans_pay"></param>
         /// <returns></returns>
-        public int UpdateOrderIsBeansPayV3(int uid,string orderlist,string is_beans_pay, string discount_type)
+        public int UpdateOrderIsBeansPayV3(int uid, string orderlist, string is_beans_pay, string discount_type)
         {
-            if(!"0".Equals(is_beans_pay))
+            if (!"0".Equals(is_beans_pay))
             {
                 is_beans_pay = "1";
             }
             SqlDataBase db = new SqlDataBase();
-            int effect=db.Execute($@"update rrl_order set is_beans_pay={is_beans_pay} where buyer_id={uid} and id in({orderlist}) and status=1 and is_paid=0 and isnull(is_paid_beans,0)=0 ");
+            int effect = db.Execute($@"update rrl_order set is_beans_pay={is_beans_pay} where buyer_id={uid} and id in({orderlist}) and status=1 and is_paid=0 and isnull(is_paid_beans,0)=0 ");
             if (effect > 0)
             {
                 if ("1" == discount_type)//3,7开
@@ -159,7 +174,7 @@ namespace RRL.Core.Manager
                 }
             }
             return 0;
-           
+
         }
 
 
@@ -175,9 +190,9 @@ namespace RRL.Core.Manager
             BussResult bussResult = new BussResult() { status = 0, message = "订单创建成功!" };
             //创建单一订单
             order_list = new List<int>();
-            string cart_id_in_str= string.Join(",", cart_list.Select(v => v.ToString()));
+            string cart_id_in_str = string.Join(",", cart_list.Select(v => v.ToString()));
             SqlDataBase db = new SqlDataBase();
-            var conn=db.CreateConnection();
+            var conn = db.CreateConnection();
             DbTransaction tran = null;
             int count = 0;
             bool isSubInv_ok = false;
@@ -185,7 +200,7 @@ namespace RRL.Core.Manager
             {
                 conn.Open();
                 tran = conn.BeginTransaction();
-                var sql= $@"UPDATE a
+                var sql = $@"UPDATE a
             set a.inv_count=a.inv_count-b.goods_count,
               a.sell_count=a.sell_count+b.goods_count
             from rrl_goods as a
@@ -205,7 +220,7 @@ namespace RRL.Core.Manager
                 else
                 {
                     string sql2 = $@"update rrl_shop_cart set isUsed=1 where id in({cart_id_in_str})";
-                    int cnt2=db.ExecuteTran(conn, sql2, null, tran);
+                    int cnt2 = db.ExecuteTran(conn, sql2, null, tran);
                     isSubInv_ok = true;
                     tran.Commit();
                 }
@@ -224,7 +239,7 @@ namespace RRL.Core.Manager
 
             if (isSubInv_ok)
             {
-                List<RRL_Shop_Cart> list= db.Select<RRL_Shop_Cart>($@"select * from rrl_shop_cart where uid=@uid and id in({cart_id_in_str})",new { uid = uid });
+                List<RRL_Shop_Cart> list = db.Select<RRL_Shop_Cart>($@"select * from rrl_shop_cart where uid=@uid and id in({cart_id_in_str})", new { uid = uid });
                 foreach (RRL_Shop_Cart shopCart in list)
                 {
                     int? orderId = Order_Insert(shopCart.goods_id, uid);
@@ -243,7 +258,7 @@ namespace RRL.Core.Manager
                 }
             }
             return bussResult;
-             
+
         }
 
         /// <summary>
@@ -295,47 +310,47 @@ namespace RRL.Core.Manager
         where rrl_order.status=1 and rrl_order.buyer_id=@uid
         and rrl_order.id in ({order_arr_str})
         ";
-            
-            List<dynamic> list=db.Select<dynamic>(sql, new { uid = uid });
+
+            List<dynamic> list = db.Select<dynamic>(sql, new { uid = uid });
             return list;
         }
- 
 
-         
+
+
         /// <summary>
         /// 获取邮费
         /// </summary>
         /// <param name="goods_id"></param>
         /// <param name="goods_count"></param>
         /// <returns></returns>
-        private decimal GetGoodsPostage(int goods_id,int goods_count)
+        private decimal GetGoodsPostage(int goods_id, int goods_count)
         {
             SqlDataBase db = new SqlDataBase();
             decimal default_postage = 8.0m;
-           /* var sql = $@"select   
-case when (select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage')<=price *@goods_count
-then 0 else 
-	case when isnull(postage,0)=0 then {default_postage} else postage end
-end postage
-from rrl_goods where id =@goods_id";*/
+            /* var sql = $@"select   
+ case when (select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage')<=price *@goods_count
+ then 0 else 
+     case when isnull(postage,0)=0 then {default_postage} else postage end
+ end postage
+ from rrl_goods where id =@goods_id";*/
 
 
-//            var sql = $@"select   
-//case when isnull(postage,0)=0 then 0 
-//else  
-//	case when (select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage')<=price *@goods_count
-//	then 0 else {default_postage} end
-//end postage
-//from rrl_goods where id =@goods_id";
+            //            var sql = $@"select   
+            //case when isnull(postage,0)=0 then 0 
+            //else  
+            //	case when (select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage')<=price *@goods_count
+            //	then 0 else {default_postage} end
+            //end postage
+            //from rrl_goods where id =@goods_id";
 
-//          var  sql = $@"select   
-//case when isnull(postage,0)=0 then 0 
-//else  
-//	case when (select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage')<=price *@goods_count
-//	then 0 else isnull(postage,0) end
-//end postage
-//from rrl_goods where id =@goods_id";
-          var  sql = $@"select   
+            //          var  sql = $@"select   
+            //case when isnull(postage,0)=0 then 0 
+            //else  
+            //	case when (select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage')<=price *@goods_count
+            //	then 0 else isnull(postage,0) end
+            //end postage
+            //from rrl_goods where id =@goods_id";
+            var sql = $@"select   
 case when isnull(postage,0)=0 then 0 
 else  
 	case when  isnull(postage_free_total_price,(select top 1 convert(DECIMAL(18,2), value) from rrl_config where  item='minimum_money_for_nil_postage'))<=price *@goods_count
@@ -343,15 +358,16 @@ else
 end postage
 from rrl_goods where id =@goods_id";
 
-            decimal? postage= db.ExecuteScalar<decimal?>(sql, new { goods_id = goods_id, goods_count = goods_count });
-            if(postage==null)
+            decimal? postage = db.ExecuteScalar<decimal?>(sql, new { goods_id = goods_id, goods_count = goods_count });
+            if (postage == null)
             {
                 return default_postage;
-            }else
+            }
+            else
             {
                 return postage.Value;
             }
-            
+
         }
 
 
@@ -361,10 +377,10 @@ from rrl_goods where id =@goods_id";
         /// <param name="goods_id"></param>
         /// <param name="buyer_id"></param>
         /// <returns></returns>
-        private int? Order_Insert(int goods_id,int buyer_id)
+        private int? Order_Insert(int goods_id, int buyer_id)
         {
             SqlDataBase db = new SqlDataBase();
-            var list=db.ExecuteStoredProcedure<int?>("sp_V3_order_insert", new { good_id= goods_id, buyer_id= buyer_id });
+            var list = db.ExecuteStoredProcedure<int?>("sp_V3_order_insert", new { good_id = goods_id, buyer_id = buyer_id });
             if (list == null || list.Count == 0)
                 return null;
             else
@@ -379,7 +395,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="goods_id"></param>
         /// <param name="goods_count"></param>
         /// <returns></returns>
-        private int OrderInfoGoods_Insert(int order_id,int goods_id, int goods_count,string msg_leave_word ,string msg_phone,string msg_realname,string msg_idcardno)
+        private int OrderInfoGoods_Insert(int order_id, int goods_id, int goods_count, string msg_leave_word, string msg_phone, string msg_realname, string msg_idcardno)
         {
             SqlDataBase db = new SqlDataBase();
             var postage = GetGoodsPostage(goods_id, goods_count);
@@ -426,7 +442,7 @@ from rrl_goods where id =@goods_id";
             where a.id=@goods_id";
             #endregion
 
-            int effect=db.Execute(sql, new
+            int effect = db.Execute(sql, new
             {
                 order_id = order_id,
                 goods_count = goods_count,
@@ -455,15 +471,15 @@ from rrl_goods where id =@goods_id";
         /// <param name="msg_realname"></param>
         /// <param name="msg_idcardno"></param>
         /// <returns></returns>
-        public int OrderInfoGoods_Update(int uid,int order_id, int goods_id, int? goods_count, string msg_leave_word, string msg_phone, string msg_realname, string msg_idcardno,int? user_coupons_id)
+        public int OrderInfoGoods_Update(int uid, int order_id, int goods_id, int? goods_count, string msg_leave_word, string msg_phone, string msg_realname, string msg_idcardno, int? user_coupons_id)
         {
             SqlDataBase db = new SqlDataBase();
-                
+
             #region update rrl_order_info_goods sql
             var sql = @"update [rrl_order_info_goods] set ";
             StringBuilder sb = new StringBuilder();
-            var param=new DynamicParameters();
-            if (goods_count!=null)
+            var param = new DynamicParameters();
+            if (goods_count != null)
             {
                 sb.Append(",").Append("goods_count=@goods_count");
                 param.Add("@goods_count", goods_count.Value);
@@ -472,7 +488,7 @@ from rrl_goods where id =@goods_id";
                 sb.Append(",").Append("postage=@postage");
                 param.Add("@postage", postage);
             }
-            if (null!=msg_leave_word)
+            if (null != msg_leave_word)
             {
                 sb.Append(",").Append("msg_leave_word=@msg_leave_word");
                 param.Add("@msg_leave_word", msg_leave_word);
@@ -493,7 +509,7 @@ from rrl_goods where id =@goods_id";
                 param.Add("@msg_idcardno", msg_idcardno);
             }
             if (sb.Length == 0) return 1;
-            sb.Remove(0, 1).Insert(0,sql);//去掉第一, 插入前面的update...  set
+            sb.Remove(0, 1).Insert(0, sql);//去掉第一, 插入前面的update...  set
             sb.Append(" where  order_id=@order_id and goods_id=@goods_id and EXISTS(select 1 from rrl_order where id=@order_id and status=1 and is_paid=0 and isnull(is_paid_beans,0)=0 )");
             param.Add("@order_id", order_id);
             param.Add("@goods_id", goods_id);
@@ -511,7 +527,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="order_id"></param>
         /// <param name="user_coupons_id"></param>
         /// <returns></returns>
-        public int UserCouponsApplyOrder(int uid, int order_id,int ? user_coupons_id)
+        public int UserCouponsApplyOrder(int uid, int order_id, int? user_coupons_id)
         {
 
             if (user_coupons_id == null)
@@ -523,26 +539,26 @@ from rrl_goods where id =@goods_id";
                 db.Execute($@"update rrl_order  set user_coupons_id=null,user_coupons_countmoney=null where id=@order_id  and  status=1 and  user_coupons_id is not null", new { order_id = order_id });
                 return 0;
             }
-           
+
             decimal? all_price = db.ExecuteScalar<decimal?>(@"select (b.goods_count*b.goods_price) all_price from 
                 rrl_order a inner join rrl_order_info_goods b on a.id=b.order_id 
                 where a.id = @order_id and a.status = 1 and a.is_paid = 0 and a.is_paid_beans=0", new { order_id = order_id });
             //EXISTS(select 1 from rrl_order where id = @order_id and status = 1 and is_paid = 0 and isnull(is_paid_beans, 0) = 0)
-            if(all_price==null)
+            if (all_price == null)
             {
                 return 1;
             }
-            if (user_coupons_id>0)//清空券选中
+            if (user_coupons_id > 0)//清空券选中
             {
                 db.Execute($@"update rrl_coupons set pay_order_id=null,is_used=0 where  id in (select user_coupons_id from rrl_order where id=@order_id  and  status=1 and  user_coupons_id is not null)", new { order_id = order_id });
                 db.Execute($@"update rrl_order  set user_coupons_id=null,user_coupons_countmoney=null where id=@order_id  and  status=1 and  user_coupons_id is not null", new { order_id = order_id });
-                 
+
             }
-            
+
             int coupons_id_int = user_coupons_id.Value;
 
             string str_sql = "select count(*) from rrl_goods where ISNULL(dbo.rrl_goods.is_can_use_coupons,cast(1 as bit))=0 and id in (select goods_id from rrl_order_info_goods where order_id=@order_id)";
-            int cnt = db.ExecuteScalar<int>(str_sql, new {  order_id = order_id });
+            int cnt = db.ExecuteScalar<int>(str_sql, new { order_id = order_id });
             if (cnt > 0)//购物卡类型不允许加券支付
             {
                 return 0;
@@ -559,24 +575,24 @@ from rrl_goods where id =@goods_id";
 
             string sql_cou = $@"select countmoney,isnull(leastconsume,0) as leastconsume from rrl_coupons c where  c.uid=@uid  and is_used=0 and is_paid=1  
   and  id=@coupons_id and(('1900-01-01' = c.starttime and '1900-01-01' = c.endtime) or(c.starttime < GETDATE() and c.endtime > GETDATE()) ) ";
-            var cuntMM = db.Select<ApplyCouponsPay_countmoney>(sql_cou, new { coupons_id = coupons_id_int,uid=uid });
+            var cuntMM = db.Select<ApplyCouponsPay_countmoney>(sql_cou, new { coupons_id = coupons_id_int, uid = uid });
             if (cuntMM == null || cuntMM.Count == 0)
             {
-                
+
                 return 0;
             }
             else
             {
 
                 var countmoney = cuntMM[0].countmoney;
-                var leastconsume =cuntMM[0].leastconsume;
-                if(all_price>=leastconsume)
+                var leastconsume = cuntMM[0].leastconsume;
+                if (all_price >= leastconsume)
                 {
                     //用券
                     db.Execute($@"update rrl_coupons set pay_order_id=@order_id,is_used=1 where  id=@coupons_id ", new { order_id = order_id, coupons_id = coupons_id_int });
                     db.Execute($@"update rrl_order set user_coupons_id=@coupons_id,user_coupons_countmoney=@countmoney where  id=@order_id", new { coupons_id = coupons_id_int, countmoney = countmoney, order_id = order_id });
                 }
-                
+
             }
             return 1;
         }
@@ -592,16 +608,16 @@ from rrl_goods where id =@goods_id";
         /// <param name="IP"></param>
         /// <param name="query_resault"></param>
         /// <returns></returns>
-        public string ApplyPayV3(UserAuth user, string order_arr_str,  int trans_type,  string IP , out int query_resault)
+        public string ApplyPayV3(UserAuth user, string order_arr_str, int trans_type, string IP, out int query_resault)
         {
-             
-            string   is_beans_pay = "1";
-            
+
+            string is_beans_pay = "1";
+
             string PayRequestString = "SUCCESS";
             ApplyPayV3_SumPay applyPayV3_SumPay = null;
             PayBody body = null;
-            string recordId=  Inner_ApplyPayV3(user, order_arr_str, trans_type,out is_beans_pay, out query_resault,out PayRequestString,out applyPayV3_SumPay,out body);
-            if(query_resault!=0)
+            string recordId = Inner_ApplyPayV3(user, order_arr_str, trans_type, out is_beans_pay, out query_resault, out PayRequestString, out applyPayV3_SumPay, out body);
+            if (query_resault != 0)
             {
                 return PayRequestString;
             }
@@ -620,7 +636,7 @@ from rrl_goods where id =@goods_id";
                 {
                     query_resault = bussResult.status;
                     return bussResult.message;
-                } 
+                }
                 #endregion
             }
             //支付宝
@@ -638,11 +654,11 @@ from rrl_goods where id =@goods_id";
                 {
                     query_resault = bussResult.status;
                     return bussResult.message;
-                } 
+                }
                 #endregion
             }
             //现金账户支付
-            else  if (trans_type == 3)
+            else if (trans_type == 3)
             {
                 #region 现金账户支付,扣豆和金
                 var bussResult = ReduceBeansAndGoldIcon(user, applyPayV3_SumPay, order_arr_str, is_beans_pay);
@@ -664,15 +680,15 @@ from rrl_goods where id =@goods_id";
                 {
                     query_resault = bussResult.status;
                     return bussResult.message;
-                } 
+                }
                 #endregion
             }
             query_resault = 0;
             return PayRequestString;
         }
-        
 
-        private string Inner_ApplyPayV3(UserAuth user, string order_arr_str,int trans_type,out string is_beans_pay,out int query_resault,out string message ,out ApplyPayV3_SumPay applyPayV3_SumPay,out PayBody body)
+
+        private string Inner_ApplyPayV3(UserAuth user, string order_arr_str, int trans_type, out string is_beans_pay, out int query_resault, out string message, out ApplyPayV3_SumPay applyPayV3_SumPay, out PayBody body)
         {
             List<int> orderListInt = PublicAPI.StrToIntList(order_arr_str);
             query_resault = 0;
@@ -686,7 +702,7 @@ from rrl_goods where id =@goods_id";
                 if (string.IsNullOrWhiteSpace(area_code))
                 {
                     query_resault = MessageCode.ERROR_ORDER_NO_ADDRESS;
-                    message= "订单无收货地址";
+                    message = "订单无收货地址";
                 }
             }
             #endregion
@@ -709,15 +725,15 @@ from rrl_goods where id =@goods_id";
         inner join rrl_order_info_goods b on b.order_id=a.id
         where a.status=1 and a.buyer_id=@uid
         and a.id in ({order_arr_str})";
-             applyPayV3_SumPay = sqldb.Single<ApplyPayV3_SumPay>(sql_sum, new { uid = user.id });
-            is_beans_pay=applyPayV3_SumPay.is_beans_pay;
+            applyPayV3_SumPay = sqldb.Single<ApplyPayV3_SumPay>(sql_sum, new { uid = user.id });
+            is_beans_pay = applyPayV3_SumPay.is_beans_pay;
 
-            
+
 
             if (applyPayV3_SumPay == null)
             {
                 query_resault = 99;
-                message= "订单不存在或者已被处理!";
+                message = "订单不存在或者已被处理!";
                 return "FAIL";
             }
             if ("0".Equals(applyPayV3_SumPay.is_beans_pay))//现金支付
@@ -730,7 +746,7 @@ from rrl_goods where id =@goods_id";
                 is_beans_pay = "1";
             }
             #endregion
-            
+
             decimal PLATFORM_HOLD_H_MONEY = userManager.GetUserHoldMoney(user);//门槛
 
             #region 产品分类判断&0门槛
@@ -806,18 +822,18 @@ from rrl_goods where id =@goods_id";
                     message = $@"金豆必须保留{(int)PLATFORM_HOLD_H_MONEY}底分!";
                     return "FAIL";
                 }
-            } 
+            }
             #endregion
 
             #region 判断金币/金豆/帐号/不足,直接返回
-            if (applyPayV3_SumPay.sum_pay_gold_coin<0)
+            if (applyPayV3_SumPay.sum_pay_gold_coin < 0)
             {
                 query_resault = 99;
                 message = "金币不足,交易失败!";
                 return "FAIL";
             }
 
-            if (applyPayV3_SumPay.sum_need_pay_beans  < 0)
+            if (applyPayV3_SumPay.sum_need_pay_beans < 0)
             {
                 query_resault = 99;
                 message = "需要支付的金豆不能小于等于0!";
@@ -847,12 +863,12 @@ from rrl_goods where id =@goods_id";
                 return "FAIL";
             }
 
-            
+
 
             if ((decimal)user.plate_to_return_money < applyPayV3_SumPay.sum_pay_gold_coin)
             {
                 query_resault = 99;
-                message= "金币不足,交易失败!";
+                message = "金币不足,交易失败!";
                 return "FAIL";
             }
 
@@ -874,13 +890,13 @@ from rrl_goods where id =@goods_id";
                 #endregion
 
                 query_resault = 99;
-                message= "金豆不足,交易失败!";
+                message = "金豆不足,交易失败!";
                 return "FAIL";
             }
             if (trans_type == 3 && (decimal)user.x_money < applyPayV3_SumPay.sum_need_pay_money)//3,退款账户余额支付
             {
                 query_resault = 99;
-                message= "现金账户余额不足,交易失败!";
+                message = "现金账户余额不足,交易失败!";
                 return "FAIL";
             }
             #endregion
@@ -898,7 +914,7 @@ from rrl_goods where id =@goods_id";
                 query_resault = 99;
                 message = "券抵扣金额还不够,请多添商品数量!";
                 return "FAIL";
-            } 
+            }
             #endregion
 
 
@@ -907,7 +923,7 @@ from rrl_goods where id =@goods_id";
             if (effect_c < 1)
             {
                 query_resault = 99;
-                message= "订单不存在或者已被处理!";
+                message = "订单不存在或者已被处理!";
                 return "FAIL";
             }
 
@@ -923,7 +939,7 @@ from rrl_goods where id =@goods_id";
             return recordId;
         }
 
-       
+
 
 
         /// <summary>
@@ -935,7 +951,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="r_money">用户红包账户余额</param>
         /// <param name="query_resault">查询结果</param>
         /// <returns>支付申请字符串</returns>
-        public JsPayConfigObject ApplyWxJsPayV3(UserAuth user, string order_arr_str,   string IP, string openid, out int query_resault, out string errer_message, string sperador = null)
+        public JsPayConfigObject ApplyWxJsPayV3(UserAuth user, string order_arr_str, string IP, string openid, out int query_resault, out string errer_message, string sperador = null)
         {
             string is_beans_pay = "1";
             string PayRequestString = "SUCCESS";
@@ -944,15 +960,16 @@ from rrl_goods where id =@goods_id";
             PayBody body = null;
             string recordId = Inner_ApplyPayV3(user, order_arr_str, 1, out is_beans_pay, out query_resault, out PayRequestString, out applyPayV3_SumPay, out body);
             //扣豆
-            
+
             if (query_resault != 0)
             {
-                errer_message= PayRequestString;
+                errer_message = PayRequestString;
                 return null;
-            }else
+            }
+            else
             {
                 var bussResult = ReduceBeansAndGoldIcon(user, applyPayV3_SumPay, order_arr_str, is_beans_pay);
-                if(bussResult.status!=0)
+                if (bussResult.status != 0)
                 {
                     query_resault = bussResult.status;
                     errer_message = bussResult.message;
@@ -962,7 +979,7 @@ from rrl_goods where id =@goods_id";
                 return GetPayConfig(prepay_id);
             }
             //微信JS支付 todo 获取prepay_id
-           
+
         }
 
 
@@ -974,7 +991,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="order_arr_str"></param>
         /// <param name="trans_type"></param>
         /// <param name="is_beans_pay"></param>
-        private BussResult ReduceBeansAndGoldIcon(UserAuth user,ApplyPayV3_SumPay sumPay, string order_arr_str, String is_beans_pay)
+        private BussResult ReduceBeansAndGoldIcon(UserAuth user, ApplyPayV3_SumPay sumPay, string order_arr_str, String is_beans_pay)
         {
             List<int> orderListInt = PublicAPI.StrToIntList(order_arr_str);
             if (!"1".Equals(is_beans_pay))
@@ -988,7 +1005,7 @@ from rrl_goods where id =@goods_id";
             {
                 conn = db.CreateConnection();
                 conn.Open();
-                tran =conn.BeginTransaction();
+                tran = conn.BeginTransaction();
                 int effect_paid_beans = db.ExecuteTran(conn, $@"update rrl_order set is_paid_beans=1 where id in({order_arr_str}) and isnull(is_paid_beans,0)=0", null, tran);
                 if (effect_paid_beans == orderListInt.Count)
                 {
@@ -1014,7 +1031,8 @@ from rrl_goods where id =@goods_id";
                         tran.Rollback();
                         return new BussResult() { status = 99, message = "金豆或金币不足" };
                     }
-                }else
+                }
+                else
                 {
                     tran.Rollback();
                 }
@@ -1044,10 +1062,10 @@ from rrl_goods where id =@goods_id";
         /// <param name="order_arr_str"></param>
         /// <param name="trans_type"></param>
         /// <param name="is_beans_pay"></param>
-        private BussResult ReduceXmoney(UserAuth user, ApplyPayV3_SumPay sumPay, string order_arr_str )
+        private BussResult ReduceXmoney(UserAuth user, ApplyPayV3_SumPay sumPay, string order_arr_str)
         {
             List<int> orderListInt = PublicAPI.StrToIntList(order_arr_str);
-            
+
             SqlDataBase db = new SqlDataBase();
             DbConnection conn = null;
             DbTransaction tran = null;
@@ -1058,13 +1076,13 @@ from rrl_goods where id =@goods_id";
                 tran = conn.BeginTransaction();
                 int effect = db.ExecuteTran(conn, @"update rrl_user  set x_money=x_money-@pay_money,pay_order_total_count=isnull(pay_order_total_count,0)+1
                                                 where id=@uid  and x_money>=@pay_money",
-                                                new {   uid = user.id,  pay_money = sumPay .sum_need_pay_money}, tran);
+                                                new { uid = user.id, pay_money = sumPay.sum_need_pay_money }, tran);
                 if (effect > 0)
                 {
                     int eff_order = db.ExecuteTran(conn, $@"update rrl_order set is_paid=1,status=2
-                                                where id in ({order_arr_str})  and is_paid=0 and status=1", 
+                                                where id in ({order_arr_str})  and is_paid=0 and status=1",
                         null, tran);
-                    if (eff_order!= orderListInt.Count)
+                    if (eff_order != orderListInt.Count)
                     {
                         tran.Rollback();
                         return new BussResult() { status = 99, message = "更新订单状态失败!" };
@@ -1116,7 +1134,7 @@ from rrl_goods where id =@goods_id";
                 SendSMS(user);
                 if (!string.IsNullOrWhiteSpace(user.wx_mp_open_id))
                 {
-                   
+
                     var ds = db.ExeQuery($@"SELECT rrl_goods.name,rrl_order_info_goods.goods_price,rrl_order_info_goods.goods_count FROM rrl_order_info_goods LEFT JOIN rrl_goods ON rrl_order_info_goods.goods_id = rrl_goods.id WHERE rrl_order_info_goods.order_id IN ({body.order_list})");
                     var goodsName = ds.Tables[0].Rows[0]["name"];
                     if (ds.Tables[0].Rows.Count > 1)
@@ -1151,13 +1169,14 @@ from rrl_goods where id =@goods_id";
             catch
             {
                 var sdf = "";
-            }finally
+            }
+            finally
             {
                 db.Close();
             }
         }
 
-        private  void SendSMS(UserAuth user)
+        private void SendSMS(UserAuth user)
         {
             var mobile = user.username;
             var sms = new AliSMS();
@@ -1171,19 +1190,21 @@ from rrl_goods where id =@goods_id";
         /// <param name="Transaction_id"></param>
         /// <param name="trans_type"></param>
         /// <returns></returns>
-        public int DealWithPayCompleteTrade(PayBody body ,string Transaction_id,string  notify_id, string trans_type,string three_pay_type,DateTime three_completed_trans_time,string order_code="")
+        public int DealWithPayCompleteTrade(PayBody body, string Transaction_id, string notify_id, string trans_type, string three_pay_type, DateTime three_completed_trans_time, string order_code = "")
         {
             List<int> listInt = PublicAPI.StrToIntList(body.order_list);
             SqlDataBase db = new SqlDataBase();
-            List<int?> list= db.ExecuteStoredProcedure<int?>("sp_V3_order_pay_complete", new { order_list = body.order_list,
+            List<int?> list = db.ExecuteStoredProcedure<int?>("sp_V3_order_pay_complete", new
+            {
+                order_list = body.order_list,
                 trans_id = Transaction_id,
                 notify_id = notify_id,
                 uid = body.uid,
                 money = -body.money,
                 type = 19,
                 remark = string.Format("现金消费,交易类型={0},订单列表={1}", trans_type, body.order_list),
-                three_pay_type= three_pay_type,
-                three_completed_trans_time= @three_completed_trans_time
+                three_pay_type = three_pay_type,
+                three_completed_trans_time = @three_completed_trans_time
             });
 
             UserAuth user = new UserAuth(body.uid);
@@ -1196,17 +1217,17 @@ from rrl_goods where id =@goods_id";
                 new SqlParameter("order_code", order_code));
             DataSet ds = rrldb.ExeQuery("select spreader_uid,order_type,buyer_id from rrl_order where ordercode=@order_code",
                 new SqlParameter("order_code", order_code));
-            if (ds!=null&&ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
-                int spreader_uid =int.Parse( ds.Tables[0].Rows[0]["spreader_uid"].ToString());
+                int spreader_uid = int.Parse(ds.Tables[0].Rows[0]["spreader_uid"].ToString());
                 int order_type = int.Parse(ds.Tables[0].Rows[0]["order_type"].ToString());
                 int buyer_id = int.Parse(ds.Tables[0].Rows[0]["buyer_id"].ToString());
-                if(order_type==970&& spreader_uid!=0)
+                if (order_type == 970 && spreader_uid != 0)
                 {
                     DateTime spreader_expire = DateTime.Now.AddDays(30);
                     res = rrldb.ExeCMD("update rrl_user set spreader_expire=@spreader_expire",
                         new SqlParameter("spreader_expire", spreader_expire.ToString("yyyy-MM-dd HH:mm:ss")));
-                }   
+                }
             }
             rrldb.Close();
             return MessageCode.SUCCESS;
@@ -1251,7 +1272,8 @@ from rrl_goods where id =@goods_id";
             else if ("99".Equals(status))
             {
                 sh_sell_status = "99";
-            }else
+            }
+            else
             {
                 sh_sell_status = "1";
             }
@@ -1358,7 +1380,7 @@ from rrl_goods where id =@goods_id";
         /// </summary>
         /// <param name="secondHandOrderId">在SDD平台发起的与二手平台交易的ID</param>
         /// <param name="remark">日志内容</param>
-        public void WriteSecondHandOrderLog(string secondHandOrderId,string remark)
+        public void WriteSecondHandOrderLog(string secondHandOrderId, string remark)
         {
             string strSql = @"insert into second_hand_order_log (second_hand_order_id ,remark ,addtime) values (@second_hand_order_id ,@remark ,getdate())";
             new SqlDataBase().Execute(strSql, new { second_hand_order_id = secondHandOrderId, remark = remark });
@@ -1374,7 +1396,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="payAccount">收款账号</param>
         /// <param name="name">真实姓名</param>
         /// <returns></returns>
-        public int CreateSecondHandOrder(string secondHandOrderId,int uid ,int goodsId ,decimal tranMoney, string payAccount, string name)
+        public int CreateSecondHandOrder(string secondHandOrderId, int uid, int goodsId, decimal tranMoney, string payAccount, string name)
         {
             string strSql = $@"insert into second_hand_order 
                                       (id ,uid ,goods_id ,tran_money ,pay_account ,real_name ,addtime)
@@ -1480,7 +1502,7 @@ from rrl_goods where id =@goods_id";
         /// <param name="uid">用户ID</param>
         /// <param name="payAccount">支付账号</param>
         /// <returns>true:是；false：否</returns>
-        public bool CheckPayAccount(int uid ,string payAccount)
+        public bool CheckPayAccount(int uid, string payAccount)
         {
             string strSql = $@"select count(0) from (
                                    select uid ,pay_account from second_hand_order(nolock) where (uid = @uid)

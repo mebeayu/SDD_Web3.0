@@ -10,4 +10,9 @@ namespace RRL.Core.Models
     {
         public double buyer_recommend_award { get; set; }
     }
+    public class Spreader
+    {
+        public int spreader_uid { get; set; }
+        public string spreader_expire { get; set; }
+    }
 }
