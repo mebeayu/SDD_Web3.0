@@ -1,0 +1,284 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>1元秒杀</title>
+    <link rel="stylesheet" href="~/Assets/Event/SecondKill/css/secondKill.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <script>
+        // 页面适配解决
+        ;(function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+    </script>
+</head>
+
+<body>
+<div class="main">
+
+    <!--头部区域开始-->
+    <div class="wj-second-kill-head">
+        <a href="/#/index" target="_self">
+            <img src="../../Assets/Event/img/second-kill_arowLeft.jpg" alt=""/>
+        </a>
+        <h6>一元秒杀</h6>
+    </div>
+    <!--头部区域结束-->
+
+    <!--中间主体内容区域开始-->
+    <div class="wj-second-kill-cont">
+        <!--广告位区域开始-->
+        <div class="wj-second-kill-bd-cont">
+            <ul>
+                <li>
+                    <a href="javascript:;">
+                        <img src="../../Assets/Event/img/second-kill_bd_v2.jpg" alt=""/>
+                        
+                        <img id="kefu1" src="../../Assets/Event/img/kefu.png" alt="kefu"  onclick="contact()"/>
+                    </a>
+                    
+                </li>
+            </ul>
+        </div>
+        <!--广告位区域结束-->
+
+        <!--抢购商品列表区域开始-->
+        <div class="wj-second-kill-goods-list-cont">
+            <ul id="JS-SecondKill-Goods-List">
+                <!--<li class="wj-second-kill-goods-list">
+                    <div class="wj-second-kill-goods-l">
+                        <a href="">
+                            <img src="" alt="">
+                        </a>
+                        <div> &lt;!&ndash;class="enter"&ndash;&gt;
+                            <p>已售罄</p>
+                        </div>
+                    </div>
+                    <div class="wj-second-kill-goods-r">
+                        <p class="head">夏普（SHARP） 空气净化器家用除甲醛雾霾PM2.5大面积加湿型消毒器 KC-W380S-W1（2017新款）</p>
+                        <div class="progress">
+                            <div>
+                                <span class="show"></span>
+                                <p>已抢<span>10</span>%</p>
+                            </div>
+                        </div>
+                        <ul class="immediately-grab">
+                            <li class="l">
+                                <div class="price-line">
+                                    <span>￥ 28.5</span>
+                                </div>
+                                <p class="price">
+                                    <span>￥<i>9.9</i></span>
+                                    <span>￥1+520金豆</span>
+                                </p>
+                            </li>
+                            <li class="r">
+                                <a href="">马上抢</a> &lt;!&ndash;class="immediately"&ndash;&gt;
+                            </li>
+                        </ul>
+                    </div>
+                </li> &lt;!&ndash;cur&ndash;&gt;-->
+            </ul>
+            <p id="JS-No-Data" class="no-data">数据加载中 ......</p>
+        </div>
+        <!--抢购商品列表区域结束-->
+
+        <!--返回顶部按钮-->
+        <img id="JS-goTop" class="wj-gotop" src="../../Assets/Source/img/totop.png" alt=""/>
+        <!--返回顶部按钮-->
+    </div>
+    <!--中间主体内容区域结束-->
+
+
+</div>
+</body>
+
+<script src='../../Assets/Event/jquery-3.2.1.min.js'></script>
+<script type="text/javascript">
+
+    $(function () {
+        getSecKillActivityAPI();
+        $("#JS-goTop").on("click", goBackTopFn);
+    });
+
+    /* 返回顶部代码实现 */
+    function goBackTopFn() {
+        var $parent = $('html,body');
+        $parent.animate({scrollTop: '0'}, 800);
+    }
+
+    /* 获取抢购商品列表代码实现 */
+    function getSecKillActivityAPI() {
+        $.ajax({
+            url: '/Webapi/ShopManager/GetSecKillActivity',
+            type: "get",
+            complete: function (xhr, textStatus) {
+
+                var res = xhr.responseJSON;
+                // 失败
+                if ((xhr.readyState !== 4) && (xhr.status !== 200)) {
+                    alert(res.message);
+                    return;
+                }
+
+                if (res.status !== 0) {
+                    alert(res.message);
+                    return;
+                }
+
+                // 成功
+                if (res.status === 0) {
+                    var data = res.data || [];
+                    renderScareBuyingFn(data);
+                }
+            }
+        })
+    }
+
+    /* 渲染抢购商品列表代码实现 */
+    function renderScareBuyingFn(dataList) {
+        var html = "",
+            $JSSecondKillGoodsList = $("#JS-SecondKill-Goods-List");
+        for (var i = 0, len = dataList.length; i < len; i++) {
+            var item = dataList[i];
+            // 已抢购完： 100
+            if (item.sellPercent == 100) {
+                html += '<li class="wj-second-kill-goods-list cur"><div class="wj-second-kill-goods-l"><a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/' + item.id + '/null"><img src="https://e-shop.rrlsz.com.cn/SWebApi/Public/picture/' + item.pic_id + '.jpg" alt="" /></a><div class="enter"><p>已售罄</p></div></div><div class="wj-second-kill-goods-r"><p class="head">' + item.name + '</p><div class="progress"><div><span style="width:' + item.sellPercent + '%" class="show"></span><p>已抢<span>' + item.sellPercent + '</span>%</p></div></div><ul class="immediately-grab"><li class="l"><div class="price-line"><span>￥<i>' + item.price + '</i></span><span>￥ ' + item.local_price + '</span></div><p class="price"><span>￥ ' + item.cash_price + '+' + item.beans_price + '金豆</span></p></li><li class="r"><a class="immediately" href="javascript:;">马上抢</a></li></ul></div></li>';
+            } else {
+                html += '<li class="wj-second-kill-goods-list"><div class="wj-second-kill-goods-l"><a href="https://e-shop.rrlsz.com.cn/#/goodsdetail/' + item.id + '/null"><img src="https://e-shop.rrlsz.com.cn/SWebApi/Public/picture/' + item.pic_id + '.jpg" alt="" /></a><div><p>已售罄</p></div></div><div class="wj-second-kill-goods-r"><p class="head">' + item.name + '</p><div class="progress"><div><span style="width:' + item.sellPercent + '%"  class="show"></span><p>已抢<span>' + item.sellPercent + '</span>%</p></div></div><ul class="immediately-grab"><li class="l"><div class="price-line"><span>￥<i>' + item.price + '</i></span><span>￥ ' + item.local_price + '</span></div><p class="price"><span>￥ ' + item.cash_price + '+' + item.beans_price + '金豆</span></p></li><li class="r"><a  href="https://e-shop.rrlsz.com.cn/#/goodsdetail/' + item.id + '/null">马上抢</a></li></ul></div></li>';
+            }
+
+        }
+        $JSSecondKillGoodsList.html(html);
+        $("#JS-No-Data").text("老板 已经没有你想要的啦~");
+    }
+
+    function contact()
+    {
+        var iframe = encodeURIComponent("https://kefu.easemob.com/webim/im.html?configId=8d149d8f-bc70-45f8-9c44-96c6ef6098c9");
+        window.location.href = "/Game/CustomerService?iframe=" + iframe + "&redirect=" + encodeURIComponent("https://e-shop.rrlsz.com.cn/Event/SecondKill");
+
+    }
+
+</script>
+
+</html>

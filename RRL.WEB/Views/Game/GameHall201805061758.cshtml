@@ -1,0 +1,860 @@
+﻿@using System.Linq;
+
+@{
+Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Assets/Game/css/gamehall.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <link rel="stylesheet" href="~/Assets/Dist/Styles/app.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+    <script src="~/Assets/global/plugins/layer-v3.1.1/layer/mobile/layer.js"></script>
+    <script src='~/Assets/Dist/Scripts/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+    <title>赠品休闲区</title>
+    <script type="text/javascript">
+
+        var token = localStorage.getItem('shorttoken');
+
+
+        function dlg_msg(msg) {
+
+            /*layer.open({
+                content: msg
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });*/
+            alert(msg);
+        }
+
+        function dlg_confirm(msg, fun_yes, fun_no, title) {
+            title = title || "省兜兜系统提示";
+            /*layer.open({
+                title: [
+                    title,
+                    'background-color:#01AAED; color:#fff;'
+                ],
+                skin: 'footer'
+
+                , anim: 'scale'
+                , content: msg
+                , btn: ['确认', '取消']
+                , yes: fun_yes
+            });*/
+            confirm(msg, fun_yes);
+        }
+
+        // 页面适配解决
+        ;(function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+
+
+    </script>
+</head>
+<body>
+<div class="wj-gamehall-mainbar">
+    <!--头部开始 -->
+    <div class="wj-gamehall-topbar">
+        <h4>赠品休闲区</h4>
+        <a id="shareRedCollar" href="javascript:;"><img src="~/Assets/Game/img/gamehall-share.jpg"/></a>
+    </div>
+    <!--头部结束 -->
+
+    <!--中间主要区域开始-->
+    <div class="wj-gamehall-centerbar">
+        <!--广告位开始-->
+        <div id="wj-gamehall-ad" class="wj-gamehall-adbar">
+            <figure id="wj-gamehall-ad-children" class="swipslider">
+                <ul class="sw-slides">
+                    <li class="sw-slide">
+                        <img src="/Assets/Game/img/gameHall-DouLandlord.jpg"/>
+                    </li>
+                </ul>
+            </figure>
+        </div>
+        <!--广告位结束-->
+
+        <!--签到区域开始-->
+        <div class="wj-gamehall-signbar border-b">
+            <!--点击签到开始-->
+            <div id="clickSignFn" class="wj-gamehall-click-sign">
+                <p>坚持签到，领取大额免费红包</p>
+                <img src="~/Assets/Game/img/gamehall-click-sign.jpg" alt="">
+            </div>
+            <!--点击签到结束-->
+
+            <!--今日已签开始-->
+            @if (ViewBag.isCanGetRedpackage == true)
+            {
+            <div id="btnSignIn" class="wj-gamehall-today-sign cur">签到</div><!-- .cur 点击签到-->
+            }
+            else
+            {
+            <div class="wj-gamehall-today-sign cur">今日已签，明日再来</div><!-- .cur 点击签到-->
+            }
+            <div class="wj-gamehall-checked-list-bg">
+                <p id="lblContinuousSignDays" class="wj-gamehall-continue">连续@(ViewBag.continuousSignDays)天</p>
+                <ul class="wj-gamehall-checked-list">
+                    @{ int intIndex = 0; }
+                    @foreach (var redpackageItem in ViewBag.redpackageDayConfig)
+                    {
+                    if (intIndex > 0)
+                    {
+                    <li class="line cur"></li>
+                    }
+
+                    if (redpackageItem.is_signin == "0")
+                    {
+
+                    <li>
+                        <i class="no-checked"></i>
+                        <span>@(redpackageItem.money)万</span>
+                    </li>
+                    }
+                    else
+                    {
+
+                    <li class="cur">
+                        <i></i>
+                        <span>@(redpackageItem.money)万</span>
+                    </li>
+                    }
+
+                    intIndex++;
+                    }
+                </ul>
+            </div>
+            <div class="wj-gamehall-free-red-envelopes">
+                <img src="~/Assets/Game/img/gamehall-red-envelopes.png" alt="">
+                <span>免费红包</span>
+                <span id="el_h_money_free">-</span><span>，</span><img src="~/Assets/Game/img/small_packet.32feb.png" alt="">
+                <span> 小红包</span>
+                <span id="el_h_money_pay">-</span>
+            </div>
+
+            <div class="wj-gamehall-card-voucher">
+                <ul>
+                    <li>
+                        <div class="wj-gamehall-card-voucher-l">
+                            <span>自动兑卡券剩余时间</span>
+                            <span id="lblCountdown" class="time"></span>
+                        </div>
+                        <div class="wj-gamehall-card-voucher-r">
+                            <span id="el_change_beans" style="display:none;" class="free-red-envelp cur"><i>免费红包兑金豆<br />（@(ViewBag.redpackageToBeanMin)w起兑）</i></span>
+                            <!--cur 选中的颜色-->
+                            <span id="el_change_card" class="free-red-envelp cur"><i>免费红包兑卡券<br/>（10w起兑）</i></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wj-gamehall-card-voucher-l imazamox">
+                            <span><img src="~/Assets/Game/img/gamehall-imazamox.png" alt=""/><i
+                                    id="el_h_money">-</i></span>
+                            <span>金豆</span>
+                        </div>
+                        <div class="wj-gamehall-card-voucher-r buy-gold-bean">
+                            <span id="firstShareRedCollar">推荐得@(ViewBag.shareRedpackage)小红包</span>
+                            <span id="buyGoldBean">买券送金豆</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!--今日已签开始-->
+        </div>
+        <!--签到区域结束-->
+
+        <!--免费红包游戏区域开始-->
+        @*<div class="wj-gamehall-gamebar border-b">
+            <h5 class="wj-gamehall-game-til">免费红包区</h5>
+            <div class="wj-gamehall-everyone-playing">
+                <ul class="wj-gamehall-everyone-playing-list">
+                    @foreach (var gameItem in ViewBag.redpackageGame)
+                    {
+                        if (gameItem.action_type == "1")
+                        {
+                    <li class="wj-gamehall-everyone-playing-li" onclick="OpenThirdPartyUrl('@gameItem.action_url')">
+                        <img src="@gameItem.img_url" alt="@gameItem.simple_remark"/>
+                        <p>@gameItem.name</p>
+                    </li>
+                        }
+                        else if (gameItem.action_type == "2")
+                        {
+                    <li class="wj-gamehall-everyone-playing-li" onclick="@gameItem.action_js">
+                        <img src="@gameItem.img_url" alt="@gameItem.simple_remark"/>
+                        <p>@gameItem.name</p>
+                    </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>*@
+        <!--免费红包游戏区域结束-->
+
+        <!--金豆游戏区域开始-->
+        <div class="wj-gamehall-gamebar border-b">
+            <h5 class="wj-gamehall-game-til">小红包与金豆游戏区</h5>
+            <div class="wj-gamehall-everyone-playing">
+                <ul class="wj-gamehall-everyone-playing-list">
+                    @foreach (var gameItem in ViewBag.beansGame)
+                    {
+                        if (gameItem.action_type == "1")
+                        {
+                    <li class="wj-gamehall-everyone-playing-li" onclick="OpenThirdPartyUrl('@gameItem.action_url')">
+                        <img src="@gameItem.img_url" alt="@gameItem.simple_remark"/>
+                        <p>@gameItem.name</p>
+                    </li>
+                        }
+                        else if (gameItem.action_type == "2")
+                        {
+                    <li class="wj-gamehall-everyone-playing-li" onclick="@gameItem.action_js">
+                        <img src="@gameItem.img_url" alt="@gameItem.simple_remark"/>
+                        <p>@gameItem.name</p>
+                    </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <!--金豆游戏区域结束-->
+
+        <!--休闲游戏区域开始-->
+        <div class="wj-gamehall-cooperatbar">
+            <h5 class="wj-gamehall-game-til">休闲游戏</h5>
+            <div id="wj-gamehall-everyone-playing-list02" class="wj-gamehall-everyone-playing">
+                <figure id="wj-gamehall-everyone-playing02-children" class="swipslider">
+                    <ul class="sw-slides">
+                    @{
+                        int intCount = 0;
+                        int intPageSize = 8;
+                    }
+                    @foreach (var gameItem in ViewBag.casualGame)
+                    {
+                        if(intCount % intPageSize == 0)
+                        {
+                            @:<li class="sw-slide"><ul class="wj-gamehall-everyone-playing-list wj-gamehall-everyone-height">
+                        }
+                        if (gameItem.action_type == "1")
+                        {
+                            <li class="wj-gamehall-everyone-playing-li"
+                                onclick="OpenThirdPartyUrl('@gameItem.action_url')">
+                                <img src="@gameItem.img_url" alt="@gameItem.simple_remark" />
+                                <p>@gameItem.name</p>
+                            </li>
+                        }
+                        else if (gameItem.action_type == "2")
+                        {
+                            <li class="wj-gamehall-everyone-playing-li" onclick="@gameItem.action_js">
+                                <img src="@gameItem.img_url" alt="@gameItem.simple_remark" />
+                                <p>@gameItem.name</p>
+                            </li>
+                        }
+                        if(intCount % intPageSize == intPageSize - 1 || intCount == ViewBag.casualGame.Count - 1)
+                        {
+                            @:</ul></li>
+                        }
+
+                        intCount++;
+                    }
+                    </ul>
+                </figure>
+            </div>
+        </div>
+        <!--休闲游戏区域结束-->
+    </div>
+    <!--中间主要区域结束-->
+
+    <!--底部导航区域开始-->
+    <div class="wj-bottom-navbar wj-gamehall-botnav wj-bottom-nav">
+        <ul>
+            <li>
+                <a href="/#/index" target="_self">
+                    <img src="/Assets/Source/img/首页灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/首页选中@3x.png" alt="">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/#/sortofgoods" target="_self">
+                    <img src="/Assets/Source/img/分类灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/分类选中@3x.png" alt="">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li class="cur">
+                <a href="javascript:;" target="_self">
+                    <img src="/Assets/Source/img/赠品休闲区@3x_52.png" alt="">
+                    <img src="/Assets/Source/img/赠品休闲区@3x_46.png" alt="">
+                    <span>赠品休闲区</span>
+                </a>
+            </li>
+            <li>
+                <a href="/#/shopcart" target="_self">
+                    <img src="/Assets/Source/img/购物车灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/购物车选中@3x.png" alt="">
+                    <span>购物车</span>
+                </a>
+            </li>
+            <li>
+                <a href="/#/my" target="_self">
+                    <img src="/Assets/Source/img/我的灰色@3x.png" alt="">
+                    <img src="/Assets/Source/img/我的选中@3x.png" alt="">
+                    <span>我的</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--底部导航区域结束-->
+
+    <!--分享红包图片区域开始-->
+    <div class="hboxfixed" id="hboxfixed">
+        <div class="shaw"></div>
+        <div class="img" id="shareRedCollarImg"><img src="/Assets/Source/img/hbox.png"/></div>
+    </div>
+    <!--分享红包图片区域结束-->
+
+    <!--省兜兜大红包页面开始-->
+    <div class='maskxx wj-maskxx'>
+        <p class='gethbnum y-color'>30.00</p>
+        <img class='closebtnxx' src='~/Assets/Event/img/images/oolin.jpg'/>
+    </div>
+    <!--省兜兜大红包页面结束-->
+
+</div>
+
+<script type="text/javascript" src="/Assets/Game/js/swipeslider.js"></script>
+<script src='/Assets/Dist/Scripts/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+<script>
+
+    $(function () {
+        // 顶部主轮播图调用
+        $("#wj-gamehall-ad-children").swipeslider({
+            autoPlay: false,                               // 是否自动播放
+            prevNextButtons: false,                        // 是否显示左右箭头
+            bullets: false,                                // 底部中间是否显示小圆点
+            sliderHeight: $("#wj-gamehall-ad").height()    // 设置轮播图的高度
+        });
+
+        // 休闲游戏轮播图调用
+        $("#wj-gamehall-everyone-playing02-children").swipeslider({
+            autoPlay: false,                               // 是否自动播放
+            prevNextButtons: false,                        // 是否显示左右箭头
+            bullets: true,                                // 底部中间是否显示小圆点
+            sliderHeight: $("#wj-gamehall-everyone-playing-list02").height()    // 设置轮播图的高度
+        });
+        // 休闲游戏的高度设置
+        $(".wj-gamehall-everyone-height").height($("#wj-gamehall-everyone-playing-list02").height());
+
+        // 设置倒计时
+        SetCountdown();
+    });
+
+    /**
+     * 点击休闲游戏跳转不同游戏页面
+     */
+    function iframeVal(val) {
+        OpenThirdPartyUrl(val);
+    }
+
+    /**
+     * 点击休闲游戏跳转不同游戏页面
+     */
+    function OpenThirdPartyUrl(url) {
+        if (url.length > 0) {
+            var redirect=location.href;
+            location.href=StringUtils.format("/Game/ThirdPartyGames?iframe={0}&redirect={1}",encodeURIComponent(url),redirect);
+        }
+    }
+
+    var jqlblCountdown = $("#lblCountdown"); // 显示倒计时的span的jQuery对象
+    function SetCountdown() {
+        var intCountdown = '@ViewBag.countdown';
+        if (intCountdown <= 0) {
+            return;
+        }
+
+        var times = intCountdown;
+        var timer = null;
+        timer = setInterval(function () {
+            var day = 0,
+                hour = 0,
+                minute = 0,
+                second = 0;//时间默认值
+            if (times > 0) {
+                day = Math.floor(times / (60 * 60 * 24));
+                hour = Math.floor(times / (60 * 60)) - (day * 24);
+                minute = Math.floor(times / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(times) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+
+            var countdownString = FormatDatePart(day) + "天" + FormatDatePart(hour) + "时" + FormatDatePart(minute) + "分" + FormatDatePart(second) + "秒";
+            jqlblCountdown.text(countdownString);
+
+            times--;
+            if (times < 0) {
+                if (timer != null) {
+                    clearInterval(timer);
+                }
+            }
+        }, 1000);
+    }
+    // 以两位数显示时间的各部分
+    function FormatDatePart(value) {
+        if (value <= 9) {
+            return '0' + value;
+        }
+
+        return value;
+    }
+</script>
+<script type="text/javascript">
+
+    $(function () {
+        GetUserInfo();
+        loopPage();
+
+        $("#el_change_beans").click(change_beans);
+        $("#el_change_card").click(change_card);
+        $("#btnSignIn").one("click", sign_in);
+        $("#shareRedCollar").on("click", share_red_collar);
+        $("#shareRedCollarImg").on("click", share_red_collar);
+        $("#firstShareRedCollar").on("click", share_red_collar);
+        $("#buyGoldBean").on("click", buy_gold_bean);
+        $("#clickSignFn").on("click", click_sign_fn);
+        $('.closebtnxx').on("click", closeRedFree);
+
+    });
+
+    /**
+     * 获取小红包的轮询
+     */
+    function loopPage() {
+        var endtime = new Date().getTime();//用户退出时间
+        var duration = Math.floor((endtime - starttime) / 1000);
+        var rdcode = String(Math.random()).split(".")[1];
+        var starttime = new Date().getTime();
+
+        $.post("/WebApi/Game/SetState",
+            { starttime: starttime, endtime: endtime, duration: duration, rdcode: rdcode, token: token },
+            function (ret) {
+                 if (ret.data == true) {//分时段小红包
+                     $.post("/WebApi/Game/RefreshRandom", { token: token },
+                         function (data) {
+                             if (data.data !== 0) {
+                                 $('.maskxx').css('display', 'block');
+                                 $('.gethbnum').text(data.additional_data  );
+                                 // getuser()
+                             }/* else if (data.add_data !== 0) {
+                                 alert(data.data);
+                             } else {
+                                 alert('领取失败，请明天再试');
+                             }*/
+                         }, 'json');
+                 }; 
+                if (ret.additional_data == true) {//针对个人发红包
+                    $.post("/WebApi/Game/RefreshPer",
+                        { "token": token },
+                        function (res) {
+                            console.log(res)
+                            if (res.status == 0) {
+                                var elText = "";
+                                if (res.data.FreeMoney.Money > 0) {
+                                    elText += res.data.FreeMoney.Msg + "</br>";
+                                }
+                                if (res.data.PayMoney.Money > 0) {
+                                    elText += res.data.PayMoney.Msg;
+                                }
+                                $('.maskxx').css('display', 'block');
+                                $('.gethbnum').html(elText);
+                            } else {
+                                alert(res.data);
+                            }
+
+                        }, 'json');
+                }
+            }, 'json');
+        setTimeout(function () {
+            loopPage();
+        }, 2000);
+    }
+
+    /**
+     * 关闭小红包
+     */
+    function closeRedFree(){
+        $('.maskxx').css('display', 'none');
+    }
+
+    /**
+     * 点击签到是否显示弹出框文字
+     */
+    function click_sign_fn() {
+        confirm("<ul><li>签到规则</li><li>1、免费红包将不再支持换成金豆，望互相转告!</li><li>2、省兜兜的幸运签到日为 3 天，每天奖励 10 万免费红包。在签到日 3 天内，如出现断签，再次续签后的奖励档次将与断签前保持连续性。</li><li>3、在幸运签到日期间，每日首次登录省兜兜均可进行签到，领取免费红包，免费红包可以手动兑换成卡券，卡券 10 万免费红包起兑。</li><li>4、幸运签到日截止时，没有兑换的免费红包将在签到日最后一天的 24:00 自动兑换成购物卡券，请及时兑换。</li><li>5、免费红包可以玩平台里的小游戏，赢取更多免费红包，金豆和卡券可用于商城购物抵扣。</li><li>6、所有用户的红包都是省兜兜平台免费发放给玩家的福利，不能通过充值获取，不能用于交易，本活动的最终解释权归省兜兜所有。</li></ul>", function() {
+        });
+    }
+
+    /**
+     * 点击免费红包区游戏
+     */
+    function redpackage_playing(sta) {
+        all_playing(sta, 1);
+    }
+
+     /**
+     * 点击金豆游戏区
+     */
+    function beans_playing(sta) {
+        all_playing(sta, 2);
+    }
+
+    /**
+     * 点击大家都在玩跳转不同游戏页面
+     */
+    function all_playing(sta, payType) {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        var ver = (new Date().getTime() / 100).toFixed(0);
+        if (token) {
+            var host = "http://" + location.host;
+            switch (sta) {
+                //http://game.rrlsz.com.cn   -->120.78.253.83
+
+                case 0:
+                    location.href = host + "/Game/Roulette_V2/?token=" + encodeURIComponent(token) + "&paytype=" + payType;
+                    break;
+                case 1:
+                    var url = "http://120.78.253.83:8360/static/dazhuanpan/?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 2:
+                    var url = "http://120.78.253.83:8096/sxl/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 3:
+                    var url = "http://120.78.253.83:8096/fkp/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 4:
+                    var url = location.href = "http://120.78.253.83:8360/static/caidaxiao/?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 5:
+                    var url = "http://120.78.253.83:8360/static/xiaozhuanpan/?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 6:
+                    var url = "http://119.23.139.194/Application/Home/View/default/Index/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    break;
+                case 7:
+                    if (payType == 1) {
+                        location.href = "http://120.78.253.83:8736/snk_client_free/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver;
+                    }
+                    else if (payType == 2) {
+                        location.href = "http://120.78.253.83:8736/snk_client_jindou/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver;
+                    }
+                    break;
+                case 8:
+                    var url = "http://119.23.139.194:8888/Application/Home/View/default/Index/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 点击购买金豆
+     */
+    function buy_gold_bean() {
+        window.location.href = "/Game/PeasPay?token=" + encodeURIComponent(token) + "&redirect=" + encodeURIComponent(location.href);
+    }
+
+    /**
+     * 点击分享领取红包
+     */
+    function share_red_collar() {
+        var ua = navigator.userAgent.toLowerCase();
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        if (isWeixin) {
+            var $hboxfixed = $("#hboxfixed");
+            if ($hboxfixed.css("display") == "none") {
+                $hboxfixed.css("display", "block");
+            } else {
+                $hboxfixed.css("display", "none");
+            }
+        } else {
+            var title = encodeURIComponent("呼朋唤友，奖励无限！");
+            var recommend = encodeURIComponent("友谊小船不翻，红包拿到手软。");
+            var pic_id = "35642";
+            //var redirect="https://e-shop.rrlsz.com.cn/Event/Xxxshare?token="+encodeURIComponent(this.$store.state.shorttoken);
+            var redirect = "http://sdd.szrundao.com/Event/Xxxshare?token=" + encodeURIComponent(token);
+            if ( ua.indexOf('iphone') > -1) 
+            {
+                    redirect = encodeURIComponent(redirect);
+            }
+
+            window.location.href = " https://e-shop.rrlsz.com.cn/Event/SharingGuide?title=" + title + "&recommend=" + recommend + "&pic_id=" + pic_id + "&redirect=" + redirect;
+        }
+    }
+
+    /**
+     * 签到领取红包
+     */
+    function sign_in() {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        /*var blnIsLogin = 'ViewBag.isLogin';
+        if (blnIsLogin == 'false') {
+            // 弹出是否登录提示框
+            alert('未登录');
+        }
+        else*/
+        {
+            UI.Ajax.post("/Game/SignInRedpackage", { token: token }, function (data) {
+                var jqSignInButton = $("#btnSignIn");
+
+                if (data.status == 0) {
+                    // 更新签到状态
+                    jqSignInButton.after('<div class="wj-gamehall-today-sign cur">今日已签，明日再来</div>');
+                    jqSignInButton.remove();
+                    // 更新连续签到天数数值
+                    var jqContinuousSignDays = $("#lblContinuousSignDays");
+                    var signDays = parseInt('@(ViewBag.continuousSignDays)');
+                    if (!isNaN(signDays)) {
+                        signDays++;
+                        jqContinuousSignDays.text("连续" + signDays + "天");
+                        // 更新连续签到打钩状态
+                        $(".wj-gamehall-checked-list i.no-checked:first").removeClass("no-checked");
+                    }
+
+                    // 重新渲染用户信息
+                    GetUserInfo();
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    }
+
+    /**
+     * 换金豆
+     */
+    function change_beans() {
+
+        return;
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        window.confirm("是否确定把所有免费红包转换成金豆?", function () {
+            UI.Ajax.post("/WebApi/Game/RedPackageBeans", {token: token}, function (data) {
+                if (data.status == 0) {
+                    alert("免费红包转金豆成功");
+                    GetUserInfo();
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+
+    }
+
+    /**
+     * 换购物卡
+     */
+    function change_card() {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        window.confirm("是否确定把所有免费红包转换成购物券?", function () {
+            UI.Ajax.post("/WebApi/Game/RedPackageToCoupons", { token: token }, function (data) {
+                if (data.status == 0) {
+                    alert("免费红包转购物券成功");
+                    GetUserInfo();
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+
+    }
+
+    /**
+     * 获取用户信息
+     */
+    function GetUserInfo() {
+        if (!isLogin()) {
+            //unloginDlg();
+            return;
+        }
+
+        UI.Ajax.post("/WebApi/Game/GetUserInfo", {token: token}, function (data) {
+            //debugger;
+            renderUserInfo(data.data);
+        });
+    }
+
+    /**
+     *渲染用户信息
+     * user
+     */
+    function renderUserInfo(user) {
+        $("#el_h_money_free").html(user.h_money_free);
+        $("#el_h_money_pay").html(user.h_money_pay);
+        $("#el_h_money").html(user.h_money);
+    }
+
+
+    /**
+     * 没登录对话框
+     */
+    function unloginDlg() {
+        dlg_confirm("尚未登录,请登录后才能使用!", function () {
+            location.href = "/#/login?redirect=" + encodeURIComponent("/Game/GameHall?token=#token");
+        }, function () {
+        }, "系统提示");
+    }
+
+    /**
+     * 是否登录
+     */
+    function isLogin() {
+        if (token) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+</script>
+</body>

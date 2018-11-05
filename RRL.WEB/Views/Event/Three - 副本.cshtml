@@ -1,0 +1,78 @@
+﻿@{
+Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="~/Assets/Source/Styles/2-22.css"/>
+    <style>
+        .main {
+            background-color: #fff;
+        }
+
+        .content, .content li {
+            padding: 0;
+        }
+
+        .content li.flp-li {
+            width: 33.3333333333%;
+        }
+
+        /* 返回上一页 */
+        .goback-page {
+            position: fixed;
+            top: .5rem;
+            left: .5rem;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .goback-page img {
+            display: block;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main">
+
+    <!--返回上一页开始-->
+    <div class="goback-page">
+        <img src="/Assets/Source/img/goback.png" id="goBackPage"/>
+    </div>
+    <!--返回上一页结束-->
+
+    <!--活动头部开始-->
+    <div class="img">
+        <img src="~/Assets/Event/images/monther-days-award_01.png"/>
+        <img src="~/Assets/Event/images/monther-days-award_02.png"/>
+        <img src="~/Assets/Event/images/monther-days-award_03.png"/>
+        <img src="~/Assets/Event/images/monther-days-award_04.png"/>
+        <img src="~/Assets/Event/images/monther-days-award_05.png"/>
+        <img src="~/Assets/Event/images/monther-days-award_06.png"/>
+    </div>
+    <!--活动头部结束-->
+
+</div>
+</body>
+
+<script type="text/javascript">
+
+    /* 返回上一页代码实现 */
+    ;(function () {
+        var goBackPage = document.getElementById("goBackPage");
+        goBackPage.addEventListener("click", function () {
+            location.href = "/#/index";
+        }, false);
+    })();
+
+</script>
+
+</html>

@@ -1,0 +1,513 @@
+﻿@using System.Linq;
+
+@{
+Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Assets/Game/css/gamehall.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <link rel="stylesheet" href="~/Assets/Dist/Styles/app.css?ver=@RRL.WEB.App_Start.AppUtils.Ver"/>
+    <script src="~/Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/global/common/utils.js?ver=@RRL.WEB.App_Start.AppUtils.Ver" type="text/javascript"></script>
+    <script src="~/Assets/global/plugins/layer-v3.1.1/layer/mobile/layer.js"></script>
+    <script src='~/Assets/Dist/Scripts/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+    <title>赠品休闲区</title>
+    <script type="text/javascript">
+        var is_wx_browser = '0';
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            is_wx_browser = '1';
+        }
+
+        // 页面适配解决
+        ;(function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+
+
+    </script>
+</head>
+<body>
+<div class="wj-gamehall-mainbar">
+    <!--头部开始 -->
+    <div class="wj-gamehall-topbar">
+        <h4>赠品休闲区</h4>
+        <a id="goGameHallBack" href="javascript:;" class="wj-back"><img src="~/Assets/Game/img/left.png"/></a>
+    </div>
+    <!--头部结束 -->
+
+    <!--中间主要区域开始-->
+    <div class="wj-gamehall-centerbar wj-gamehall-centerbar-new">
+        <div class="wj-gamehall-leisure-total border-b">
+            <ul>
+                <li><span>金豆</span><span id="el_h_money">-</span><span id="buyGoldBean"><i class="buy-gold-bean-btn">购券送豆</i></span>
+                </li>
+                <li><span>小红包</span><span id="el_h_money_pay">-</span><span id="clearHMoneyPayTimer">清零倒计时</span></li>
+            </ul>
+        </div>
+
+        <div class="wj-gamehall-leisure-list border-b">
+            <ul id="gameHallLeisureList">
+                <!--<li>
+                    <div class="wj-gamehall-leisure-list-wrap">
+                        <div>
+                            <img src="~/Assets/Game/img/left.png" alt="">
+                            <p>大转盘</p>
+                        </div>
+                        <p>幸运转盘，快乐相伴</p>
+                    </div>
+                </li>-->
+            </ul>
+        </div>
+
+        <!--第三方游戏区域开始-->
+        <!--休闲游戏区域开始-->
+        <div class="wj-gamehall-cooperatbar">
+            <h5 class="wj-gamehall-game-til wj-gamehall-game-til-new">休闲游戏</h5>
+            <div id="wj-gamehall-everyone-playing-list02" class="wj-gamehall-everyone-playing">
+                <figure id="wj-gamehall-everyone-playing02-children" class="swipslider">
+                    <ul class="sw-slides">
+                        @{
+                        int intCount = 0;
+                        int intPageSize = 8;
+                        }
+                        @foreach (var gameItem in ViewBag.casualGame)
+                        {
+                        if(intCount % intPageSize == 0)
+                        {
+                        @:<li class="sw-slide"><ul class="wj-gamehall-everyone-playing-list wj-gamehall-everyone-height">
+                        }
+                        if (gameItem.action_type == "1")
+                        {
+                        <li class="wj-gamehall-everyone-playing-li"
+                            onclick="OpenThirdPartyUrl('@gameItem.action_url')">
+                            <img src="@gameItem.img_url" alt="@gameItem.simple_remark" />
+                            <p>@gameItem.name</p>
+                        </li>
+                        }
+                        else if (gameItem.action_type == "2")
+                        {
+                        <li class="wj-gamehall-everyone-playing-li" onclick="@gameItem.action_js">
+                            <img src="@gameItem.img_url" alt="@gameItem.simple_remark" />
+                            <p>@gameItem.name</p>
+                        </li>
+                        }
+                        if(intCount % intPageSize == intPageSize - 1 || intCount == ViewBag.casualGame.Count - 1)
+                        {
+                        @:</ul></li>
+                        }
+
+                        intCount++;
+                        }
+                    </ul>
+                </figure>
+            </div>
+        </div>
+        <!--休闲游戏区域结束-->
+        <!--第三方游戏区域结束-->
+    </div>
+    <!--中间主要区域结束-->
+
+</div>
+
+<script type="text/javascript" src="/Assets/Game/js/swipeslider.js"></script>
+<script src='/Assets/Dist/Scripts/alert.js?ver=@RRL.WEB.App_Start.AppUtils.Ver'></script>
+
+<script>
+    var token = localStorage.getItem('shorttoken');
+
+    $(function () {
+        // 休闲游戏轮播图调用
+        $("#wj-gamehall-everyone-playing02-children").swipeslider({
+            autoPlay: false,                               // 是否自动播放
+            prevNextButtons: false,                        // 是否显示左右箭头
+            bullets: true,                                // 底部中间是否显示小圆点
+            sliderHeight: $("#wj-gamehall-everyone-playing-list02").height()    // 设置轮播图的高度
+        });
+        // 休闲游戏的高度设置
+        $(".wj-gamehall-everyone-height").height($("#wj-gamehall-everyone-playing-list02").height());
+
+    });
+
+    $(function () {
+        // 获取用户的信息
+        GetUserInfo();
+
+        // 获取中间游戏列表的数据
+        getGameBaseDataAPI();
+
+        // 获取清零倒计时的时间
+        SetCountdown();
+
+        // 点击购券送豆
+        $("#buyGoldBean").on("click", buy_gold_bean);
+
+        // 点击返回按钮 ===== 跳转至游戏大厅页面
+        $("#goGameHallBack").on("click", goGameHallPage);
+
+    });
+
+    /**
+     * 获取清零倒计时
+     */
+    function SetCountdown() {
+        $.ajax({
+            url: "/WebApi/game/MoneyPayCountdown",
+            type: "get",
+            complete: function(xhr, textStatus) {
+                var res = xhr.responseJSON;
+                // 失败
+                if ((xhr.readyState !== 4) && (xhr.status !== 200)) {
+                    alert(res.message);
+                    return;
+                }
+                // 成功
+                if (res.status === 0) {
+                    getCountdown(res.data);
+                }
+            }
+        });
+    }
+
+    function getCountdown(time) {
+        var jqlblCountdown = $("#clearHMoneyPayTimer");  // 显示倒计时的span的jQuery对象
+        var times = time,
+            timer = null;
+
+        timer = setInterval(function () {
+            var hour = 0,
+                minute = 0,
+                second = 0;//时间默认值
+            if (times > 0) {
+                hour = Math.floor(times / (60 * 60));
+                minute = Math.floor(times / 60) - (hour * 60);
+                second = Math.floor(times) - (hour * 60 * 60) - (minute * 60);
+            }
+
+            var countdownString = FormatDatePart(hour) + "时" + FormatDatePart(minute) + "分" + FormatDatePart(second) + "秒";
+            jqlblCountdown.html("清零倒计时：<br/>" + countdownString);
+            times--;
+
+            if (times <= 0) {
+                times = Math.floor(60 * 60 * 24) - 1;
+            }
+
+        }, 1000);
+    }
+
+    // 以两位数显示时间的各部分
+    function FormatDatePart(value) {
+        if (value <= 9) {
+            return '0' + value;
+        }
+
+        return value;
+    }
+
+    /**
+     * 获取游戏列表的数据
+     */
+    function getGameBaseDataAPI(sta) {
+        UI.Ajax.post("/WebApi/game/GameBaseData", { "type": 1 }, function (res) {
+            if (res.status === 0) {
+                var data = res.data,
+                    $gameHallLeisureList = $("#gameHallLeisureList"),
+                    liHtml = "";
+                if (is_wx_browser == "1") {//微信端
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        if (item.is_show_at_wechat == "1") {
+                            liHtml += "<li onClick='" + item.action_js + "'><div class='wj-gamehall-leisure-list-wrap' style='background-color:" + item.background_color + "'><div><img src='" + item.logo_url + "' alt=''><p>" + item.name + "</p></div><p>" + item.simple_remark + "</p></div></li>";
+                        }
+                    }
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        liHtml += "<li onClick='" + item.action_js + "'><div class='wj-gamehall-leisure-list-wrap' style='background-color:" + item.background_color + "'><div><img src='" + item.logo_url + "' alt=''><p>" + item.name + "</p></div><p>" + item.simple_remark + "</p></div></li>";
+                    }
+                }
+                $gameHallLeisureList.html(liHtml);
+
+            } else {
+                alert(res.message);
+            }
+        });
+    }
+
+    /**
+     * 点击免费红包区游戏
+     */
+    function redpackage_playing(sta) {
+        all_playing(sta, 1);
+    }
+
+    /**
+     * 点击金豆游戏区
+     */
+    function beans_playing(sta) {
+        all_playing(sta, 2);
+    }
+
+    /**
+     * 点击大家都在玩跳转不同游戏页面
+     */
+    function all_playing(sta, payType) {
+        if (!isLogin()) {
+            unloginDlg();
+            return;
+        }
+        var ver = (new Date().getTime() / 100).toFixed(0);
+        if (token) {
+            var host = "http://" + location.host;
+            switch (sta) {
+                //http://game.rrlsz.com.cn   -->rrl-game.sdoudou.net
+
+                case 0:
+                    location.href = "http://game.sdoudou.net/Game/Roulette_V2/?token=" + encodeURIComponent(token) + "&paytype=" + payType;
+                    break;
+                case 1:
+                    var url = "http://rrl-game.sdoudou.net:8360/static/dazhuanpan/?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 2:
+                    var url = "http://rrl-game.sdoudou.net:8096/sxl/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 3:
+                    var url = "http://rrl-game.sdoudou.net:8096/fkp/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 4:
+                    var url = location.href = "http://rrl-game.sdoudou.net:8360/static/caidaxiao/?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 5:
+                    var url = "http://rrl-game.sdoudou.net:8360/static/xiaozhuanpan/?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;// host + "/Game/GameJump?iframe=" + encodeURIComponent(url) + "&token=" + encodeURIComponent(token);
+                    break;
+                case 6:
+                    var url = "http://rrl-game2.sdoudou.net/Application/Home/View/default/Index/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    break;
+                case 7:
+                    if (payType == 1) {
+                        location.href = "http://rrl-game.sdoudou.net:8736/snk_client_free/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver;
+                    }
+                    else if (payType == 2) {
+                        location.href = "http://rrl-game.sdoudou.net:8736/snk_client_jindou/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver;
+                    }
+                    break;
+                case 8:
+                    var url = "http://rrl-game2.sdoudou.net:8888/Application/Home/View/default/Index/index.html?token=" + encodeURIComponent(token) + "&ver=" + ver + "&paytype=" + payType;
+                    location.href = url;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 点击购买金豆
+     */
+    function buy_gold_bean() {
+        window.location.href = "/Game/PeasPay?token=" + encodeURIComponent(token) + "&redirect=" + encodeURIComponent(location.href);
+    }
+
+    /**
+     * 点击休闲游戏跳转不同游戏页面
+     */
+    function iframeVal(val) {
+        OpenThirdPartyUrl(val);
+    }
+
+    /**
+     * 点击休闲游戏跳转不同游戏页面
+     */
+    function OpenThirdPartyUrl(url) {
+        if (url.length > 0) {
+            var redirect = location.href;
+            location.href = StringUtils.format("/Game/ThirdPartyGames?iframe={0}&redirect={1}", encodeURIComponent(url), redirect);
+        }
+    }
+
+    /**
+     * 跳转至休闲游戏区
+     */
+    function goGameHallPage() {
+        window.location.href = "/Game/GameHall?token=" + encodeURIComponent(token);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    function GetUserInfo() {
+        if (!isLogin()) {
+            return;
+        }
+
+        UI.Ajax.post("/WebApi/Game/GetUserInfo", {token: token}, function (data) {
+            renderUserInfo(data.data);
+        });
+    }
+
+    /**
+     *渲染用户信息
+     * user
+     */
+    function renderUserInfo(user) {
+        $("#el_h_money").html(user.h_money);
+        $("#el_h_money_pay").html(user.h_money_pay);
+    }
+
+    function dlg_confirm(msg, fun_yes, fun_no, title) {
+        title = title || "省兜兜系统提示";
+        confirm(msg, fun_yes);
+    }
+
+
+    /**
+     * 没登录对话框
+     */
+    function unloginDlg() {
+        dlg_confirm("尚未登录,请登录后才能使用!", function () {
+            location.href = "/#/login?redirect=" + encodeURIComponent("/Game/GameHall?token=#token");
+        }, function () {
+        }, "系统提示");
+    }
+
+    /**
+     * 是否登录
+     */
+    function isLogin() {
+        if (token) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
