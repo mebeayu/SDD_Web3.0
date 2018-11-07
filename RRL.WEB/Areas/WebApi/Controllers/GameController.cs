@@ -820,12 +820,18 @@ AND end_at > '{timestr}'");
         /// <returns></returns>
         [HttpPost]
         [ActionName("IsHaveRandomRedBag")]
-        public DataResult IsHaveRandomRedBag()
+        public DataResult IsHaveRandomRedBag([FromBody]BaseTokenRequest request)
         {
+            TokenObject token = TokenObject.InitTokenObjFromString(request.token);
+
+            if (!string.Equals(TokenObject.ShortTimeToken, token.Prefix))
+            {
+               return DataResult.InitFromMessageCode(MessageCode.ERROR_TOKEN_VALIDATE);
+            }
             var db = new RRLDB();
             DataResult result = DataResult.InitFromMessageCode(MessageCode.SUCCESS);
             var timestr = DateTime.Now.GetDateTimeFormats('T')[0];
-            DataSet ds = db.ExeQuery($@"select money,type
+            DataSet ds = db.ExeQuery($@"select id,money,type
                                               from spreader_queue
                                              where (start_at < '{timestr}')
                                                and (end_at > '{timestr}') and (money > 0)");
@@ -843,8 +849,22 @@ AND end_at > '{timestr}'");
                 db.Close();
                 return result;
             }
-            double money = Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
-            int type = Convert.ToInt32(ds.Tables[0].Rows[0][1].ToString());
+            double money = Convert.ToDouble(ds.Tables[0].Rows[0]["money"].ToString());
+            int type = Convert.ToInt32(ds.Tables[0].Rows[0]["type"].ToString());
+
+            int intMoneyType = Convert.ToInt32(ds.Tables[0].Rows[0]["type"].ToString()); // 资金类型(1：红包(免费)；2：小红包)
+            string id = ds.Tables[0].Rows[0]["id"].ToString(); // 表示时段的数据唯一ID
+            string order_id = DateTime.Now.ToString("yyyyMMdd") + intMoneyType.ToString() + id;
+            // 已领取红包的唯一主键ID = 用户ID + 年月日 + 资金类型 + 时段数据唯一ID
+            string rrl_random_redpackage = token.id.ToString() + order_id;
+
+            ds = db.ExeQuery("select id from rrl_random_redpackage where id=@rrl_random_redpackage",new System.Data.SqlClient.SqlParameter("rrl_random_redpackage", rrl_random_redpackage));
+            if(ds.Tables[0].Rows.Count>0)
+            {
+                result.message = "已经领取过红包了";
+                result.data = new { money = 0, type = type }; ;
+                return result;
+            }
             result.message = "有红包可以领取";
             result.data = new { money = money, type = type }; ;
             return result;

@@ -577,7 +577,7 @@
             <param name="request">基础令牌请求</param>
             <returns></returns>
         </member>
-        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IsHaveRandomRedBag">
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.GameController.IsHaveRandomRedBag(RRL.WEB.Models.Request.BaseTokenRequest)">
             <summary>
             查询是否有分时段红包，返回数据data为红包金额如果等于0没有红包；大于0有红包
             </summary>
