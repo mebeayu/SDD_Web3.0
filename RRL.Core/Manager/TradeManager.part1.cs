@@ -42,6 +42,11 @@ namespace RRL.Core.Manager
             string msg_phone, string msg_realname, string msg_idcardno, out int? order_id, int order_type = 1, int spreader_uid = 0)
         {
             BussResult bussResult = new BussResult() { status = 0, message = "订单创建成功!" };
+            if (spreader_uid != 0)
+            {
+                int t;
+                AddToSpreader(uid, spreader_uid, out t);
+            }
             //创建单一订单
             order_id = null;
             SqlDataBase db = new SqlDataBase();
@@ -136,6 +141,72 @@ namespace RRL.Core.Manager
                 new_spreader_uid = old_spreader_uid;
                 return MessageCode.SUCCESS;
             }
+        }
+        public DataSet QueryMemberOrder(int spreader_uid, int Page, int PageSize = 20)
+        {
+            string col = "a.id,a.ordercode,a.buyer_id,a.money,a.order_type,a.status,a.addtime,a.pay_bean,a.pay_money,a.recommend_award_rate,a.yj_tag,b.username,b.real_name";
+            int PageID = Math.Max(Page, 1);
+            int offset = (PageID - 1) * PageSize;
+            string sql = string.Format(@" select top {0} * from 
+                                        (select row_number() over(order by a.id desc) as rownumber,{2} from rrl_order a left join rrl_user b on a.buyer_id=b.id where 
+                                         a.spreader_uid=@spreader_uid and a.status in(2,3,4,-3)) as s where s.rownumber>{1}",
+            PageSize, offset, col);
+            RRLDB db = new RRLDB();
+            DataSet ds = db.ExeQuery(sql, new SqlParameter("spreader_uid", spreader_uid));
+            return ds;
+        }
+        /// <summary>
+        /// 佣金结算，收货7天后
+        /// </summary>
+        /// <returns></returns>
+        public int SettleAccountsOfSpreader()
+        {
+            RRLDB db = new RRLDB();
+            DateTime checktime = DateTime.Now.AddDays(-7);//七天前
+            DataSet ds = db.ExeQuery(@"select a.id,a.buyer_id,a.pay_bean,a.pay_money,a.spreader_uid,a.recommend_award_rate,b.username,b.real_name from 
+                                        rrl_order a left join rrl_user b on a.buyer_id=b.id where 
+                                        a.yj_tag=0 and a.spreader_uid<>0 and a.checktime<=@checktime and a.status=3", new SqlParameter("checktime", checktime));
+            int n = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < n; i++)
+            {
+                string order_id = ds.Tables[0].Rows[i]["id"].ToString();
+                double pay_bean = double.Parse(ds.Tables[0].Rows[i]["pay_bean"].ToString());
+                double pay_money = double.Parse(ds.Tables[0].Rows[i]["pay_money"].ToString());
+                double recommend_award_rate = double.Parse(ds.Tables[0].Rows[i]["recommend_award_rate"].ToString());
+                int buyer_id = int.Parse(ds.Tables[0].Rows[i]["pay_bean"].ToString());
+                int spreader_uid= int.Parse(ds.Tables[0].Rows[i]["spreader_uid"].ToString());
+                string username = ds.Tables[0].Rows[i]["username"].ToString();
+                string real_name = ds.Tables[0].Rows[i]["real_name"].ToString();
+
+                double y_money = pay_money * recommend_award_rate;
+                double y_bean = pay_bean * recommend_award_rate;
+
+                int res = db.ExeCMD("update rrl_user set x_money=x_money+@y_money,h_money=h_money+y_bean where id=@spreader_uid",
+                    new SqlParameter("y_money", y_money),
+                    new SqlParameter("y_bean", y_bean), 
+                    new SqlParameter("spreader_uid", spreader_uid));
+                if (y_money > 0)
+                {
+                    res = db.ExeCMD(@"insert into rrl_user_money_record(addtime,uid,order_id,money,type,remark) values(@addtime,@uid,@order_id,@money,201,@remark)",
+                    new SqlParameter("addtime", DateTime.Now),
+                    new SqlParameter("uid", spreader_uid),
+                    new SqlParameter("order_id", order_id),
+                    new SqlParameter("money", y_money),
+                    new SqlParameter("remark", string.Format("{0}{1}佣金现金收入{2}",username,real_name, y_money)));
+                }
+                if (y_bean>0)
+                {
+                    res = db.ExeCMD(@"insert into rrl_user_money_record(addtime,uid,order_id,money,type,remark) values(@addtime,@uid,@order_id,@money,201,@remark)",
+                    new SqlParameter("addtime", DateTime.Now),
+                    new SqlParameter("uid", spreader_uid),
+                    new SqlParameter("order_id", order_id),
+                    new SqlParameter("money", y_bean),
+                    new SqlParameter("remark", string.Format("{0}{1}佣金金豆收入{2}", username, real_name, y_bean)));
+                }
+                
+            }
+            db.Close();
+            return n;
         }
         /// <summary>
         /// 更新是否豆支付

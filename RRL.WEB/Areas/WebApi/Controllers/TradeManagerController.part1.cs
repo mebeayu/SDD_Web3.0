@@ -13,10 +13,11 @@ using RRL.DB;
 using System.Text;
 using RRL.WEB.Ulity;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace RRL.WEB.Areas.WebApi.Controllers
 {
-    public partial class TradeManagerController  
+    public partial class TradeManagerController
     {
 
 
@@ -45,9 +46,9 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                 if (res == MessageCode.SUCCESS)
                 {
                     int? order_id = 0;
-                    var s=  tm.CreateOrderFromGoodsV3(User.id, goods_id, goods_count,"","","","", out order_id);
+                    var s = tm.CreateOrderFromGoodsV3(User.id, goods_id, goods_count, "", "", "", "", out order_id);
                     var result = new DataResult() { status = s.status, message = s.message };// AutoMapper.Mapper.Map< BussResult, DataResult >(s);
-                    if(order_id!=null)
+                    if (order_id != null)
                         order_list.Add(order_id.Value);
                     result.data = order_list;
                     return result;
@@ -83,7 +84,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                 if (res == MessageCode.SUCCESS)
                 {
                     int? order_id = 0;
-                    var s = tm.CreateOrderFromGoodsV3(User.id, goods_id, goods_count, "", "", "", "", out order_id,970, spreader_uid);
+                    var s = tm.CreateOrderFromGoodsV3(User.id, goods_id, goods_count, "", "", "", "", out order_id, 970, spreader_uid);
                     if (order_id != null)
                     {
 
@@ -92,7 +93,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                     if (order_id != null)
                         order_list.Add(order_id.Value);
                     result.data = order_list;
-                    
+
                     return result;
                 }
             }
@@ -114,14 +115,50 @@ namespace RRL.WEB.Areas.WebApi.Controllers
             TokenObject Token = TokenObject.InitTokenObjFromString(token);
             if (!string.Equals(TokenObject.ShortTimeToken, Token.Prefix))
             {
-                return DataResult.InitFromMessageCode( MessageCode.ERROR_TOKEN_VALIDATE);
+                return DataResult.InitFromMessageCode(MessageCode.ERROR_TOKEN_VALIDATE);
             }
             else
             {
                 int new_spreader_uid;
-                res = tm.AddToSpreader(Token.id, spreader_uid,out new_spreader_uid);
+                res = tm.AddToSpreader(Token.id, spreader_uid, out new_spreader_uid);
                 return DataResult.InitFromMessageCode(res);
             }
+        }
+        /// <summary>
+        /// 分页查询用户下面被推荐人的订单，返回状态为2,3,4,-3的订单。2待收货；3待评价；4退换货；-3订单已退款. 返回字段中yj_tag为佣金结算标志，0表示未结算佣金，1表示已结算佣金
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="Page"></param>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("QueryMemberOrder")]
+        public DataResult QueryMemberOrder(string token, int Page, int PageSize = 20)
+        {
+            int res;
+            TokenObject Token = TokenObject.InitTokenObjFromString(token);
+            if (!string.Equals(TokenObject.ShortTimeToken, Token.Prefix))
+            {
+                return DataResult.InitFromMessageCode(MessageCode.ERROR_TOKEN_VALIDATE);
+            }
+            else
+            {
+                DataSet ds = tm.QueryMemberOrder(Token.id, Page,PageSize);
+                return DataResult.InitFromDataSet(ds);
+            }
+        }
+        /// <summary>
+        /// 佣金结算
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("SettleAccountsOfSpreader")]
+        public DataResult SettleAccountsOfSpreader()
+        {
+            int res = tm.SettleAccountsOfSpreader();
+            DataResult data = DataResult.InitFromMessageCode(MessageCode.SUCCESS);
+            data.data = res;
+            return data;
         }
         /// <summary>
         /// 通过订单数组获取预处理订单
@@ -161,7 +198,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                     {
                         h_money = user.h_money,
                         h_money_rate = "RMB1元 = 100金豆",
-                        x_money= user.x_money
+                        x_money = user.x_money
                     };
                     return resault;
                 }
@@ -178,7 +215,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
         /// <returns>结果对象</returns>
         [HttpGet]
         [ActionName("CreateOrderFromCartV3")]
-        public DataResult CreateOrderFromCartV3(string cartlist,  string token)
+        public DataResult CreateOrderFromCartV3(string cartlist, string token)
         {
             List<int> order_list = new List<int>();
             List<int> list = PublicAPI.StrToIntList(cartlist);
@@ -215,11 +252,11 @@ namespace RRL.WEB.Areas.WebApi.Controllers
         /// <returns>结果对象</returns>
         [HttpGet]
         [ActionName("UpdateOrderIsBeansPayV3")]
-        public DataResult UpdateOrderIsBeansPayV3(string orderlist, string is_beans_pay,string token,string discount_type="0")
+        public DataResult UpdateOrderIsBeansPayV3(string orderlist, string is_beans_pay, string token, string discount_type = "0")
         {
-            if(string.IsNullOrWhiteSpace(orderlist))
+            if (string.IsNullOrWhiteSpace(orderlist))
             {
-               return new DataResult() { status = 0, message = "orderlist参数为空" };
+                return new DataResult() { status = 0, message = "orderlist参数为空" };
             }
             List<int> order_list = new List<int>();
             List<int> list = PublicAPI.StrToIntList(orderlist);
@@ -259,9 +296,9 @@ namespace RRL.WEB.Areas.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName("UpdateOrderGoodsAttrV3")]
-        public DataResult UpdateOrderGoodsAttrV3(int order_id,int goods_id, string token,int? user_coupons_id=null, int? goods_count=null, string msg_leave_word=null, string msg_phone=null, string msg_realname=null, string msg_idcardno=null   )
+        public DataResult UpdateOrderGoodsAttrV3(int order_id, int goods_id, string token, int? user_coupons_id = null, int? goods_count = null, string msg_leave_word = null, string msg_phone = null, string msg_realname = null, string msg_idcardno = null)
         {
-           
+
             int res;
             TokenObject Token = TokenObject.InitTokenObjFromString(token);
             if (!string.Equals(TokenObject.ShortTimeToken, Token.Prefix))
@@ -274,16 +311,16 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                 res = user.Load(Token.id);
                 if (res == MessageCode.SUCCESS)
                 {
-                    int count = tm.OrderInfoGoods_Update(user.id,   order_id,   goods_id,   goods_count,   msg_leave_word,   msg_phone,   msg_realname,   msg_idcardno, user_coupons_id);
+                    int count = tm.OrderInfoGoods_Update(user.id, order_id, goods_id, goods_count, msg_leave_word, msg_phone, msg_realname, msg_idcardno, user_coupons_id);
                     int dcount = tm.UserCouponsApplyOrder(user.id, order_id, user_coupons_id);
-                    
+
                     var resault = DataResult.InitFromMessageCode(res);
-                    if (count==0)
+                    if (count == 0)
                     {
                         resault.status = 99;
                         resault.message = "更新商品数据失败!";
                     }
-                    var ls = tm.GetPreOrderListV3(user.id, order_id+"");
+                    var ls = tm.GetPreOrderListV3(user.id, order_id + "");
                     resault.data = ls;
                     resault.additional_data = user.x_money;
                     resault.add_data = new
@@ -296,7 +333,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                 }
             }
             return DataResult.InitFromMessageCode(res);
- 
+
         }
 
         /// <summary>
@@ -349,7 +386,8 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                 result.message = data;
                 result.data = data;
                 return result;
-            }catch(Exception exs)
+            }
+            catch (Exception exs)
             {
                 return new DataResult() { status = 99, message = "支付异常请联系客服" };
             }
@@ -543,7 +581,7 @@ namespace RRL.WEB.Areas.WebApi.Controllers
             return result;
         }
 
-        private dynamic CreateOrderAndToSecondHand(UserAuth user, int goodsId, string goodsName,int goodsCount,
+        private dynamic CreateOrderAndToSecondHand(UserAuth user, int goodsId, string goodsName, int goodsCount,
                                                    decimal payGoldBeanTotal, decimal cardMoneyTotal, string payAccount, string name,
                                                    decimal platformFeeMoney)
         {

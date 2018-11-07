@@ -97,6 +97,21 @@
             <param name="spreader_uid">推荐人id</param>
             <returns></returns>
         </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.QueryMemberOrder(System.String,System.Int32,System.Int32)">
+            <summary>
+            分页查询用户下面被推荐人的订单，返回状态为2,3,4,-3的订单。2待收货；3待评价；4退换货；-3订单已退款. 返回字段中yj_tag为佣金结算标志，0表示未结算佣金，1表示已结算佣金
+            </summary>
+            <param name="token"></param>
+            <param name="Page"></param>
+            <param name="PageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.SettleAccountsOfSpreader">
+            <summary>
+            佣金结算
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:RRL.WEB.Areas.WebApi.Controllers.TradeManagerController.GetPreOrderListV3(System.String,System.String)">
             <summary>
             通过订单数组获取预处理订单
