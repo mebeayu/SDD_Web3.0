@@ -825,7 +825,7 @@ AND end_at > '{timestr}'");
             var db = new RRLDB();
             DataResult result = DataResult.InitFromMessageCode(MessageCode.SUCCESS);
             var timestr = DateTime.Now.GetDateTimeFormats('T')[0];
-            DataSet ds = db.ExeQuery($@"select money
+            DataSet ds = db.ExeQuery($@"select money,type
                                               from spreader_queue
                                              where (start_at < '{timestr}')
                                                and (end_at > '{timestr}') and (money > 0)");
@@ -838,14 +838,15 @@ AND end_at > '{timestr}'");
             }
             if(ds.Tables[0].Rows.Count==0)
             {
-                result.data = 0;
+                result.data = new { money = 0,type=-1 };
                 result.message = "现在没有可领取的红包";
                 db.Close();
                 return result;
             }
             double money = Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
-            result.message = "新红包";
-            result.data = money;
+            int type = Convert.ToInt32(ds.Tables[0].Rows[0][1].ToString());
+            result.message = "有红包可以领取";
+            result.data = new { money = money, type = type }; ;
             return result;
         }
 
