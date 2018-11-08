@@ -49,8 +49,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -75,8 +77,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -100,8 +104,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -139,8 +145,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -164,8 +172,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -188,8 +198,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -213,8 +225,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
         }
 
@@ -259,8 +273,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
@@ -286,8 +302,10 @@ namespace RRL.DB
             finally
             {
                 if (conn != null)
+                {
                     conn.Close();
-                conn.Dispose();
+                    conn.Dispose();
+                }
             }
 
         }
