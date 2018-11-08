@@ -682,7 +682,7 @@ namespace RRL.Core.Models
         {
             short_time_token_expir = DateTime.Now;
         }
-
+        public static Dictionary<int, DataRow> ListUserRow = new Dictionary<int, DataRow>();
         /// <summary>
         /// 根据用户id载入数据
         /// </summary>
@@ -690,16 +690,33 @@ namespace RRL.Core.Models
         /// <returns>载入结果</returns>
         public int Load(int uid)
         {
-            var db = new RRLDB();
-            var ds = db.ExeQuery("select * from [rrl_user](nolock) where id = @id",
-                new SqlParameter("@id", SqlDbType.Int, 4) { Value = uid });
-            db.Close();
-            if (ds == null)
-                return MessageCode.ERROR_EXECUTE_SQL;//执行查询失败
-            if (ds.Tables[0].Rows.Count == 0)
-                return MessageCode.ERROR_NO_UID;//没查到数据
-            var user = ds.Tables[0].Rows[0];
-            InitUser(user);
+            DataRow user = null;
+            try
+            {
+                var db = new RRLDB();
+                var ds = db.ExeQuery("select * from [rrl_user](nolock) where id = @id",
+                    new SqlParameter("@id", SqlDbType.Int, 4) { Value = uid });
+                db.Close();
+                if (ds == null)
+                    return MessageCode.ERROR_EXECUTE_SQL;//执行查询失败
+                if (ds.Tables[0].Rows.Count == 0)
+                    return MessageCode.ERROR_NO_UID;//没查到数据
+                user = ds.Tables[0].Rows[0];
+                if (ListUserRow.ContainsKey(uid) == false) ListUserRow.Add(uid, user);
+                else ListUserRow[uid] = user;
+                InitUser(user);
+            }
+            catch (Exception ex)
+            {
+
+                if(ListUserRow.ContainsKey(uid)&& ListUserRow[uid]!=null)
+                {
+                    InitUser(ListUserRow[uid]);
+                }
+            }
+            
+           
+            
             return MessageCode.SUCCESS;
         }
 
