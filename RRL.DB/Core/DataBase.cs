@@ -10,11 +10,11 @@ namespace RRL.DB
 {
     public abstract class DataBase
     {
-        public abstract string ConnectionString { get;  }
+        public abstract string ConnectionString { get; }
 
         //public virtual DbProviderFactory DbProvider { get;  }
-         
-        public   DbParameter CreateParameter(DbCommand cmd,String pName, Object value, System.Data.DbType type)
+
+        public DbParameter CreateParameter(DbCommand cmd, String pName, Object value, System.Data.DbType type)
         {
             var p = cmd.CreateParameter();
             p.ParameterName = pName;
@@ -27,18 +27,18 @@ namespace RRL.DB
 
 
         public abstract DbConnection CreateConnection();
-        
- 
 
-        public List<T> Select<T>(string sql,  Object paramObject=null)
+
+
+        public List<T> Select<T>(string sql, Object paramObject = null)
         {
-             
+
             DbConnection conn = null;
             try
             {
                 conn = CreateConnection();
                 conn.Open();
-                var list=  Dapper.SqlMapper.Query<T>(conn, sql, paramObject);
+                var list = Dapper.SqlMapper.Query<T>(conn, sql, paramObject);
                 return list.ToList<T>();
             }
             catch (Exception ex)
@@ -50,6 +50,7 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
@@ -75,11 +76,12 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
 
-        public List<dynamic> Select(string sql, Object paramObject=null)
+        public List<dynamic> Select(string sql, Object paramObject = null)
         {
 
             DbConnection conn = null;
@@ -99,6 +101,7 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
@@ -117,7 +120,7 @@ namespace RRL.DB
             return new List<dynamic>();
         }
 
-        public  dynamic   Single(string sql, Object paramObject=null)
+        public dynamic Single(string sql, Object paramObject = null)
         {
 
             DbConnection conn = null;
@@ -137,11 +140,12 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
 
-        public T  Single<T>(string sql, Object paramObject=null)
+        public T Single<T>(string sql, Object paramObject = null)
         {
 
             DbConnection conn = null;
@@ -161,10 +165,11 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
-        public T ExecuteScalar<T>(string sql, Object paramObject=null)
+        public T ExecuteScalar<T>(string sql, Object paramObject = null)
         {
 
             DbConnection conn = null;
@@ -184,13 +189,14 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
 
-        public int Execute(string sql , Object paramObject=null)
+        public int Execute(string sql, Object paramObject = null)
         {
- 
+
             DbConnection conn = null;
             try
             {
@@ -208,6 +214,7 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
         }
 
@@ -241,7 +248,7 @@ namespace RRL.DB
             {
                 conn = CreateConnection();
                 conn.Open();
-                var list = Dapper.SqlMapper.Query<T>(conn, sql, paramObject,null,true,null, System.Data.CommandType.StoredProcedure);
+                var list = Dapper.SqlMapper.Query<T>(conn, sql, paramObject, null, true, null, System.Data.CommandType.StoredProcedure);
                 return list.ToList<T>();
             }
             catch (Exception ex)
@@ -253,11 +260,12 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
 
-        public GridReader ExecuteStoredProcedureMultiple (string sql, Object paramObject)
+        public GridReader ExecuteStoredProcedureMultiple(string sql, Object paramObject)
         {
 
             DbConnection conn = null;
@@ -268,7 +276,7 @@ namespace RRL.DB
                 var list = Dapper.SqlMapper.QueryMultiple(conn, sql, paramObject, null, null, System.Data.CommandType.StoredProcedure);
                 // return list.ToList<T>();
                 return list;
-               
+
             }
             catch (Exception ex)
             {
@@ -279,6 +287,7 @@ namespace RRL.DB
             {
                 if (conn != null)
                     conn.Close();
+                conn.Dispose();
             }
 
         }
