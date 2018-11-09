@@ -449,13 +449,22 @@ namespace RRL.WEB.Controllers
                         TradeManager tm = new TradeManager();
                         string openid = /*SessionHelper.Get("openid")*/rdsession["openid"].ToString();
                         //todo
-                        JsPayConfigObject configObject = tm.ApplyWxJsCouponPay(list, ip, openid, out res, out money);
-                        appid = configObject.appId;
-                        timeStamp = configObject.timeStamp.ToString();
-                        nonceStr = configObject.nonceStr;
-                        package = configObject.package;
-                        signType = configObject.signType;
-                        paySign = configObject.paySign;
+                        try
+                        {
+                            JsPayConfigObject configObject = tm.ApplyWxJsCouponPay(list, ip, openid, out res, out money);
+                            appid = configObject.appId;
+                            timeStamp = configObject.timeStamp.ToString();
+                            nonceStr = configObject.nonceStr;
+                            package = configObject.package;
+                            signType = configObject.signType;
+                            paySign = configObject.paySign;
+                        }
+                        catch (Exception ex)
+                        {
+
+                            ConfigManager.WriteTextLog("ViewRoute-453", ex.Message + "\r\n" + ex.StackTrace,DateTime.Now);
+                        }
+                        
 
                         // lcl 20180716 Insert
                         try
