@@ -31,7 +31,7 @@ namespace RRL.WEB.Controllers
         /// </summary>
         /// <param name="url">目标页面</param>
         /// <returns></returns>
-        private string GetCodeUrl(string url,string state= "1#wechat_redirect")
+        private string GetCodeUrl(string url, string state = "1#wechat_redirect")
         {
             string CodeUrl = "";
             //对url进行编码
@@ -116,108 +116,120 @@ namespace RRL.WEB.Controllers
                 {
                     rdsession["token"] = Request.Headers["token"];
                 }
-                if (/*System.Web.HttpContext.Current.Session["token"] == null*/!rdsession.Exist("token"))
+                else
+                {
+                    rdsession["token"] = "";
+                }
+                if (!rdsession.Exist("token"))
                 {
                     rdsession["token"] = "";
                     //SessionHelper.Add("token", "");
                 }
             }
-            var token= rdsession["token"];
+            var token = rdsession["token"];
             ViewBag.token = rdsession["token"];
             ViewBag.Title = RRLConfig.PlateName;
-           
+
             var openid = "";
             if (rdsession.Exist("openid"))
             {
                 openid = rdsession["openid"];
             }
-            ViewBag.OpenId = /*System.Web.HttpContext.Current.Session["openid"]*/openid;
-            ShopManager shopManager = new ShopManager();
-            var isAtUSA=shopManager.isAtUSA("");
-            ViewBag.is_show_game = isAtUSA ? "0" : "1";
-            ViewBag.longtoken = "";
-            ViewBag.h_money_pay = 0;
-            ViewBag.m_play_total_times = configMgr.GetConfigValue("GameCenter_can_change_goldbeans_times");
-            ViewBag.platform_hold_money = configMgr.GetConfigValue("platform_hold_h_money");
-            // lcl 2018-08-03 Insert 用于在Vue中使用的配置数据的键值对形式(json格式)
-            ViewBag.key_value_config = configMgr.GetConfigValue("js_key_value_config");
-            ViewBag.Order_Shared_discount_money_rate= configMgr.GetConfigValue< decimal>("Order_Shared_discount_money_rate",0.29m);
-            ViewBag.Order_Shared_discount_beans_rate = configMgr.GetConfigValue<decimal>("Order_Shared_discount_beans_rate",0.71m);
-            ViewBag.Order_Shared_people_num = configMgr.GetConfigValue<int>("Order_Shared_people_num",2);
-            #region 发红包逻辑
-            ViewBag.h_money_free = 0;
-            ViewBag.daily_h_money_free = 0;
-            ViewBag.has_received_free_money_default = true;
-            ViewBag.has_received_daily_free_h_money = false;
-            ViewBag.first_h_money_free = 0;
-            var tokenObj = TokenObject.InitTokenObjFromString(token);
-            var user = new UserAuth();
-            var res = user.Load(tokenObj.id);
+            try
+            {
+                ViewBag.OpenId = /*System.Web.HttpContext.Current.Session["openid"]*/openid;
+                ShopManager shopManager = new ShopManager();
+                var isAtUSA = shopManager.isAtUSA("");
+                ViewBag.is_show_game = isAtUSA ? "0" : "1";
+                ViewBag.longtoken = "";
+                ViewBag.h_money_pay = 0;
+                ViewBag.m_play_total_times = configMgr.GetConfigValue("GameCenter_can_change_goldbeans_times");
+                ViewBag.platform_hold_money = configMgr.GetConfigValue("platform_hold_h_money");
+                // lcl 2018-08-03 Insert 用于在Vue中使用的配置数据的键值对形式(json格式)
+                ViewBag.key_value_config = configMgr.GetConfigValue("js_key_value_config");
+                ViewBag.Order_Shared_discount_money_rate = configMgr.GetConfigValue<decimal>("Order_Shared_discount_money_rate", 0.29m);
+                ViewBag.Order_Shared_discount_beans_rate = configMgr.GetConfigValue<decimal>("Order_Shared_discount_beans_rate", 0.71m);
+                ViewBag.Order_Shared_people_num = configMgr.GetConfigValue<int>("Order_Shared_people_num", 2);
+                #region 发红包逻辑
+                ViewBag.h_money_free = 0;
+                ViewBag.daily_h_money_free = 0;
+                ViewBag.has_received_free_money_default = true;
+                ViewBag.has_received_daily_free_h_money = false;
+                ViewBag.first_h_money_free = 0;
+            }
+            catch (Exception ex)
+            {
+                ConfigManager.WriteTextLog("140", ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
+            }
+            TokenObject tokenObj = null;
+            UserAuth user = null;
+            int res = -1;
+            try
+            {
+                tokenObj = TokenObject.InitTokenObjFromString(token);
+                user = new UserAuth();
+                res = user.Load(tokenObj.id);
+            }
+            catch (Exception ex)
+            {
+                ConfigManager.WriteTextLog("168", ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
+
+            }
+
             if (res == MessageCode.SUCCESS)
             {
-                ViewBag.h_money_pay = user.h_money_pay;
-                ViewBag.longtoken = user.long_time_token;
-                #region 付费红包
-                //RRLDB db1 = null;
-
-                //db1 = new RRLDB();
-                //UserManager userManager = new UserManager();
-                //var tr = userManager.GetRndRedPackage();
-                //int rnd_pay_redpacket = tr.Item1;
-                //string endDateTime = tr.Item2;// 
-                //db1.ExeCMD($@"update rrl_user set rnd_pay_redpacket={rnd_pay_redpacket},rnd_pay_redpacket_expire='{endDateTime}' where id={user.id} and (rnd_pay_redpacket_expire is null or  rnd_pay_redpacket_expire<=getdate())");
-
-                //db1.Close();
-
-                //user.Load(tokenObj.id);
-
-                //ViewBag.payRedpacket = user.rnd_pay_redpacket;
-                #endregion
-                //ViewBag.h_money_free_frz = user.h_money_free_frz;
-                ViewBag.h_money_free = user.h_money_free;
-                //ViewBag.h_money_free_frz_expire  = user.h_money_free_frz_expire;
-                ViewBag.has_received_free_money_default = user.has_received_free_money_default;
-                ViewBag.has_received_daily_free_h_money = user.has_received_daily_free_h_money;
-                // lcl 2018-6-28 Insert
-                if (new UserManager().IfNewUser(user))
-                {
-                    // 如果是新用户，给允许红包兑换金豆的游戏次数重新赋值
-                    ViewBag.m_play_total_times = configMgr.GetConfigValue("GameCenter_can_change_goldbeans_times_NewUser");
-                    ViewBag.is_new_user = 1;
-                }
-                else
-                {
-                    ViewBag.is_new_user = 0;
-                }
-
                 RRLDB db = null;
+                try
+                {
+                    ViewBag.h_money_pay = user.h_money_pay;
+                    ViewBag.longtoken = user.long_time_token;
+                    #region 付费红包
 
-                db = new RRLDB();
-                db.ExeCMD($@"update rrl_user set last_access_time=getdate() where id={user.id}");
-                var ds = db.ExeQuery(@"Select [Value] From rrl_config Where [Item] = 'daily_h_money_free'
+                    #endregion
+                    ViewBag.h_money_free = user.h_money_free;
+                    ViewBag.has_received_free_money_default = user.has_received_free_money_default;
+                    ViewBag.has_received_daily_free_h_money = user.has_received_daily_free_h_money;
+                    // lcl 2018-6-28 Insert
+                    if (new UserManager().IfNewUser(user))
+                    {
+                        // 如果是新用户，给允许红包兑换金豆的游戏次数重新赋值
+                        ViewBag.m_play_total_times = configMgr.GetConfigValue("GameCenter_can_change_goldbeans_times_NewUser");
+                        ViewBag.is_new_user = 1;
+                    }
+                    else
+                    {
+                        ViewBag.is_new_user = 0;
+                    }
+
+                    db = new RRLDB();
+                    db.ExeCMD($@"update rrl_user set last_access_time=getdate() where id={user.id}");
+                    var ds = db.ExeQuery(@"Select [Value] From rrl_config Where [Item] = 'daily_h_money_free'
                                         union  ALL
                                        Select [Value] From rrl_config Where [Item] = 'first_h_money_free'
                                         union all
                                     Select [Value] From rrl_config Where [Item] = 'freeRedPackage_to_beans_rate'");
-                if (ds != null&&ds.Tables.Count>0&&ds.Tables[0].Rows.Count==3)
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count == 3)
+                    {
+                        ViewBag.daily_h_money_free = Convert.ToDouble(ds.Tables[0].Rows[0]["Value"]);
+                        ViewBag.first_h_money_free = Convert.ToDouble(ds.Tables[0].Rows[1]["Value"]);
+                        ViewBag.freeRedPackage_to_beans_rate = Convert.ToDouble(ds.Tables[0].Rows[2]["Value"]);
+                    }
+                    ViewBag.spreader_redpackage = 0;
+                }
+                catch (Exception ex)
                 {
-                    ViewBag.daily_h_money_free = Convert.ToDouble(ds.Tables[0].Rows[0]["Value"]);
-                    ViewBag.first_h_money_free = Convert.ToDouble(ds.Tables[0].Rows[1]["Value"]);
-                    ViewBag.freeRedPackage_to_beans_rate = Convert.ToDouble(ds.Tables[0].Rows[2]["Value"]);
+                    ViewBag.daily_h_money_free =0;
+                    ViewBag.first_h_money_free = 0;
+                    ViewBag.freeRedPackage_to_beans_rate =0;
+                    ViewBag.spreader_redpackage = 0;
+                    ConfigManager.WriteTextLog("218", ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
+
+                }
+                finally
+                {
+                    db.Close();
                 }
 
-
-                //var now = DateTime.Now;
-                //var timestr = now.GetDateTimeFormats('T')[0];
-                //ds = db.ExeQuery($@"SELECT top 1   ([count]+1)*[money]  FROM   spreader_queue order by money  desc");
-                //int spreader_redpackage = 100000;
-                //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                //{
-                //    spreader_redpackage = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-                //}
-                //ViewBag.spreader_redpackage = spreader_redpackage;
-                ViewBag.spreader_redpackage = 0;
-                db.Close();
 
 
             }
@@ -258,7 +270,7 @@ namespace RRL.WEB.Controllers
             //    }
             //}
             var hash = Request.QueryString["hash"] ?? "/";
-            return new RedirectResult("/#"+hash);
+            return new RedirectResult("/#" + hash);
         }
 
         /// <summary>
@@ -281,7 +293,7 @@ namespace RRL.WEB.Controllers
 
             //HelpManager.Mark(url);
             //HelpManager.Mark(JsonConvert.SerializeObject(ob));
-            
+
             if (/*System.Web.HttpContext.Current.Session["openid"].ToString() == "" || System.Web.HttpContext.Current.Session["openid"] == null*/!rdsession.Exist("openid") || string.IsNullOrWhiteSpace(rdsession["openid"]))
             {
                 //先要判断是否是获取code后跳转过来的
@@ -326,7 +338,7 @@ namespace RRL.WEB.Controllers
                 string package = "";
                 string signType = "";
                 string paySign = "";
-                string message="";
+                string message = "";
                 TokenObject Token = TokenObject.InitTokenObjFromString(token);
                 if (!string.Equals(TokenObject.ShortTimeToken, Token.Prefix))
                 {
@@ -341,9 +353,9 @@ namespace RRL.WEB.Controllers
                     {
                         TradeManager tm = new TradeManager();
                         string openid = /*SessionHelper.Get("openid")*/rdsession["openid"].ToString();
-                        JsPayConfigObject ConfigObject = tm.ApplyWxJsPayV3(User,orderlist, IP, openid, out res,out message, sperador);
+                        JsPayConfigObject ConfigObject = tm.ApplyWxJsPayV3(User, orderlist, IP, openid, out res, out message, sperador);
                         // tm.ApplyWxJsPay(User.id, orderlist, discount, User.plate_to_return_money + User.ex_plate_to_return_money, IP, openid, out res, sperador);
-                        if(res!=0)
+                        if (res != 0)
                         {
                             ViewBag.status = res;
                             ViewBag.message = message;
@@ -437,7 +449,7 @@ namespace RRL.WEB.Controllers
                         TradeManager tm = new TradeManager();
                         string openid = /*SessionHelper.Get("openid")*/rdsession["openid"].ToString();
                         //todo
-                        JsPayConfigObject configObject = tm.ApplyWxJsCouponPay(list, ip, openid, out res,out money);
+                        JsPayConfigObject configObject = tm.ApplyWxJsCouponPay(list, ip, openid, out res, out money);
                         appid = configObject.appId;
                         timeStamp = configObject.timeStamp.ToString();
                         nonceStr = configObject.nonceStr;
@@ -493,7 +505,7 @@ namespace RRL.WEB.Controllers
             return View();
         }
 
-       
+
 
         ///// <summary>
         ///// 产品节点视图(/Product)
@@ -551,7 +563,7 @@ namespace RRL.WEB.Controllers
                 System.Xml.XmlNodeList xnl = doc.GetElementsByTagName("Event");
                 var openidNode = doc.GetElementsByTagName("FromUserName");
                 string openid = "";
-                if(openidNode!=null&&openidNode.Count>0)
+                if (openidNode != null && openidNode.Count > 0)
                 {
                     openid = openidNode[0].InnerText;
                 }
@@ -624,7 +636,7 @@ namespace RRL.WEB.Controllers
             string strCode = System.Web.HttpContext.Current.Request.QueryString["code"];
 
             string openid = GetOauthAccessOpenId(strCode);
-            
+
             rdsession.Redis.StringSet(strState, openid, new TimeSpan(0, 20, 0));
         }
 

@@ -191,13 +191,13 @@ namespace RRL.Core.Models
 
         public decimal pay_coupons_total_money { get; set; } = 0m;
 
- 
+
 
 
         /// <summary>
         /// 小红包
         /// </summary>
-        public decimal h_money_pay { get; set; }
+        public decimal h_money_pay { get; set; } = 0;
 
         public int id
         {
@@ -712,6 +712,62 @@ namespace RRL.Core.Models
                 if(ListUserRow.ContainsKey(uid)&& ListUserRow[uid]!=null)
                 {
                     InitUser(ListUserRow[uid]);
+                }
+                else
+                {
+                    id = 0;
+                    username = "";
+                    long_time_token = "";
+                    long_time_token_expir = DateTime.Now;
+                    short_time_token = "";
+                    short_time_token_expir = DateTime.Now;
+                    r_money = 0;
+                    x_money = 0;
+                    h_money = 0;
+                    h_money_free = 0;
+                    h_money_free_frz = 0;
+                    h_money_free_frz_expire = DateTime.Now;
+                    has_received_free_money_default =false;
+                    has_received_spreader_h_money = false;
+                    has_received_daily_free_h_money = false;
+                    has_received_h_money_five_group_spreade = false;
+                    last_spreader_h_money_time = DateTime.Now; 
+                    last_random_h_money_time = DateTime.Now;
+                    spreader_count = 0;
+                    daily_free_h_money_count = 0;
+                    plate_to_return_money =0;
+                    ex_plate_to_return_money = 0;
+                    wx_open_id = "";
+                    wx_mp_open_id = "";
+                    device_code ="";
+                    decimal rnd_pay_redpacket_try = 0;
+                    
+                    decimal h_money_pay_try = 0;
+                   
+
+                    this.is_locked_login = "0";
+                    
+                    this.is_locked_trade = "0";
+
+                    // lcl 20180428 Insert
+                    // 是否为合伙人
+                    is_partner = 0;
+                    // STORY #18 lcl 20180517 Insert
+                    head_pic = 0;
+
+                    int pay_order_total_count_try = 0;
+                    
+
+                    decimal pay_coupons_total_money_try = 0m;
+                    
+
+                    // lcl 20180627 Insert
+                    this.addtime =DateTime.Now;
+                    // lcl 20180627 Insert
+                    this.level_category = "";
+
+                    // lcl 20180717 Insert
+                    this.is_agent = 0;
                 }
             }
             
