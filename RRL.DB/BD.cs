@@ -67,6 +67,10 @@ namespace RRL.DB
             if (conn.State == ConnectionState.Open)
             {
                 conn.Close();
+                
+            }
+            if (conn!=null)
+            {
                 conn.Dispose();
             }
         }
