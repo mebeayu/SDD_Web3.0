@@ -172,7 +172,7 @@ namespace RRL.WEB.Controllers
             }
             catch (Exception ex)
             {
-                ConfigManager.WriteTextLog("168", ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
+                ConfigManager.WriteTextLog("168 "+"uid:"+ tokenObj.id, ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
 
             }
 
@@ -222,7 +222,7 @@ namespace RRL.WEB.Controllers
                     ViewBag.first_h_money_free = 0;
                     ViewBag.freeRedPackage_to_beans_rate =0;
                     ViewBag.spreader_redpackage = 0;
-                    ConfigManager.WriteTextLog("218", ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
+                    ConfigManager.WriteTextLog("218 " + "uid:" + tokenObj.id, ex.Message + "\r\n" + ex.StackTrace, DateTime.Now);
 
                 }
                 finally
