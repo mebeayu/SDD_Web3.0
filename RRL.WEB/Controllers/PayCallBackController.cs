@@ -280,6 +280,22 @@ namespace RRL.WEB.Controllers
                             db.ExeCMD($@"update rrl_coupons SET is_paid = 1,three_trans_id='{payNotifyModel.Transaction_id}',three_notify_id='{payNotifyModel.Notify_id}',three_pay_type='{payNotifyModel.Three_Pay_Type}',three_completed_trans_time='{payNotifyModel.Completed_Trans_Time.ToString("yyyy-MM-dd HH:mm:ss")}' where order_code = '{order_code}'");
                         }
                     }
+                    else if (strType == "5")//充值送免费红包
+                    {
+                        string strTransId = Convert.ToString(ds.Tables[0].Rows[0]["relation_trans_id"]);
+                        decimal redpacket = 0;
+                        if (decimal.TryParse(ds.Tables[0].Rows[0]["redpacket"].ToString(), out decimal redpacket_try))
+                        {
+                            redpacket = redpacket_try;
+                        }
+                        int res = db.ExeCMD($@"update rrl_user set h_money_free = h_money_free + {redpacket} where id = {uid}");
+                        if (res>0)
+                        {
+                            db.ExeCMD($@"update time_interval_redpaket_receive set is_paid = 1 where (receive_id = '{strTransId}') and (is_paid = 0)");
+                            db.ExeCMD($@"INSERT INTO [dbo].[rrl_user_money_record] ([uid], [money],[type], [remark]) VALUES ({uid}, -{money},{1} ,N'充值免费红包')");
+                            db.ExeCMD($@"INSERT INTO [dbo].[rrl_user_money_record] ([uid], [money],[type], [remark]) VALUES ({uid}, {redpacket},{202} ,N'充值送免费红包')");
+                        }
+                    }
                     else
                     {
                         // 其他场景的购券

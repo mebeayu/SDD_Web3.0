@@ -418,7 +418,8 @@ namespace RRL.WEB.Areas.WebApi.Controllers
                 isHasRedpacket = receiveData.isHasRedpacket,
                 payMoney = receiveData.payMoney,
                 redpacket = receiveData.redpacket,
-                couponsMoney = receiveData.couponsMoney
+                couponsMoney = receiveData.couponsMoney,
+                type = receiveData.type
             };
 
             return result;

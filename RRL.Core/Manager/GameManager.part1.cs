@@ -299,6 +299,7 @@ namespace RRL.Core.Manager
             result.couponsMoney = 0m; // 购物券额度
             result.isExistUnpaid = 0; // 在满足领取条件前提下，是否存在未支付的领取记录
             result.receiveId = string.Empty; // 红包的领取记录ID
+            result.type = 2;
 
             var now = DateTime.Now;
             var timestr = now.GetDateTimeFormats('T')[0];
@@ -346,6 +347,7 @@ namespace RRL.Core.Manager
             result.redpacket = configData.receive_redpacket;
             result.couponsMoney = configData.pay_money;
             result.receiveId = strReceiveId;
+            result.type = configData.type;
             if (receiveData != null && receiveData.is_paid == 0)
             {
                 // 针对领取过的，但未支付的

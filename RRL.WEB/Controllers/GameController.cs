@@ -639,15 +639,16 @@ namespace RRL.WEB.Controllers
             {
                 return new JsonResult() { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new DataResult() { status = 99, message = "不能重复领取" } };
             }
-
-            // rrl_coupons表type=4，表示分时段充值送红包
-            strSql = $@"insert into [rrl_coupons]
+            string type = "4";
+            if (receiveData.type == 1) type = "5";
+             // rrl_coupons表type=4，表示分时段充值送红包
+             strSql = $@"insert into [rrl_coupons]
                                ([goodsid] ,[moeny] ,[countmoney] ,[goldbean] ,[starttime] 
                                ,[endtime] ,[uid] ,[goldcoin] ,[redpacket] ,[leastconsume] 
                                ,[goodsname] ,[type] ,[relation_trans_id]) output inserted.id
                         values (0 ,@moeny ,@countmoney ,@goldbean ,@starttime 
                                ,@endtime ,@uid ,0 ,@redpacket ,@leastconsume 
-                               ,@goodsname ,'4' ,@relation_trans_id)";
+                               ,@goodsname ,@type ,@relation_trans_id)";
 
             decimal mMoney = receiveData.payMoney;
             decimal leastconsume = mMoney * 20;
@@ -664,7 +665,8 @@ namespace RRL.WEB.Controllers
                 redpacket = receiveData.redpacket,
                 leastconsume = leastconsume,
                 goodsname = goodsname,
-                relation_trans_id = receiveData.receiveId
+                relation_trans_id = receiveData.receiveId,
+                type= type
             });
 
             string redirectUrl = $@"/CouponsPay?list={list}&token={token}&type=1,2,3&wallet=0&jd=0&cash={mMoney}&redirect=https://e-shop.rrlsz.com.cn/#/gamehall";
